@@ -61,7 +61,7 @@ const addAdmin = (req, res, next) => {
     })
         .save()
         .then(() => {
-            res.json(req.body)
+            res.json("Thêm thành công")
         })
         .catch(next)
 }

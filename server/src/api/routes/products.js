@@ -2,11 +2,27 @@ const express = require("express");
 const productRouter = express.Router()
 
 // Middleware
-const { storageAvatarAdmin } = require('../middleware/upload')
+const {
+    storagePhotoProduct,
+    uploadPhotoProduct
+} = require('../middleware/upload')
 
-const { } = require('../controllers/ProductController')
+
+const {
+    getListProduct,
+    searchProduct,
+    filterProduct,
+    addProduct,
+} = require('../controllers/ProductController')
 
 productRouter
+    .get('/', getListProduct)
+    .get('/search', searchProduct)
+    .get('/filter', filterProduct)
+    .post('/', uploadPhotoProduct().fields([{ name: 'photo' }, { name: 'photo_detail' }]), addProduct)
+//  .get('/:id', getOneProduct)
 
+
+// upload.fields([{ name: 'singleFile' }, { name: 'multiFiles' }])
 
 module.exports = productRouter;

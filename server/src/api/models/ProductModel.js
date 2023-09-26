@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-updater');
-const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const ProductSchema = Schema({
@@ -14,9 +13,9 @@ const ProductSchema = Schema({
     sale_price: { type: Number, required: true },
     photo_detail: { type: Array, required: true },
     status: {
-        in_stock: true,
-        out_stock: false,
-        low_stock: false,
+        in_stock: { type: Boolean, default: true },
+        out_stock: { type: Boolean, default: false },
+        low_stock: { type: Boolean, default: false },
     },
     slug: { type: String, slug: "name", unique: true },
 },

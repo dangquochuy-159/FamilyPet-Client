@@ -1,3 +1,4 @@
+const util = require("util");
 const path = require("path");
 const multer = require('multer');
 const fs = require('fs')
@@ -5,6 +6,7 @@ const appRoot = require('app-root-path');
 
 const pathAdmin = `${appRoot}/src/api/public/uploads/admins/`;
 const pathUser = `${appRoot}/src/api/public/uploads/users/`;
+const pathProduct = `${appRoot}/src/api/public/uploads/products/`;
 
 const imageFilter = function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
@@ -49,7 +51,37 @@ const storageAvatarUser = () => {
     return multer({ storage: storage, fileFilter: imageFilter }).single('avatar')
 }
 
+// Upload Photo Product
+const storagePhotoProduct = () => {
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, pathProduct)
+        },
+        filename: (req, file, cb) => {
+            let fileName = handleDuplicateNames(file.originalname, pathProduct)
+            cb(null, fileName)
+        }
+    })
+    return multer({ storage: storage, fileFilter: imageFilter }).single('photo')
+}
+
+// Upload Single and Multiple Product
+const uploadPhotoProduct = () => {
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, pathProduct)
+        },
+        filename: (req, file, cb) => {
+            let fileName = handleDuplicateNames(file.originalname, pathProduct)
+            cb(null, fileName)
+        }
+    })
+    return multer({ storage: storage, fileFilter: imageFilter })
+}
+
 module.exports = {
     storageAvatarAdmin,
     storageAvatarUser,
+    storagePhotoProduct,
+    uploadPhotoProduct
 }
