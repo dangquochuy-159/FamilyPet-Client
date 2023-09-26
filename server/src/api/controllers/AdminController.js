@@ -6,14 +6,8 @@ const appRoot = require('app-root-path');
 
 const Admin = require('../models/AdminModel');
 
-const pathAdmin = '/api/public/uploads/admins/'
+const pathAdmin = '/src/api/public/uploads/admins/'
 
-// So sánh password
-// if (bcrypt.compareSync("123456", admin.password)) {
-//     res.send("true")
-// } else {
-//     res.send("false")
-// }
 
 // GET /api/admins
 const getListAdmins = (req, res, next) => {
@@ -33,15 +27,22 @@ const getOneAdmin = (req, res, next) => {
         .catch(next)
 }
 
-// GET /api/admins/:id/avatar
+// GET /api/admins/:id/:name_avt
 const getAvatarAdmin = (req, res, next) => {
     Admin.findById(req.params.id)
         .then((admin) => {
-            let avatarPath = appRoot + pathAdmin + admin.avatar;
-            // Đọc tệp hình ảnh và gửi nó về client
+            let avatarPath = appRoot + pathAdmin + req.params.name_avt;
             res.sendFile(avatarPath);
         })
         .catch(next)
+}
+
+// GET /api/admins/:id/avatar/list
+const getListAvatarAdmin = (req, res, next) => {
+    Admin.findById(req.params.id)
+        .then((admin) => {
+            res.json(admin.avatar_old)
+        })
 }
 
 // POST /api/admins
@@ -52,8 +53,11 @@ const addAdmin = (req, res, next) => {
         password: req.body.password,
         address: req.body.address,
         phone: req.body.phone,
+        gender: req.body.gender,
+        date_birth: req.body.date_birth,
         avatar: req.file.filename,
-        add_admin: req.body.add_admin
+        add_admin: req.body.add_admin,
+        delete_admin: req.body.delete_admin,
     })
         .save()
         .then(() => {
@@ -84,72 +88,82 @@ const removeAdmin = (req, res, next) => {
 
 // DELETE /api/admins/:id/avatar
 const removeAvatarAdmin = (req, res, next) => {
-    Admin.findById(req.params.id)
+    Admin.findByIdAndUpdate({ _id: req.params.id }, {
+        $set: { avatar: "" }
+    })
         .then((admin) => {
-            let avatar = admin.avatar
-            let avatarPath = appRoot + pathAdmin + avatar
-            fs.unlink(avatarPath, (err) => {
-                if (err) {
-                    console.error(err)
-                    return
-                }
-            })
-            admin.avatar = "";
-            admin
-                .save()
-                .then(() => {
-                    res.send('success');
-                })
-                .catch(next);
+            return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
+
+        })
+        .then(() => {
+            res.status(200).json({
+                error: 'Delete thành công',
+            });
         })
         .catch(next)
 }
 
 // PUT /api/admins/:id
 const updateOneAdmin = (req, res, next) => {
-    Admin.findByIdAndUpdate(req.params.id, {
-        $set: {
-            full_name: "Admin",
-            email: "admin@example.com",
-            password: "654321",
-            address: "123 Main St",
-            phone: "+123",
-            avatar: "huy.jpg",
-            add_admin: "true"
-        }
+    let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
 
-    })
+    const updateAdmin = {}
+
+    for (let key in req.body) {
+        if (req.body[key] !== '') {
+            updateAdmin[key] = req.body[key];
+        }
+    }
+
+    if (req.file) {
+        updateAdmin.avatar = req.file.filename;
+    }
+    Admin.findByIdAndUpdate(req.params.id, updateAdmin)
         .then((admin) => {
-            let oldPath = appRoot + pathAdmin + admin.avatar
-            let newPath = appRoot + pathAdmin + "huy.jpg"
-            fs.rename(oldPath, newPath, () => { });
+            return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
+        })
+        .then(() => {
             res.status(200).json({
                 error: 'Update thành công',
             });
         })
+
+        .catch(next)
 }
 
-// PUT /api/admins/:id/avatar
+// PUT /api/admins/:id/:name_avt
 const updateAvatarAdmin = (req, res, next) => {
-    Admin.findByIdAndUpdate(req.params.id, {
-        $set: {
-            avatar: "huy.jpg",
-        }
-    })
+    Admin.findById(req.params.id)
         .then((admin) => {
-            let oldPath = appRoot + pathAdmin + admin.avatar
-            let newPath = appRoot + pathAdmin + "huy.jpg"
-            fs.rename(oldPath, newPath, () => { });
+            const updateAvtOld = []
+            for (let i in admin.avatar_old) {
+                if (admin.avatar_old[i] === req.params.name_avt) {
+                    updateAvtOld.push(admin.avatar)
+                } else {
+                    updateAvtOld.push(admin.avatar_old[i])
+                }
+            }
+            return Admin.updateOne({ _id: admin._id }, {
+                $set: {
+                    avatar_old: updateAvtOld,
+                    avatar: req.params.name_avt,
+                }
+            })
+        })
+        .then(() => {
             res.status(200).json({
                 error: 'Update thành công',
             });
         })
+
+        .catch(next)
 }
 
 module.exports = {
     getListAdmins,
     getOneAdmin,
     getAvatarAdmin,
+    getListAvatarAdmin,
     addAdmin,
     removeAdmin,
     removeAvatarAdmin,

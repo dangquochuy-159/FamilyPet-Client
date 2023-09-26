@@ -9,6 +9,7 @@ const {
     getListAdmins,
     getOneAdmin,
     getAvatarAdmin,
+    getListAvatarAdmin,
     addAdmin,
     removeAdmin,
     removeAvatarAdmin,
@@ -19,14 +20,15 @@ const {
 adminRouter
     .get('/', getListAdmins)
     .get('/:id', getOneAdmin)
-    .get('/:id/avatar', getAvatarAdmin)
+    .get('/:id/:name_avt', getAvatarAdmin)
+    .get('/:id/avatar/list', getListAvatarAdmin)
 
     .post('/', storageAvatarAdmin(), addAdmin)
 
     .delete('/:id', removeAdmin)
     .delete('/:id/avatar', removeAvatarAdmin)
 
-    .put('/:id', updateOneAdmin)
-    .put('/:id/avatar', updateAvatarAdmin)
+    .put('/:id', storageAvatarAdmin(), updateOneAdmin)
+    .put('/:id/:name_avt', updateAvatarAdmin)
 
 module.exports = adminRouter
