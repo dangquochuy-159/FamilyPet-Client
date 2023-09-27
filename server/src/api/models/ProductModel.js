@@ -10,10 +10,10 @@ const ProductSchema = Schema({
     origin: { type: String, required: true },
     quantity: { type: Number, required: true },
     price: { type: Number, required: true },
-    sale_price: { type: Number, required: true },
+    sale_price: { type: Number },
     photo_detail: { type: Array, required: true },
     status: {
-        in_stock: { type: Boolean, default: true },
+        in_stock: { type: Boolean, default: false },
         out_stock: { type: Boolean, default: false },
         low_stock: { type: Boolean, default: false },
     },

@@ -100,6 +100,7 @@ const updateOneUser = (req, res, next) => {
     let add = `${req.body.ward}/${req.body.district}/${req.body.province}`
 
     const updateUser = {}
+    updateUser.address = add
 
     for (let key in req.body) {
         if (req.body[key] !== '') {

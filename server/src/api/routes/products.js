@@ -12,17 +12,22 @@ const {
     getListProduct,
     searchProduct,
     filterProduct,
+    getOneProduct,
     addProduct,
+    removeProduct,
+    updateProduct,
 } = require('../controllers/ProductController')
 
 productRouter
     .get('/', getListProduct)
     .get('/search', searchProduct)
     .get('/filter', filterProduct)
+    .get('/:id', getOneProduct)
+
     .post('/', uploadPhotoProduct().fields([{ name: 'photo' }, { name: 'photo_detail' }]), addProduct)
-//  .get('/:id', getOneProduct)
 
+    .delete('/:id', removeProduct)
 
-// upload.fields([{ name: 'singleFile' }, { name: 'multiFiles' }])
+    .put('/:id', uploadPhotoProduct().fields([{ name: 'photo' }, { name: 'photo_detail' }]), updateProduct)
 
 module.exports = productRouter;

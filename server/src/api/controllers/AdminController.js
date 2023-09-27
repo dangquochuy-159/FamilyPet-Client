@@ -106,8 +106,8 @@ const removeAvatarAdmin = (req, res, next) => {
 // PUT /api/admins/:id
 const updateOneAdmin = (req, res, next) => {
     let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
-
     const updateAdmin = {}
+    updateAdmin.address = add
 
     for (let key in req.body) {
         if (req.body[key] !== '') {
