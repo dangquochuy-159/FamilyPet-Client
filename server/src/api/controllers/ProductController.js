@@ -72,6 +72,16 @@ const getOneProduct = (req, res, next) => {
 
 }
 
+// GET /api/products/:id/:photo
+const getPhotoProduct = (req, res, next) => {
+    Product.findById(req.params.id)
+        .then((product) => {
+            let photoPath = appRoot + pathProduct + req.params.photo;
+            res.sendFile(photoPath);
+        })
+        .catch(next)
+}
+
 // POST /api/products
 const addProduct = (req, res, next) => {
     const photoStr = req.files.photo.map(file => file.originalname).join()
@@ -164,6 +174,7 @@ module.exports = {
     searchProduct,
     filterProduct,
     getOneProduct,
+    getPhotoProduct,
     addProduct,
     removeProduct,
     updateProduct,

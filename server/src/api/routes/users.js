@@ -2,7 +2,7 @@ const express = require("express");
 const userRouter = express.Router()
 
 // Middleware
-const { storageAvatarUser } = require('../middleware/upload')
+const { storageUploadSinglePhoto } = require('../middleware/upload')
 
 // Controller
 const {
@@ -22,12 +22,12 @@ userRouter
     .get('/:id', getOneUser)
     .get('/:id/:name_avt', getAvatarUser)
 
-    .post('/', storageAvatarUser(), addUser)
+    .post('/', storageUploadSinglePhoto('avatar', 'user'), addUser)
 
     .delete('/:id', removeUser)
     .delete('/:id/avatar', removeAvatarUser)
 
-    .put('/:id', storageAvatarUser(), updateOneUser)
+    .put('/:id', storageUploadSinglePhoto('avatar', 'user'), updateOneUser)
     .put('/:id/:name_avt', updateAvatarUser)
     .put('/:id/cart/:id_product/:quantity/:price', updateCart)
 

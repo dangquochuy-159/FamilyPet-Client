@@ -30,28 +30,22 @@ const getOneAdmin = (req, res, next) => {
 // GET /api/admins/:id/:name_avt
 const getAvatarAdmin = (req, res, next) => {
     Admin.findById(req.params.id)
-        .then((admin) => {
+        .then(() => {
             let avatarPath = appRoot + pathAdmin + req.params.name_avt;
             res.sendFile(avatarPath);
         })
         .catch(next)
 }
 
-// GET /api/admins/:id/avatar/list
-const getListAvatarAdmin = (req, res, next) => {
-    Admin.findById(req.params.id)
-        .then((admin) => {
-            res.json(admin.avatar_old)
-        })
-}
-
 // POST /api/admins
 const addAdmin = (req, res, next) => {
+    let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
+
     const admin = new Admin({
         full_name: req.body.full_name,
         email: req.body.email,
         password: req.body.password,
-        address: req.body.address,
+        address: add,
         phone: req.body.phone,
         gender: req.body.gender,
         date_birth: req.body.date_birth,
@@ -70,8 +64,7 @@ const addAdmin = (req, res, next) => {
 const removeAdmin = (req, res, next) => {
     Admin.findOneAndDelete({ _id: req.params.id })
         .then((admin) => {
-            let avatar = admin.avatar
-            let avatarPath = appRoot + pathAdmin + avatar
+            let avatarPath = appRoot + pathAdmin + admin.avatar
 
             fs.unlink(avatarPath, (err) => {
                 if (err) {
@@ -163,7 +156,6 @@ module.exports = {
     getListAdmins,
     getOneAdmin,
     getAvatarAdmin,
-    getListAvatarAdmin,
     addAdmin,
     removeAdmin,
     removeAvatarAdmin,
