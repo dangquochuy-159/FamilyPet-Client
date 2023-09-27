@@ -16,7 +16,7 @@ const UserSchema = Schema(
         gender: { type: String },
         date_birth: { type: String },
         carts: { type: Array }, // id_product, quantity price
-        list_orders: { type: Array },
+        list_orders: { type: Array }, // id_order, total 
         total_order: { type: Number, default: 0 },
         total_pay: { type: Number, default: 0 },
         total_point: { type: Number, default: 0 },
