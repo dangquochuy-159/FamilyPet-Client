@@ -6,11 +6,12 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = Schema(
     {
-        name: { type: String, required: true }, // get from user
-        phone: { type: String, required: true }, // get from user
-        address: { type: String, required: true }, // get from user
-        total: { type: Number, required: true },
-        detail: { type: Array }, // object: quantity, id_product, total
+        id_customer: { type: String, required: true },
+        name: { type: String, required: true }, // get from user if default or input
+        phone: { type: String, required: true }, // get from user if default or input
+        address: { type: String, required: true }, // get from user if default or input
+        total_pay: { type: Number, required: true },
+        detail: { type: Array }, // object: quantity, id_product, unit_price, into_money
         payments: {
             cod: { type: Boolean, default: true },
             atm: { type: Boolean, default: false },
@@ -18,7 +19,7 @@ const OrderSchema = Schema(
         },
         status: {
             confirmed: { type: Boolean, default: false },
-            wait_confirm: { type: Boolean, default: false }
+            wait_confirm: { type: Boolean, default: true }
         },
     },
     {

@@ -1,4 +1,3 @@
-const util = require("util");
 const path = require("path");
 const multer = require('multer');
 const fs = require('fs')
@@ -43,6 +42,7 @@ const storageUploadSinglePhoto = (name, model) => {
         default:
             break;
     }
+
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, pathImage)
@@ -53,8 +53,8 @@ const storageUploadSinglePhoto = (name, model) => {
         }
     })
     return multer({ storage: storage, fileFilter: imageFilter }).single(name)
-}
 
+}
 
 // Upload Single and Multiple Product
 const storageUploadPhotoProduct = () => {
@@ -63,6 +63,7 @@ const storageUploadPhotoProduct = () => {
             cb(null, pathProduct)
         },
         filename: (req, file, cb) => {
+
             let fileName = handleDuplicateNames(file.originalname, pathProduct)
             cb(null, fileName)
         }

@@ -26,6 +26,39 @@ const getOneUser = (req, res, next) => {
         .catch(next)
 }
 
+// GET /api/users/search?email= or ?phone_login=
+const getSearchAccountUser = (req, res, next) => {
+    let q = Object.keys(req.query).join()
+    switch (q) {
+        case 'email':
+            User.findOne({ email: req.query.email })
+                .then(user => {
+                    if (user) {
+                        res.json(true)
+                    } else {
+                        res.json(false)
+                    }
+                })
+                .catch(next)
+            break
+        case 'phone_login':
+            User.findOne({ phone_login: req.query.phone_login })
+                .then(user => {
+                    if (user) {
+                        res.json(true)
+                    } else {
+                        res.json(false)
+                    }
+                })
+                .catch(next)
+            break
+        default:
+            break
+    }
+    // res.json(q)
+    // res.json(Object.keys(req.query))
+}
+
 // GET /api/users/:id/:name_avt
 const getAvatarUser = (req, res, next) => {
     User.findById(req.params.id)
@@ -39,21 +72,43 @@ const getAvatarUser = (req, res, next) => {
 
 // POST /api/users
 const addUser = (req, res, next) => {
+    let fileName, phone_login, email
+    // let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
+    if (req.body.email) {
+        method_login = {
+            email: true,
+            phone: false
+        }
+        email = req.body.email
+    } else {
+        method_login = {
+            email: false,
+            phone: true
+        }
+        phone_login = req.body.phone_login
+    }
+    if (req.file) {
+        fileName = req.file.filename
+    }
 
-    let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
     const user = new User({
         full_name: req.body.full_name,
-        email: req.body.email,
+        email: email,
+        phone_login: phone_login,
+        method_login: method_login,
         password: req.body.password,
-        address: add,
+        address: req.body.address,
         phone: req.body.phone,
         gender: req.body.gender,
         date_birth: req.body.date_birth,
-        avatar: req.file.filename,
+        avatar: fileName,
     })
         .save()
         .then(() => {
-            res.json(req.body)
+            res.json({
+                message: 'post success',
+                data: req.body
+            })
         })
         .catch(next)
 }
@@ -97,10 +152,14 @@ const removeAvatarUser = (req, res, next) => {
 
 // PUT /api/users/:id
 const updateOneUser = (req, res, next) => {
-    let add = `${req.body.ward}/${req.body.district}/${req.body.province}`
+    // let add = `${req.body.ward}/${req.body.district}/${req.body.province}`
+    // updateUser.address = add
 
     const updateUser = {}
-    updateUser.address = add
+
+    if (req.file) {
+        updateUser.avatar = req.file.filename;
+    }
 
     for (let key in req.body) {
         if (req.body[key] !== '') {
@@ -108,20 +167,26 @@ const updateOneUser = (req, res, next) => {
         }
     }
 
-    if (req.file) {
-        updateUser.avatar = req.file.filename;
-    }
-    User.findByIdAndUpdate(req.params.id, updateUser)
-        .then((user) => {
-            return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
-        })
-        .then(() => {
-            res.status(200).json({
-                error: 'Update thành công',
-            });
-        })
+    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+        if (err) {
+            console.error('Lỗi khi băm mật khẩu:', err);
+            return;
+        }
+        updateUser.password = hashedPassword
+        User.findByIdAndUpdate(req.params.id, updateUser)
+            .then((user) => {
+                return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
+            })
+            .then(() => {
+                res.status(200).json({
+                    error: 'Update thành công',
+                    updateUser: updateUser
+                });
+            })
 
-        .catch(next)
+            .catch(next)
+    })
+
 }
 
 // PUT /api/users/:id/:name_avt
@@ -194,6 +259,7 @@ const updateCart = (req, res, next) => {
 module.exports = {
     getListUsers,
     getOneUser,
+    getSearchAccountUser,
     getAvatarUser,
     addUser,
     removeUser,

@@ -39,13 +39,13 @@ const getAvatarAdmin = (req, res, next) => {
 
 // POST /api/admins
 const addAdmin = (req, res, next) => {
-    let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
+    // let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
 
     const admin = new Admin({
         full_name: req.body.full_name,
         email: req.body.email,
         password: req.body.password,
-        address: add,
+        address: req.body.address,
         phone: req.body.phone,
         gender: req.body.gender,
         date_birth: req.body.date_birth,
@@ -98,30 +98,38 @@ const removeAvatarAdmin = (req, res, next) => {
 
 // PUT /api/admins/:id
 const updateOneAdmin = (req, res, next) => {
-    let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
+    // let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
     const updateAdmin = {}
-    updateAdmin.address = add
+    // updateAdmin.address = req.body.address
+
+    if (req.file) {
+        updateAdmin.avatar = req.file.filename;
+    }
 
     for (let key in req.body) {
         if (req.body[key] !== '') {
             updateAdmin[key] = req.body[key];
         }
     }
+    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+        if (err) {
+            console.error('Lỗi khi băm mật khẩu:', err);
+            return;
+        }
+        updateAdmin.password = hashedPassword
+        Admin.findByIdAndUpdate(req.params.id, updateAdmin)
+            .then((admin) => {
+                return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
+            })
+            .then(() => {
+                res.status(200).json({
+                    error: 'Update thành công',
+                });
+            })
 
-    if (req.file) {
-        updateAdmin.avatar = req.file.filename;
-    }
-    Admin.findByIdAndUpdate(req.params.id, updateAdmin)
-        .then((admin) => {
-            return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
-        })
-        .then(() => {
-            res.status(200).json({
-                error: 'Update thành công',
-            });
-        })
+            .catch(next)
+    })
 
-        .catch(next)
 }
 
 // PUT /api/admins/:id/:name_avt

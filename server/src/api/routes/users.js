@@ -8,6 +8,7 @@ const { storageUploadSinglePhoto } = require('../middleware/upload')
 const {
     getListUsers,
     getOneUser,
+    getSearchAccountUser,
     getAvatarUser,
     addUser,
     removeUser,
@@ -19,6 +20,7 @@ const {
 
 userRouter
     .get('/', getListUsers)
+    .get('/search', getSearchAccountUser)
     .get('/:id', getOneUser)
     .get('/:id/:name_avt', getAvatarUser)
 

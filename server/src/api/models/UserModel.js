@@ -7,7 +7,12 @@ const Schema = mongoose.Schema;
 const UserSchema = Schema(
     {
         full_name: { type: String },
-        email: { type: String, required: true, unique: true },
+        email: { type: String, default: null },
+        phone_login: { type: String, default: null },
+        method_login: {
+            email: { type: Boolean, default: false },
+            phone: { type: Boolean, default: false },
+        },
         password: { type: String, required: true },
         address: { type: String, required: true },
         avatar: { type: String },
@@ -15,8 +20,8 @@ const UserSchema = Schema(
         phone: { type: String, required: true },
         gender: { type: String },
         date_birth: { type: String },
-        carts: { type: Array }, // id_product, quantity price
-        list_orders: { type: Array }, // id_order, total 
+        carts: { type: Array }, // id_product, quantity price --> xong
+        list_orders: { type: Array }, // Object: id_order, total_pay  --> xong
         total_order: { type: Number, default: 0 },
         total_pay: { type: Number, default: 0 },
         total_point: { type: Number, default: 0 },
@@ -52,23 +57,26 @@ UserSchema.pre('save', function (next) {
     }
 })
 
-// thực hiện hash pass trước khi update
-UserSchema.pre('findOneAndUpdate', function (next) {
-    const updateData = this._update;
-    if (updateData.$set && updateData.$set.password) {
-        bcrypt.hash(updateData.$set.password, saltRounds, (err, hash) => {
-            if (err) {
-                return next(err);
+// Định nghĩa middleware sau khi cập nhật thông qua updateOne
+UserSchema.post('updateOne', function (doc, next) {
+    // Tìm tài liệu đã cập nhật
+    const conditions = this.getQuery();
+    // Lấy tài liệu trước khi cập nhật
+    this.model.findOne(conditions)
+        .then(user => {
+            if (user) {
+                // Tính toán và cập nhật total_pont dựa trên total_pay
+                user.total_point = user.total_pay / 1000; // Ví dụ đơn giản: total_pont = total_pay / 10
+                // Lưu lại tài liệu đã cập nhật
+                return user.save();
             }
-            updateData.$set.password = hash;
+        })
+        .then(() => {
             next();
+        })
+        .catch(error => {
+            next(error);
         });
-    } else {
-        next();
-    }
 });
 
 module.exports = mongoose.model("User", UserSchema);
-
-
-

@@ -17,6 +17,8 @@ const ProductSchema = Schema({
         out_stock: { type: Boolean, default: false },
         low_stock: { type: Boolean, default: false },
     },
+    star: { type: Number, default: 0 },
+    total_eval: { type: Number, default: 0 },
     slug: { type: String, slug: "name", unique: true },
 },
     {
