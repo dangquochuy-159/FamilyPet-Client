@@ -17,49 +17,38 @@ const getListProduct = (req, res, next) => {
         .catch(next)
 }
 
-// GET /api/products/search?name=&type=
+// GET /api/products/search?name=&quantity=
 const searchProduct = (req, res, next) => {
-    Product.find()
+    Product
+        .find({ name: { $regex: req.query.name } })
+        .limit(Number(req.query.quantity))
         .then((products) => {
             res.json({
+                products: products,
                 name: req.query.name,
-                less: req.query.type,
+                quantity: Number(req.query.quantity),
             })
         })
         .catch(next)
 }
 
-// GET /api/products/filter?filter=&q=&type=
+// GET /api/products/filter?filter=&q=&quantity=&page=
 const filterProduct = (req, res, next) => {
-    let q, less, filter
-    Product.find()
-        .then((products) => {
-            switch (req.query.filter) {
-                case 'price':
-                    filter = req.query.filter
-                    q = req.query.q
-                    less = req.query.type
-                    break;
-                case 'category':
-                    filter = req.query.filter
-                    q = req.query.q
-                    less = req.query.type
-                    break;
-                case 'origin':
-                    filter = req.query.filter
-                    q = req.query.q
-                    less = req.query.type
-                    break;
-                default:
-                    break;
-            }
+    let q = typeof req.query.q === 'string' ? req.query.q : Number(req.query.q)
+    let limit = Number(req.query.quantity)
+    let skip = (req.query.page - 1) * limit
+
+    Promise.all([
+        Product.find({ [req.query.filter]: q }).skip(skip).limit(limit),
+        Product.find({})
+    ])
+        .then(([productsFilter, products]) => {
             res.json({
-                filter: filter,
-                q: q,
-                less: less
+                productsFilter: productsFilter,
+                page: Number(req.query.page),
+                products: products.length
             })
         })
-        .catch(next)
 }
 
 // GET /api/products/:id
