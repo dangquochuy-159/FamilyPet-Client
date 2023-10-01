@@ -117,17 +117,24 @@ const addUser = (req, res, next) => {
 const removeUser = (req, res, next) => {
     User.findOneAndDelete({ _id: req.params.id })
         .then((user) => {
-            let avatar = user.avatar
-            let avatarPath = appRoot + pathUser + avatar
-
-            fs.unlink(avatarPath, (err) => {
-                if (err) {
-                    console.error(err)
-                    return
-                }
+            const listAvt = []
+            listAvt.push(user.avatar)
+            user.avatar_old.map(avt => {
+                listAvt.push(avt)
             })
+
+            listAvt.map(avt => {
+                let avatarPath = appRoot + pathUser + avt
+                fs.unlink(avatarPath, (err) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                })
+            })
+
             res.status(200).json({
-                error: 'Delete thành công',
+                message: 'Delete thành công',
             });
         })
         .catch(next)

@@ -39,8 +39,6 @@ const getAvatarAdmin = (req, res, next) => {
 
 // POST /api/admins
 const addAdmin = (req, res, next) => {
-    // let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
-
     const admin = new Admin({
         full_name: req.body.full_name,
         email: req.body.email,
@@ -64,16 +62,23 @@ const addAdmin = (req, res, next) => {
 const removeAdmin = (req, res, next) => {
     Admin.findOneAndDelete({ _id: req.params.id })
         .then((admin) => {
-            let avatarPath = appRoot + pathAdmin + admin.avatar
+            const listAvt = []
+            listAvt.push(admin.avatar)
+            admin.avatar_old.map(avt => {
+                listAvt.push(avt)
+            })
 
-            fs.unlink(avatarPath, (err) => {
-                if (err) {
-                    console.error(err)
-                    return
-                }
+            listAvt.map(avt => {
+                let avatarPath = appRoot + pathAdmin + avt
+                fs.unlink(avatarPath, (err) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                })
             })
             res.status(200).json({
-                error: 'Delete thành công',
+                message: 'Delete thành công',
             });
         })
         .catch(next)
@@ -82,7 +87,7 @@ const removeAdmin = (req, res, next) => {
 // DELETE /api/admins/:id/avatar
 const removeAvatarAdmin = (req, res, next) => {
     Admin.findByIdAndUpdate({ _id: req.params.id }, {
-        $set: { avatar: "" }
+        $set: { avatar: null }
     })
         .then((admin) => {
             return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
@@ -90,7 +95,7 @@ const removeAvatarAdmin = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                error: 'Delete thành công',
+                message: 'Delete thành công',
             });
         })
         .catch(next)
@@ -98,9 +103,7 @@ const removeAvatarAdmin = (req, res, next) => {
 
 // PUT /api/admins/:id
 const updateOneAdmin = (req, res, next) => {
-    // let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
     const updateAdmin = {}
-    // updateAdmin.address = req.body.address
 
     if (req.file) {
         updateAdmin.avatar = req.file.filename;
