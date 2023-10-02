@@ -25,23 +25,13 @@ const handleDuplicateNames = (fileFull, pathData) => {
     return fileExists ? fileName = `${baseName}_${Date.now()}${extName}` : fileName = fileFull
 }
 
-// Upload Single Photo
+// Function Upload Single Photo
 const storageUploadSinglePhoto = (name, model) => {
     let pathImage
 
-    switch (model) {
-        case 'category':
-            pathImage = pathCategory
-            break;
-        case 'user':
-            pathImage = pathUser
-            break;
-        case 'admin':
-            pathImage = pathAdmin
-            break;
-        default:
-            break;
-    }
+    pathImage = model === 'category' ? pathCategory : pathImage
+    pathImage = model === 'user' ? pathUser : pathImage
+    pathImage = model === 'admin' ? pathAdmin : pathImage
 
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -53,10 +43,9 @@ const storageUploadSinglePhoto = (name, model) => {
         }
     })
     return multer({ storage: storage, fileFilter: imageFilter }).single(name)
-
 }
 
-// Upload Single and Multiple Product
+// Function Upload Single and Multiple Photo Product
 const storageUploadPhotoProduct = () => {
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
