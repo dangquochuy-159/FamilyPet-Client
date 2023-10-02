@@ -1,13 +1,9 @@
-const express = require("express");
 const bcrypt = require('bcrypt');
-const path = require("path");
 const fs = require('fs')
 const appRoot = require('app-root-path');
 
 const Admin = require('../models/AdminModel');
-
 const pathAdmin = '/src/api/public/uploads/admins/'
-
 
 // GET /api/admins
 const getListAdmins = (req, res, next) => {
@@ -29,12 +25,8 @@ const getOneAdmin = (req, res, next) => {
 
 // GET /api/admins/:id/:name_avt
 const getAvatarAdmin = (req, res, next) => {
-    Admin.findById(req.params.id)
-        .then(() => {
-            let avatarPath = appRoot + pathAdmin + req.params.name_avt;
-            res.sendFile(avatarPath);
-        })
-        .catch(next)
+    let avatarPath = appRoot + pathAdmin + req.params.name_avt;
+    res.sendFile(avatarPath);
 }
 
 // POST /api/admins
@@ -53,7 +45,9 @@ const addAdmin = (req, res, next) => {
     })
         .save()
         .then(() => {
-            res.json("Thêm thành công")
+            res.status(200).json({
+                message: 'Post Success'
+            });
         })
         .catch(next)
 }
@@ -78,7 +72,7 @@ const removeAdmin = (req, res, next) => {
                 })
             })
             res.status(200).json({
-                message: 'Delete thành công',
+                message: 'Delete Success'
             });
         })
         .catch(next)
@@ -91,11 +85,10 @@ const removeAvatarAdmin = (req, res, next) => {
     })
         .then((admin) => {
             return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
-
         })
         .then(() => {
             res.status(200).json({
-                message: 'Delete thành công',
+                message: 'Delete Success'
             });
         })
         .catch(next)
@@ -105,34 +98,40 @@ const removeAvatarAdmin = (req, res, next) => {
 const updateOneAdmin = (req, res, next) => {
     const updateAdmin = {}
 
-    if (req.file) {
-        updateAdmin.avatar = req.file.filename;
-    }
+    req.file ? updateAdmin.avatar = req.file.filename : updateAdmin
 
     for (let key in req.body) {
         if (req.body[key] !== '') {
             updateAdmin[key] = req.body[key];
         }
     }
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        if (err) {
-            console.error('Lỗi khi băm mật khẩu:', err);
-            return;
-        }
-        updateAdmin.password = hashedPassword
+
+    const handleUpdateAdmin = (updateAdmin) => {
         Admin.findByIdAndUpdate(req.params.id, updateAdmin)
             .then((admin) => {
                 return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
             })
             .then(() => {
                 res.status(200).json({
-                    error: 'Update thành công',
+                    message: 'Update Success'
                 });
             })
 
             .catch(next)
-    })
+    }
 
+    if (req.body.password) {
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+            if (err) {
+                console.error('Lỗi khi băm mật khẩu:', err);
+                return;
+            }
+            updateAdmin.password = hashedPassword
+            handleUpdateAdmin(updateAdmin)
+        })
+    } else {
+        handleUpdateAdmin(updateAdmin)
+    }
 }
 
 // PUT /api/admins/:id/:name_avt
@@ -156,10 +155,9 @@ const updateAvatarAdmin = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                error: 'Update thành công',
+                message: 'Update Success'
             });
         })
-
         .catch(next)
 }
 

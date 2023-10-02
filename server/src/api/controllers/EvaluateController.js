@@ -1,23 +1,13 @@
-const express = require("express");
-const bcrypt = require('bcrypt');
-const path = require("path");
-const fs = require('fs')
-const appRoot = require('app-root-path');
-
 const Evaluate = require('../models/EvaluateModel')
 const Product = require('../models/ProductModel')
-
-const pathEvaluate = '/src/api/public/uploads/evaluates/'
 
 // GET /api/evaluates
 const getListEvaluate = (req, res, next) => {
     Evaluate.find()
         .then((evaluates) => {
             res.json(evaluates)
-            // res.send('huy')
         })
         .catch(next)
-
 }
 
 // POST /api/evaluates
@@ -36,11 +26,10 @@ const addEvaluate = (req, res, next) => {
                     total_eval: 1
                 }
             })
-                .then((product) => {
-                    res.json({
-                        message: 'post success',
-                        data: req.body
-                    })
+                .then(() => {
+                    res.status(200).json({
+                        message: 'Post Success'
+                    });
                 })
         })
 }
@@ -49,20 +38,29 @@ const addEvaluate = (req, res, next) => {
 const removeEvaluate = (req, res, next) => {
     Evaluate.deleteOne({ _id: req.params.id })
         .then(() => {
-            res.json('delete success')
+            res.status(200).json({
+                message: 'Delete Success'
+            });
         })
 }
 
 //PUT /api/evaluates/:id
 const updateEvaluate = (req, res, next) => {
-    Evaluate.updateOne({ _id: req.params.id }, {
+    Evaluate.findByIdAndUpdate(req.params.id, {
         $set: {
             content: req.body.content,
             star: Number(req.body.star)
         }
     })
-        .then(() => {
-            res.json('update success')
+        .then((evaluate) => {
+            let starChange = Number(req.body.star) - evaluate.star
+            return Product.updateOne({ _id: evaluate.id_product }, { $inc: { star: starChange } })
+                .then(() => {
+                    res.status(200).json({
+                        message: 'Update Success'
+                    });
+                })
+
         })
 }
 module.exports = {

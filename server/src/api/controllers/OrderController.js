@@ -1,8 +1,3 @@
-const express = require("express");
-const bcrypt = require('bcrypt');
-const path = require("path");
-const fs = require('fs')
-
 const Order = require('../models/OrderModel');
 const User = require('../models/UserModel');
 
@@ -60,12 +55,10 @@ const addOrder = (req, res, next) => {
                     },
                 }
             })
-                .then((order) => {
-                    res.json({
-                        messge: 'post success',
-                        // order: order,
-                        _id: order._id
-                    })
+                .then(() => {
+                    res.status(200).json({
+                        message: 'Post Success'
+                    });
                 })
         })
         .catch(next)
@@ -82,7 +75,9 @@ const updateStatusOrder = (req, res, next) => {
         }
     })
         .then(() => {
-            res.json('put success')
+            res.status(200).json({
+                message: 'Update Success'
+            });
         })
 }
 

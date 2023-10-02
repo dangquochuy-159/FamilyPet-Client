@@ -16,7 +16,6 @@ const {
 
 categoryRouter
     .get('/', getListCategorys)
-
     .get('/:id', getOneCategory)
     .get('/:id/:photo', getPhotoCategory)
 

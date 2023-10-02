@@ -13,6 +13,7 @@ const {
     addUser,
     removeUser,
     removeAvatarUser,
+    removeSomeProductCart,
     updateOneUser,
     updateAvatarUser,
     updateCart
@@ -28,9 +29,10 @@ userRouter
 
     .delete('/:id', removeUser)
     .delete('/:id/avatar', removeAvatarUser)
+    .delete('/:id/cart/:id_product', removeSomeProductCart)
 
     .put('/:id', storageUploadSinglePhoto('avatar', 'user'), updateOneUser)
     .put('/:id/:name_avt', updateAvatarUser)
-    .put('/:id/cart/:id_product/:quantity/:price', updateCart)
+    .put('/:id/cart/:id_product', updateCart)
 
 module.exports = userRouter

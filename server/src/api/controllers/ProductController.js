@@ -1,11 +1,7 @@
-const express = require("express");
-const bcrypt = require('bcrypt');
-const path = require("path");
 const fs = require('fs')
 const appRoot = require('app-root-path');
 
 const Product = require('../models/ProductModel')
-
 const pathProduct = '/src/api/public/uploads/products/'
 
 // GET /api/products
@@ -24,9 +20,7 @@ const searchProduct = (req, res, next) => {
         .limit(Number(req.query.quantity))
         .then((products) => {
             res.json({
-                products: products,
-                name: req.query.name,
-                quantity: Number(req.query.quantity),
+                data: products,
             })
         })
         .catch(next)
@@ -44,9 +38,9 @@ const filterProduct = (req, res, next) => {
     ])
         .then(([productsFilter, products]) => {
             res.json({
-                productsFilter: productsFilter,
+                data: productsFilter,
                 page: Number(req.query.page),
-                products: products.length
+                length: products.length
             })
         })
 }
@@ -57,18 +51,12 @@ const getOneProduct = (req, res, next) => {
         .then((product) => {
             res.json(product)
         })
-
-
 }
 
 // GET /api/products/:id/:photo
 const getPhotoProduct = (req, res, next) => {
-    Product.findById(req.params.id)
-        .then((product) => {
-            let photoPath = appRoot + pathProduct + req.params.photo;
-            res.sendFile(photoPath);
-        })
-        .catch(next)
+    let photoPath = appRoot + pathProduct + req.params.photo;
+    res.sendFile(photoPath);
 }
 
 // POST /api/products
@@ -94,7 +82,9 @@ const addProduct = (req, res, next) => {
     })
         .save()
         .then(() => {
-            res.json("Thêm thành công")
+            res.status(200).json({
+                message: 'Post Success'
+            });
         })
         .catch(next)
 }
@@ -118,7 +108,7 @@ const removeProduct = (req, res, next) => {
                 })
             }
             res.status(200).json({
-                error: 'Delete thành công',
+                message: 'Delete Success'
             });
         })
         .catch(next)
@@ -126,24 +116,16 @@ const removeProduct = (req, res, next) => {
 
 // PUT /api/products/:id
 const updateProduct = (req, res, next) => {
-
-
-
     const updateProduct = {}
     for (let key in req.body) {
         if (req.body[key] !== '') {
             updateProduct[key] = req.body[key];
         }
     }
-    if (req.files) {
-        if (req.files.photo) {
-            updateProduct.photo = req.files.photo.map(file => file.originalname).join()
-        }
-        if (req.files.photo_detail) {
-            updateProduct.photo_detail = req.files.photo_detail.map(file => file.originalname)
-        }
 
-    }
+    req.files.photo ? updateProduct.photo = req.files.photo.map(file => file.originalname).join() : updateProduct
+    req.files.photo_detail ? updateProduct.photo_detail = req.files.photo_detail.map(file => file.originalname) : updateProduct
+
     updateProduct.status = {
         in_stock: req.body.quantity > 5,
         out_stock: req.body.quantity <= 5 && req.body.quantity > 0,
@@ -152,8 +134,7 @@ const updateProduct = (req, res, next) => {
     Product.findByIdAndUpdate(req.params.id, updateProduct, { new: true })
         .then((product) => {
             res.status(200).json({
-                error: 'Update thành công',
-                product: product
+                message: 'Update Success'
             });
         })
         .catch(next)

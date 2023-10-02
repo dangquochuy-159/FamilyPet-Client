@@ -3,7 +3,6 @@ const slug = require('mongoose-slug-updater');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
-
 const AdminSchema = Schema(
     {
         full_name: { type: String },
@@ -18,7 +17,6 @@ const AdminSchema = Schema(
         add_admin: { type: Boolean, default: false },
         delete_admin: { type: Boolean, default: false },
         slug: { type: String, slug: "full_name", unique: true },
-
     },
     {
         timestamps: true,

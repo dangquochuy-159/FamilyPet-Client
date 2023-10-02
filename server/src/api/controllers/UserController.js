@@ -1,11 +1,8 @@
-const express = require("express");
 const bcrypt = require('bcrypt');
-const path = require("path");
 const fs = require('fs')
 const appRoot = require('app-root-path');
 
 const User = require('../models/UserModel');
-
 const pathUser = '/src/api/public/uploads/users/'
 
 // GET /api/users
@@ -33,63 +30,35 @@ const getSearchAccountUser = (req, res, next) => {
         case 'email':
             User.findOne({ email: req.query.email })
                 .then(user => {
-                    if (user) {
-                        res.json(true)
-                    } else {
-                        res.json(false)
-                    }
+                    user ? res.json(true) : res.json(false)
                 })
                 .catch(next)
             break
         case 'phone_login':
             User.findOne({ phone_login: req.query.phone_login })
                 .then(user => {
-                    if (user) {
-                        res.json(true)
-                    } else {
-                        res.json(false)
-                    }
+                    user ? res.json(true) : res.json(false)
                 })
                 .catch(next)
             break
         default:
             break
     }
-    // res.json(q)
-    // res.json(Object.keys(req.query))
 }
 
 // GET /api/users/:id/:name_avt
 const getAvatarUser = (req, res, next) => {
-    User.findById(req.params.id)
-        .then((user) => {
-            let avatarPath = appRoot + pathUser + req.params.name_avt;
-            // Đọc tệp hình ảnh và gửi nó về client
-            res.sendFile(avatarPath);
-        })
-        .catch(next)
+    let avatarPath = appRoot + pathUser + req.params.name_avt;
+    res.sendFile(avatarPath);
 }
 
 // POST /api/users
 const addUser = (req, res, next) => {
     let fileName, phone_login, email
-    // let add = `${req.body.ward} / ${req.body.district} / ${req.body.province}`
-    if (req.body.email) {
-        method_login = {
-            email: true,
-            phone: false
-        }
-        email = req.body.email
-    } else {
-        method_login = {
-            email: false,
-            phone: true
-        }
-        phone_login = req.body.phone_login
-    }
-    if (req.file) {
-        fileName = req.file.filename
-    }
+
+    method_login = req.body.email ? { email: true, phone: false } : { email: false, phone: true }
+    req.body.email ? email = req.body.email : phone_login = req.body.phone_login
+    fileName = req.file ? req.file.filename : fileName
 
     const user = new User({
         full_name: req.body.full_name,
@@ -105,10 +74,9 @@ const addUser = (req, res, next) => {
     })
         .save()
         .then(() => {
-            res.json({
-                message: 'post success',
-                data: req.body
-            })
+            res.status(200).json({
+                message: 'Post Success'
+            });
         })
         .catch(next)
 }
@@ -134,7 +102,7 @@ const removeUser = (req, res, next) => {
             })
 
             res.status(200).json({
-                message: 'Delete thành công',
+                message: 'Delete Success',
             });
         })
         .catch(next)
@@ -143,30 +111,45 @@ const removeUser = (req, res, next) => {
 // DELETE /api/users/:id/avatar
 const removeAvatarUser = (req, res, next) => {
     User.findByIdAndUpdate({ _id: req.params.id }, {
-        $set: { avatar: "" }
+        $set: { avatar: null }
     })
         .then((user) => {
             return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
-
         })
         .then(() => {
             res.status(200).json({
-                error: 'Delete thành công',
+                message: 'Delete Success',
             });
         })
         .catch(next)
 }
 
+// DELETE /api/users/:id/cart/:id_product
+const removeSomeProductCart = (req, res, next) => {
+    let cartsReq = req.body.id_product_list
+
+    User.findById(req.params.id)
+        .then(user => {
+            let cartsUser = user.carts
+            cartsUser = cartsUser.filter(cartUser => {
+                return !cartsReq.some(cartReq => {
+                    return cartUser.id_product === cartReq;
+                });
+            });
+            return User.updateOne({ _id: user._id }, { $set: { carts: cartsUser } })
+                .then(() => {
+                    res.status(200).json({
+                        message: 'Delete Success',
+                    });
+                })
+        })
+}
+
 // PUT /api/users/:id
 const updateOneUser = (req, res, next) => {
-    // let add = `${req.body.ward}/${req.body.district}/${req.body.province}`
-    // updateUser.address = add
-
     const updateUser = {}
 
-    if (req.file) {
-        updateUser.avatar = req.file.filename;
-    }
+    req.file ? updateUser.avatar = req.file.filename : updateUser
 
     for (let key in req.body) {
         if (req.body[key] !== '') {
@@ -174,26 +157,31 @@ const updateOneUser = (req, res, next) => {
         }
     }
 
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        if (err) {
-            console.error('Lỗi khi băm mật khẩu:', err);
-            return;
-        }
-        updateUser.password = hashedPassword
+    const handleUpdateUser = (updateUser) => {
         User.findByIdAndUpdate(req.params.id, updateUser)
             .then((user) => {
                 return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
             })
             .then(() => {
                 res.status(200).json({
-                    error: 'Update thành công',
-                    updateUser: updateUser
+                    message: 'Update Success',
                 });
             })
-
             .catch(next)
-    })
+    }
 
+    if (req.body.password) {
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+            if (err) {
+                console.error('Hash Error', err);
+                return;
+            }
+            updateUser.password = hashedPassword
+            handleUpdateUser(updateUser)
+        })
+    } else {
+        handleUpdateUser(updateUser)
+    }
 }
 
 // PUT /api/users/:id/:name_avt
@@ -203,11 +191,8 @@ const updateAvatarUser = (req, res, next) => {
             const updateAvtOld = []
             for (let i in user.avatar_old) {
                 if (user.avatar_old[i] === req.params.name_avt) {
-                    if (user.avatar != "") {
-                        updateAvtOld.push(user.avatar)
-                    } else {
-                        updateAvtOld.push(user.avatar_old[i])
-                    }
+                    let avatar = user.avatar != "" ? user.avatar : user.avatar_old[i]
+                    updateAvtOld.push(avatar)
                 } else {
                     updateAvtOld.push(user.avatar_old[i])
                 }
@@ -221,21 +206,20 @@ const updateAvatarUser = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                error: 'Update thành công',
+                message: 'Update Success',
             });
         })
-
         .catch(next)
 }
 
-// PUT /api/users/:id/cart/:id_product/:quantity/:price
+// PUT /api/users/:id/cart/:id_product?quantity=&price=
 const updateCart = (req, res, next) => {
     let key_cart
     let exist
     let updateCart = {
         id_product: req.params.id_product,
-        quantity: Number(req.params.quantity),
-        price: Number(req.params.price),
+        quantity: Number(req.query.quantity),
+        price: Number(req.query.price),
     }
     User.findById(req.params.id)
         .then((user) => {
@@ -248,8 +232,8 @@ const updateCart = (req, res, next) => {
             if (user.carts.length > 0 && exist) {
                 return User.updateOne({ _id: user._id, "carts.id_product": req.params.id_product }, {
                     $set: {
-                        "carts.$.quantity": Number(req.params.quantity) + user.carts[key_cart].quantity,
-                        "carts.$.price": Number(req.params.price),
+                        "carts.$.quantity": Number(req.query.quantity) + user.carts[key_cart].quantity,
+                        "carts.$.price": Number(req.query.price),
                     }
                 })
             } else {
@@ -257,11 +241,12 @@ const updateCart = (req, res, next) => {
             }
         })
         .then(() => {
-            res.json("Update Thành Công")
+            res.status(200).json({
+                message: 'Update Success',
+            });
         })
         .catch(next)
 }
-
 
 module.exports = {
     getListUsers,
@@ -271,6 +256,7 @@ module.exports = {
     addUser,
     removeUser,
     removeAvatarUser,
+    removeSomeProductCart,
     updateOneUser,
     updateAvatarUser,
     updateCart

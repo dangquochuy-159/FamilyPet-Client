@@ -1,11 +1,7 @@
-const express = require("express");
-const bcrypt = require('bcrypt');
-const path = require("path");
 const fs = require('fs')
 const appRoot = require('app-root-path');
 
 const Category = require('../models/CategoryModel');
-
 const pathCategory = '/src/api/public/uploads/categorys/'
 
 // GET /api/categorys
@@ -44,7 +40,9 @@ const addCategory = (req, res, next) => {
     })
         .save()
         .then(() => {
-            res.json("Thêm thành công")
+            res.status(200).json({
+                message: 'Post Success'
+            });
         })
         .catch(next)
 }
@@ -62,7 +60,7 @@ const removeCategory = (req, res, next) => {
                 }
             })
             res.status(200).json({
-                error: 'Delete thành công',
+                message: 'Delete Success'
             });
         })
         .catch(next)
@@ -70,22 +68,17 @@ const removeCategory = (req, res, next) => {
 
 // PUT /api/categorys/:id
 const updateOneCategory = (req, res, next) => {
-
     const updateData = {}
-    if (req.body.name !== "") {
-        updateData.name = req.body.name
-    }
-    if (req.file) {
-        updateData.photo = req.file.filename
-    }
-    Category.findByIdAndUpdate({ _id: req.params.id }, updateData)
 
+    req.body.name !== "" ? updateData.name = req.body.name : updateData
+    req.file ? updateData.photo = req.file.filename : updateData
+
+    Category.findByIdAndUpdate({ _id: req.params.id }, updateData)
         .then(() => {
             res.status(200).json({
                 error: 'Update thành công',
             });
         })
-
         .catch(next)
 }
 

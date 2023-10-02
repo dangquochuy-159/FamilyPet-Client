@@ -42,7 +42,6 @@ const UserSchema = Schema(
 mongoose.plugin(slug);
 
 let saltRounds = 10;
-// thực hiện hash pass trước khi save
 UserSchema.pre('save', function (next) {
     if (this.isModified('password') && this.password) {
         bcrypt.hash(this.password, saltRounds, (err, hash) => {
@@ -57,17 +56,12 @@ UserSchema.pre('save', function (next) {
     }
 })
 
-// Định nghĩa middleware sau khi cập nhật thông qua updateOne
 UserSchema.post('updateOne', function (doc, next) {
-    // Tìm tài liệu đã cập nhật
     const conditions = this.getQuery();
-    // Lấy tài liệu trước khi cập nhật
     this.model.findOne(conditions)
         .then(user => {
             if (user) {
-                // Tính toán và cập nhật total_pont dựa trên total_pay
-                user.total_point = user.total_pay / 1000; // Ví dụ đơn giản: total_pont = total_pay / 10
-                // Lưu lại tài liệu đã cập nhật
+                user.total_point = user.total_pay / 1000;
                 return user.save();
             }
         })

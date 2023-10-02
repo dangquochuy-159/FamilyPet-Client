@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
-const slug = require('mongoose-slug-updater');
-const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
-
 
 const EvaluateSchema = Schema(
     {
@@ -15,7 +12,6 @@ const EvaluateSchema = Schema(
         timestamps: true,
     }
 )
-
 
 module.exports = mongoose.model("Evaluate", EvaluateSchema);
 

@@ -6,7 +6,6 @@ const {
     storageUploadPhotoProduct,
 } = require('../middleware/upload')
 
-
 const {
     getListProduct,
     searchProduct,
