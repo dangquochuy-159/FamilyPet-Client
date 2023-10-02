@@ -46,7 +46,8 @@ const addOrder = (req, res, next) => {
             User.updateOne({ _id: order.id_customer }, {
                 $inc: {
                     total_pay: order.total_pay,
-                    total_order: 1
+                    total_order: 1,
+                    total_point: order.total_pay / 1000
                 },
                 $push: {
                     list_orders: {

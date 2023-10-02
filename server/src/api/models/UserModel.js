@@ -56,21 +56,4 @@ UserSchema.pre('save', function (next) {
     }
 })
 
-UserSchema.post('updateOne', function (doc, next) {
-    const conditions = this.getQuery();
-    this.model.findOne(conditions)
-        .then(user => {
-            if (user) {
-                user.total_point = user.total_pay / 1000;
-                return user.save();
-            }
-        })
-        .then(() => {
-            next();
-        })
-        .catch(error => {
-            next(error);
-        });
-});
-
 module.exports = mongoose.model("User", UserSchema);
