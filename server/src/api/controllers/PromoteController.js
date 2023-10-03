@@ -44,7 +44,7 @@ const removePromote = (req, res, next) => {
 }
 
 // PUT /api/promotes/:id
-const updatePromote = (res, req, next) => {
+const updatePromote = (req, res, next) => {
     const updatePromote = {}
     for (let key in req.body) {
         if (req.body[key] !== '') {
