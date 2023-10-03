@@ -3,7 +3,7 @@ const productRouter = express.Router()
 
 // Middleware
 const {
-    storageUploadPhotoProduct,
+    storageUploadMultiplePhoto,
 } = require('../middleware/upload')
 
 const {
@@ -24,10 +24,10 @@ productRouter
     .get('/:id', getOneProduct)
     .get('/:id/:photo', getPhotoProduct)
 
-    .post('/', storageUploadPhotoProduct().fields([{ name: 'photo' }, { name: 'photo_detail' }]), addProduct)
+    .post('/', storageUploadMultiplePhoto('product', 'photo', 'photo_detail'), addProduct)
 
     .delete('/:id', removeProduct)
 
-    .put('/:id', storageUploadPhotoProduct().fields([{ name: 'photo' }, { name: 'photo_detail' }]), updateProduct)
+    .put('/:id', storageUploadMultiplePhoto('product', 'photo', 'photo_detail'), updateProduct)
 
 module.exports = productRouter;

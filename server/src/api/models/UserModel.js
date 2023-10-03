@@ -61,12 +61,13 @@ UserSchema.post('updateOne', function (doc, next) {
     this.model.findOne(conditions)
         .then(user => {
             if (user) {
+                totalPay = user.total_pay / 1000
                 user.rank = {
-                    diamond: user.total_pay >= 40000,
-                    gold: user.total_pay >= 30000 && user.total_pay < 40000,
-                    silver: user.total_pay >= 20000 && user.total_pay < 30000,
-                    bronze: user.total_pay >= 10000 && user.total_pay < 20000,
-                    member: user.total_pay >= 0 && user.total_pay < 10000,
+                    diamond: totalPay >= 50000,
+                    gold: totalPay >= 20000 && totalPay < 50000,
+                    silver: totalPay >= 5000 && totalPay < 20000,
+                    bronze: totalPay >= 2000 && totalPay < 5000,
+                    member: totalPay >= 0 && totalPay < 2000,
                 }
                 return user.save();
             }

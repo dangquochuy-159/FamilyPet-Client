@@ -46,21 +46,23 @@ const storageUploadSinglePhoto = (name, model) => {
 }
 
 // Function Upload Single and Multiple Photo Product
-const storageUploadPhotoProduct = () => {
+const storageUploadMultiplePhoto = (model, nameSingle, nameMultiple) => {
+    let pathImage
+    pathImage = model === 'product' ? pathProduct : pathImage
+
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, pathProduct)
+            cb(null, pathImage)
         },
         filename: (req, file, cb) => {
-
-            let fileName = handleDuplicateNames(file.originalname, pathProduct)
+            let fileName = handleDuplicateNames(file.originalname, pathImage)
             cb(null, fileName)
         }
     })
-    return multer({ storage: storage, fileFilter: imageFilter })
+    return multer({ storage: storage, fileFilter: imageFilter }).fields([{ name: nameSingle }, { name: nameMultiple }])
 }
 
 module.exports = {
     storageUploadSinglePhoto,
-    storageUploadPhotoProduct,
+    storageUploadMultiplePhoto,
 }

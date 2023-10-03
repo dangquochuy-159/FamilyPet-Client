@@ -126,11 +126,14 @@ const updateProduct = (req, res, next) => {
     req.files.photo ? updateProduct.photo = req.files.photo.map(file => file.originalname).join() : updateProduct
     req.files.photo_detail ? updateProduct.photo_detail = req.files.photo_detail.map(file => file.originalname) : updateProduct
 
-    updateProduct.status = {
-        in_stock: req.body.quantity > 5,
-        out_stock: req.body.quantity <= 5 && req.body.quantity > 0,
-        low_stock: req.body.quantity == 0,
+    if (req.body.quantity) {
+        updateProduct.status = {
+            in_stock: req.body.quantity > 5,
+            out_stock: req.body.quantity <= 5 && req.body.quantity > 0,
+            low_stock: req.body.quantity == 0,
+        }
     }
+
     Product.findByIdAndUpdate(req.params.id, updateProduct, { new: true })
         .then((product) => {
             res.status(200).json({
