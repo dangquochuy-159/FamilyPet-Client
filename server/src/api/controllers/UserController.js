@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const fs = require('fs')
 const appRoot = require('app-root-path');
+const HashPassword = require('../utils/hashPassWord')
 
 const User = require('../models/UserModel');
 const pathUser = '/src/api/public/uploads/users/'
@@ -9,7 +10,10 @@ const pathUser = '/src/api/public/uploads/users/'
 const getListUsers = (req, res, next) => {
     User.find({})
         .then((users) => {
-            res.json(users)
+            res.json({
+                data: users,
+                message: 'success'
+            })
         })
         .catch(next)
 }
@@ -18,7 +22,10 @@ const getListUsers = (req, res, next) => {
 const getOneUser = (req, res, next) => {
     User.findById(req.params.id)
         .then((user) => {
-            res.json(user)
+            res.json({
+                data: user,
+                message: 'success'
+            })
         })
         .catch(next)
 }
@@ -53,29 +60,31 @@ const getAvatarUser = (req, res, next) => {
 }
 
 // POST /api/users
-const addUser = (req, res, next) => {
+const addUser = async (req, res, next) => {
     let fileName, phone_login, email
+    const { full_name, address, phone, gender, date_birth } = req.body
+    const password = await HashPassword(req.body.password)
 
     method_login = req.body.email ? { email: true, phone: false } : { email: false, phone: true }
     req.body.email ? email = req.body.email : phone_login = req.body.phone_login
     fileName = req.file ? req.file.filename : fileName
 
     const user = new User({
-        full_name: req.body.full_name,
+        phone_login,
+        method_login,
+        full_name,
         email: email,
-        phone_login: phone_login,
-        method_login: method_login,
-        password: req.body.password,
-        address: req.body.address,
-        phone: req.body.phone,
-        gender: req.body.gender,
-        date_birth: req.body.date_birth,
+        password,
+        address,
+        phone,
+        gender,
+        date_birth,
         avatar: fileName,
     })
         .save()
         .then(() => {
             res.status(200).json({
-                message: 'Post Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -102,7 +111,7 @@ const removeUser = (req, res, next) => {
             })
 
             res.status(200).json({
-                message: 'Delete Success',
+                message: 'success',
             });
         })
         .catch(next)
@@ -118,7 +127,7 @@ const removeAvatarUser = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                message: 'Delete Success',
+                message: 'success',
             });
         })
         .catch(next)
@@ -139,14 +148,14 @@ const removeSomeProductCart = (req, res, next) => {
             return User.updateOne({ _id: user._id }, { $set: { carts: cartsUser } })
                 .then(() => {
                     res.status(200).json({
-                        message: 'Delete Success',
+                        message: 'success',
                     });
                 })
         })
 }
 
 // PUT /api/users/:id
-const updateOneUser = (req, res, next) => {
+const updateOneUser = async (req, res, next) => {
     const updateUser = {}
 
     req.file ? updateUser.avatar = req.file.filename : updateUser
@@ -157,31 +166,19 @@ const updateOneUser = (req, res, next) => {
         }
     }
 
-    const handleUpdateUser = (updateUser) => {
-        User.findByIdAndUpdate(req.params.id, updateUser)
-            .then((user) => {
-                return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
-            })
-            .then(() => {
-                res.status(200).json({
-                    message: 'Update Success',
-                });
-            })
-            .catch(next)
-    }
+    req.body.password ? updateUser.password = await HashPassword(req.body.password) : updateUser
 
-    if (req.body.password) {
-        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-            if (err) {
-                console.error('Hash Error', err);
-                return;
-            }
-            updateUser.password = hashedPassword
-            handleUpdateUser(updateUser)
+    User.findByIdAndUpdate(req.params.id, updateUser)
+        .then((user) => {
+            return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
         })
-    } else {
-        handleUpdateUser(updateUser)
-    }
+        .then(() => {
+            res.status(200).json({
+                message: 'success',
+            });
+        })
+        .catch(next)
+
 }
 
 // PUT /api/users/:id/:name_avt
@@ -206,7 +203,7 @@ const updateAvatarUser = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                message: 'Update Success',
+                message: 'success',
             });
         })
         .catch(next)
@@ -242,7 +239,7 @@ const updateCart = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                message: 'Update Success',
+                message: 'success',
             });
         })
         .catch(next)

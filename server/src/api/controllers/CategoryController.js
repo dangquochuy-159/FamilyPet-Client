@@ -8,7 +8,10 @@ const pathCategory = '/src/api/public/uploads/categorys/'
 const getListCategorys = (req, res, next) => {
     Category.find()
         .then(categorys => {
-            res.json(categorys)
+            res.json({
+                data: categorys,
+                message: 'success',
+            })
         })
         .catch(next);
 }
@@ -17,7 +20,10 @@ const getListCategorys = (req, res, next) => {
 const getOneCategory = (req, res, next) => {
     Category.findById(req.params.id)
         .then(category => {
-            res.json(category)
+            res.json({
+                data: category,
+                message: 'success',
+            })
         })
         .catch(next);
 }
@@ -41,7 +47,7 @@ const addCategory = (req, res, next) => {
         .save()
         .then(() => {
             res.status(200).json({
-                message: 'Post Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -60,7 +66,7 @@ const removeCategory = (req, res, next) => {
                 }
             })
             res.status(200).json({
-                message: 'Delete Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -76,7 +82,7 @@ const updateOneCategory = (req, res, next) => {
     Category.findByIdAndUpdate({ _id: req.params.id }, updateData)
         .then(() => {
             res.status(200).json({
-                error: 'Update thành công',
+                message: 'success'
             });
         })
         .catch(next)

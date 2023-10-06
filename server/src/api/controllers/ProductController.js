@@ -8,7 +8,10 @@ const pathProduct = '/src/api/public/uploads/products/'
 const getListProduct = (req, res, next) => {
     Product.find()
         .then((products) => {
-            res.json(products)
+            res.json({
+                data: products,
+                message: 'success',
+            })
         })
         .catch(next)
 }
@@ -21,6 +24,7 @@ const searchProduct = (req, res, next) => {
         .then((products) => {
             res.json({
                 data: products,
+                message: 'success',
             })
         })
         .catch(next)
@@ -40,7 +44,8 @@ const filterProduct = (req, res, next) => {
             res.json({
                 data: productsFilter,
                 page: Number(req.query.page),
-                length: products.length
+                length: products.length,
+                message: 'success',
             })
         })
 }
@@ -49,7 +54,10 @@ const filterProduct = (req, res, next) => {
 const getOneProduct = (req, res, next) => {
     Product.findById(req.params.id)
         .then((product) => {
-            res.json(product)
+            res.json({
+                data: product,
+                message: 'success',
+            })
         })
 }
 
@@ -61,9 +69,10 @@ const getPhotoProduct = (req, res, next) => {
 
 // POST /api/products
 const addProduct = (req, res, next) => {
+
     const photoStr = req.files.photo.map(file => file.originalname).join()
     const photo_detail = req.files.photo_detail.map(file => file.originalname)
-
+    let arrColor = req.body.color ? req.body.color.split('-') : []
     const product = new Product({
         name: req.body.name,
         category: req.body.category,
@@ -73,6 +82,8 @@ const addProduct = (req, res, next) => {
         price: Number(req.body.price),
         sale_price: Number(req.body.sale_price),
         photo: photoStr,
+        outstand: req.body.outstand,
+        color: arrColor,
         photo_detail: photo_detail,
         status: {
             in_stock: req.body.quantity > 5,
@@ -83,7 +94,7 @@ const addProduct = (req, res, next) => {
         .save()
         .then(() => {
             res.status(200).json({
-                message: 'Post Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -108,7 +119,7 @@ const removeProduct = (req, res, next) => {
                 })
             }
             res.status(200).json({
-                message: 'Delete Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -122,7 +133,8 @@ const updateProduct = (req, res, next) => {
             updateProduct[key] = req.body[key];
         }
     }
-
+    let arrColor = req.body.color ? req.body.color.split('-') : []
+    updateProduct.color = arrColor
     req.files.photo ? updateProduct.photo = req.files.photo.map(file => file.originalname).join() : updateProduct
     req.files.photo_detail ? updateProduct.photo_detail = req.files.photo_detail.map(file => file.originalname) : updateProduct
 
@@ -137,7 +149,7 @@ const updateProduct = (req, res, next) => {
     Product.findByIdAndUpdate(req.params.id, updateProduct, { new: true })
         .then((product) => {
             res.status(200).json({
-                message: 'Update Success'
+                message: 'success'
             });
         })
         .catch(next)

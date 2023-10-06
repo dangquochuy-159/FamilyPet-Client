@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 
 const AdminSchema = Schema(
     {
-        full_name: { type: String },
+        full_name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         address: { type: String, required: true },
-        gender: { type: String },
-        date_birth: { type: String },
+        gender: { type: String, required: true },
+        date_birth: { type: String, required: true },
         avatar: { type: String },
         avatar_old: { type: Array },
         phone: { type: String, required: true },
@@ -23,21 +23,6 @@ const AdminSchema = Schema(
     }
 )
 mongoose.plugin(slug);
-
-let saltRounds = 10;
-AdminSchema.pre('save', function (next) {
-    if (this.isModified('password') && this.password) {
-        bcrypt.hash(this.password, saltRounds, (err, hash) => {
-            if (err) {
-                return next(err);
-            }
-            this.password = hash;
-            next();
-        });
-    } else {
-        next();
-    }
-})
 
 module.exports = mongoose.model("Admin", AdminSchema);
 

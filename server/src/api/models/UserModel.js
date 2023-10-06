@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = Schema(
     {
-        full_name: { type: String },
+        full_name: { type: String, required: true },
         email: { type: String, default: null },
         phone_login: { type: String, default: null },
         method_login: {
@@ -41,20 +41,6 @@ const UserSchema = Schema(
 )
 mongoose.plugin(slug);
 
-let saltRounds = 10;
-UserSchema.pre('save', function (next) {
-    if (this.isModified('password') && this.password) {
-        bcrypt.hash(this.password, saltRounds, (err, hash) => {
-            if (err) {
-                return next(err);
-            }
-            this.password = hash;
-            next();
-        });
-    } else {
-        next();
-    }
-})
 
 UserSchema.post('updateOne', function (doc, next) {
     const conditions = this.getQuery();

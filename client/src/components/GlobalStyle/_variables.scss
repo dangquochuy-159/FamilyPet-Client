@@ -1,0 +1,13 @@
+:root {
+    --primary-color: #f9a529;
+    --text-color: #363025;
+    --price-color: #ef1515;
+    --sale_price-color: #363025;
+    --title-color: #f4b915;
+    --black-color: #000;
+    --white-color: #fff;
+
+    --header_nav-height: 100px;
+    --header_search-height: 100px;
+    --header-height: calc(var(--header_nav-height) + var(--header_search-height));
+}

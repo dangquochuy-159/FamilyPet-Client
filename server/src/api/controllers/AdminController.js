@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const fs = require('fs')
 const appRoot = require('app-root-path');
+const HashPassword = require('../utils/hashPassWord')
 
 const Admin = require('../models/AdminModel');
 const pathAdmin = '/src/api/public/uploads/admins/'
@@ -9,7 +10,10 @@ const pathAdmin = '/src/api/public/uploads/admins/'
 const getListAdmins = (req, res, next) => {
     Admin.find({})
         .then((admins) => {
-            res.json(admins)
+            res.status(200).json({
+                data: admins,
+                message: 'success',
+            })
         })
         .catch(next)
 }
@@ -18,7 +22,10 @@ const getListAdmins = (req, res, next) => {
 const getOneAdmin = (req, res, next) => {
     Admin.findById(req.params.id)
         .then((admin) => {
-            res.json(admin)
+            res.status(200).json({
+                data: admin,
+                message: 'success',
+            })
         })
         .catch(next)
 }
@@ -30,23 +37,26 @@ const getAvatarAdmin = (req, res, next) => {
 }
 
 // POST /api/admins
-const addAdmin = (req, res, next) => {
+const addAdmin = async (req, res, next) => {
+
+    const { full_name, email, address, phone, gender, date_birth, add_admin, delete_admin } = req.body
+    const password = await HashPassword(req.body.password)
     const admin = new Admin({
-        full_name: req.body.full_name,
-        email: req.body.email,
-        password: req.body.password,
-        address: req.body.address,
-        phone: req.body.phone,
-        gender: req.body.gender,
-        date_birth: req.body.date_birth,
+        full_name,
+        email,
+        password,
+        address,
+        phone,
+        gender,
+        date_birth,
+        add_admin,
+        delete_admin,
         avatar: req.file.filename,
-        add_admin: req.body.add_admin,
-        delete_admin: req.body.delete_admin,
     })
         .save()
         .then(() => {
             res.status(200).json({
-                message: 'Post Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -72,7 +82,7 @@ const removeAdmin = (req, res, next) => {
                 })
             })
             res.status(200).json({
-                message: 'Delete Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -88,14 +98,14 @@ const removeAvatarAdmin = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                message: 'Delete Success'
+                message: 'success'
             });
         })
         .catch(next)
 }
 
 // PUT /api/admins/:id
-const updateOneAdmin = (req, res, next) => {
+const updateOneAdmin = async (req, res, next) => {
     const updateAdmin = {}
 
     req.file ? updateAdmin.avatar = req.file.filename : updateAdmin
@@ -105,33 +115,20 @@ const updateOneAdmin = (req, res, next) => {
             updateAdmin[key] = req.body[key];
         }
     }
+    req.body.password ? updateAdmin.password = await HashPassword(req.body.password) : updateAdmin
 
-    const handleUpdateAdmin = (updateAdmin) => {
-        Admin.findByIdAndUpdate(req.params.id, updateAdmin)
-            .then((admin) => {
-                return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
-            })
-            .then(() => {
-                res.status(200).json({
-                    message: 'Update Success'
-                });
-            })
-
-            .catch(next)
-    }
-
-    if (req.body.password) {
-        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-            if (err) {
-                console.error('Lỗi khi băm mật khẩu:', err);
-                return;
-            }
-            updateAdmin.password = hashedPassword
-            handleUpdateAdmin(updateAdmin)
+    Admin.findByIdAndUpdate(req.params.id, updateAdmin)
+        .then((admin) => {
+            return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
         })
-    } else {
-        handleUpdateAdmin(updateAdmin)
-    }
+        .then(() => {
+            res.status(200).json({
+                message: 'success'
+            });
+        })
+
+        .catch(next)
+
 }
 
 // PUT /api/admins/:id/:name_avt
@@ -155,7 +152,7 @@ const updateAvatarAdmin = (req, res, next) => {
         })
         .then(() => {
             res.status(200).json({
-                message: 'Update Success'
+                message: 'success'
             });
         })
         .catch(next)

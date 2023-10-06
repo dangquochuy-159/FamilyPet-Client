@@ -5,7 +5,10 @@ const User = require('../models/UserModel');
 const getListOrder = (req, res, next) => {
     Order.find()
         .then((orders) => {
-            res.json(orders)
+            res.json({
+                data: orders,
+                message: 'success',
+            })
         })
 }
 
@@ -13,7 +16,10 @@ const getListOrder = (req, res, next) => {
 const getOneOrder = (req, res, next) => {
     Order.findById(req.params.id)
         .then((order) => {
-            res.json(order)
+            res.json({
+                data: order,
+                message: 'success',
+            })
         })
 }
 
@@ -21,7 +27,10 @@ const getOneOrder = (req, res, next) => {
 const getDetailOrder = (req, res, next) => {
     Order.findById(req.params.id)
         .then((order) => {
-            res.json(order.detail)
+            res.json({
+                data: order.detail,
+                message: 'success',
+            })
         })
 }
 
@@ -58,7 +67,7 @@ const addOrder = (req, res, next) => {
             })
                 .then(() => {
                     res.status(200).json({
-                        message: 'Post Success'
+                        message: 'success'
                     });
                 })
         })
@@ -77,7 +86,7 @@ const updateStatusOrder = (req, res, next) => {
     })
         .then(() => {
             res.status(200).json({
-                message: 'Update Success'
+                message: 'success'
             });
         })
 }

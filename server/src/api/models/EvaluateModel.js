@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const EvaluateSchema = Schema(
     {
-        id_customer: { type: String },
-        id_product: { type: String },
+        id_customer: { type: String, required: true },
+        id_product: { type: String, required: true },
         content: { type: String },
         star: { type: Number, default: 0 },
     },

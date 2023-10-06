@@ -5,7 +5,10 @@ const Product = require('../models/ProductModel')
 const getListEvaluate = (req, res, next) => {
     Evaluate.find()
         .then((evaluates) => {
-            res.json(evaluates)
+            res.json({
+                data: evaluates,
+                message: 'success',
+            })
         })
         .catch(next)
 }
@@ -28,7 +31,7 @@ const addEvaluate = (req, res, next) => {
             })
                 .then(() => {
                     res.status(200).json({
-                        message: 'Post Success'
+                        message: 'success'
                     });
                 })
         })
@@ -39,7 +42,7 @@ const removeEvaluate = (req, res, next) => {
     Evaluate.deleteOne({ _id: req.params.id })
         .then(() => {
             res.status(200).json({
-                message: 'Delete Success'
+                message: 'success'
             });
         })
 }
@@ -57,7 +60,7 @@ const updateEvaluate = (req, res, next) => {
             return Product.updateOne({ _id: evaluate.id_product }, { $inc: { star: starChange } })
                 .then(() => {
                     res.status(200).json({
-                        message: 'Update Success'
+                        message: 'success'
                     });
                 })
 

@@ -4,7 +4,10 @@ const Promote = require('../models/PromoteModel');
 const getListPromote = (req, res, next) => {
     Promote.find()
         .then(promotes => {
-            res.json(promotes);
+            res.json({
+                data: promotes,
+                message: 'success'
+            });
         })
 }
 
@@ -12,7 +15,10 @@ const getListPromote = (req, res, next) => {
 const getPromote = (req, res, next) => {
     Promote.findById(req.params.id)
         .then(promote => {
-            res.json(promote);
+            res.json({
+                data: promote,
+                message: 'success'
+            });
         })
 }
 
@@ -27,7 +33,7 @@ const addPromote = (req, res, next) => {
         .save()
         .then(() => {
             res.status(200).json({
-                message: 'Post Success'
+                message: 'success'
             });
         })
         .catch(next)
@@ -38,7 +44,7 @@ const removePromote = (req, res, next) => {
     Promote.deleteOne({ _id: req.params.id })
         .then(() => {
             res.status(200).json({
-                message: 'Delete Success'
+                message: 'success'
             });
         })
 }
@@ -54,7 +60,7 @@ const updatePromote = (req, res, next) => {
     Promote.updateOne({ _id: req.params.id }, updatePromote)
         .then(() => {
             res.status(200).json({
-                message: 'Update Success'
+                message: 'success'
             });
         })
 }
