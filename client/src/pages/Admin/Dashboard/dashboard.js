@@ -1,21 +1,23 @@
-import classNames from 'classnames/bind';
 
-
+import { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGauge, faGaugeSimple, faTableColumns } from '@fortawesome/free-solid-svg-icons';
+import { faGauge, faTableColumns, } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './dashboard.module.scss'
+import AdminContext from '~/context/AdminContext';
 
-const cx = classNames.bind(styles)
+import './dashboard.scss'
+import { Header } from "~/layouts/AdminLayout/components";
 
 function Dashboard() {
+    const context = useContext(AdminContext)
     return (
         <>
-            <h1 className={`${cx("size", "color")} underline`}>Page Dashboard</h1>
+            <Header title='Thống kê' name={context.name} avatar={context.avatar} />
+            <h1 className="size color underline">Page Dashboard</h1>
             <h1 className="bg-red-800 text-3xl font-bold underline">Page Dashboard</h1>
             <FontAwesomeIcon icon={faGauge} />
             <FontAwesomeIcon icon={faTableColumns} />
-            <FontAwesomeIcon icon={faGaugeSimple} />
+
         </>
     );
 }

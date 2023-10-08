@@ -1,1 +1,1 @@
-export { default } from './adminLayout';
+export { default } from './AdminLayout';

@@ -1,0 +1,16 @@
+.wrapper--header {
+    background-color: var(--bg-content-admin);
+    .header-content {
+        background-color: var(--primary-color);
+        .icon,
+        .title--page,
+        .title--admin {
+            color: var(--white-color);
+        }
+        .header--admin {
+            img {
+                border-radius: 50%;
+            }
+        }
+    }
+}
