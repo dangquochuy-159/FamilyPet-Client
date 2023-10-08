@@ -13,6 +13,7 @@ import Promote from './Admin/Promote'
 import Product from './Admin/Product'
 import Info from './Admin/Info'
 import LoginAdmin from './Admin/Login'
+import logoutAdmin from './Admin/Logout'
 
 const pages = {
     Home,
@@ -28,5 +29,6 @@ const pages = {
     Product,
     Info,
     LoginAdmin,
+    logoutAdmin,
 }
 export default pages
