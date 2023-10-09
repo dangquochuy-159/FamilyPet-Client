@@ -28,7 +28,7 @@ function Sidebar() {
                 <NavItem to={admin.evaluate} title='Đánh giá' className=' py-4 px-6' icon={<FontAwesomeIcon icon={faPenNib} />} />
                 <NavItem to={admin.info} title='Thông tin quản trị viên' className=' py-4 px-6' icon={<FontAwesomeIcon icon={faCircleInfo} />} />
                 <button
-                    className='btn--logout w-full text-left absolute bottom-0 left-0 py-4 px-6 '
+                    className='btn--logout w-full border-t-2 border-solid border-black text-left absolute bottom-0 left-0 py-4 px-6 '
                     onClick={handleLogout}
                 >
                     <span className="w-4 h-4">

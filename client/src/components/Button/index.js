@@ -1,0 +1,1 @@
+export { default as ButtonAdmin } from './buttonAdmin'
