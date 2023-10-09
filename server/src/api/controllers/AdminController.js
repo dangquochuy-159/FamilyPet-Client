@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const fs = require('fs')
 const appRoot = require('app-root-path');
 const HashPassword = require('../utils/hashPassWord')
+const ComparePassword = require('../utils/comparePassword')
 
 const Admin = require('../models/AdminModel');
 const pathAdmin = '/src/api/public/uploads/admins/'
@@ -58,6 +59,36 @@ const addAdmin = async (req, res, next) => {
             res.status(200).json({
                 message: 'success'
             });
+        })
+        .catch(next)
+}
+
+// POST /api/admins/login
+const checkLogin = (req, res, next) => {
+    Admin.findOne({ email: req.body.email })
+        .then(async (admin) => {
+            if (admin) {
+                let comparePass = await ComparePassword(req.body.password, admin.password)
+                if (comparePass) {
+                    res.status(200).json({
+                        comparePass: comparePass,
+                        login: true,
+                        message: 'Đăng nhập thành công',
+                        admin: admin,
+                        token: '112'
+                    })
+                } else {
+                    res.status(200).json({
+                        password: false,
+                        message: 'Mật khẩu không chính xác',
+                    })
+                }
+            } else {
+                res.status(200).json({
+                    email: false,
+                    message: 'Tài khoản chưa được đăng kí'
+                })
+            }
         })
         .catch(next)
 }
@@ -163,6 +194,7 @@ module.exports = {
     getOneAdmin,
     getAvatarAdmin,
     addAdmin,
+    checkLogin,
     removeAdmin,
     removeAvatarAdmin,
     updateOneAdmin,

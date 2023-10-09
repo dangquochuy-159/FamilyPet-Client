@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 function Header({ title, avatar, name, }) {
+
+
     return (
         <div className="wrapper--header w-10/12 h-20 fixed top-0 right-0 z-2 p-2">
             <div className='header-content h-full flex justify-between items-center px-8'>

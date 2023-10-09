@@ -1,12 +1,11 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { privateRoutes, publicRoutes, LoginRoutes } from '~/routes'
 
 
 function App() {
-  window.localStorage.setItem('isAuthenticated', JSON.stringify({ admin: "quochuy", token: "1234" }))
-  // window.localStorage.removeItem('isAuthenticated')
-  let checkLogin = window.localStorage.getItem('isAuthenticated')
+
+  let checkLogin = window.localStorage.getItem('adminLogin')
 
   const LoginAdmin = () => <Navigate to="/login-admin" />;
   const LoginCustomer = () => <Navigate to="/login" />;

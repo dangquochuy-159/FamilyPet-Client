@@ -8,6 +8,11 @@ import { faCat, faChartLine, faCircleInfo, faGift, faPaste, faPenNib, faRectangl
 
 function Sidebar() {
     const admin = config.routes_private
+
+    const handleLogout = () => {
+        window.localStorage.removeItem('isAuthenticated')
+        window.location.href = '/login-admin';
+    }
     return (
         <div className="wrapper--sidebar w-2/12 h-screen fixed top-0 left-0 ">
             <div className='w-full logo--admin border-b-2 border-solid border-black'>
@@ -22,7 +27,15 @@ function Sidebar() {
                 <NavItem to={admin.promote} title='Khuyến mãi' className=' py-4 px-6' icon={<FontAwesomeIcon icon={faGift} />} />
                 <NavItem to={admin.evaluate} title='Đánh giá' className=' py-4 px-6' icon={<FontAwesomeIcon icon={faPenNib} />} />
                 <NavItem to={admin.info} title='Thông tin quản trị viên' className=' py-4 px-6' icon={<FontAwesomeIcon icon={faCircleInfo} />} />
-                <NavItem to={admin.logoutAdmin} title='Log-out' className='w-full absolute bottom-0 left-0 py-4 px-6 ' icon={<FontAwesomeIcon icon={faRightFromBracket} />} />
+                <button
+                    className='btn--logout w-full text-left absolute bottom-0 left-0 py-4 px-6 '
+                    onClick={handleLogout}
+                >
+                    <span className="w-4 h-4">
+                        <FontAwesomeIcon icon={faRightFromBracket} />
+                    </span>
+                    <span className="ml-4 font-bold">Logout</span>
+                </button>
             </NavMenu>
         </div>
     );

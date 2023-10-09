@@ -1,4 +1,9 @@
 .wrapper--login {
     background-image: url('../../../assets/images/bgr_login.jpg');
     background-size: cover;
+    .invalid {
+        input {
+            border-color: red;
+        }
+    }
 }

@@ -16,7 +16,7 @@ function NavItem({ to, icon, title, className }) {
 NavItem.propTypes = {
     to: PropTypes.string.isRequired,
     className: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.node.isRequired,
     title: PropTypes.string.isRequired,
 }
 

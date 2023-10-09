@@ -1,6 +1,11 @@
 .wrapper--sidebar {
     .active {
-        background-color: #f0efef;
-        color: red;
+        background-color: var(--primary-color);
+        color: var(--white-color);
+    }
+    .btn--logout {
+        &:hover {
+            background-color: var(--primary-color);
+        }
     }
 }

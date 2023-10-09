@@ -3,13 +3,16 @@ import { Sidebar } from './components';
 import AdminContext from '~/context/AdminContext';
 
 import './AdminLayout.scss'
+import { useEffect, useState } from 'react';
 
 function AdminLayout({ children }) {
-    let avatar = 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2023/02/Hinh-anh-avatar-Facebook-cute-cho-con-gai.jpg?ssl=1'
-    let name = "Kiều Oanh"
+
+    const data = JSON.parse(window.localStorage.getItem('adminLogin')).data
     const value = {
-        avatar, name
+        avatar: `${process.env.REACT_APP_API_URL}/api/admins/${data.admin.id}/${data.admin.avatar}`,
+        name: data.admin.full_name
     }
+
     return (
         <AdminContext.Provider value={value}>
             <div className='wrapper h-screen flex flex-col' >

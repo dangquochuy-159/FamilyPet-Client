@@ -8,7 +8,6 @@ const routes_public = {
 const routes_private = {
     // admin
     loginAdmin: '/login-admin',
-    logoutAdmin: '/logout-admin',
     admin: '/admin',
     dashboard: '/admin/dashboard',
     info: '/admin/info',

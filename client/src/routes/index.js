@@ -11,7 +11,6 @@ const publicRoutes = [
 
 const LoginRoutes = [
     { path: config.routes_private.loginAdmin, page: pages.LoginAdmin, layout: null },
-    { path: config.routes_private.logoutAdmin, page: pages.logoutAdmin, layout: null },
     { path: config.routes_public.login, page: pages.LoginCustomer, layout: null },
 
 ]

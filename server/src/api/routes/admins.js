@@ -10,6 +10,7 @@ const {
     getOneAdmin,
     getAvatarAdmin,
     addAdmin,
+    checkLogin,
     removeAdmin,
     removeAvatarAdmin,
     updateOneAdmin,
@@ -22,6 +23,7 @@ adminRouter
     .get('/:id/:name_avt', getAvatarAdmin)
 
     .post('/', storageUploadSinglePhoto('avatar', 'admin'), addAdmin)
+    .post('/login', checkLogin)
 
     .delete('/:id', removeAdmin)
     .delete('/:id/avatar', removeAvatarAdmin)
