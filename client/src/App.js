@@ -1,11 +1,11 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { privateRoutes, publicRoutes, LoginRoutes } from '~/routes'
 
 
 function App() {
 
-  let checkLogin = window.localStorage.getItem('adminLogin')
+  let checkLogin = window.sessionStorage.getItem('adminLogin')
 
   const LoginAdmin = () => <Navigate to="/login-admin" />;
   const LoginCustomer = () => <Navigate to="/login" />;

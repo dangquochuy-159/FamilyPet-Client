@@ -1,1 +1,1 @@
-export { default as ButtonAdmin } from './buttonAdmin'
+export { default as Button } from './button'

@@ -10,7 +10,7 @@ function Sidebar() {
     const admin = config.routes_private
 
     const handleLogout = () => {
-        window.localStorage.removeItem('isAuthenticated')
+        window.sessionStorage.removeItem('adminLogin')
         window.location.href = '/login-admin';
     }
     return (

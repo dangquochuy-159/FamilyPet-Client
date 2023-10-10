@@ -4,10 +4,9 @@ import AdminContext from '~/context/AdminContext';
 
 import './AdminLayout.scss'
 
-
 function AdminLayout({ children }) {
 
-    const data = JSON.parse(window.localStorage.getItem('adminLogin')).data
+    const data = JSON.parse(window.sessionStorage.getItem('adminLogin')).data
     const value = {
         admin: data.admin,
         avatar: `${process.env.REACT_APP_API_URL}/api/admins/${data.admin.id}/${data.admin.avatar}`,
@@ -18,11 +17,8 @@ function AdminLayout({ children }) {
         <AdminContext.Provider value={value}>
             <div className='wrapper h-screen flex flex-col' >
                 <Sidebar />
-
-                <div className='wrapper--content w-10/12 h-full fixed top-20 right-0 px-2'>
-                    <div className='content h-full overflow-auto'>
-                        {children}
-                    </div>
+                <div className='wrapper--content w-10/12 h-screen fixed top-0 right-0 px-2'>
+                    {children}
                 </div>
             </div>
         </AdminContext.Provider>

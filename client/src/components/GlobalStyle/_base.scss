@@ -35,3 +35,11 @@ input,
 a {
     color: var(--text-color);
 }
+
+.wrapper-page {
+    height: 90vh;
+    margin-top: 10vh;
+    padding-bottom: 8px;
+    width: 100%;
+    overflow: auto;
+}

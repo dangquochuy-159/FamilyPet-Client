@@ -34,7 +34,7 @@ function Login() {
                         let logged = res.data.login
                         if (logged) {
                             alert(res.data.message)
-                            window.localStorage.setItem('adminLogin', JSON.stringify({ data: res.data }))
+                            window.sessionStorage.setItem('adminLogin', JSON.stringify({ data: res.data }))
                             window.location.href = '/admin/dashboard';
                         } else {
                             eleErrorLogin.innerHTML = res.data.message

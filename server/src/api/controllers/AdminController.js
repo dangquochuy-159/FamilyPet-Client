@@ -71,7 +71,6 @@ const checkLogin = (req, res, next) => {
                 let comparePass = await ComparePassword(req.body.password, admin.password)
                 if (comparePass) {
                     res.status(200).json({
-                        comparePass: comparePass,
                         login: true,
                         message: 'Đăng nhập thành công',
                         admin: admin,
