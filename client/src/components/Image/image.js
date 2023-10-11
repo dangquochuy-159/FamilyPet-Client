@@ -6,6 +6,7 @@ import { images } from '~/assets'
 const Image = forwardRef(({ className, src, alt, fallback: customFallback = images.no_image, ...props }, ref) => {
     const [fallback, setFallback] = useState('')
     const handleError = () => {
+        console.log('errr')
         setFallback(customFallback);
 
     }

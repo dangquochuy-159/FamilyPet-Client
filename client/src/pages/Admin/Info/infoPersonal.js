@@ -18,17 +18,34 @@ function InfoPersonal() {
                 setAdmin(data.data)
             })
     })
+    const handleClick = () => {
+        console.log('context: ', context.admin.avatar)
+        console.log('context type: ', typeof context.admin.avatar)
+        console.log('admin :', admin.avatar)
+        console.log('admin type: ', typeof admin.avatar)
+        console.log(context.admin.avatar === admin.avatar)
+    }
+
+
     return (
         <div className="wrapper-info-admin flex bg-white mb-2">
             <div className="w-2/5 h-full flex flex-col items-center py-8 pl-8">
-                <Image
-                    src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${admin.avatar}`}
-                    className='w-56 h-56 object-cover rounded-full'
-                    alt="avatar"
-                />
+                {
+                    admin._id ? (
+                        <Image
+                            onClick={() => console.log(admin.avatar)}
+                            src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${admin.avatar}`}
+                            className='w-56 h-56 object-cover rounded-full'
+                            alt='avatar'
+                        />
+                    ) : (
+                        <></>
+                    )
+                }
+
                 <div className="w-full flex mt-4 space-x-2">
                     <Button onClick={() => console.log(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${admin.avatar}`)} className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay dổi ảnh' rightIcon={<ImageIcon />} />
-                    <Button className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay đổi thông tin' rightIcon={<InfoIcon />} />
+                    <Button onClick={handleClick} className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay đổi thông tin' rightIcon={<InfoIcon />} />
                 </div>
             </div>
             <div className="w-3/5 h-full p-8 space-y-2">

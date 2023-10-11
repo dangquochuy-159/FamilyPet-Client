@@ -17,6 +17,22 @@ body {
     // overflow-y: overlay;
 }
 
+// scrollbar css
+html {
+    *::-webkit-scrollbar {
+        border-radius: 0;
+        width: 8px;
+    }
+    *::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    *::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
 h1,
 h2,
 h3,
