@@ -9,6 +9,7 @@ const {
     getListAdmins,
     getOneAdmin,
     getAvatarAdmin,
+    getSearchEmailAdmin,
     addAdmin,
     checkLogin,
     removeAdmin,
@@ -19,6 +20,7 @@ const {
 
 adminRouter
     .get('/', getListAdmins)
+    .get('/search', getSearchEmailAdmin)
     .get('/:id', getOneAdmin)
     .get('/:id/:name_avt', getAvatarAdmin)
 

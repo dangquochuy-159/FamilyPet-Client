@@ -62,7 +62,7 @@ const getAvatarUser = (req, res, next) => {
 // POST /api/users
 const addUser = async (req, res, next) => {
     let fileName, phone_login, email
-    const { full_name, address, phone, gender, date_birth } = req.body
+    const { full_name, address, province, district, ward, phone, gender, date_birth } = req.body
     const password = await HashPassword(req.body.password)
 
     method_login = req.body.email ? { email: true, phone: false } : { email: false, phone: true }
@@ -75,7 +75,7 @@ const addUser = async (req, res, next) => {
         full_name,
         email: email,
         password,
-        address,
+        address: address + ' - ' + ward + ' - ' + district + ' - ' + province,
         phone,
         gender,
         date_birth,
@@ -167,7 +167,7 @@ const updateOneUser = async (req, res, next) => {
     }
 
     req.body.password ? updateUser.password = await HashPassword(req.body.password) : updateUser
-
+    req.body.address ? updateAdmin.address = req.body.address + ' - ' + req.body.ward + ' - ' + req.body.district + ' - ' + req.body.province : updateUser
     User.findByIdAndUpdate(req.params.id, updateUser)
         .then((user) => {
             return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })

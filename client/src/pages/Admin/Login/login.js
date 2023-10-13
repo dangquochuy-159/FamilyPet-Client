@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import Validator from "~/utils/validator";
+import Validator from "~/utils/Validate/validator";
 import './login.scss'
 import { EyeIcon, NotEyeIcon } from "~/components/Icons";
 

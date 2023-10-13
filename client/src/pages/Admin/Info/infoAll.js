@@ -6,7 +6,8 @@ import { InfoIcon, PlusIcon } from "~/components/Icons";
 
 import './info.scss'
 import Modal from "../../../components/Modal/modal";
-import ModalInfo from "./Modal/modalInfo";
+import { ModalAddAdmin, ModalInfo } from "./Modal";
+
 
 function InfoAll() {
     const context = useContext(AdminContext)
@@ -23,12 +24,9 @@ function InfoAll() {
     })
 
     const handleClick = () => {
-        // console.log(context.admin.add_admin)
-        // console.log('click')
     }
     return (
         <div className="wrapper--info-all h-full  ">
-
             <h2 className="text-4xl pt-8 font-bold text-center text-[var(--primary-color)] bg-white">Danh sách quản trị viên</h2>
             <div className="w-full h-auto flex flex-wrap justify-center items-center gap-8 py-8 bg-white" >
                 {
@@ -42,10 +40,11 @@ function InfoAll() {
                                 />
                             </div>
                             <p className="font-bold">{admin.full_name}</p>
-                            <p>{admin.email}</p>
+                            <p>{admin.phone}</p>
+                            <p>{admin.gender}</p>
                             <ModalInfo
                                 data={admin}
-                                className="w-1/2 h-auto"
+                                className="w-1/3 h-auto"
                                 trigger={
                                     <div className="w-auto h-auto">
                                         <Button
@@ -64,14 +63,16 @@ function InfoAll() {
                 <div className="w-full flex justify-center ">
                     {
                         context.admin.add_admin && (
-                            <Modal trigger={
-                                <div className="w-auto h-auto" >
-                                    <Button
-                                        className='bg-[var(--primary-color)] text-white button'
-                                        type='primary' title='Thêm quản trị viên' rightIcon={<PlusIcon />} onClick={handleClick}
-                                    />
-                                </div>
-                            }
+                            <ModalAddAdmin
+                                className="w-2/3 h-auto"
+                                trigger={
+                                    <div className="w-auto h-auto" >
+                                        <Button
+                                            className='bg-[var(--primary-color)] text-white button'
+                                            type='primary' title='Thêm quản trị viên' rightIcon={<PlusIcon />} onClick={handleClick}
+                                        />
+                                    </div>
+                                }
                             />
                         )
                     }

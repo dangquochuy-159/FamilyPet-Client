@@ -37,22 +37,32 @@ const getAvatarAdmin = (req, res, next) => {
     res.sendFile(avatarPath);
 }
 
+// GET /api/admins/search?email=
+const getSearchEmailAdmin = async (req, res, next) => {
+    const exits = await Admin.findOne({ email: req.query.email })
+    res.status(200).json({
+        exits: !!exits
+    });
+
+}
+
 // POST /api/admins
 const addAdmin = async (req, res, next) => {
 
-    const { full_name, email, address, phone, gender, date_birth, add_admin, delete_admin } = req.body
+    const { full_name, email, address, province, district, ward, phone, gender, date_birth, add_admin, delete_admin } = req.body
     const password = await HashPassword(req.body.password)
+
     const admin = new Admin({
         full_name,
         email,
         password,
-        address,
+        address: address + ' - ' + ward + ' - ' + district + ' - ' + province,
         phone,
         gender,
         date_birth,
         add_admin,
         delete_admin,
-        avatar: req.file.filename,
+        avatar: req.file ? req.file.filename : null,
     })
         .save()
         .then(() => {
@@ -146,7 +156,7 @@ const updateOneAdmin = async (req, res, next) => {
         }
     }
     req.body.password ? updateAdmin.password = await HashPassword(req.body.password) : updateAdmin
-
+    req.body.address ? updateAdmin.address = req.body.address + ' - ' + req.body.ward + ' - ' + req.body.district + ' - ' + req.body.province : updateAdmin
     Admin.findByIdAndUpdate(req.params.id, updateAdmin)
         .then((admin) => {
             return Admin.updateOne({ _id: admin._id }, { $push: { avatar_old: admin.avatar } })
@@ -192,6 +202,7 @@ module.exports = {
     getListAdmins,
     getOneAdmin,
     getAvatarAdmin,
+    getSearchEmailAdmin,
     addAdmin,
     checkLogin,
     removeAdmin,

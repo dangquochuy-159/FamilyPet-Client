@@ -9,7 +9,6 @@ const Validator = (options) => {
     }
   }
   let listRules = {};
-
   function validate(inputEle, rule) {
     let msgElement = getParent(inputEle, options.formGroup).querySelector(
       options.formError
@@ -105,7 +104,6 @@ const Validator = (options) => {
     });
   }
 }
-
 Validator.isRequired = function (selector, isEmpty) {
   return {
     selector: selector,
@@ -114,7 +112,6 @@ Validator.isRequired = function (selector, isEmpty) {
     },
   };
 };
-
 Validator.isEmail = function (selector, isEmail) {
   return {
     selector: selector,
@@ -124,7 +121,6 @@ Validator.isEmail = function (selector, isEmail) {
     },
   };
 };
-
 Validator.isMinLength = function (selector, minPass, isPass) {
   return {
     selector: selector,
@@ -133,7 +129,6 @@ Validator.isMinLength = function (selector, minPass, isPass) {
     },
   };
 };
-
 Validator.isConfirmed = function (selector, confirmPass, isConfirmPass) {
   return {
     selector: selector,

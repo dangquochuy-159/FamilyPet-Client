@@ -8,7 +8,6 @@ import './info.scss'
 
 function Info() {
     const context = useContext(AdminContext)
-    // console.log(context.admin);
     return (
         <div className="wrapper--info">
             <Header title='Thông tin quản trị viên' name={context.name} avatar={context.avatar} />
