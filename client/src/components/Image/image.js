@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import { useState, forwardRef } from 'react'
+import { useState } from 'react'
 import { images } from '~/assets'
 
 
-const Image = forwardRef(({ className, src, alt, fallback: customFallback = images.no_image, ...props }, ref) => {
+function Image({ className, src, alt, fallback: customFallback = images.no_image, onClick, innerRef, ...props }) {
     const [fallback, setFallback] = useState('')
     const handleError = () => {
         console.log('errr')
@@ -13,20 +13,22 @@ const Image = forwardRef(({ className, src, alt, fallback: customFallback = imag
     return (
         <img
             className={className}
-            ref={ref}
+            ref={innerRef}
             src={fallback || src} {...props}
             alt={alt}
             {...props}
             onError={handleError}
+            onClick={onClick}
         />
     );
-})
+}
 
 Image.propTypes = {
     className: PropTypes.string,
     src: PropTypes.string,
     alt: PropTypes.string,
     fallback: PropTypes.string,
+    onClick: PropTypes.func,
 }
 
 export default Image;

@@ -1,19 +1,17 @@
-import { useContext } from "react";
 import { Header } from "~/layouts/AdminLayout/components";
-import AdminContext from '~/context/AdminContext';
 import InfoPersonal from "./infoPersonal";
 import InfoAll from "./infoAll";
-import './info.scss'
-
+import ButtonToTop from "~/components/ButtonToTop";
 
 function Info() {
-    const context = useContext(AdminContext)
+
     return (
         <div className="wrapper--info">
-            <Header title='Thông tin quản trị viên' name={context.name} avatar={context.avatar} />
+            <Header title='Thông tin quản trị viên' />
             <div className="wrapper-page flex flex-col">
                 <InfoPersonal />
                 <InfoAll />
+                <ButtonToTop />
             </div>
         </div>
     );

@@ -39,7 +39,7 @@ function Button(
 
     const classes = {
         primary: ' font-bold py-2 px-4 rounded',
-        outline: `font-semibold py-2 px-4 border border-blue-500 rounded`,
+        outline: `font-bold py-2 px-4 border border-blue-500 rounded`,
         text: 'underline',
         rounded: ' font-bold py-2 px-4 rounded-full',
         disabled: ' font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed',

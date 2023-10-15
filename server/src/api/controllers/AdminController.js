@@ -32,7 +32,7 @@ const getOneAdmin = (req, res, next) => {
 }
 
 // GET /api/admins/:id/:name_avt
-const getAvatarAdmin = (req, res, next) => {
+const getAvatarAdmin = async (req, res, next) => {
     let avatarPath = appRoot + pathAdmin + req.params.name_avt;
     res.sendFile(avatarPath);
 }

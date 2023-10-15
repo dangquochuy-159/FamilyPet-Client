@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
-import { forwardRef } from 'react';
 
-const Input = forwardRef(({ className, label, id, name, placeholder, type, value, title, onChange }, ref) => {
+function Input({ className, label, id, name, placeholder, type, defaultValue, value, title, onChange, innerRef, ...props }) {
 
 
     return (
@@ -9,35 +8,37 @@ const Input = forwardRef(({ className, label, id, name, placeholder, type, value
             {label && (<label htmlFor={id} className='font-semibold italic'>{label}</label>)}
             {
                 type === 'radio' || type === 'checkbox' ? (
-                    <div className='flex items-center space-x-2'>
+                    <div className='flex items-center space-x-2 '>
                         <span>{title}</span>
                         <input
-                            ref={ref}
+                            ref={innerRef}
                             id={id}
-                            className={`${className} focus:outline-none focus:border-black form-control`}
+                            className={`${className} focus:outline-none focus:border-black hover:cursor-pointer form-control`}
                             type={type}
                             name={name}
                             placeholder={placeholder}
-                            value={value}
                             onChange={onChange}
+                            value={value}
+                            {...props}
                         />
                     </div>
                 ) : (
                     <input
-                        ref={ref}
+                        ref={innerRef}
                         id={id}
                         className={`${className} focus:outline-none focus:border-black form-control`}
                         type={type}
                         name={name}
                         placeholder={placeholder}
-                        value={value}
+                        defaultValue={defaultValue}
                         onChange={onChange}
+                        {...props}
                     />
                 )
             }
         </>
     );
-})
+}
 
 Input.propTypes = {
     className: PropTypes.string,
@@ -46,8 +47,10 @@ Input.propTypes = {
     name: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string,
+    defaultValue: PropTypes.string,
     title: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
 }
 
 export default Input;

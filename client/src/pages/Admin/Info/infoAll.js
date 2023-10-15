@@ -4,13 +4,13 @@ import AdminContext from '~/context/AdminContext';
 import { Button } from "~/components/Button";
 import { InfoIcon, PlusIcon } from "~/components/Icons";
 
-import './info.scss'
-import Modal from "../../../components/Modal/modal";
-import { ModalAddAdmin, ModalInfo } from "./Modal";
+import { FormAddAdmin, FormInfo } from "./ModalContent";
+import Modal from "~/components/Modal/modal";
 
 
 function InfoAll() {
     const context = useContext(AdminContext)
+    const [dataAdmin] = context
     const [admins, setAdmins] = useState([])
 
 
@@ -42,8 +42,7 @@ function InfoAll() {
                             <p className="font-bold">{admin.full_name}</p>
                             <p>{admin.phone}</p>
                             <p>{admin.gender}</p>
-                            <ModalInfo
-                                data={admin}
+                            <Modal
                                 className="w-1/3 h-auto"
                                 trigger={
                                     <div className="w-auto h-auto">
@@ -56,14 +55,16 @@ function InfoAll() {
                                         />
                                     </div>
                                 }
-                            />
+                            >
+                                <FormInfo admin={admin} />
+                            </Modal>
                         </div>
                     ))
                 }
                 <div className="w-full flex justify-center ">
                     {
-                        context.admin.add_admin && (
-                            <ModalAddAdmin
+                        dataAdmin.add_admin && (
+                            <Modal
                                 className="w-2/3 h-auto"
                                 trigger={
                                     <div className="w-auto h-auto" >
@@ -73,7 +74,9 @@ function InfoAll() {
                                         />
                                     </div>
                                 }
-                            />
+                            >
+                                <FormAddAdmin />
+                            </Modal>
                         )
                     }
                 </div>

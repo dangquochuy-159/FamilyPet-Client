@@ -14,7 +14,7 @@ function Modal({ children, trigger, className }) {
     return (
         <Popup trigger={trigger} modal>
             {close => (
-                <div className='modal--over w-screen h-screen bg-black bg-opacity-70' onClick={(e) => handleCloseModal(e, close)}>
+                <div className='modal--over w-screen h-screen bg-opacity-70 bg-[#000] ' onClick={(e) => handleCloseModal(e, close)}>
                     <div className={`${className} modal  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md overflow-hidden bg-white`}>
                         <div className='w-full h-auto p-2 text-right'>
                             <button className="close w-auto h-auto p-2 outline-none text-white text-4xl rounded-sm bg-gray-600 hover:bg-red-600" onClick={close}>
