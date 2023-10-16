@@ -19,16 +19,16 @@ body {
 
 // scrollbar css
 html {
-    *::-webkit-scrollbar {
+    *:not(.wrapper-table)::-webkit-scrollbar {
         border-radius: 0;
         width: 8px;
         height: 8px;
     }
-    *::-webkit-scrollbar-thumb {
+    *:not(.wrapper-table)::-webkit-scrollbar-thumb {
         border-radius: 4px;
         background-color: rgba(0, 0, 0, 0.3);
     }
-    *::-webkit-scrollbar-track {
+    *:not(.wrapper-table)::-webkit-scrollbar-track {
         border-radius: 0;
         background-color: rgba(0, 0, 0, 0);
     }
@@ -49,8 +49,32 @@ a {
 
 .wrapper-page {
     height: 90vh;
+    min-height: 90vh;
     margin-top: 10vh;
     padding-bottom: 8px;
     width: 100%;
     overflow: auto;
+}
+
+.wrapper-table {
+    max-height: 83.33333%;
+    border: 1px solid #000;
+    position: relative;
+    overflow-y: scroll;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    thead {
+        position: sticky;
+        top: 0;
+    }
+    th,
+    td {
+        text-align: center;
+        grid-column: span 1 / span 1;
+        padding: 24px 16px;
+        border-right: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
 }

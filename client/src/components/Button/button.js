@@ -39,15 +39,15 @@ function Button(
 
     const classes = {
         primary: ' font-bold py-2 px-4 rounded',
-        outline: `font-bold py-2 px-4 border border-blue-500 rounded`,
+        outline: `font-bold py-2 px-4 border rounded`,
         text: 'underline',
         rounded: ' font-bold py-2 px-4 rounded-full',
         disabled: ' font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed',
     }
     return (
-        <Comp className={`${classes[type]} ${className} flex items-center space-x-2 justify-center`} onClick={props.onClick}>
+        <Comp className={`${classes[type]} ${className} flex items-center space-x-2 justify-center`} {...passProps} onClick={props.onClick}>
             {leftIcon}
-            <span>{title}</span>
+            {title ? <span>{title}</span> : <></>}
             {rightIcon}
         </Comp>
     );

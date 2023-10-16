@@ -3,14 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import AdminContext from '~/context/AdminContext';
 import { Button } from "~/components/Button";
 import { InfoIcon, PlusIcon } from "~/components/Icons";
-
 import { FormAddAdmin, FormInfo } from "./ModalContent";
 import Modal from "~/components/Modal/modal";
 
-
 function InfoAll() {
     const context = useContext(AdminContext)
-    const [dataAdmin] = context
+    const [adminLogin] = context
     const [admins, setAdmins] = useState([])
 
 
@@ -21,10 +19,8 @@ function InfoAll() {
                 setAdmins(data.data)
             })
             .catch(err => { })
-    })
+    }, [])
 
-    const handleClick = () => {
-    }
     return (
         <div className="wrapper--info-all h-full  ">
             <h2 className="text-4xl pt-8 font-bold text-center text-[var(--primary-color)] bg-white">Danh sách quản trị viên</h2>
@@ -51,7 +47,6 @@ function InfoAll() {
                                             type='primary'
                                             title='Xem Thêm'
                                             rightIcon={<InfoIcon />}
-                                            onClick={handleClick}
                                         />
                                     </div>
                                 }
@@ -63,14 +58,14 @@ function InfoAll() {
                 }
                 <div className="w-full flex justify-center ">
                     {
-                        dataAdmin.add_admin && (
+                        adminLogin.add_admin && (
                             <Modal
                                 className="w-2/3 h-auto"
                                 trigger={
                                     <div className="w-auto h-auto" >
                                         <Button
                                             className='bg-[var(--primary-color)] text-white button'
-                                            type='primary' title='Thêm quản trị viên' rightIcon={<PlusIcon />} onClick={handleClick}
+                                            type='primary' title='Thêm quản trị viên' rightIcon={<PlusIcon />}
                                         />
                                     </div>
                                 }

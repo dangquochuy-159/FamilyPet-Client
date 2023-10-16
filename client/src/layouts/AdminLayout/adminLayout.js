@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types'
-import { Sidebar } from './components';
 import AdminContext from '~/context/AdminContext';
 import './AdminLayout.scss'
-import { useState } from 'react';
+import { Sidebar } from './components';
+import { useEffect, useState } from 'react';
 
 function AdminLayout({ children }) {
     const dataAdmin = JSON.parse(window.sessionStorage.getItem('adminLogin')).data.admin
+    const [adminLogin, setAdminLogin] = useState(dataAdmin)
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_URL}/api/admins/${dataAdmin._id}`)
+            .then(res => res.json())
+            .then(data => {
+                setAdminLogin(data.data)
+            })
+    }, [])
 
     return (
-        <AdminContext.Provider value={[dataAdmin]}>
+        <AdminContext.Provider value={[adminLogin]}>
             <div className='wrapper h-screen flex flex-col' >
                 <Sidebar />
                 <div className='wrapper--content w-10/12 h-screen fixed top-0 right-0 px-2'>

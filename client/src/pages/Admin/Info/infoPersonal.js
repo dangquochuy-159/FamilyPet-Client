@@ -8,19 +8,18 @@ import Image from "~/components/Image";
 import { FormUpdateAvatar, FormUpdateInfo } from "./ModalContent";
 import Modal from "~/components/Modal/modal";
 
-
 function InfoPersonal() {
     const context = useContext(AdminContext)
+    const [adminLogin] = context
     const [admin, setAdmin] = useState({})
-    const [dataAdmin] = context
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/admins/${dataAdmin._id}`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/admins/${adminLogin._id}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.data)
             })
-    })
+    }, [])
 
     return (
         <div className="wrapper-info-admin flex bg-white mb-2">

@@ -60,7 +60,7 @@ function FormUpdateInfo({ admin }) {
     })
 
     const handleInputChange = (event) => {
-        const { name, value, type, files } = event.target;
+        const { name, value, type } = event.target;
 
         let ValueItem
         switch (name) {

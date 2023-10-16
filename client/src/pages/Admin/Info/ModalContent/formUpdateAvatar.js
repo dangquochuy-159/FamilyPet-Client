@@ -2,7 +2,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react';
 import { Button } from '~/components/Button';
-import { UploadIcon } from '~/components/Icons';
+import { DeleteIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 
 function FormUpdateAvatar({ admin }) {
@@ -35,20 +35,35 @@ function FormUpdateAvatar({ admin }) {
                 window.location.reload();
             })
     }
+    const handleDeleteAvatar = () => {
+        if (window.confirm('Bạn chắc chắn muốn xóa ảnh')) {
+            try {
+                axios.delete(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/avatar`)
+                    .then(response => window.location.reload())
+            } catch (error) {
+                console.error('Error sending PUT request:', error);
+            }
+        }
+
+    }
 
     return (
         <div className='w-full h-auto pb-8'>
             <div className=' flex-col items-center space-y-2 mt-4'>
-                <div className='flex flex-col items-center space-y-2 mt-4'>
-                    <Image
-                        innerRef={avatarRef}
-                        src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${nameAvt}`}
-                        className='w-56 h-auto object-cover rounded'
-                        alt='avatar'
-                    />
+                <div className='flex justify-center items-center space-x-2 mt-4'>
                     <input type="file" name="avatar" id="file" className="overflow-hidden w-1 h-1 opacity-0 absolute z-10 " onChange={handleUploadAvatar} />
                     <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer'>
                         <Button className='w-full bg-[var(--primary-color)] text-white py-4 pointer-events-none' type='primary' title='Tải ảnh từ thiết bị' rightIcon={<UploadIcon />} />
+                    </label>
+                    <Image
+                        innerRef={avatarRef}
+                        src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${nameAvt}`}
+                        className='w-40 h-40 object-cover rounded-full'
+                        alt='avatar'
+                    />
+                    <label className='w-1/3 h-auto hover:cursor-pointer'>
+                        <Button className='w-full bg-red-600 text-white py-4 pointer-events-none' type='primary'
+                            title='Xóa ảnh' rightIcon={<DeleteIcon />} onClick={handleDeleteAvatar} />
                     </label>
                 </div>
 
@@ -63,11 +78,11 @@ function FormUpdateAvatar({ admin }) {
                             ) : (
                                 <div className='w-full h-56 mt-4 flex flex-wrap justify-center gap-2 overflow-y-auto '>
                                     {
-                                        admin.avatar_old.map(avatar => (
+                                        admin.avatar_old.map((avatar, index) => (
                                             <Image
-                                                key={avatar}
+                                                key={index}
                                                 src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${avatar}`}
-                                                className='w-56 h-auto object-cover rounded hover:cursor-pointer'
+                                                className='w-56 h-28 object-contain rounded hover:cursor-pointer'
                                                 alt='avatar'
                                                 onClick={handleGetAvatar}
                                                 data-img={avatar}

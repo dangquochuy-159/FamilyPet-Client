@@ -170,7 +170,8 @@ const updateOneUser = async (req, res, next) => {
     req.body.address ? updateAdmin.address = req.body.address + ' - ' + req.body.ward + ' - ' + req.body.district + ' - ' + req.body.province : updateUser
     User.findByIdAndUpdate(req.params.id, updateUser)
         .then((user) => {
-            return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
+            if (updateUser.avatar)
+                return User.updateOne({ _id: user._id }, { $push: { avatar_old: user.avatar } })
         })
         .then(() => {
             res.status(200).json({
@@ -188,8 +189,8 @@ const updateAvatarUser = (req, res, next) => {
             const updateAvtOld = []
             for (let i in user.avatar_old) {
                 if (user.avatar_old[i] === req.params.name_avt) {
-                    let avatar = user.avatar != "" ? user.avatar : user.avatar_old[i]
-                    updateAvtOld.push(avatar)
+                    user.avatar !== null &&
+                        updateAvtOld.push(user.avatar)
                 } else {
                     updateAvtOld.push(user.avatar_old[i])
                 }
