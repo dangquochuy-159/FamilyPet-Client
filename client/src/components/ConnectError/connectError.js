@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
+
 function ConnectError() {
+    const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessage('Đang đợi kết nối tới server...');
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
     return (
         <div className="w-full h-full bg-white pb-4 px-4 ">
-            <p className="text-2xl text-center mt-10">Mất kết nối tới server...</p>
+            <p className="text-2xl text-center mt-10">{message}</p>
         </div >
     );
 }

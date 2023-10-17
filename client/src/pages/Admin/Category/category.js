@@ -14,9 +14,9 @@ import axios from "axios";
 function Category() {
     const context = useContext(AdminContext)
     const [adminLogin] = context
+    const [connectServer, setConnectServer] = useState(false)
     const [categorys, setCategorys] = useState([])
     const [idCategory, setIdCategory] = useState('')
-    const [connectServer, setConnectServer] = useState(true)
     const ipName = document.getElementById('name')
     const ipFile = document.getElementById('photo')
     const btnAdd = document.getElementById('add-cate')
@@ -79,7 +79,11 @@ function Category() {
 
     return (
         <div className="wrapper-user">
-            <Header title='Danh mục sản phẩm' avatar={adminLogin.avatar} name={adminLogin.full_name} id={adminLogin._id} />
+            <Header title='Danh mục sản phẩm'
+                avatar={connectServer && adminLogin.avatar}
+                name={connectServer && adminLogin.full_name}
+                id={connectServer && adminLogin._id}
+            />
 
             <div className="wrapper-page flex flex-col  ">
                 {

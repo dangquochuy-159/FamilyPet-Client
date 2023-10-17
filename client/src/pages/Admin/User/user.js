@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import AdminContext from '~/context/AdminContext';
 import ConnectError from "~/components/ConnectError";
 import { Header } from "~/layouts/AdminLayout/components";
-import Image from "~/components/Image";
 import { Button } from "~/components/Button";
 import { InfoIcon } from "~/components/Icons";
 import Modal from "~/components/Modal/modal";
@@ -13,22 +12,27 @@ function User() {
     const context = useContext(AdminContext)
     const [adminLogin] = context
     const [users, setUsers] = useState([])
-    const [connectServer, setConnectServer] = useState(true)
+    const [connectServer, setConnectServer] = useState(false)
 
     useEffect(() => {
-
         fetch(`${process.env.REACT_APP_API_URL}/api/users`)
             .then(res => res.json())
             .then(data => {
                 setUsers(data.data)
                 setConnectServer(true)
             })
-            .catch(err => setConnectServer(false))
+            .catch(err => {
+                setConnectServer(false)
+            })
     }, [])
     return (
 
         <div className="wrapper-user">
-            <Header title='Khách hàng' avatar={adminLogin.avatar} name={adminLogin.full_name} id={adminLogin._id} />
+            <Header title='Khách hàng'
+                avatar={connectServer && adminLogin.avatar}
+                name={connectServer && adminLogin.full_name}
+                id={connectServer && adminLogin._id}
+            />
             <div className="wrapper-page flex flex-col  ">
                 {
                     !connectServer ? <ConnectError /> :

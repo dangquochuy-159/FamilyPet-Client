@@ -14,11 +14,12 @@ function AdminLayout({ children }) {
             .then(data => {
                 setAdminLogin(data.data)
             })
+            .catch(err => err.message);
     }, [])
 
     return (
         <AdminContext.Provider value={[adminLogin]}>
-            <div className='wrapper h-screen flex flex-col' >
+            <div className='wrapper h-screen flex flex-col ' >
                 <Sidebar />
                 <div className='wrapper--content w-10/12 h-screen fixed top-0 right-0 px-2'>
                     {children}

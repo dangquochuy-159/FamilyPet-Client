@@ -15,10 +15,13 @@ function Header({ title, avatar, name, id }) {
                     <FontAwesomeIcon className='icon w-6 h-6' icon={faPlay} />
                     <h2 className='title--page text-2xl font-bold uppercase ml-4'>{title}</h2>
                 </div>
-                <div className='header--admin flex items-center '>
-                    <h2 className='title--admin text-2xl font-semibold'>{name}</h2>
-                    <img className='w-12 h-12 ml-4 object-cover' src={`${process.env.REACT_APP_API_URL}/api/admins/${id}/${avatar}`} alt={avatar} />
-                </div>
+                {
+                    avatar && name && id &&
+                    <div className='header--admin flex items-center '>
+                        <h2 className='title--admin text-2xl font-semibold'>{name}</h2>
+                        <Image className='w-12 h-12 ml-4 object-cover' src={`${process.env.REACT_APP_API_URL}/api/admins/${id}/${avatar}`} alt={avatar} />
+                    </div>
+                }
             </div>
         </div>
     );
