@@ -42,7 +42,7 @@ const getPhotoCategory = (req, res, next) => {
 const addCategory = (req, res, next) => {
     const category = new Category({
         name: req.body.name,
-        photo: req.file.filename,
+        photo: req.file ? req.file.filename : null,
     })
         .save()
         .then(() => {
@@ -74,13 +74,25 @@ const removeCategory = (req, res, next) => {
 
 // PUT /api/categorys/:id
 const updateOneCategory = (req, res, next) => {
+
     const updateData = {}
 
     req.body.name !== "" ? updateData.name = req.body.name : updateData
     req.file ? updateData.photo = req.file.filename : updateData
 
     Category.findByIdAndUpdate({ _id: req.params.id }, updateData)
-        .then(() => {
+        .then((category) => {
+            if (updateData.photo) {
+                let photoPath = appRoot + pathCategory + category.photo
+
+                fs.unlink(photoPath, (err) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                })
+            }
+
             res.status(200).json({
                 message: 'success'
             });

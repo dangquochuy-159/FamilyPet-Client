@@ -8,7 +8,7 @@ import InfoAll from "./infoAll";
 function Info() {
     const context = useContext(AdminContext)
     const [adminLogin] = context
-    const [connectServer, setConnectServer] = useState()
+    const [connectServer, setConnectServer] = useState(true)
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/admins/${adminLogin._id}`)

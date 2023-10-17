@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function Input({ className, label, id, name, placeholder, type, defaultValue, value, title, onChange, innerRef, ...props }) {
+function Input({ className = '', label, id, name, placeholder, type, defaultValue, value, title, onChange, innerRef, ...props }) {
 
 
     return (
@@ -26,7 +26,7 @@ function Input({ className, label, id, name, placeholder, type, defaultValue, va
                     <input
                         ref={innerRef}
                         id={id}
-                        className={`${className} focus:outline-none focus:border-black form-control`}
+                        className={`${className} focus:outline-none form-control`}
                         type={type}
                         name={name}
                         placeholder={placeholder}

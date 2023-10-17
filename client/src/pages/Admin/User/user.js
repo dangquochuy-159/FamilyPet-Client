@@ -13,7 +13,7 @@ function User() {
     const context = useContext(AdminContext)
     const [adminLogin] = context
     const [users, setUsers] = useState([])
-    const [connectServer, setConnectServer] = useState(false)
+    const [connectServer, setConnectServer] = useState(true)
 
     useEffect(() => {
 
@@ -58,7 +58,7 @@ function User() {
                                                     <td>{user.address}</td>
                                                     <td>{user.phone}</td>
                                                     <td>
-                                                        <Modal className="w-2/3 h-auto"
+                                                        <Modal className="w-1/2 h-auto"
                                                             trigger={
                                                                 <div className="w-auto h-auto">
                                                                     <Button type='primary' rightIcon={<InfoIcon width='30px' height='30px' />}

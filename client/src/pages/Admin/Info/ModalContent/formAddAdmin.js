@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Form from '~/components/Form';
-import FormGroup from '~/components/Form/FormGroup';
-import Input from '~/components/Form/Input';
-import { Option, Select } from '~/components/Form/Select';
+import Form, { FormGroup, Input, Option, Select } from '~/components/Form';
 import check from '~/utils/Validate/ruleCheck';
 import Validator from '~/utils/Validate/validator';
 
