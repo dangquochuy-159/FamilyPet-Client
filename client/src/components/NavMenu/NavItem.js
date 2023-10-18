@@ -5,10 +5,10 @@ function NavItem({ to, icon, title, className }) {
     const navigate = useNavigate();
     const handleNavLinkClick = (e) => {
         e.preventDefault()
-        console.log('add class modal')
         setTimeout(() => {
+            window.sessionStorage.setItem('titleHeader', title)
+            console.log(window.sessionStorage.getItem('titleHeader'))
             navigate(to);
-            console.log('remove class modal')
         }, 0);
     };
     return (

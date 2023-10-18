@@ -11,7 +11,8 @@ function Sidebar() {
 
     const handleLogout = () => {
         window.sessionStorage.removeItem('adminLogin')
-        window.location.href = '/login-admin';
+        window.sessionStorage.removeItem('titleHeader')
+        window.location.href = '/admin';
     }
     return (
         <div className="wrapper--sidebar w-2/12 h-screen fixed top-0 left-0 ">

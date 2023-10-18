@@ -18,8 +18,8 @@ function Header({ title, avatar, name, id }) {
                 {
                     avatar && name && id &&
                     <div className='header--admin flex items-center '>
-                        <h2 className='title--admin text-2xl font-semibold'>{name}</h2>
-                        <Image className='w-12 h-12 ml-4 object-cover' src={`${process.env.REACT_APP_API_URL}/api/admins/${id}/${avatar}`} alt={avatar} />
+                        <h2 className='title--admin text-2xl font-thin  '>{name}</h2>
+                        <Image className='w-10 h-10 ml-4 object-cover' src={`${process.env.REACT_APP_API_URL}/api/admins/${id}/${avatar}`} alt={avatar} />
                     </div>
                 }
             </div>

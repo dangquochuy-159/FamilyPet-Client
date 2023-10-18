@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import ConnectError from "~/components/ConnectError";
 import AdminContext from '~/context/AdminContext';
-import { Header } from "~/layouts/AdminLayout/components";
 import InfoPersonal from "./infoPersonal";
 import InfoAll from "./infoAll";
 
@@ -20,19 +19,13 @@ function Info() {
     }, [])
 
     return (
-        <div className="wrapper--info">
-            <Header title='Thông tin quản trị viên'
-                avatar={connectServer && adminLogin.avatar}
-                name={connectServer && adminLogin.full_name}
-                id={connectServer && adminLogin._id} />
-            <div className="wrapper-page flex flex-col">
-                {!connectServer ? <ConnectError /> :
-                    <>
-                        <InfoPersonal />
-                        <InfoAll />
-                    </>
-                }
-            </div>
+        <div className="wrapper-page flex flex-col">
+            {!connectServer ? <ConnectError /> :
+                <>
+                    <InfoPersonal />
+                    <InfoAll />
+                </>
+            }
         </div>
     );
 }

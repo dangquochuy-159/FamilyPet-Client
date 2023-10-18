@@ -1,13 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ConnectError from '~/components/ConnectError';
-import AdminContext from '~/context/AdminContext';
 
 import './dashboard.scss'
-import { Header } from "~/layouts/AdminLayout/components";
 
 function Dashboard() {
-    const context = useContext(AdminContext)
-    const [adminLogin] = context
     const [connectServer, setConnectServer] = useState(false)
     const [categorys, setCategorys] = useState([])
     useEffect(() => {
@@ -21,20 +17,12 @@ function Dashboard() {
     }, [])
 
     return (
-        <>
-            <Header title='Thống kê'
-                avatar={connectServer && adminLogin.avatar}
-                name={connectServer && adminLogin.full_name}
-                id={connectServer && adminLogin._id}
-            />
-            <div className="wrapper-page flex flex-col  ">
-                {
-                    !connectServer ? <ConnectError /> :
-                        <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5"></div>
-                }
-            </div>
-
-        </>
+        <div className="wrapper-page flex flex-col  ">
+            {
+                !connectServer ? <ConnectError /> :
+                    <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5"></div>
+            }
+        </div>
     );
 }
 

@@ -30,14 +30,27 @@ const searchProduct = (req, res, next) => {
         .catch(next)
 }
 
-// GET /api/products/filter?filter=&q=&quantity=&page=
+// GET /api/products/filter?filter=&value=&size=&page=
 const filterProduct = (req, res, next) => {
-    let q = typeof req.query.q === 'string' ? req.query.q : Number(req.query.q)
-    let limit = Number(req.query.quantity)
+
+    let filters = [];
+    let values = [];
+
+    filters = filters.concat(req.query.filter);
+    values = values.concat(req.query.value);
+
+    let value = isNaN(req.query.value) ? req.query.value : Number(req.query.value)
+    let limit = Number(req.query.size)
     let skip = (req.query.page - 1) * limit
 
+    const query = {};
+    for (let i = 0; i < filters.length; i++) {
+        isNaN(values[i]) ? query[filters[i]] = values[i] :
+            query[filters[i]] = { $lt: Number(values[i]) }
+    }
+
     Promise.all([
-        Product.find({ [req.query.filter]: q }).skip(skip).limit(limit),
+        Product.find(query).skip(skip).limit(limit),
         Product.find({})
     ])
         .then(([productsFilter, products]) => {
@@ -87,8 +100,8 @@ const addProduct = (req, res, next) => {
         photo_detail: photo_detail,
         status: {
             in_stock: req.body.quantity > 5,
-            out_stock: req.body.quantity <= 5 && req.body.quantity > 0,
-            low_stock: req.body.quantity == 0,
+            low_stock: req.body.quantity <= 5 && req.body.quantity > 0,
+            out_stock: req.body.quantity == 0,
         }
     })
         .save()
@@ -141,8 +154,8 @@ const updateProduct = (req, res, next) => {
     if (req.body.quantity) {
         updateProduct.status = {
             in_stock: req.body.quantity > 5,
-            out_stock: req.body.quantity <= 5 && req.body.quantity > 0,
-            low_stock: req.body.quantity == 0,
+            low_stock: req.body.quantity <= 5 && req.body.quantity > 0,
+            out_stock: req.body.quantity == 0,
         }
     }
 

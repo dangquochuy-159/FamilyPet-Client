@@ -5,7 +5,7 @@ function ConnectError() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setMessage('Đang đợi kết nối tới server...');
+            setMessage('Đang kết nối tới server...');
         }, 2000);
 
         return () => clearTimeout(timer);

@@ -1,4 +1,4 @@
-export const ImageIcon = ({ className, width = '24px', height = '24px' }) => (
+const ImageIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -7,7 +7,7 @@ export const ImageIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const InfoIcon = ({ className, width = '24px', height = '24px' }) => (
+const InfoIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -16,7 +16,7 @@ export const InfoIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const EyeIcon = ({ className }, width = '24px', height = '24px') => (
+const EyeIcon = ({ className }, width = '24px', height = '24px') => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -25,7 +25,7 @@ export const EyeIcon = ({ className }, width = '24px', height = '24px') => (
     </svg >
 )
 
-export const NotEyeIcon = ({ className, width = '24px', height = '24px' }) => (
+const NotEyeIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -35,7 +35,7 @@ export const NotEyeIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const PlusIcon = ({ className, width = '24px', height = '24px' }) => (
+const PlusIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -44,7 +44,7 @@ export const PlusIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const CloseIcon = ({ className, width = '24px', height = '24px' }) => (
+const CloseIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -53,7 +53,7 @@ export const CloseIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const UploadIcon = ({ className, width = '24px', height = '24px' }) => (
+const UploadIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -62,7 +62,7 @@ export const UploadIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const DeleteIcon = ({ className, width = '24px', height = '24px' }) => (
+const DeleteIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
@@ -71,12 +71,54 @@ export const DeleteIcon = ({ className, width = '24px', height = '24px' }) => (
     </svg>
 )
 
-export const UpdateIcon = ({ className, width = '24px', height = '24px' }) => (
+const UpdateIcon = ({ className, width = '24px', height = '24px' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
         width={width}
         height={height}
     >
         <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
     </svg>
+)
+
+const FilterIcon = ({ className, width = '24px', height = '24px' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
+        width={width}
+        height={height}
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+    </svg >
+)
+
+const CheckIcon = ({ className, width = '24px', height = '24px' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
+        width={width}
+        height={height}
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+)
+
+const SearchIcon = ({ className, width = '24px', height = '24px' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`pointer-events-none ${className}`}
+        width={width}
+        height={height}
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
 
 )
+
+export {
+    ImageIcon,
+    InfoIcon,
+    EyeIcon,
+    NotEyeIcon,
+    PlusIcon,
+    CloseIcon,
+    UploadIcon,
+    DeleteIcon,
+    UpdateIcon,
+    FilterIcon,
+    CheckIcon,
+    SearchIcon,
+}
