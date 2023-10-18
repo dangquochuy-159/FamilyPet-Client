@@ -23,17 +23,30 @@ function Input({ className = '', label, id, name, placeholder, type, defaultValu
                         />
                     </div>
                 ) : (
-                    <input
-                        ref={innerRef}
-                        id={id}
-                        className={`${className} focus:outline-none form-control`}
-                        type={type}
-                        name={name}
-                        placeholder={placeholder}
-                        defaultValue={defaultValue}
-                        onChange={onChange}
-                        {...props}
-                    />
+                    type === 'textarea' ?
+                        <textarea
+                            ref={innerRef}
+                            id={id}
+                            className={`${className} focus:outline-none form-control`}
+                            type={type}
+                            name={name}
+                            placeholder={placeholder}
+                            defaultValue={defaultValue}
+                            onChange={onChange}
+                            {...props}
+                        />
+                        :
+                        <input
+                            ref={innerRef}
+                            id={id}
+                            className={`${className} focus:outline-none form-control`}
+                            type={type}
+                            name={name}
+                            placeholder={placeholder}
+                            defaultValue={defaultValue}
+                            onChange={onChange}
+                            {...props}
+                        />
                 )
             }
         </>

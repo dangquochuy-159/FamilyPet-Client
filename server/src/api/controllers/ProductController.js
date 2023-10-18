@@ -148,8 +148,8 @@ const updateProduct = (req, res, next) => {
     }
     let arrColor = req.body.color ? req.body.color.split('-') : []
     updateProduct.color = arrColor
-    req.files.photo ? updateProduct.photo = req.files.photo.map(file => file.originalname).join() : updateProduct
-    req.files.photo_detail ? updateProduct.photo_detail = req.files.photo_detail.map(file => file.originalname) : updateProduct
+    req.files.photo ? updateProduct.photo = req.files.photo.map(file => file.filename).join() : updateProduct
+    req.files.photo_detail ? updateProduct.photo_detail = req.files.photo_detail.map(file => file.filename) : updateProduct
 
     if (req.body.quantity) {
         updateProduct.status = {
@@ -159,8 +159,24 @@ const updateProduct = (req, res, next) => {
         }
     }
 
-    Product.findByIdAndUpdate(req.params.id, updateProduct, { new: true })
+    Product.findByIdAndUpdate(req.params.id, updateProduct)
         .then((product) => {
+
+
+            let photo = product.photo
+            let photo_detail = product.photo_detail
+            let namePhoto
+            let pathPhoto
+            photo_detail.push(photo)
+            for (let pt of photo_detail) {
+                namePhoto = pt
+                pathPhoto = appRoot + pathProduct + namePhoto
+                fs.unlink(pathPhoto, (err) => {
+                    if (err) {
+                        return
+                    }
+                })
+            }
             res.status(200).json({
                 message: 'success'
             });

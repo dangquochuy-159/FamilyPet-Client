@@ -7,6 +7,7 @@ import Modal from '~/components/Modal/modal';
 import axios from 'axios';
 import ModalInfoProduct from './modalIfoProduct';
 import ModalAddProduct from './modalAddProduct';
+import ModalUpdateProduct from './modalUpdateProduct';
 
 
 
@@ -22,8 +23,8 @@ function Product() {
     const prices = [100000, 300000, 500000, 800000, 1000000]
     const changeStatus = {
         in_stock: 'Còn hàng',
-        low_stock: 'Cháy hàng',
-        out_stock: 'Sắp hết hàng',
+        low_stock: 'Sắp hết hàng',
+        out_stock: 'Cháy hàng',
     }
 
     useEffect(() => {
@@ -46,6 +47,7 @@ function Product() {
 
     // function filter product
     const handleFilterProduct = () => {
+        searchEle.value = ''
         const query = []
         Array.from(filterEle).map(filter => {
             filter.value !== '' && query.push(`filter=${filter.name}&value=${filter.value}`)
@@ -58,9 +60,12 @@ function Product() {
                 setFilterProducts(data.data)
             })
     }
+
     // function search product
     const handleSearchProduct = () => {
-
+        Array.from(filterEle).map(filter => {
+            return filter.value = ''
+        })
         let name = searchEle.value
         fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${name}`)
             .then(res => res.json())
@@ -71,7 +76,6 @@ function Product() {
 
     // function show all product
     const handleShowAllProduct = () => {
-
         Array.from(filterEle).map(filter => {
             return filter.value = ''
         })
@@ -149,7 +153,7 @@ function Product() {
                                         filterProducts.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
                                             filterProducts.map((product, index) => (
                                                 <tr key={index}>
-                                                    <th className='w-10 whitespace-pre-wrap'>{product.name}</th>
+                                                    <th className='w-48 whitespace-pre-wrap'>{product.name}</th>
                                                     <td>
                                                         <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
                                                             className='w-12 h-12 rounded-full m-auto object-cover'
@@ -183,7 +187,7 @@ function Product() {
                                                                     </div>
                                                                 }
                                                             >
-                                                                {/* <ModalAddProduct /> */}
+                                                                <ModalUpdateProduct product={product} categorys={categorys} />
                                                             </Modal>
                                                             <div className="w-auto h-auto">
                                                                 <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={product._id}
@@ -199,7 +203,7 @@ function Product() {
                             </table>
                         </div>
 
-                        <Modal className="w-1/2 h-auto"
+                        <Modal className="w-2/3 h-auto"
                             trigger={
                                 <div className="w-auto h-auto">
                                     <Button title='Thêm sản phẩm' type='primary' rightIcon={<PlusIcon width='14px' height='14px' />}
@@ -208,7 +212,7 @@ function Product() {
                                 </div>
                             }
                         >
-                            <ModalAddProduct />
+                            <ModalAddProduct categorys={categorys} />
                         </Modal>
                     </div>
             }

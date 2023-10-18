@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function FormGroup({ children, className }) {
+function FormGroup({ children, className = '' }) {
     return (
         <div className={`${className} form-group`}>
             {children}
@@ -10,7 +10,7 @@ function FormGroup({ children, className }) {
 
 FormGroup.propTypes = {
     children: PropTypes.node.isRequired,
-    className: PropTypes.string.isRequired,
+    className: PropTypes.string,
 }
 
 export default FormGroup;

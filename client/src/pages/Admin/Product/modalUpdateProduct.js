@@ -5,8 +5,8 @@ import Form, { FormGroup, Input, Option, Select } from "~/components/Form";
 import check from '~/utils/Validate/ruleCheck';
 import Validator from '~/utils/Validate/validator';
 
-function ModalAddProduct({ categorys }) {
-
+function ModalUpdateProduct({ categorys, product }) {
+    const oldName = product.name;
     useEffect(() => {
         Validator({
             form: '#form-add-product',
@@ -19,39 +19,45 @@ function ModalAddProduct({ categorys }) {
                 Validator.isRequired("#origin", check.isEmpty),
                 Validator.isRequired("#price", check.isEmpty),
                 Validator.isRequired("#sale_price", check.isEmpty),
-                Validator.isRequired("#photo", check.isEmpty),
-                Validator.isRequired("#photo_detail", check.isEmpty),
             ],
             onRegister: function (data) {
-
-                const fetchApi = async () => {
-                    try {
-                        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?filter=name&value=${data.name}`)
-                        const results = await response.json();
-                        if (results.data.length > 0) {
-                            const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
-                            ele.innerHTML = 'Tên sản phẩm đã tồn tại'
+                const update = () => {
+                    const photoEle = document.getElementById('photo');
+                    const photoDetailEle = document.getElementById('photo_detail');
+                    const formData = new FormData();
+                    photoEle.files.length > 0 && formData.append('photo', photoEle.files[0]);
+                    if (photoDetailEle.files.length > 0) {
+                        for (let file of photoDetailEle.files) {
+                            formData.append('photo_detail', file);
                         }
-                        else {
-                            const photoEle = document.getElementById('photo');
-                            const photoDetailEle = document.getElementById('photo_detail');
-                            const formData = new FormData();
-                            formData.append('photo', photoEle.files[0]);
-                            for (let file of photoDetailEle.files) {
-                                formData.append('photo_detail', file);
+                    }
+                    for (let key in data) {
+                        formData.append(key, data[key]);
+                    }
+                    try {
+                        axios.put(`http://localhost:5001/api/products/${product._id}`, formData)
+                            .then(response => {
+                                alert('Cập nhật sản phẩm thành công')
+                                window.location.reload();
+                            })
+                    } catch (error) {
+                        console.error('Error sending PUT request:', error);
+                    }
+                }
+                const fetchApi = async () => {
+                    let results
+                    try {
+                        if (oldName !== data.name) {
+                            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?filter=name&value=${data.name}`)
+                            results = await response.json();
+                            if (results.data.length > 0) {
+                                const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
+                                ele.innerHTML = 'Tên sản phẩm đã tồn tại'
+                            } else {
+                                update()
                             }
-                            for (let key in data) {
-                                formData.append(key, data[key]);
-                            }
-                            try {
-                                axios.post('http://localhost:5001/api/products', formData)
-                                    .then(response => {
-                                        alert('Thêm sản phẩm thành công')
-                                        window.location.reload();
-                                    })
-                            } catch (error) {
-                                console.error('Error sending PUT request:', error);
-                            }
+                        } else {
+                            update()
                         }
                     }
                     catch (error) {
@@ -65,16 +71,17 @@ function ModalAddProduct({ categorys }) {
 
     return (
         <div className='w-full h-auto px-8 pb-8 pt-4'>
-            <h2 className="font-extrabold text-4xl text-center text-black">Thêm sản phẩm</h2>
+            <h2 className="font-extrabold text-4xl text-center text-black">Chỉnh sửa sản phẩm</h2>
             <Form id='form-add-product' className='mt-5 flex flex-col gap-y-2' enctype="multipart/form-data">
                 <div className='w-full flex justify-between gap-x-2'>
                     <FormGroup className='w-1/2' >
                         <Input id='name' name='name' type='text' placeholder='Nhập tên sản phẩm' label='Tên sản phẩm'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
+                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.name} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-1/2'>
                         <Select className='w-full h-12 p-2 outline-none border-2 border-solid border-gray-400' name='category' label='Danh mục sản phẩm'>
+                            <Option value={product.category} name={product.category} />
                             {
                                 categorys.map((cate, index) => <Option key={index} value={cate.name} name={cate.name} />)
                             }
@@ -83,29 +90,29 @@ function ModalAddProduct({ categorys }) {
                     </FormGroup>
                     <FormGroup className='w-1/2'>
                         <Input id='quantity' name='quantity' type='number' placeholder='Nhập số lượng' label='Số lượng'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
+                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.quantity} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
                 <FormGroup>
                     <Input id='des' name='des' type='textarea' placeholder='Nhập mô tả sản phẩm' label='Mô tả sản phẩm'
-                        className='w-full h-40 px-4 border-2 border-solid border-gray-400' />
+                        className='w-full h-40 px-4 border-2 border-solid border-gray-400' defaultValue={product.des} />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
                 <div className='w-full flex justify-between gap-x-2'>
                     <FormGroup className='w-1/2'>
                         <Input id='origin' name='origin' type='text' placeholder='Nhập xuất xứ' label='Xuất xứ'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
+                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.origin} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-1/2'>
                         <Input id='price' name='price' type='text' placeholder='Nhập giá' label='Giá'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
+                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.price} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-1/2'>
                         <Input id='sale_price' name='sale_price' type='text' placeholder='Nhập giá khuyến mãi' label='Giá khuyến mãi'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
+                            className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.sale_price} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
@@ -121,14 +128,15 @@ function ModalAddProduct({ categorys }) {
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
-                <button className='w-1/4 bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Thêm</button>
+                <button className='w-1/4 bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Cập nhật</button>
             </Form>
         </div>
     );
 }
 
-ModalAddProduct.propTypes = {
+ModalUpdateProduct.propTypes = {
     categorys: PropTypes.array.isRequired,
+    product: PropTypes.object.isRequired,
 }
 
-export default ModalAddProduct;
+export default ModalUpdateProduct;

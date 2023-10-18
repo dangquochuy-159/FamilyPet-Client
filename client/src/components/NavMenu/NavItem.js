@@ -7,7 +7,6 @@ function NavItem({ to, icon, title, className }) {
         e.preventDefault()
         setTimeout(() => {
             window.sessionStorage.setItem('titleHeader', title)
-            console.log(window.sessionStorage.getItem('titleHeader'))
             navigate(to);
         }, 0);
     };

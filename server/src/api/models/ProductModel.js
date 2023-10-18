@@ -13,7 +13,6 @@ const ProductSchema = Schema({
     sale_price: { type: Number },
     photo_detail: { type: Array, required: true },
     outstand: { type: Boolean },
-    color: { type: Array },
     status: {
         in_stock: { type: Boolean, default: false },
         out_stock: { type: Boolean, default: false },
