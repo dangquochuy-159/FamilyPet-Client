@@ -101,7 +101,6 @@ function Product() {
                 !connectServer ? <ConnectError /> :
                     <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5">
                         <div className="w-full h-1/6 flex flex-col gap-y-2 items-center justify-center">
-                            <h2 className="text-4xl text-center font-bold text-[#000]">Danh sách sản phẩm</h2>
                             <div className='flex gap-x-2'>
                                 <Button title='All' type='primary' rightIcon={<CheckIcon width='14px' height='14px' />}
                                     className='bg-green-500 text-white m-auto' onClick={handleShowAllProduct}
@@ -132,88 +131,90 @@ function Product() {
                                 />
                             </div>
                         </div>
-                        <div className="wrapper-table w-full">
-                            <table>
-                                <thead className="text-black font-bold text-lg bg-[#71cbe8]">
-                                    <tr>
-                                        <th scope='col'>Tên</th>
-                                        <th scope='col'>Ảnh</th>
-                                        <th scope='col'>Danh mục</th>
-                                        <th scope='col'>Giá</th>
-                                        <th scope='col'>Giá khuyến mãi</th>
-                                        <th scope='col'>Nổi bật</th>
-                                        <th scope='col'>Số lượng</th>
-                                        <th scope='col'>Trạng thái</th>
-                                        <th scope='col'>Hành động</th>
+                        <div className='w-full h-5/6 flex flex-col gap-y-4'>
+                            <div className="wrapper-table w-full">
+                                <table>
+                                    <thead className="text-black font-bold text-lg bg-[#71cbe8]">
+                                        <tr>
+                                            <th scope='col'>Tên</th>
+                                            <th scope='col'>Ảnh</th>
+                                            <th scope='col'>Danh mục</th>
+                                            <th scope='col'>Giá</th>
+                                            <th scope='col'>Giá khuyến mãi</th>
+                                            <th scope='col'>Nổi bật</th>
+                                            <th scope='col'>Số lượng</th>
+                                            <th scope='col'>Trạng thái</th>
+                                            <th scope='col'>Hành động</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody className="font-normal text-[#000]">
-                                    {
-                                        filterProducts.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
-                                            filterProducts.map((product, index) => (
-                                                <tr key={index}>
-                                                    <th className='w-48 whitespace-pre-wrap'>{product.name}</th>
-                                                    <td>
-                                                        <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
-                                                            className='w-12 h-12 rounded-full m-auto object-cover'
-                                                        />
-                                                    </td>
-                                                    <td>{product.category}</td>
-                                                    <td>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
-                                                    <td>{product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
-                                                    <td>{product.outstand ? 'Có' : 'Không'}</td>
-                                                    <td>{product.quantity}</td>
-                                                    <td>{Object.keys(product.status).map(key => product.status[key] && changeStatus[key])}</td>
-                                                    <td>
-                                                        <div className='flex justify-center gap-x-1'>
-                                                            <Modal className="w-2/3 h-auto"
-                                                                trigger={
-                                                                    <div className="w-auto h-auto">
-                                                                        <Button type='primary' rightIcon={<InfoIcon width='14px' height='14px' />}
-                                                                            className='bg-blue-500 text-white m-auto'
-                                                                        />
-                                                                    </div>
-                                                                }
-                                                            >
-                                                                <ModalInfoProduct product={product} changeStatus={changeStatus} />
-                                                            </Modal>
-                                                            <Modal className="w-1/2 h-auto"
-                                                                trigger={
-                                                                    <div className="w-auto h-auto">
-                                                                        <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />}
-                                                                            className='bg-green-500 text-white m-auto'
-                                                                        />
-                                                                    </div>
-                                                                }
-                                                            >
-                                                                <ModalUpdateProduct product={product} categorys={categorys} />
-                                                            </Modal>
-                                                            <div className="w-auto h-auto">
-                                                                <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={product._id}
-                                                                    className='bg-red-500 text-white m-auto' onClick={handleDeleteProduct}
-                                                                />
+                                        </tr>
+                                    </thead>
+                                    <tbody className="font-normal text-[#000]">
+                                        {
+                                            filterProducts.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
+                                                filterProducts.map((product, index) => (
+                                                    <tr key={index}>
+                                                        <th className='w-48 whitespace-pre-wrap'>{product.name}</th>
+                                                        <td>
+                                                            <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
+                                                                className='w-12 h-12 rounded-full m-auto object-cover'
+                                                            />
+                                                        </td>
+                                                        <td>{product.category}</td>
+                                                        <td>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                                        <td>{product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                                        <td>{product.outstand ? 'Có' : 'Không'}</td>
+                                                        <td>{product.quantity}</td>
+                                                        <td>{Object.keys(product.status).map(key => product.status[key] && changeStatus[key])}</td>
+                                                        <td>
+                                                            <div className='flex justify-center gap-x-1'>
+                                                                <Modal className="w-2/3 h-auto"
+                                                                    trigger={
+                                                                        <div className="w-auto h-auto">
+                                                                            <Button type='primary' rightIcon={<InfoIcon width='14px' height='14px' />}
+                                                                                className='bg-blue-500 text-white m-auto'
+                                                                            />
+                                                                        </div>
+                                                                    }
+                                                                >
+                                                                    <ModalInfoProduct product={product} changeStatus={changeStatus} />
+                                                                </Modal>
+                                                                <Modal className="w-1/2 h-auto"
+                                                                    trigger={
+                                                                        <div className="w-auto h-auto">
+                                                                            <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />}
+                                                                                className='bg-green-500 text-white m-auto'
+                                                                            />
+                                                                        </div>
+                                                                    }
+                                                                >
+                                                                    <ModalUpdateProduct product={product} categorys={categorys} />
+                                                                </Modal>
+                                                                <div className="w-auto h-auto">
+                                                                    <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={product._id}
+                                                                        className='bg-red-500 text-white m-auto' onClick={handleDeleteProduct}
+                                                                    />
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <Modal className="w-2/3 h-auto"
-                            trigger={
-                                <div className="w-auto h-auto">
-                                    <Button title='Thêm sản phẩm' type='primary' rightIcon={<PlusIcon width='14px' height='14px' />}
-                                        className='bg-yellow-500 text-white m-auto'
-                                    />
-                                </div>
-                            }
-                        >
-                            <ModalAddProduct categorys={categorys} />
-                        </Modal>
+                            <Modal className="w-2/3 h-auto"
+                                trigger={
+                                    <div className="w-auto h-auto">
+                                        <Button title='Thêm sản phẩm' type='primary' rightIcon={<PlusIcon width='14px' height='14px' />}
+                                            className='bg-yellow-500 text-white m-auto'
+                                        />
+                                    </div>
+                                }
+                            >
+                                <ModalAddProduct categorys={categorys} />
+                            </Modal>
+                        </div>
                     </div>
             }
         </div>

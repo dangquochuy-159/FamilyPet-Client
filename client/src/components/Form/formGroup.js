@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 function FormGroup({ children, className = '' }) {
     return (
-        <div className={`${className} form-group`}>
+        <div className={`${className} space-y-2 form-group`}>
             {children}
         </div>
     );

@@ -6,9 +6,11 @@ const Schema = mongoose.Schema;
 const PromoteSchema = Schema(
     {
         code: { type: String, required: true, unique: true },
+        name: { type: String, required: true },
         des: { type: String, required: true },
-        reduce: { type: String, required: true },
-        point: { type: Number, required: true }
+        reduce: { type: Number, required: true },
+        point: { type: Number, required: true },
+        time_end: { type: Number, required: true }
     },
     {
         timestamps: true,

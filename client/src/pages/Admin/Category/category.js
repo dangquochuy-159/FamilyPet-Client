@@ -19,6 +19,7 @@ function Category() {
     const btnAdd = document.getElementById('add-cate')
     const btnUpdate = document.getElementById('update-cate')
     const btnNoUpdate = document.getElementById('no-update-cate')
+    const [oldName, setOldName] = useState('')
 
     // get API
     useEffect(() => {
@@ -41,14 +42,27 @@ function Category() {
                 Validator.isRequired("#name", check.isEmpty),
             ],
             onRegister: function (data) {
-                const formData = new FormData()
-                formData.append('name', data.name)
-                ipFile.files && formData.append('photo', ipFile.files[0])
+                console.log(data)
+                const fetchApi = async () => {
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/categorys/search?name=${data.name}`)
+                    const results = await response.json();
+                    if (results.data.length > 0) {
+                        console.log(results.data)
+                        const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
+                        ele.innerHTML = 'Tên danh mục đã tồn tại'
+                    } else {
 
-                axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData)
-                    .then(res => {
-                        window.location.reload()
-                    })
+                        const formData = new FormData()
+                        formData.append('name', data.name)
+                        ipFile.files && formData.append('photo', ipFile.files[0])
+
+                        axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData)
+                            .then(res => {
+                                window.location.reload()
+                            })
+                    }
+                }
+                fetchApi()
             }
         })
     })
@@ -67,19 +81,36 @@ function Category() {
         document.querySelector('.msg-error').innerText = ''
         setIdCategory(e.target.getAttribute('data-id'))
         ipName.value = e.target.getAttribute('data-name')
+        setOldName(e.target.getAttribute('data-name'))
         btnAdd.classList.add('hidden')
         btnUpdate.classList.remove('hidden')
         btnNoUpdate.classList.remove('hidden')
     }
 
     // function update category
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        formData.append('name', ipName.value)
-        ipFile.files && formData.append('photo', ipFile.files[0])
-        axios.put(`${process.env.REACT_APP_API_URL}/api/categorys/${idCategory}`, formData)
-            .then(res => window.location.reload())
+        const update = () => {
+            const formData = new FormData()
+            formData.append('name', ipName.value)
+            ipFile.files && formData.append('photo', ipFile.files[0])
+            axios.put(`${process.env.REACT_APP_API_URL}/api/categorys/${idCategory}`, formData)
+                .then(res => window.location.reload())
+        }
+
+        if (oldName === ipName.value) {
+            update()
+        }
+        else {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/categorys/search?name=${ipName.value}`)
+            const results = await response.json();
+            if (results.data.length > 0) {
+                const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
+                ele.innerHTML = 'Tên danh mục đã tồn tại'
+            } else {
+                update()
+            }
+        }
     }
 
     // function cancel update category
@@ -88,6 +119,8 @@ function Category() {
         btnAdd.classList.remove('hidden')
         btnUpdate.classList.add('hidden')
         btnNoUpdate.classList.add('hidden')
+        const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
+        ele.innerHTML = ''
         ipFile.value = ''
         ipName.value = ''
     }

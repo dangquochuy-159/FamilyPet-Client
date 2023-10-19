@@ -44,7 +44,7 @@ function ModalAddProduct({ categorys }) {
                                 formData.append(key, data[key]);
                             }
                             try {
-                                axios.post('http://localhost:5001/api/products', formData)
+                                axios.post(`${process.env.REACT_APP_API_URL}/api/products`, formData)
                                     .then(response => {
                                         alert('Thêm sản phẩm thành công')
                                         window.location.reload();

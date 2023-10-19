@@ -3,6 +3,7 @@ const promoteRouter = express.Router()
 
 const {
     getListPromote,
+    getSearchPromote,
     getPromote,
     addPromote,
     removePromote,
@@ -12,6 +13,7 @@ const {
 
 promoteRouter
     .get('/', getListPromote)
+    .get('/search', getSearchPromote)
     .get('/:id', getPromote)
 
     .post('/', addPromote)

@@ -16,6 +16,16 @@ const getListCategorys = (req, res, next) => {
         .catch(next);
 }
 
+// GET /api/categorys/search?name=
+const getSearchCategory = (req, res, next) => {
+    Category.find({ name: req.query.name })
+        .then(category => {
+            res.json({
+                data: category
+            })
+        })
+}
+
 // GET /api/categorys/:id
 const getOneCategory = (req, res, next) => {
     Category.findById(req.params.id)
@@ -102,6 +112,7 @@ const updateOneCategory = (req, res, next) => {
 
 module.exports = {
     getListCategorys,
+    getSearchCategory,
     getOneCategory,
     getPhotoCategory,
     addCategory,

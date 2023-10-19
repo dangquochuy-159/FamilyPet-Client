@@ -35,7 +35,7 @@ function ModalUpdateProduct({ categorys, product }) {
                         formData.append(key, data[key]);
                     }
                     try {
-                        axios.put(`http://localhost:5001/api/products/${product._id}`, formData)
+                        axios.put(`${process.env.REACT_APP_API_URL}/api/products/${product._id}`, formData)
                             .then(response => {
                                 alert('Cập nhật sản phẩm thành công')
                                 window.location.reload();

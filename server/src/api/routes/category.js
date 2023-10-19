@@ -7,6 +7,7 @@ const { storageUploadSinglePhoto } = require('../middleware/upload')
 // Controller
 const {
     getListCategorys,
+    getSearchCategory,
     getOneCategory,
     getPhotoCategory,
     addCategory,
@@ -16,6 +17,7 @@ const {
 
 categoryRouter
     .get('/', getListCategorys)
+    .get('/search', getSearchCategory)
     .get('/:id', getOneCategory)
     .get('/:id/:photo', getPhotoCategory)
 

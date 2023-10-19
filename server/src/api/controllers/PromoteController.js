@@ -11,6 +11,16 @@ const getListPromote = (req, res, next) => {
         })
 }
 
+// GET /api/promotes/search?code=
+const getSearchPromote = (req, res, next) => {
+    Promote.find({ code: req.query.code })
+        .then(promote => {
+            res.json({
+                data: promote
+            })
+        })
+}
+
 // GET /api/promotes/:id
 const getPromote = (req, res, next) => {
     Promote.findById(req.params.id)
@@ -24,11 +34,14 @@ const getPromote = (req, res, next) => {
 
 // POST /api/promotes
 const addPromote = (req, res, next) => {
+
     const promote = new Promote({
         code: req.body.code,
+        name: req.body.name,
         des: req.body.des,
-        reduce: req.body.reduce,
-        point: req.body.point,
+        reduce: Number(req.body.reduce),
+        point: Number(req.body.point),
+        time_end: Number(req.body.time_end),
     })
         .save()
         .then(() => {
@@ -68,6 +81,7 @@ const updatePromote = (req, res, next) => {
 
 module.exports = {
     getListPromote,
+    getSearchPromote,
     getPromote,
     addPromote,
     removePromote,
