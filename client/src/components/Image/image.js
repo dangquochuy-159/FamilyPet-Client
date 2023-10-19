@@ -6,7 +6,6 @@ import { images } from '~/assets'
 function Image({ className, src, alt, fallback: customFallback = images.no_image, onClick, innerRef, ...props }) {
     const [fallback, setFallback] = useState('')
     const handleError = () => {
-        console.log('errr')
         setFallback(customFallback);
 
     }

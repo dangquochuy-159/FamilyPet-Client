@@ -42,12 +42,10 @@ function Category() {
                 Validator.isRequired("#name", check.isEmpty),
             ],
             onRegister: function (data) {
-                console.log(data)
                 const fetchApi = async () => {
                     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/categorys/search?name=${data.name}`)
                     const results = await response.json();
                     if (results.data.length > 0) {
-                        console.log(results.data)
                         const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
                         ele.innerHTML = 'Tên danh mục đã tồn tại'
                     } else {
