@@ -56,7 +56,6 @@ function Promote() {
                     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/promotes/search?code=${data.code}`)
                     const results = await response.json();
                     if (results.data.length > 0) {
-                        console.log(results.data)
                         const ele = document.getElementById('code').parentElement.querySelector('.msg-error')
                         ele.innerHTML = 'Mã khuyến mãi đã tồn tại'
                     } else {
