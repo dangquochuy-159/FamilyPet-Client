@@ -222,29 +222,31 @@ function Promote() {
                                         </tr>
                                     </thead>
                                     <tbody className="font-normal text-[#000]">
-                                        {filterPromotes.map((promote, index) =>
-                                            <tr key={index}>
-                                                <td className='whitespace-pre-wrap'>{index + 1}</td>
-                                                <td className='whitespace-pre-wrap'>{promote.name}</td>
-                                                <td className='whitespace-pre-wrap'>{promote.code}</td>
-                                                <td className='whitespace-pre-wrap'>{promote.des}</td>
-                                                <td className='whitespace-pre-wrap'>{promote.reduce}</td>
-                                                <td className='whitespace-pre-wrap'>{promote.point}</td>
-                                                <td className='whitespace-pre-wrap'>{promote.time_end}</td>
-                                                <td className='whitespace-pre-wrap'>
-                                                    <div className='flex justify-center'>
-                                                        <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />} data-id={promote._id}
-                                                            className='bg-green-500 text-white m-auto' onClick={handleShowUpdatePromote}
-                                                        />
-                                                        <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={promote._id}
-                                                            className='bg-red-500 text-white m-auto' onClick={handleDeletePromote}
-                                                        />
-                                                    </div>
-                                                </td>
+                                        {
+                                            filterPromotes.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
+                                                filterPromotes.map((promote, index) =>
+                                                    <tr key={index}>
+                                                        <td className='whitespace-pre-wrap'>{index + 1}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.name}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.code}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.des}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.reduce}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.point}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.time_end}</td>
+                                                        <td className='whitespace-pre-wrap'>
+                                                            <div className='flex justify-center'>
+                                                                <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />} data-id={promote._id}
+                                                                    className='bg-green-500 text-white m-auto' onClick={handleShowUpdatePromote}
+                                                                />
+                                                                <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={promote._id}
+                                                                    className='bg-red-500 text-white m-auto' onClick={handleDeletePromote}
+                                                                />
+                                                            </div>
+                                                        </td>
 
 
-                                            </tr>
-                                        )}
+                                                    </tr>
+                                                )}
                                     </tbody>
                                 </table>
                             </div>

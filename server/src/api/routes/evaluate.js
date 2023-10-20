@@ -3,6 +3,7 @@ const evaluateRouter = express.Router();
 
 const {
     getListEvaluate,
+    getFilterEvaluate,
     addEvaluate,
     removeEvaluate,
     updateEvaluate,
@@ -10,6 +11,7 @@ const {
 
 evaluateRouter
     .get('/', getListEvaluate)
+    .get('/filter', getFilterEvaluate)
 
     .post('/', addEvaluate)
 

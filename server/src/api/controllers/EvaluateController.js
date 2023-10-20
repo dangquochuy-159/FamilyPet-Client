@@ -13,6 +13,31 @@ const getListEvaluate = (req, res, next) => {
         .catch(next)
 }
 
+//GET /api/evaluates/filter?filter=&value=
+const getFilterEvaluate = (req, res, next) => {
+    let filters = [];
+    let values = [];
+
+    filters = filters.concat(req.query.filter);
+    values = values.concat(req.query.value);
+
+    const query = {};
+    for (let i = 0; i < filters.length; i++) {
+        query[filters[i]] = values[i]
+    }
+
+
+    Evaluate.find(query)
+
+        .then((evaluateFilter) => {
+            res.json({
+                data: evaluateFilter,
+                page: Number(req.query.page),
+                message: 'success',
+            })
+        })
+}
+
 // POST /api/evaluates
 const addEvaluate = (req, res, next) => {
     const evaluate = new Evaluate({
@@ -68,6 +93,7 @@ const updateEvaluate = (req, res, next) => {
 }
 module.exports = {
     getListEvaluate,
+    getFilterEvaluate,
     addEvaluate,
     removeEvaluate,
     updateEvaluate,
