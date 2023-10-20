@@ -11,10 +11,25 @@ import Validator from '~/utils/Validate/validator';
 function Promote() {
     const [connectServer, setConnectServer] = useState(false)
     const [promotes, setPromotes] = useState([])
+    const [filterPromotes, setFilterPromotes] = useState([])
     const [currentBtn, setCurrentBtn] = useState('btn-add')
+    const [currentId, setCurrentId] = useState('')
+    const [oldCode, setOldCode] = useState('')
 
     const points = [500, 800, 1000, 1200, 1500, 2000]
-    const reduces = [20, 40, 60, 80, 100]
+    const reduces = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+    const filterEles = document.querySelectorAll('.filter')
+    const nameEle = document.getElementById('name')
+    const codeELe = document.getElementById('code')
+    const desEle = document.getElementById('des')
+    const pointEle = document.getElementById('point')
+    const reduceEle = document.getElementById('reduce')
+    const timeEndEle = document.getElementById('time_end')
+    const btnAdd = document.querySelector('.btn-add')
+    const btnUpdate = document.querySelector('.btn-update')
+    const btnNoUpdate = document.querySelector('.btn-cancel')
+
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/promotes`)
@@ -22,6 +37,7 @@ function Promote() {
             .then(data => {
                 setConnectServer(true)
                 setPromotes(data.data)
+                setFilterPromotes(data.data)
             })
             .catch(err => setConnectServer(false))
     }, [])
@@ -40,37 +56,123 @@ function Promote() {
                 Validator.isRequired("#time_end", check.isEmpty),
             ],
             onRegister: function (data) {
-
+                const errorCodeEle = codeELe.parentElement.querySelector('.msg-error')
                 const postRequest = () => {
                     try {
                         axios.post(`${process.env.REACT_APP_API_URL}/api/promotes`, data)
                             .then(res => {
-                                alert('Thêm mã khuyến mãi thành công')
+                                alert('Thêm khuyến mãi thành công')
                                 window.location.reload();
                             })
                     } catch (error) {
                         console.error('Error sending PUT request:', error);
                     }
                 }
-                const fetchApi = async () => {
-                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/promotes/search?code=${data.code}`)
-                    const results = await response.json();
-                    if (results.data.length > 0) {
-                        const ele = document.getElementById('code').parentElement.querySelector('.msg-error')
-                        ele.innerHTML = 'Mã khuyến mãi đã tồn tại'
-                    } else {
-                        postRequest()
+                const putRequest = () => {
+                    try {
+                        axios.put(`${process.env.REACT_APP_API_URL}/api/promotes/${currentId}`, data)
+                            .then(res => {
+                                alert('Cập nhật khuyến mãi thành công')
+                                window.location.reload();
+                            })
+                    } catch (error) {
+                        console.error('Error sending PUT request:', error);
                     }
                 }
-                fetchApi()
+                const messageError = () => errorCodeEle.innerHTML = 'Mã khuyến mãi đã tồn tại'
 
+                const addPromote = async () => {
+                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/promotes/search?code=${data.code}`)
+                    const results = await response.json();
+                    results.data.length > 0 ? messageError() : postRequest()
+                }
+                const updatePromote = async () => {
+                    if (oldCode === data.code) {
+                        putRequest()
+                    } else {
+                        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/promotes/search?code=${data.code}`)
+                        const results = await response.json();
+                        results.data.length > 0 ? messageError() : putRequest()
+                    }
+                }
+                currentBtn === 'btn-add' ? addPromote() : updatePromote()
             }
-
-
         })
     })
-    const handleShowUpdatePromote = () => { }
-    const handleDeletePromote = () => { }
+
+    // function show all promotes
+    const handleShowAllPromote = () => {
+        Array.from(filterEles).map(filter => {
+            filter.value = ''
+        })
+        setFilterPromotes(promotes)
+    }
+
+    //function filter promotes
+    const handleFilterPromote = () => {
+        const query = []
+        Array.from(filterEles).map(filter => {
+            filter.value !== '' && query.push(`filter=${filter.name}&value=${filter.value}`)
+            return query
+        })
+        const queryString = query.join('&')
+        fetch(`${process.env.REACT_APP_API_URL}/api/promotes/filter?${queryString}`)
+            .then(res => res.json())
+            .then(data => {
+                setFilterPromotes(data.data)
+            })
+    }
+
+    // function show update promote
+    const handleShowUpdatePromote = (e) => {
+        let id = e.target.getAttribute('data-id')
+        setCurrentBtn('btn-update')
+        setCurrentId(id)
+        btnUpdate.classList.remove('hidden')
+        btnNoUpdate.classList.remove('hidden')
+        btnAdd.classList.add('hidden')
+        promotes.forEach(promote => {
+            if (promote._id === id) {
+                setOldCode(promote.code)
+                nameEle.value = promote.name
+                codeELe.value = promote.code
+                desEle.value = promote.des
+                pointEle.value = promote.point
+                reduceEle.value = promote.reduce
+                timeEndEle.value = promote.time_end
+            }
+        })
+
+    }
+
+    // function cancel Update promote
+    const handleCancelUpdate = (e) => {
+        e.preventDefault();
+        const errorCodeEle = codeELe.parentElement.querySelector('.msg-error')
+        errorCodeEle.innerHTML = ''
+        setCurrentBtn('btn-add')
+        btnUpdate.classList.add('hidden')
+        btnNoUpdate.classList.add('hidden')
+        btnAdd.classList.remove('hidden')
+        nameEle.value = ''
+        codeELe.value = ''
+        desEle.value = ''
+        pointEle.value = ''
+        reduceEle.value = ''
+        timeEndEle.value = ''
+    }
+
+    // function deletePromote
+    const handleDeletePromote = (e) => {
+        if (window.confirm('Bạn chắn chắn muốn xóa mã khuyến mãi')) {
+            let id = e.target.getAttribute('data-id')
+            axios.delete(`${process.env.REACT_APP_API_URL}/api/promotes/${id}`)
+                .then(() => {
+                    alert('Xóa mã khuyến mãi thành công')
+                    window.location.reload()
+                })
+        }
+    }
 
     return (
         <div className="wrapper-page flex flex-col  ">
@@ -81,7 +183,7 @@ function Promote() {
                             <div className='w-full h-1/6 flex items-center'>
                                 <div className='m-auto flex gap-x-2 justify-center items-center'>
                                     <Button title='All' type='primary' rightIcon={<CheckIcon width='14px' height='14px' />}
-                                        className='bg-green-500 text-white m-auto'
+                                        className='bg-green-500 text-white m-auto' onClick={handleShowAllPromote}
                                     />
                                     <select className='filter p-2 border border-solid border-black' name='point' >
                                         <option value="">Điểm</option>
@@ -99,7 +201,7 @@ function Promote() {
                                     </select>
                                     <input className='filter p-2 border border-solid border-black' name='time_end' type='number' placeholder='Nhập thời hạn (ngày)' />
                                     <Button title='Lọc' type='primary' rightIcon={<FilterIcon width='14px' height='14px' />}
-                                        className='bg-red-500 text-white m-auto'
+                                        className='bg-red-500 text-white m-auto' onClick={handleFilterPromote}
                                     />
                                 </div>
                             </div>
@@ -120,7 +222,7 @@ function Promote() {
                                         </tr>
                                     </thead>
                                     <tbody className="font-normal text-[#000]">
-                                        {promotes.map((promote, index) =>
+                                        {filterPromotes.map((promote, index) =>
                                             <tr key={index}>
                                                 <td className='whitespace-pre-wrap'>{index + 1}</td>
                                                 <td className='whitespace-pre-wrap'>{promote.name}</td>
@@ -131,7 +233,7 @@ function Promote() {
                                                 <td className='whitespace-pre-wrap'>{promote.time_end}</td>
                                                 <td className='whitespace-pre-wrap'>
                                                     <div className='flex justify-center'>
-                                                        <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />}
+                                                        <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />} data-id={promote._id}
                                                             className='bg-green-500 text-white m-auto' onClick={handleShowUpdatePromote}
                                                         />
                                                         <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={promote._id}
@@ -148,7 +250,7 @@ function Promote() {
                             </div>
                         </div>
                         <div className='w-full h-auto p-2 bg-gray-100'>
-                            <h2 className='text-center text-2xl font-bold my-4'>Thêm mã khuyến mãi</h2>
+                            <h2 className='text-center text-2xl font-bold my-4'>Thêm khuyến mãi</h2>
                             <Form id='form-add-promote' enctype="multipart/form-data">
                                 <div className='flex flex-col gap-y-5'>
                                     <div className='flex gap-x-2'>
@@ -187,9 +289,10 @@ function Promote() {
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
                                     </div>
-                                    <div className='w-full flex justify-center p-2'>
-                                        <button className=' w-auto bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Thêm</button>
-                                        <button className='hidden w-auto bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Cập nhật</button>
+                                    <div className='w-full flex justify-center gap-x-2 p-2'>
+                                        <button className='btn-add w-auto bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Thêm</button>
+                                        <button className='btn-update hidden w-auto bg-green-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Cập nhật</button>
+                                        <button onClick={handleCancelUpdate} className='btn-cancel hidden w-auto bg-red-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Cancel</button>
                                     </div>
                                 </div>
                             </Form>

@@ -4,6 +4,7 @@ const promoteRouter = express.Router()
 const {
     getListPromote,
     getSearchPromote,
+    getFilterPromote,
     getPromote,
     addPromote,
     removePromote,
@@ -14,6 +15,7 @@ const {
 promoteRouter
     .get('/', getListPromote)
     .get('/search', getSearchPromote)
+    .get('/filter', getFilterPromote)
     .get('/:id', getPromote)
 
     .post('/', addPromote)

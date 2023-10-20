@@ -43,7 +43,6 @@ const Validator = (options) => {
   if (formEle) {
     formEle.onsubmit = function (e) {
       e.preventDefault();
-
       let isFormValid = true;
       options.rules.forEach((rule) => {
         let inputEle = document.querySelector(rule.selector);

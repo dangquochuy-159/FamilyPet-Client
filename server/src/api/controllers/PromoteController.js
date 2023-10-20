@@ -21,6 +21,29 @@ const getSearchPromote = (req, res, next) => {
         })
 }
 
+// GET /api/promotes/filter?filter=&value=
+const getFilterPromote = (req, res, next) => {
+    let filters = [];
+    let values = [];
+
+    filters = filters.concat(req.query.filter);
+    values = values.concat(req.query.value);
+
+    const query = {};
+    for (let i = 0; i < filters.length; i++) {
+        isNaN(values[i]) ? query[filters[i]] = values[i] :
+            query[filters[i]] = { $lt: Number(values[i]) }
+    }
+    // res.json(query)
+    Promote.find(query)
+        .then((promotesFilter) => {
+            res.json({
+                data: promotesFilter,
+                message: 'success',
+            })
+        })
+}
+
 // GET /api/promotes/:id
 const getPromote = (req, res, next) => {
     Promote.findById(req.params.id)
@@ -82,6 +105,7 @@ const updatePromote = (req, res, next) => {
 module.exports = {
     getListPromote,
     getSearchPromote,
+    getFilterPromote,
     getPromote,
     addPromote,
     removePromote,
