@@ -3,6 +3,7 @@ const orderRouter = express.Router()
 
 const {
     getListOrder,
+    getFilterOrder,
     getOneOrder,
     getDetailOrder,
     addOrder,
@@ -11,6 +12,7 @@ const {
 
 orderRouter
     .get('/', getListOrder)
+    .get('/filter', getFilterOrder)
     .get('/:id', getOneOrder)
     .get('/:id/detail', getDetailOrder)
 

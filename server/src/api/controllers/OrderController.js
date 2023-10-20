@@ -12,6 +12,31 @@ const getListOrder = (req, res, next) => {
         })
 }
 
+// GET /api/orders/filter?filter=&value=
+const getFilterOrder = (req, res, next) => {
+
+    let filters = [];
+    let values = [];
+
+    filters = filters.concat(req.query.filter);
+    values = values.concat(req.query.value);
+
+
+    const query = {};
+    for (let i = 0; i < filters.length; i++) {
+        isNaN(values[i]) ? query[`${filters[i]}.${values[i]}`] = true :
+            query[filters[i]] = { $lt: Number(values[i]) }
+    }
+
+    Order.find(query)
+        .then((ordersFilter) => {
+            res.json({
+                data: ordersFilter,
+                message: 'success',
+            })
+        })
+}
+
 // GET /api/orders/:id
 const getOneOrder = (req, res, next) => {
     Order.findById(req.params.id)
@@ -93,6 +118,7 @@ const updateStatusOrder = (req, res, next) => {
 
 module.exports = {
     getListOrder,
+    getFilterOrder,
     getOneOrder,
     getDetailOrder,
     addOrder,

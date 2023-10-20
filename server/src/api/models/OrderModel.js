@@ -5,11 +5,12 @@ const Schema = mongoose.Schema;
 const OrderSchema = Schema(
     {
         id_customer: { type: String, required: true },
+        account: { type: String, required: true },
         name: { type: String, required: true },
         phone: { type: String, required: true },
         address: { type: String, required: true },
         total_pay: { type: Number, required: true },
-        detail: { type: Array }, // object: quantity, id_product, unit_price, into_money
+        detail: { type: Array }, // object: quantity, name_product, unit_price, into_money
         payments: {
             cod: { type: Boolean, default: true },
             atm: { type: Boolean, default: false },
