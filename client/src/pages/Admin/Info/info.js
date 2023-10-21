@@ -19,14 +19,14 @@ function Info() {
     }, [])
 
     return (
-        <div className="wrapper-page flex flex-col">
+        <>
             {!connectServer ? <ConnectError /> :
                 <>
                     <InfoPersonal />
                     <InfoAll />
                 </>
             }
-        </div>
+        </>
     );
 }
 

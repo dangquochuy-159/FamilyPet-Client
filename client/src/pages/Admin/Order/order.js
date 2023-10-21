@@ -29,7 +29,12 @@ function Order() {
             })
             .catch(err => setConnectServer(false))
     }, [])
-    const handleShowAllOrder = () => { }
+    const handleShowAllOrder = () => {
+        Array.from(filterEle).map(filter => {
+            return filter.value = ''
+        })
+        setFilterOrder(orders)
+    }
     const handleFilterOrder = () => {
         const query = []
         Array.from(filterEle).map(filter => {
@@ -53,7 +58,7 @@ function Order() {
         return `${hours}:${minutes} - ${day}/${month}/${year}`;
     }
     return (
-        <div className="wrapper-page flex flex-col  ">
+        <>
             {
                 !connectServer ? <ConnectError /> :
                     <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5">
@@ -81,7 +86,7 @@ function Order() {
 
                         </div>
                         <div className='w-full h-5/6 flex flex-col gap-y-4'>
-                            <div className='wrapper-table'>
+                            <div className='wrapper-table' style={{ maxHeight: '100%' }}>
                                 <table>
                                     <thead className="text-black font-bold text-lg bg-[#71cbe8]">
                                         <tr>
@@ -92,9 +97,9 @@ function Order() {
                                             <th scope='col'>Địa chỉ</th>
                                             <th scope='col'>Tổng tiền</th>
                                             <th scope='col'>Hinh thức thanh toán</th>
-                                            <th scope='col'>Chi tiết</th>
+                                            <th scope='col'>Chi tiết sản phẩm</th>
                                             <th scope='col'>Trạng thái</th>
-                                            <th scope='col' className='w-1/5 border border-solid border-black p-4'>Ngày thanh toán</th>
+                                            <th scope='col'>Ngày thanh toán</th>
 
                                         </tr>
                                     </thead>
@@ -142,7 +147,7 @@ function Order() {
                         </div>
                     </div>
             }
-        </div>
+        </>
     );
 }
 

@@ -52,7 +52,7 @@ function Login() {
     }
     return (
         <div className="wrapper--login w-full h-screen relative">
-            <div className="w-3/4 h-1/2 p-5 max-w-md bg-white absolute bottom-32 left-24 rounded shadow-lg">
+            <div className="w-3/4 h-1/2 p-5 max-w-md bg-white absolute bottom-32 sm:left-1/2 sm:-translate-x-1/2 left-24 rounded shadow-lg">
                 <h2 className="text-4xl text-center">Đăng nhập</h2>
                 <form action="" method="POST" id="form-login" noValidate className="form mt-10 space-y-8">
                     <div className="form-group">

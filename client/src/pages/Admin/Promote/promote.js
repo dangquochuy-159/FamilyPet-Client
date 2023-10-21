@@ -102,9 +102,7 @@ function Promote() {
 
     // function show all promotes
     const handleShowAllPromote = () => {
-        Array.from(filterEles).map(filter => {
-            filter.value = ''
-        })
+        Array.from(filterEles).map(filter => filter.value = '')
         setFilterPromotes(promotes)
     }
 
@@ -175,7 +173,7 @@ function Promote() {
     }
 
     return (
-        <div className="wrapper-page flex flex-col  ">
+        <>
             {
                 !connectServer ? <ConnectError /> :
                     <div className="w-full h-auto bg-white p-4 flex flex-col gap-y-5">
@@ -301,7 +299,7 @@ function Promote() {
                         </div>
                     </div >
             }
-        </div >
+        </ >
     );
 }
 

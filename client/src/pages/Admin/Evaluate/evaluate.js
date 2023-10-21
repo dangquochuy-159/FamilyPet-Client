@@ -69,7 +69,7 @@ function Evaluate() {
     }
 
     return (
-        <div className="wrapper-page flex flex-col  ">
+        <>
             {
                 !connectServer ? <ConnectError /> :
                     <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5">
@@ -129,7 +129,7 @@ function Evaluate() {
                         </div>
                     </div>
             }
-        </div>
+        </>
     );
 }
 
