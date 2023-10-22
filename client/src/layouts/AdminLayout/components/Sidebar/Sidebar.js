@@ -19,16 +19,16 @@ function Sidebar() {
             <div className='sm:hidden md:hidden w-full logo--admin border-b-2 border-solid border-black'>
                 <img src={images.logo_admin} alt='logo admin' />
             </div>
-            <NavMenu className='sm:h-[64px] flex sm:!flex-row sm:justify-around flex-col sm:bg-[var(--primary-color)]'>
-                <NavItem to={admin.dashboard} title='Thống kê' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faChartLine} />} />
-                <NavItem to={admin.user} title='Khách hàng' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faUser} />} />
-                <NavItem to={admin.product} title='Sản phẩm' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faCat} />} />
-                <NavItem to={admin.category} title='Danh mục sản phẩm' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faRectangleList} />} />
-                <NavItem to={admin.order} title='Đơn đặt hàng' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faPaste} />} />
-                <NavItem to={admin.promote} title='Khuyến mãi' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faGift} />} />
-                <NavItem to={admin.evaluate} title='Đánh giá' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faPenNib} />} />
-                <NavItem to={admin.info} title='Thông tin quản trị viên' className='sm:!px-2 py-4 px-6' icon={<FontAwesomeIcon icon={faCircleInfo} />} />
-                <NavItem to='./' title='Đăng xuất' className='sm:!block sm:!px-4 py-4 px-6 hidden' icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
+            <NavMenu className='sm:h-[64px] flex sm:!flex-row sm:justify-around sm:items-center  flex-col sm:bg-[var(--primary-color)]'>
+                <NavItem to={admin.dashboard} title='Thống kê' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faChartLine} />} />
+                <NavItem to={admin.user} title='Khách hàng' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faUser} />} />
+                <NavItem to={admin.product} title='Sản phẩm' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faCat} />} />
+                <NavItem to={admin.category} title='Danh mục sản phẩm' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faRectangleList} />} />
+                <NavItem to={admin.order} title='Đơn đặt hàng' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faPaste} />} />
+                <NavItem to={admin.promote} title='Khuyến mãi' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faGift} />} />
+                <NavItem to={admin.evaluate} title='Đánh giá' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faPenNib} />} />
+                <NavItem to={admin.info} title='Thông tin quản trị viên' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faCircleInfo} />} />
+                <NavItem to='./' title='Đăng xuất' className='sm:!block sm:!px-2 sm:!py-0 py-4 px-6 hidden' icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                 <button
                     className='sm:hidden btn--logout w-full border-t-2 border-solid border-black text-left absolute bottom-0 left-0 py-4 px-6 '
                     onClick={handleLogout}

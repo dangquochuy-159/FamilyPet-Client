@@ -32,7 +32,7 @@ function AdminLayout({ children }) {
                         id={connectServer && adminLogin._id}
                     />
                     <div className="wrapper-page sm:!pb-0 flex flex-col w-full pb-2 overflow-auto
-                                   h-[var(--page-admin-height)] mt-[var(--header-admin-height)]"
+                                   h-[var(--page-admin-height)] mt-[var(--header-admin-height)] sm:!pb-[64px]"
                     >
                         {children}
                     </div>

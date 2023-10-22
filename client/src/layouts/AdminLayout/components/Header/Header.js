@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPlay } from '@fortawesome/free-solid-svg-icons';
 import Image from '~/components/Image';
+import { NavItem } from '~/components/NavMenu';
+import { Link } from 'react-router-dom';
 
 function Header({ title, avatar, name, id }) {
 
@@ -18,6 +20,7 @@ function Header({ title, avatar, name, id }) {
                     <div className='header--admin flex items-center '>
                         <h2 className='sm:hidden title--admin text-2xl text-white font-thin'>{name}</h2>
                         <Image className='w-10 h-10 ml-4 object-cover rounded-full' src={`${process.env.REACT_APP_API_URL}/api/admins/${id}/${avatar}`} alt={avatar} />
+                        <Link to='/' className='p-4 hover:text-white'><FontAwesomeIcon icon={faHouse} /></Link>
                     </div>
                 }
             </div>

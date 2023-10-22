@@ -53,7 +53,7 @@ function FormUpdateAvatar({ admin }) {
                 <div className='flex justify-center items-center space-x-2 mt-4'>
                     <input type="file" name="avatar" id="file" className="overflow-hidden w-1 h-1 opacity-0 absolute z-10 " onChange={handleUploadAvatar} />
                     <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer'>
-                        <Button className='w-full bg-[var(--primary-color)] text-white py-4 pointer-events-none' type='primary' title='Tải ảnh từ thiết bị' rightIcon={<UploadIcon />} />
+                        <Button className='w-full bg-[var(--primary-color)] text-white py-4 pointer-events-none' type='primary' title='Tải ảnh' rightIcon={<UploadIcon />} />
                     </label>
                     <Image
                         innerRef={avatarRef}
@@ -76,7 +76,7 @@ function FormUpdateAvatar({ admin }) {
                             (
                                 <p className='mt-4 text-center'>Chưa có ảnh nào trong thư viện</p>
                             ) : (
-                                <div className='w-full h-56 mt-4 flex flex-wrap justify-center gap-2 overflow-y-auto '>
+                                <div className='w-full h-56 mt-4 flex sm:!flex-nowrap flex-wrap sm:!justify-start justify-center gap-2 overflow-y-auto '>
                                     {
                                         admin.avatar_old.map((avatar, index) => (
                                             <Image

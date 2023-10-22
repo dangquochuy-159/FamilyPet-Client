@@ -1,11 +1,53 @@
 import PropTypes from 'prop-types'
 
-function ModalInfoOrder({ data }) {
+function ModalInfoOrder({ data, changeStatus }) {
 
+    const changeDate = (date) => {
+        const originalDate = new Date(date);
+        const day = String(originalDate.getDate()).padStart(2, '0');
+        const month = String(originalDate.getMonth() + 1).padStart(2, '0');
+        const year = originalDate.getFullYear();
+        const hours = String(originalDate.getHours()).padStart(2, '0');
+        const minutes = String(originalDate.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes} - ${day}/${month}/${year}`;
+    }
     return (
-        <div className='w-full h-auto px-8 pb-8 pt-4'>
-            <h2 className="font-extrabold text-4xl text-center text-black">Chi tiết đơn hàng</h2>
-            <div className="mt-8 flex gap-10 justify-center ">
+        <div className="px-4 h-full pb-20 overflow-auto">
+            <h2 className="font-extrabold text-xl text-center text-black">Thông tin đơn hàng</h2>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Tài khoản: </span>
+                <span>{data.account}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Tên khách hàng: </span>
+                <span>{data.name}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Số điện thoại: </span>
+                <span>{data.phone}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Địa chỉ: </span>
+                <span>{data.address}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Tổng tiền: </span>
+                <span>{data.total_pay}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Hình thức thanh toán: </span>
+                <span>{Object.keys(data.payments).map(key => data.payments[key] === true && key)}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Trạng thái đơn hàng: </span>
+                <span>{Object.keys(data.status).map(key => data.status[key] === true && changeStatus[key])}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Ngày thanh toán: </span>
+                <span>{changeDate(data.createdAt)}</span>
+            </p>
+            <p className="p-2 rounded-md bg-white">
+                <span className="font-bold">Chi tiết sản phẩm: </span>
                 <table className='w-full'>
                     <thead className='w-full bg-yellow-400'>
                         <tr>
@@ -20,7 +62,7 @@ function ModalInfoOrder({ data }) {
                     </thead>
                     <tbody>
                         {
-                            data.map((detail, index) => (
+                            data.detail.map((detail, index) => (
                                 <tr key={index}>
                                     <td className='border border-solid border-black p-4'>{index}</td>
                                     <td className='border border-solid border-black p-4'>{detail['name_product']}</td>
@@ -33,14 +75,15 @@ function ModalInfoOrder({ data }) {
                         }
                     </tbody>
                 </table>
+            </p>
 
-            </div>
         </div>
     );
 }
 
-ModalInfoOrder.propsTypes = {
+ModalInfoOrder.propTypes = {
     data: PropTypes.object.isRequired,
+    changeStatus: PropTypes.object.isRequired,
 }
 
 export default ModalInfoOrder;

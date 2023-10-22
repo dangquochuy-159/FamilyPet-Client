@@ -90,25 +90,25 @@ function FormUpdateInfo({ admin }) {
     }
 
     return (
-        <div className='w-full h-auto px-8 pb-8 pt-4'>
-            <h2 className="text-4xl text-center text-[var(--primary-color)]">Chỉnh sửa thông tin cá nhân</h2>
+        <div className='w-full h-auto px-8 pb-8 pt-4 sm:!pb-20 sm:overflow-auto sm:!h-full'>
+            <h2 className="sm:!text-xl text-4xl text-center text-[var(--primary-color)]">Chỉnh sửa thông tin cá nhân</h2>
             <Form id="form-update-info" action="" method="POST" className="form flex flex-wrap space-y-4 mt-2">
-                <div className='w-full flex space-x-12'>
-                    <FormGroup className='w-1/2 flex flex-col space-y-1'>
+                <div className='w-full flex sm:!flex-col gap-x-12 gap-y-2'>
+                    <FormGroup className='sm:w-full w-1/2 flex flex-col space-y-1'>
                         <Input
                             id='full_name' name='full_name' type='text' placeholder='Nhập họ và tên'
                             className='w-full h-12 px-4 border-b-2 border-solid border-gray-400'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2 flex flex-col space-y-1'>
+                    <FormGroup className='sm:w-full w-1/2 flex flex-col space-y-1'>
                         <Input
                             id='email' name='email' type='text' placeholder='Nhập email' defaultValue={admin.email} disabled
                             className='w-full h-12 px-4 text-gray-400 bg-transparent'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2 flex flex-col space-y-1'>
+                    <FormGroup className='sm:w-full w-1/2 flex flex-col space-y-1'>
                         <Input
                             id='phone' name='phone' type='text' placeholder='Nhập số điện thoại'
                             className='w-full h-12 px-4 border-b-2 border-solid border-gray-400'
@@ -137,7 +137,7 @@ function FormUpdateInfo({ admin }) {
                         }
                     </Select>
                 </FormGroup>
-                <div className='w-full flex space-x-12'>
+                <div className='w-full flex sm:flex-col gap-x-12 gap-y-2'>
                     <FormGroup className='w-full flex flex-col space-y-1'>
                         <Input
                             innerRef={ipAddressRef}

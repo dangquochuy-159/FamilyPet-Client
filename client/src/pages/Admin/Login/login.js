@@ -52,7 +52,7 @@ function Login() {
     }
     return (
         <div className="wrapper--login w-full h-screen relative">
-            <div className="w-3/4 h-1/2 p-5 max-w-md bg-white absolute bottom-32 sm:left-1/2 sm:-translate-x-1/2 left-24 rounded shadow-lg">
+            <div className="w-3/4 h-1/2 sm:h-auto p-5 max-w-md bg-white absolute bottom-32 sm:left-1/2 sm:-translate-x-1/2 left-24 rounded shadow-lg">
                 <h2 className="text-4xl text-center">Đăng nhập</h2>
                 <form action="" method="POST" id="form-login" noValidate className="form mt-10 space-y-8">
                     <div className="form-group">
@@ -89,7 +89,7 @@ function Login() {
                         </div>
                         <span className="msg-error text-red-600"></span>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex sm:flex-col items-center justify-between">
                         <button className="bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase">
                             Xác nhận
                         </button>

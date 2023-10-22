@@ -64,6 +64,25 @@ function Dashboard() {
             ],
         })
     };
+
+    const options = {
+        indexAxis: 'y',
+        elements: {
+            bar: {
+                borderWidth: 2,
+            },
+        },
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: true,
+            },
+        },
+    };
+
     const processDataOrder = (data) => {
         const data_month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
         const data_order = {}
@@ -74,7 +93,7 @@ function Dashboard() {
             return data_order
         })
         setDataChartOrder({
-            labels: data_month.map(month => 'Tháng' + month),
+            labels: data_month.map(month => month),
             datasets: [
                 {
                     label: 'Doanh thu sản phẩm 2023',
@@ -100,7 +119,7 @@ function Dashboard() {
         <>
             {
                 !connectServer ? <ConnectError /> :
-                    <div className="w-full sm:!h-auto h-full bg-white sm:!pb-[64px] p-4 flex flex-col gap-y-5">
+                    <div className="w-full sm:!h-auto h-full bg-white  p-4 flex flex-col gap-y-5">
                         <div className='w-full sm:h-auto h-1/6 flex sm:flex-col gap-x-2'>
                             <div className='sm:w-full w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 border border-solid border-[#ccc] rounded'>
                                 <div className='w-[50px] h-[50px] shadow-lg shadow-current flex justify-center items-center bg-red-500 rounded-full'>
@@ -155,7 +174,7 @@ function Dashboard() {
                                 <PieChart dataChart={dataChartProduct} />
                             </div>
                             <div className="sm:w-full w-2/3 h-full flex flex-col justify-center items-center p-4 ">
-                                <h2 className="py-2 text-xl text-center font-bold">Biểu đồ doanh thu năm 2023</h2>
+                                <h2 className="py-2 text-xl text-center font-bold">Biểu đồ doanh thu theo tháng năm 2023</h2>
                                 <BarChart dataChart={dataChartOrder} />
                             </div>
                         </div>

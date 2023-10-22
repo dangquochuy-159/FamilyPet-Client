@@ -72,13 +72,10 @@ function Evaluate() {
         <>
             {
                 !connectServer ? <ConnectError /> :
-                    <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5">
-                        <div className='w-full h-1/6 flex items-center '>
-                            <div className='m-auto flex gap-x-2 justify-center items-center'>
-                                <Button title='All' type='primary' rightIcon={<CheckIcon width='14px' height='14px' />}
-                                    className='bg-green-500 text-white m-auto' onClick={handleShowAllEvaluate}
-                                />
-                                <select className='filter p-2 border border-solid border-black' name='star' >
+                    <div className="w-full h-full sm:!h-auto bg-white p-4 flex flex-col gap-y-5">
+                        <div className='w-full sm:!h-auto h-1/6 flex items-center '>
+                            <div className='m-auto flex sm:w-full sm:flex-col gap-2 justify-center items-center'>
+                                <select className='filter sm:w-full p-2 border border-solid border-black' name='star' >
                                     <option value="">Điểm đánh giá</option>
                                     <option value="1">1 sao</option>
                                     <option value="2">2 sao</option>
@@ -86,7 +83,7 @@ function Evaluate() {
                                     <option value="4">4 sao</option>
                                     <option value="5">5 sao</option>
                                 </select>
-                                <select className='filter p-2 border border-solid border-black' name='name_product' >
+                                <select className='filter sm:w-full p-2 border border-solid border-black' name='name_product' >
                                     <option value="">Sản phẩm</option>
                                     {
                                         products.map((product, index) =>
@@ -94,11 +91,28 @@ function Evaluate() {
                                     }
                                 </select>
                                 <Button title='Lọc' type='primary' rightIcon={<FilterIcon width='14px' height='14px' />}
-                                    className='bg-red-500 text-white m-auto' onClick={handleFilterEvaluate}
+                                    className='sm:w-full bg-red-500 text-white m-auto' onClick={handleFilterEvaluate}
+                                />
+                                <Button title='All' type='primary' rightIcon={<CheckIcon width='14px' height='14px' />}
+                                    className='sm:w-full bg-green-500 text-white m-auto' onClick={handleShowAllEvaluate}
                                 />
                             </div>
                         </div>
-                        <div className='wrapper-table'>
+                        <h2 className='font-bold'>Tổng số lượt đánh giá: {filterEvaluates.length}</h2>
+                        <div className='hidden sm:!flex flex-col gap-4'>
+                            {
+                                filterEvaluates.map((evaluate, index) => (
+                                    <div key={index} className='flex flex-col gap-2 p-4 rounded-md bg-gray-200'>
+                                        <p><span className='font-bold'>Khách hàng: </span>{evaluate.name_user}</p>
+                                        <p><span className='font-bold'>Sản phẩm: </span>{evaluate.name_product}</p>
+                                        <p><span className='font-bold'>Nội dung: </span>{evaluate.content}</p>
+                                        <p><span className='font-bold'>Điểm đánh giá: </span>{evaluate.star}/5</p>
+                                        <p><span className='font-bold'>Ngày dánh giá: </span>{changeDate(evaluate.createdAt)}/5</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className='wrapper-table sm:hidden'>
                             <table>
                                 <thead className="text-black font-bold text-lg bg-[#71cbe8]">
                                     <tr>

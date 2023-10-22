@@ -128,31 +128,33 @@ function Category() {
             {
                 !connectServer ? <ConnectError /> :
                     <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5">
-                        <div className="w-full h-1/6">
+                        <div className="w-full h-1/6 sm:h-auto">
                             <Form id='form-add-cate'
-                                className='w-full h-full flex items-center justify-center gap-x-10 p-4 border-2 border-solid border-gray-200'>
-                                <FormGroup className="flex items-center gap-x-5">
-                                    <Input id='name' name='name' label='Tên danh mục' type='text' placeholder='Nhập tên danh mục'
-                                        className="h-14 border-2 border-solid p-2 border-gray-300"
+                                className='w-full h-full flex sm:flex-col items-center justify-center sm:gap-y-0 gap-x-10 p-4 border-2 border-solid border-gray-200'>
+                                <FormGroup className="flex sm:flex-col sm:w-full items-center gap-x-5">
+                                    <Input id='name' name='name' type='text' placeholder='Nhập tên danh mục'
+                                        className="sm:w-full h-14 border-2 border-solid p-2 border-gray-300"
                                     />
                                     <span className="msg-error text-red-600"></span>
                                 </FormGroup>
-                                <FormGroup className="flex items-center gap-x-5">
-                                    <Input id='photo' label='Ảnh danh mục' type='file' />
+                                <FormGroup className="flex sm:flex-col sm:w-full items-center gap-x-5">
+                                    <Input id='photo' type='file' className="sm:w-full" />
                                 </FormGroup>
                                 <Button id='add-cate' title='Thêm' type='primary' className='bg-blue-600 text-white' />
-                                <Button id='update-cate' title='Cập nhật' type='primary' className='hidden bg-blue-600 text-white' onClick={handleUpdate} />
-                                <Button id='no-update-cate' type='primary' className='hidden bg-red-600 text-white' leftIcon={<CloseIcon />} onClick={handleNoUpdate} />
+                                <div className="flex gap-5">
+                                    <Button id='update-cate' title='Cập nhật' type='primary' className='hidden bg-blue-600 text-white' onClick={handleUpdate} />
+                                    <Button id='no-update-cate' type='primary' className='hidden bg-red-600 text-white' leftIcon={<CloseIcon />} onClick={handleNoUpdate} />
+                                </div>
                             </Form>
                         </div>
                         <div className="w-full max-h-5/6 flex flex-wrap justify-center gap-5 p-4 overflow-y-scroll">
                             {
                                 categorys.map((category, index) =>
                                     <div key={index}
-                                        className="w-1/6 h-auto p-4 rounded bg-[var(--primary-color)] shadow-lg">
+                                        className="sm:w-full sm:flex sm:!justify-between w-1/6 h-auto p-4 rounded bg-[var(--primary-color)] shadow-lg">
                                         <Image src={`${process.env.REACT_APP_API_URL}/api/categorys/${category._id}/${category.photo}`}
                                             alt={category.photo}
-                                            className='w-28 h-28 m-auto  rounded-full object-cover'
+                                            className='sm:!w-12 sm:!h-12 w-28 h-28 sm:m-0 m-auto rounded-full object-cover'
                                         />
                                         <p className="text-center text-lg text-white font-medium py-2">{category.name}</p>
                                         <div className="flex justify-center gap-x-2">

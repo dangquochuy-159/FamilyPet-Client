@@ -136,26 +136,44 @@ function FormAddAdmin() {
         }
     };
 
+    const handleSubmitForm = (e) => {
+        const elements = document.querySelectorAll('.msg-error');
+        let targetElement = null;
+        elements.forEach((element) => {
+            if (element.innerHTML !== '') {
+                targetElement = element;
+            }
+        });
+        const notifyError = document.querySelector('.notify-error')
+        if (targetElement) {
+            e.preventDefault()
+            notifyError.innerHTML = 'Xảy ra lỗi khi nhập dữ liệu'
+        } else {
+
+            notifyError.innerHTML = ''
+        }
+    }
+
     return (
-        <div className='w-full h-auto px-8 pb-8 pt-4'>
+        <div className='w-full h-auto px-8 pb-8 pt-4 sm:!h-full sm:!pb-20 sm:overflow-auto'>
             <h2 className="text-4xl text-center text-[var(--primary-color)]">Thêm quản trị viên</h2>
             <Form id="form-add-admin" action="" method="POST" enctype="multipart/form-data" className="form flex flex-wrap space-y-4 mt-2">
-                <div className='w-full flex space-x-12'>
-                    <FormGroup className='w-1/2 flex flex-col space-y-1'>
+                <div className='w-full flex sm:flex-col gap-x-12 gap-y-2'>
+                    <FormGroup className='sm:!w-full w-1/2 flex flex-col space-y-1'>
                         <Input
                             id='full_name' name='full_name' type='text' placeholder='Nhập họ và tên'
                             className='w-full h-12 px-4 border-b-2 border-solid border-gray-400'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2 flex flex-col space-y-1'>
+                    <FormGroup className='sm:!w-full w-1/2 flex flex-col space-y-1'>
                         <Input
                             id='email' name='email' type='text' placeholder='Nhập email'
                             className='w-full h-12 px-4 border-b-2 border-solid border-gray-400'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2 flex flex-col space-y-1'>
+                    <FormGroup className='sm:!w-full w-1/2 flex flex-col space-y-1'>
                         <Input
                             id='phone' name='phone' type='text' placeholder='Nhập số điện thoại'
                             className='w-full h-12 px-4 border-b-2 border-solid border-gray-400'
@@ -207,7 +225,7 @@ function FormAddAdmin() {
                         }
                     </Select>
                 </FormGroup>
-                <div className='w-full flex space-x-12'>
+                <div className='w-full flex sm:flex-col gap-x-12 gap-y-2'>
                     <FormGroup className='w-full flex flex-col space-y-1'>
                         <Input
                             id='address' name='address' type='text' placeholder='Nhập số nhà, tên đường'
@@ -223,7 +241,7 @@ function FormAddAdmin() {
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
-                <FormGroup className='w-full flex space-x-2'>
+                <FormGroup className='w-full flex flex sm:flex-col gap-2'>
                     <Input
                         name='gender' type='radio' value='Nam' title='Nam' label='Giới tính: '
                         className='w-4 h-4'
@@ -234,7 +252,7 @@ function FormAddAdmin() {
                     />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
-                <FormGroup className='w-full flex space-x-2'>
+                <FormGroup className='w-full flex sm:flex-col gap-2'>
                     <Input
                         name='add_admin' type='radio' value='true' title='Có' label='Quyền đăng kí tài khoản quản trị viên: '
                         className='w-4 h-4'
@@ -252,7 +270,12 @@ function FormAddAdmin() {
                         onChange={handleInputChange}
                     />
                 </FormGroup>
-                <button className='bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Đăng ký</button>
+                <div className='flex-col'>
+                    <p className="notify-error mb-2 text-red-600"></p>
+                    <button className='bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'
+                        onClick={handleSubmitForm}
+                    >Đăng ký</button>
+                </div>
             </Form >
         </div >
     );

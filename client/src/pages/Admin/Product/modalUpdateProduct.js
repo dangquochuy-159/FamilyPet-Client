@@ -18,7 +18,6 @@ function ModalUpdateProduct({ categorys, product }) {
                 Validator.isRequired("#des", check.isEmpty),
                 Validator.isRequired("#origin", check.isEmpty),
                 Validator.isRequired("#price", check.isEmpty),
-                Validator.isRequired("#sale_price", check.isEmpty),
             ],
             onRegister: function (data) {
                 const update = () => {
@@ -69,17 +68,33 @@ function ModalUpdateProduct({ categorys, product }) {
         })
     })
 
+    const handleSubmitForm = (e) => {
+        const elements = document.querySelectorAll('.msg-error');
+        let targetElement = null;
+        elements.forEach((element) => {
+            if (element.innerHTML !== '') {
+                targetElement = element;
+            }
+        });
+        const notifyError = document.querySelector('.notify-error')
+        if (targetElement) {
+            e.preventDefault()
+            notifyError.innerHTML = 'Xảy ra lỗi khi nhập dữ liệu'
+        } else {
+            notifyError.innerHTML = ''
+        }
+    }
     return (
-        <div className='w-full h-auto px-8 pb-8 pt-4'>
+        <div className='w-full h-auto sm:!h-full sm:!overflow-auto px-8 pb-8 pt-4 sm:pb-20'>
             <h2 className="font-extrabold text-4xl text-center text-black">Chỉnh sửa sản phẩm</h2>
-            <Form id='form-add-product' className='mt-5 flex flex-col gap-y-2' enctype="multipart/form-data">
-                <div className='w-full flex justify-between gap-x-2'>
-                    <FormGroup className='w-1/2' >
+            <Form Form id='form-add-product' className='mt-5 flex flex-col gap-y-2' enctype="multipart/form-data" >
+                <div className='w-full flex sm:flex-col justify-between gap-2'>
+                    <FormGroup className='sm:w-full w-1/2' >
                         <Input id='name' name='name' type='text' placeholder='Nhập tên sản phẩm' label='Tên sản phẩm'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.name} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Select className='w-full h-12 p-2 outline-none border-2 border-solid border-gray-400' name='category' label='Danh mục sản phẩm'>
                             <Option value={product.category} name={product.category} />
                             {
@@ -88,7 +103,7 @@ function ModalUpdateProduct({ categorys, product }) {
                         </Select>
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Input id='quantity' name='quantity' type='number' placeholder='Nhập số lượng' label='Số lượng'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.quantity} />
                         <span className="msg-error text-red-600"></span>
@@ -99,38 +114,41 @@ function ModalUpdateProduct({ categorys, product }) {
                         className='w-full h-40 px-4 border-2 border-solid border-gray-400' defaultValue={product.des} />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
-                <div className='w-full flex justify-between gap-x-2'>
-                    <FormGroup className='w-1/2'>
+                <div className='w-full flex sm:flex-col justify-between gap-2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Input id='origin' name='origin' type='text' placeholder='Nhập xuất xứ' label='Xuất xứ'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.origin} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Input id='price' name='price' type='text' placeholder='Nhập giá' label='Giá'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.price} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Input id='sale_price' name='sale_price' type='text' placeholder='Nhập giá khuyến mãi' label='Giá khuyến mãi'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.sale_price} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
-                <div className='w-full flex justify-between gap-x-2'>
-                    <FormGroup className='w-1/2'>
+                <div className='w-full flex sm:flex-col justify-between gap-2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Input id='photo' type='file' label='Ảnh'
                             className='w-full p-2 border-2 border-solid border-gray-400' />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='w-1/2'>
+                    <FormGroup className='sm:w-full w-1/2'>
                         <Input id='photo_detail' multiple type='file' label='Ảnh chi tiết'
                             className='w-full p-2 border-2 border-solid border-gray-400' />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
-                <button className='w-1/4 bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'>Cập nhật</button>
-            </Form>
-        </div>
+                <span className="notify-error text-red-600"></span>
+                <button className='sm:w-full w-1/4 bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'
+                    onClick={handleSubmitForm}
+                >Cập nhật</button>
+            </Form >
+        </div >
     );
 }
 

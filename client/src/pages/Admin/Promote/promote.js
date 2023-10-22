@@ -20,6 +20,7 @@ function Promote() {
     const reduces = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
     const filterEles = document.querySelectorAll('.filter')
+    const errorEles = document.querySelectorAll('.msg-error')
     const nameEle = document.getElementById('name')
     const codeELe = document.getElementById('code')
     const desEle = document.getElementById('des')
@@ -123,6 +124,7 @@ function Promote() {
 
     // function show update promote
     const handleShowUpdatePromote = (e) => {
+        Array.from(errorEles).map(error => error.innerHTML = '')
         let id = e.target.getAttribute('data-id')
         setCurrentBtn('btn-update')
         setCurrentId(id)
@@ -146,6 +148,7 @@ function Promote() {
     // function cancel Update promote
     const handleCancelUpdate = (e) => {
         e.preventDefault();
+        Array.from(errorEles).map(error => error.innerHTML = '')
         const errorCodeEle = codeELe.parentElement.querySelector('.msg-error')
         errorCodeEle.innerHTML = ''
         setCurrentBtn('btn-add')
@@ -176,34 +179,80 @@ function Promote() {
         <>
             {
                 !connectServer ? <ConnectError /> :
-                    <div className="w-full h-auto bg-white p-4 flex flex-col gap-y-5">
+                    <div className="w-full h-auto bg-white sm:!px-0 p-4 flex flex-col gap-y-5">
                         <div className='w-full h-4/6 flex flex-col gap-y-5'>
-                            <div className='w-full h-1/6 flex items-center'>
-                                <div className='m-auto flex gap-x-2 justify-center items-center'>
-                                    <Button title='All' type='primary' rightIcon={<CheckIcon width='14px' height='14px' />}
-                                        className='bg-green-500 text-white m-auto' onClick={handleShowAllPromote}
-                                    />
-                                    <select className='filter p-2 border border-solid border-black' name='point' >
-                                        <option value="">Điểm</option>
-                                        {
-                                            points.map((point, index) =>
-                                                <option key={index} value={point}>{point} điểm</option>)
-                                        }
-                                    </select>
-                                    <select className='filter p-2 border border-solid border-black' name='reduce' >
-                                        <option value="">Giảm (%)</option>
-                                        {
-                                            reduces.map((reduce, index) =>
-                                                <option key={index} value={reduce}>{reduce} %</option>)
-                                        }
-                                    </select>
-                                    <input className='filter p-2 border border-solid border-black' name='time_end' type='number' placeholder='Nhập thời hạn (ngày)' />
-                                    <Button title='Lọc' type='primary' rightIcon={<FilterIcon width='14px' height='14px' />}
-                                        className='bg-red-500 text-white m-auto' onClick={handleFilterPromote}
-                                    />
+                            <div className='w-full sm:!h-auto h-1/6 flex items-center'>
+                                <div className='m-auto flex sm:flex-col gap-2 justify-center items-center'>
+                                    <div className='flex gap-2 sm:w-full'>
+                                        <select className='filter sm:w-1/2 p-2 border border-solid border-black' name='point' >
+                                            <option value="">Điểm</option>
+                                            {
+                                                points.map((point, index) =>
+                                                    <option key={index} value={point}>{point} điểm</option>)
+                                            }
+                                        </select>
+                                        <select className='filter sm:w-1/2 p-2 border border-solid border-black' name='reduce' >
+                                            <option value="">Giảm (%)</option>
+                                            {
+                                                reduces.map((reduce, index) =>
+                                                    <option key={index} value={reduce}>{reduce} %</option>)
+                                            }
+                                        </select>
+                                    </div>
+                                    <input className='filter sm:w-full p-2 border border-solid border-black' name='time_end' type='number' placeholder='Nhập thời hạn (ngày)' />
+                                    <div className='flex gap-2 sm:w-full'>
+                                        <Button title='Lọc' type='primary' rightIcon={<FilterIcon width='14px' height='14px' />}
+                                            className='sm:w-1/2 bg-red-500 text-white m-auto' onClick={handleFilterPromote}
+                                        />
+                                        <Button title='All' type='primary' rightIcon={<CheckIcon width='14px' height='14px' />}
+                                            className='sm:w-1/2 bg-green-500 text-white m-auto' onClick={handleShowAllPromote}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <div className='wrapper-table'>
+                            <h2 className='font-bold sm:px-4'>Tổng mã khuyến mãi: {filterPromotes.length}</h2>
+                            <div className='hidden sm:!flex sm:w-full overflow-x-auto space-x-4 bg-gray-200'>
+                                {
+                                    filterPromotes.map((promote, index) => (
+                                        <div key={index} className='min-w-full p-8 relative'>
+                                            <div className='bg-white px-4 pb-2 pt-4 rounded-md'>
+                                                <p className='w-10 h-10 absolute top-1 left-1/2 -translate-x-1/2 p-2 flex justify-center items-center rounded-full text-black font-bold bg-gray-200'>
+                                                    <span className='w-full h-full flex justify-center items-center rounded-full bg-white '>{index + 1}</span>
+                                                </p>
+                                                <p>
+                                                    <span className='font-bold'>Tên khuyến mãi: </span>
+                                                    <span>{promote.name}</span>
+                                                </p>
+                                                <p>
+                                                    <span className='font-bold'>Mã khuyến mãi: </span>
+                                                    <span>{promote.code}</span>
+                                                </p>
+                                                <p>
+                                                    <span className='font-bold'>Giảm giá: </span>
+                                                    <span>{promote.reduce}</span>
+                                                </p>
+                                                <p>
+                                                    <span className='font-bold'>Điểm đổi: </span>
+                                                    <span>{promote.point}</span>
+                                                </p>
+                                                <p>
+                                                    <span className='font-bold'>Thời hạn: </span>
+                                                    <span>{promote.time_end}</span>
+                                                </p>
+                                                <div className='flex justify-start w-full gap-2'>
+                                                    <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />} data-id={promote._id}
+                                                        className='w-1/2 bg-green-500 text-white m-auto' onClick={handleShowUpdatePromote}
+                                                    />
+                                                    <Button type='primary' rightIcon={<DeleteIcon width='14px' height='14px' />} data-id={promote._id}
+                                                        className='w-1/2 bg-red-500 text-white m-auto' onClick={handleDeletePromote}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            <div className='wrapper-table sm:hidden'>
                                 <table>
                                     <thead className="text-black font-bold text-lg bg-[#71cbe8]">
                                         <tr>
@@ -232,7 +281,7 @@ function Promote() {
                                                         <td className='whitespace-pre-wrap'>{promote.point}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.time_end}</td>
                                                         <td className='whitespace-pre-wrap'>
-                                                            <div className='flex justify-center'>
+                                                            <div className='flex justify-center gap-2'>
                                                                 <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />} data-id={promote._id}
                                                                     className='bg-green-500 text-white m-auto' onClick={handleShowUpdatePromote}
                                                                 />
@@ -249,11 +298,11 @@ function Promote() {
                                 </table>
                             </div>
                         </div>
-                        <div className='w-full h-auto p-2 bg-gray-100'>
+                        <div className='w-full h-auto sm:!p-4 p-2 sm:bg-white bg-gray-100'>
                             <h2 className='text-center text-2xl font-bold my-4'>Thêm khuyến mãi</h2>
                             <Form id='form-add-promote' enctype="multipart/form-data">
                                 <div className='flex flex-col gap-y-5'>
-                                    <div className='flex gap-x-2'>
+                                    <div className='flex sm:flex-col gap-2'>
                                         <FormGroup className='w-full'>
                                             <Input id='name' name='name' type='text' placeholder='Nhập tên khuyến mãi' label='Tên khuyến mãi'
                                                 className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
@@ -265,18 +314,18 @@ function Promote() {
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
                                     </div>
-                                    <div className='flex gap-x-2'>
-                                        <FormGroup className='w-1/3'>
+                                    <div className='flex sm:flex-col gap-2'>
+                                        <FormGroup className=' sm:w-full w-1/3'>
                                             <Input id='reduce' name='reduce' type='number' placeholder='Nhập giá trị giảm' label='Giá trị giảm'
                                                 className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
-                                        <FormGroup className='w-1/3'>
+                                        <FormGroup className=' sm:w-full w-1/3'>
                                             <Input id='point' name='point' type='number' placeholder='Nhập điểm đổi' label='Điểm đổi'
                                                 className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
-                                        <FormGroup className='w-1/3'>
+                                        <FormGroup className=' sm:w-full w-1/3'>
                                             <Input id='time_end' name='time_end' type='number' placeholder='Nhập thời gian khuyễn mãi (ngày)' label='Thời gian khuyến mãi (ngày)'
                                                 className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
                                             <span className="msg-error text-red-600"></span>

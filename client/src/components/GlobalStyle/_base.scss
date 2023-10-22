@@ -37,6 +37,14 @@ html {
     }
 }
 
+@media (min-width: 320px) and (max-width: 767px) {
+    *::-webkit-scrollbar {
+        border-radius: 0;
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
 h1,
 h2,
 h3,
@@ -54,7 +62,7 @@ a {
     max-height: 83.33333%;
     border: 1px solid #000;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
     table {
         width: 100%;
         border-collapse: collapse;

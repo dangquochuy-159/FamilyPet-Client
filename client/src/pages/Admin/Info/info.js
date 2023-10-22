@@ -21,10 +21,10 @@ function Info() {
     return (
         <>
             {!connectServer ? <ConnectError /> :
-                <>
+                <div className="">
                     <InfoPersonal />
                     <InfoAll />
-                </>
+                </div>
             }
         </>
     );

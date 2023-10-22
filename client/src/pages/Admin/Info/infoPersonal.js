@@ -22,8 +22,8 @@ function InfoPersonal() {
     }, [])
 
     return (
-        <div className="wrapper-info-admin flex bg-white mb-2">
-            <div className="w-2/5 h-full flex flex-col items-center py-8 pl-8">
+        <div className="wrapper-info-admin flex sm:flex-col bg-white mb-2">
+            <div className="sm:w-full w-2/5 h-full flex flex-col items-center sm:!p-8 py-8 pl-8">
                 {
                     admin._id ? (
                         <Image
@@ -35,13 +35,13 @@ function InfoPersonal() {
                 }
 
                 <div className="w-full flex mt-4 space-x-2">
-                    <Modal className="w-2/3 h-auto"
+                    <Modal className="sm:w-full sm:!h-[90vh] w-2/3 h-auto "
                         trigger={
                             <Button className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay dổi ảnh' rightIcon={<ImageIcon />} />
                         } >
                         <FormUpdateAvatar admin={admin} />
                     </Modal>
-                    <Modal className='w-2/3 h-auto'
+                    <Modal className='sm:!w-full sm:!h-[90vh] w-2/3 h-auto'
                         trigger={
                             <Button className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay đổi thông tin' rightIcon={<InfoIcon />} />
                         }
@@ -50,7 +50,7 @@ function InfoPersonal() {
                     </Modal>
                 </div>
             </div>
-            <div className="w-3/5 h-full p-8 space-y-2">
+            <div className="sm:w-full w-3/5 h-full p-8 space-y-2">
                 <h2 className="text-4xl pb-2 font-bold text-[#71cbe8]">Thông tin cá nhân</h2>
                 <p className="ml-4 text-lg">
                     <FontAwesomeIcon className="text-sm" icon={faStop} />
