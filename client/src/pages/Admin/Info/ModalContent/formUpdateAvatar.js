@@ -52,16 +52,16 @@ function FormUpdateAvatar({ admin }) {
             <div className=' flex-col items-center space-y-2 mt-4'>
                 <div className='flex md:flex-col justify-center items-center gap-2 mt-4'>
                     <input type="file" name="avatar" id="file" className="overflow-hidden w-1 h-1 opacity-0 absolute z-10 " onChange={handleUploadAvatar} />
-                    <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer order-2'>
+                    <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer md:order-2'>
                         <Button className='w-full bg-[var(--primary-color)] text-white py-4 pointer-events-none' type='primary' title='Tải ảnh' rightIcon={<UploadIcon />} />
                     </label>
                     <Image
                         innerRef={avatarRef}
                         src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${nameAvt}`}
-                        className='w-40 h-40 object-cover rounded-full order-1'
+                        className='w-40 h-40 object-cover rounded-full md:order-1'
                         alt='avatar'
                     />
-                    <label className='w-1/3 h-auto hover:cursor-pointer order-3'>
+                    <label className='w-1/3 h-auto hover:cursor-pointer md:order-3'>
                         <Button className='w-full bg-red-600 text-white py-4 pointer-events-none' type='primary'
                             title='Xóa ảnh' rightIcon={<DeleteIcon />} onClick={handleDeleteAvatar} />
                     </label>

@@ -1,6 +1,10 @@
 // Customer
 import Home from './Customer/Home'
 import Introduce from './Customer/Introduce'
+import Contact from './Customer/Contact'
+import PriceList from './Customer/PriceList'
+import Product from './Customer/Product'
+import Register from './Customer/Register'
 import LoginCustomer from './Customer/Login'
 
 // Admin
@@ -10,7 +14,7 @@ import Category from './Admin/Category'
 import Order from './Admin/Order'
 import Evaluate from './Admin/Evaluate'
 import Promote from './Admin/Promote'
-import Product from './Admin/Product'
+import ProductAdmin from './Admin/Product'
 import Info from './Admin/Info'
 import LoginAdmin from './Admin/Login'
 
@@ -18,6 +22,10 @@ import LoginAdmin from './Admin/Login'
 const pages = {
     Home,
     Introduce,
+    Contact,
+    PriceList,
+    Register,
+    Product,
     LoginCustomer,
 
     Dashboard,
@@ -26,7 +34,7 @@ const pages = {
     Order,
     Evaluate,
     Promote,
-    Product,
+    ProductAdmin,
     Info,
     LoginAdmin,
 

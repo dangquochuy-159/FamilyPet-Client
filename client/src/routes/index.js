@@ -1,12 +1,17 @@
 import config from "~/config";
-import { AdminLayout } from "~/layouts";
+import { AdminLayout, MainLayout } from "~/layouts";
 
 
 import pages from "~/pages";
 
 const publicRoutes = [
-    { path: config.routes_public.home, page: pages.Home, layout: null },
-    { path: config.routes_public.introduce, page: pages.Introduce, layout: null, required_login: true },
+    { path: config.routes_public.default, page: pages.Home, layout: MainLayout },
+    { path: config.routes_public.home, page: pages.Home, layout: MainLayout },
+    { path: config.routes_public.introduce, page: pages.Introduce, layout: MainLayout, required_login: true },
+    { path: config.routes_public.priceLList, page: pages.PriceList, layout: MainLayout, required_login: true },
+    { path: config.routes_public.contact, page: pages.Contact, layout: MainLayout, required_login: true },
+    { path: config.routes_public.product, page: pages.Product, layout: MainLayout, required_login: true },
+    { path: config.routes_public.register, page: pages.Register, layout: null, required_login: true },
 ]
 
 const LoginRoutes = [
@@ -24,7 +29,7 @@ const privateRoutes = [
     { path: config.routes_private.evaluate, page: pages.Evaluate, layout: AdminLayout },
     { path: config.routes_private.promote, page: pages.Promote, layout: AdminLayout },
     { path: config.routes_private.user, page: pages.User, layout: AdminLayout },
-    { path: config.routes_private.product, page: pages.Product, layout: AdminLayout },
+    { path: config.routes_private.product, page: pages.ProductAdmin, layout: AdminLayout },
 
 ]
 

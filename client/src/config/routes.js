@@ -1,7 +1,12 @@
 const routes_public = {
     // user
-    home: '/',
+    default: '/',
+    home: '/home',
     introduce: '/introduce',
+    product: '/product',
+    priceLList: '/price-list',
+    contact: '/contact',
+    register: '/register',
     login: '/login',
 }
 
