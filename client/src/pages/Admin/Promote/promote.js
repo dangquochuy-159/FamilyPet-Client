@@ -179,7 +179,7 @@ function Promote() {
         <>
             {
                 !connectServer ? <ConnectError /> :
-                    <div className="w-full h-auto bg-white sm:!px-0 p-4 flex flex-col gap-y-5">
+                    <div className="w-full h-auto bg-white md:!h-full sm:!px-0 p-4 flex flex-col gap-y-5">
                         <div className='w-full h-4/6 flex flex-col gap-y-5'>
                             <div className='w-full sm:!h-auto h-1/6 flex items-center'>
                                 <div className='m-auto flex sm:flex-col gap-2 justify-center items-center'>
@@ -259,7 +259,7 @@ function Promote() {
                                             <th scope='col'>#</th>
                                             <th scope='col'>Tên</th>
                                             <th scope='col'>Mã khuyến mãi</th>
-                                            <th scope='col'>Mô tả</th>
+                                            <th scope='col' className='md:hidden'>Mô tả</th>
                                             <th scope='col'>Giảm (%)</th>
                                             <th scope='col'>Điểm đổi</th>
                                             <th scope='col'>Thời hạn</th>
@@ -276,7 +276,7 @@ function Promote() {
                                                         <td className='whitespace-pre-wrap'>{index + 1}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.name}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.code}</td>
-                                                        <td className='whitespace-pre-wrap'>{promote.des}</td>
+                                                        <td className='whitespace-pre-wrap md:hidden'>{promote.des}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.reduce}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.point}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.time_end}</td>

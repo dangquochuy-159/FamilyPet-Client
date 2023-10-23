@@ -50,18 +50,18 @@ function FormUpdateAvatar({ admin }) {
     return (
         <div className='w-full h-auto pb-8'>
             <div className=' flex-col items-center space-y-2 mt-4'>
-                <div className='flex justify-center items-center space-x-2 mt-4'>
+                <div className='flex md:flex-col justify-center items-center gap-2 mt-4'>
                     <input type="file" name="avatar" id="file" className="overflow-hidden w-1 h-1 opacity-0 absolute z-10 " onChange={handleUploadAvatar} />
-                    <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer'>
+                    <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer order-2'>
                         <Button className='w-full bg-[var(--primary-color)] text-white py-4 pointer-events-none' type='primary' title='Tải ảnh' rightIcon={<UploadIcon />} />
                     </label>
                     <Image
                         innerRef={avatarRef}
                         src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${nameAvt}`}
-                        className='w-40 h-40 object-cover rounded-full'
+                        className='w-40 h-40 object-cover rounded-full order-1'
                         alt='avatar'
                     />
-                    <label className='w-1/3 h-auto hover:cursor-pointer'>
+                    <label className='w-1/3 h-auto hover:cursor-pointer order-3'>
                         <Button className='w-full bg-red-600 text-white py-4 pointer-events-none' type='primary'
                             title='Xóa ảnh' rightIcon={<DeleteIcon />} onClick={handleDeleteAvatar} />
                     </label>
@@ -76,7 +76,7 @@ function FormUpdateAvatar({ admin }) {
                             (
                                 <p className='mt-4 text-center'>Chưa có ảnh nào trong thư viện</p>
                             ) : (
-                                <div className='w-full h-56 mt-4 flex sm:!flex-nowrap flex-wrap sm:!justify-start justify-center gap-2 overflow-y-auto '>
+                                <div className='w-full h-56 md:!h-full mt-4 flex sm:!flex-nowrap flex-wrap sm:!justify-start justify-center gap-2 overflow-y-auto '>
                                     {
                                         admin.avatar_old.map((avatar, index) => (
                                             <Image

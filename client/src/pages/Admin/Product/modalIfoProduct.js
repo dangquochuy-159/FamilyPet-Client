@@ -8,8 +8,8 @@ function ModalInfoProduct({ product, changeStatus }) {
         <div className='w-full h-auto sm:!h-full sm:!overflow-auto px-8 sm:pb-20 pb-8 pt-4'>
             <h2 className="font-extrabold sm:!text-xl text-4xl text-center text-black">Thông tin chi tiết sản phẩm</h2>
             <div className="mt-8 space-y-4">
-                <div className="w-full flex sm:flex-col gap-2">
-                    <div className="sm:w-full w-1/6 flex flex-col gap-y-2">
+                <div className="w-full flex sm:flex-col md:flex-col gap-2">
+                    <div className="sm:w-full md:w-full w-1/6 flex flex-col gap-y-2">
                         <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`}
                             alt='ảnh vô cực'
                             className='w-full h-auto rounded object-cover m-auto' />

@@ -4,6 +4,7 @@ import { images } from '~/assets'
 import { NavItem, NavMenu } from '~/components/NavMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCat, faChartLine, faCircleInfo, faGift, faPaste, faPenNib, faRectangleList, faRightFromBracket, faUser, } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from "react-router-dom";
 
 
 function Sidebar() {
@@ -17,7 +18,9 @@ function Sidebar() {
     return (
         <div className="wrapper--sidebar sm:!w-full md:w-1/12 w-2/12 sm:!h-auto h-screen fixed lg:top-0 sm:!bottom-0 left-0 sm:z-50">
             <div className='sm:hidden md:hidden w-full logo--admin border-b-2 border-solid border-black'>
-                <img src={images.logo_admin} alt='logo admin' />
+                <NavLink to='/admin'>
+                    <img src={images.logo_admin} alt='logo admin' />
+                </NavLink>
             </div>
             <NavMenu className='sm:h-[64px] flex sm:!flex-row sm:justify-around sm:items-center  flex-col sm:bg-[var(--primary-color)]'>
                 <NavItem to={admin.dashboard} title='Thống kê' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faChartLine} />} />

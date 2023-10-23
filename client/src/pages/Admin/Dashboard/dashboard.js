@@ -119,9 +119,9 @@ function Dashboard() {
         <>
             {
                 !connectServer ? <ConnectError /> :
-                    <div className="w-full sm:!h-auto h-full bg-white  p-4 flex flex-col gap-y-5">
-                        <div className='w-full sm:h-auto h-1/6 flex sm:flex-col gap-x-2'>
-                            <div className='sm:w-full w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 border border-solid border-[#ccc] rounded'>
+                    <div className="w-full sm:!h-auto md:!h-auto h-full bg-white p-4 flex flex-col gap-y-5">
+                        <div className='w-full sm:h-auto h-1/6 flex sm:flex-col md:flex-col md:!h-auto gap-2'>
+                            <div className='sm:w-full md:w-1/2 w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 md:!border-0 border border-solid border-[#ccc] rounded'>
                                 <div className='w-[50px] h-[50px] shadow-lg shadow-current flex justify-center items-center bg-red-500 rounded-full'>
                                     <FontAwesomeIcon icon={faUsers} className='w-1/2 h-1/2 text-white' />
                                 </div>
@@ -130,7 +130,7 @@ function Dashboard() {
                                     <p className='text-xl font-bold'>{users.length}</p>
                                 </div>
                             </div>
-                            <div className='sm:w-full w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 border border-solid border-[#ccc] rounded'>
+                            <div className='sm:w-full md:w-1/2 w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 md:!border-0 border border-solid border-[#ccc] rounded'>
                                 <div className='w-[50px] h-[50px] shadow-lg shadow-current flex justify-center items-center bg-green-500 rounded-full'>
                                     <FontAwesomeIcon icon={faBox} className='w-1/2 h-1/2 text-white' />
 
@@ -140,7 +140,7 @@ function Dashboard() {
                                     <p className='text-xl font-bold'>{products.length}</p>
                                 </div>
                             </div>
-                            <div className='sm:w-full w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 border border-solid border-[#ccc] rounded'>
+                            <div className='sm:w-full md:w-1/2 w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 md:!border-0 border border-solid border-[#ccc] rounded'>
                                 <div className='w-[50px] h-[50px] shadow-lg shadow-current flex justify-center items-center bg-blue-500 rounded-full'>
                                     <FontAwesomeIcon icon={faPaste} className='w-1/2 h-1/2 text-white' />
                                 </div>
@@ -149,7 +149,7 @@ function Dashboard() {
                                     <p className='text-xl font-bold'>{orders.length}</p>
                                 </div>
                             </div>
-                            <div className='sm:w-full w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 border border-solid border-[#ccc] rounded'>
+                            <div className='sm:w-full md:w-1/2 w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 md:!border-0 border border-solid border-[#ccc] rounded'>
                                 <div className='w-[50px] h-[50px] shadow-lg shadow-current flex justify-center items-center bg-yellow-500 rounded-full'>
                                     <FontAwesomeIcon icon={faClipboardList} className='w-1/2 h-1/2 text-white' />
                                 </div>
@@ -158,7 +158,7 @@ function Dashboard() {
                                     <p className='text-xl font-bold'>{categorys.length}</p>
                                 </div>
                             </div>
-                            <div className='sm:w-full w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 border border-solid border-[#ccc] rounded'>
+                            <div className='sm:w-full md:w-1/2 w-1/5 h-full py-2 pl-4 flex justify-start items-center gap-x-5 sm:!border-0 md:!border-0 border border-solid border-[#ccc] rounded'>
                                 <div className='w-[50px] h-[50px] shadow-lg shadow-current flex justify-center items-center bg-violet-500 rounded-full'>
                                     <FontAwesomeIcon icon={faPenNib} className='w-1/2 h-1/2 text-white' />
                                 </div>
@@ -168,12 +168,12 @@ function Dashboard() {
                                 </div>
                             </div>
                         </div>
-                        <div className='w-full sm:h-full h-5/6 flex sm:flex-col gap-y-2'>
-                            <div className="sm:w-full w-1/3 h-full flex flex-col justify-center items-center p-4 ">
+                        <div className='w-full sm:h-full h-5/6 flex sm:flex-col md:flex-col gap-y-2'>
+                            <div className="sm:w-full md:w-full w-1/3 h-full flex flex-col justify-center items-center p-4 ">
                                 <h2 className="py-2 text-xl text-center font-bold">Biểu đồ sản phẩm theo phân loại</h2>
                                 <PieChart dataChart={dataChartProduct} />
                             </div>
-                            <div className="sm:w-full w-2/3 h-full flex flex-col justify-center items-center p-4 ">
+                            <div className="sm:w-full md:w-full w-2/3 h-full flex flex-col justify-center items-center p-4 ">
                                 <h2 className="py-2 text-xl text-center font-bold">Biểu đồ doanh thu theo tháng năm 2023</h2>
                                 <BarChart dataChart={dataChartOrder} />
                             </div>

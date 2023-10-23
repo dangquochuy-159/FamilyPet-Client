@@ -3,11 +3,11 @@ import { Button } from '~/components/Button';
 import ConnectError from '~/components/ConnectError';
 import { CheckIcon, DeleteIcon, FilterIcon, InfoIcon, PlusIcon, SearchIcon, UpdateIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-import Modal from '~/components/Modal/modal';
 import axios from 'axios';
 import ModalInfoProduct from './modalIfoProduct';
 import ModalAddProduct from './modalAddProduct';
 import ModalUpdateProduct from './modalUpdateProduct';
+import Modal from '~/components/Modal/modal';
 
 function Product() {
     const [connectServer, setConnectServer] = useState(false)
@@ -97,15 +97,15 @@ function Product() {
         <>
             {
                 !connectServer ? <ConnectError /> :
-                    <div className="w-full sm:!h-auto h-full bg-white p-4 flex flex-col gap-y-5">
-                        <div className="w-full sm:h-auto h-1/6 flex flex-col gap-y-2 items-center justify-center">
-                            <div className='flex sm:flex-col gap-2'>
+                    <div className="w-full sm:!h-auto md:!h-auto h-full bg-white p-4 flex flex-col gap-y-5">
+                        <div className="w-full sm:h-auto md:!h-auto h-1/6 flex flex-col gap-y-2 items-center justify-center">
+                            <div className='flex sm:flex-col md:flex-col gap-2'>
                                 <div className='flex gap-x-2'>
-                                    <select className='filter sm:w-1/2 p-2 border border-solid border-black' name='category'>
+                                    <select className='filter sm:w-1/2 md:w-1/2 p-2 border border-solid border-black' name='category'>
                                         <option value="">Danh mục</option>
                                         {categorys.map((cate, index) => <option key={index} value={cate.name}>{cate.name}</option>)}
                                     </select>
-                                    <select className='filter sm:w-1/2 p-2 border border-solid border-black' name='price' >
+                                    <select className='filter sm:w-1/2 md:w-1/2 p-2 border border-solid border-black' name='price' >
                                         <option value="">Giá</option>
                                         {
                                             prices.map((price, index) =>
@@ -114,12 +114,12 @@ function Product() {
                                     </select>
                                 </div>
                                 <div className='flex gap-x-2'>
-                                    <select className='filter sm:w-1/2 p-2 border border-solid border-black' name='outstand' >
+                                    <select className='filter sm:w-1/2 md:w-1/2 p-2 border border-solid border-black' name='outstand' >
                                         <option value="">Nổi bật</option>
                                         <option value='true'>Có</option>
                                         <option value='false'>Không</option>
                                     </select>
-                                    <input className='filter sm:w-1/2 p-2 border border-solid border-black' name='quantity' type='number' placeholder='Số lượng' />
+                                    <input className='filter sm:w-1/2 md:w-1/2 p-2 border border-solid border-black' name='quantity' type='number' placeholder='Số lượng' />
                                 </div>
                                 <div className='flex gap-x-2'>
                                     <Button title='Lọc' type='primary' rightIcon={<FilterIcon width='14px' height='14px' />}
@@ -137,11 +137,10 @@ function Product() {
                                 </div>
                             </div>
                         </div>
-
                         <div className='w-full h-5/6 flex flex-col gap-y-4'>
-                            <Modal className="sm:w-full sm:!h-[90vh] w-2/3 h-auto"
+                            <Modal className="sm:w-full sm:h-[90vh] md:w-full md:!h-[90vh] w-2/3 h-auto"
                                 trigger={
-                                    <div className="sm:w-full w-2/12 h-auto mx-auto bg-red-400">
+                                    <div className="sm:w-full md:w-full w-2/12 h-auto mx-auto bg-red-400">
                                         <Button title='Thêm sản phẩm' type='primary' rightIcon={<PlusIcon width='14px' height='14px' />}
                                             className='w-full bg-yellow-500 text-white m-auto'
                                         />
@@ -150,12 +149,12 @@ function Product() {
                             >
                                 <ModalAddProduct categorys={categorys} />
                             </Modal>
+                            <h2 className='font-bold'>Tổng sản phẩn: {filterProducts.length}</h2>
                             {/* show product mobile */}
                             <div className='hidden wrapper-product sm:!flex flex-col gap-y-2'>
-                                <h2>Tổng sản phẩn: {filterProducts.length}</h2>
                                 {filterProducts.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
                                     filterProducts.map((product, index) => (
-                                        <div className={`w-full p-2 flex flex-col gap-y-2 rounded-sm`}>
+                                        <div key={index} className={`w-full p-2 flex flex-col gap-y-2 rounded-sm`}>
                                             <div className='flex justify-start items-center gap-x-3'>
                                                 <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
                                                     className='w-12 h-12 rounded-full object-cover'
@@ -166,7 +165,7 @@ function Product() {
 
                                             </div>
                                             <div className='flex justify-end gap-x-1'>
-                                                <Modal className="sm:w-full sm:!h-[90vh] w-2/3 h-auto"
+                                                <Modal className="w-full h-[90vh]"
                                                     trigger={
                                                         <div className="w-auto h-auto">
                                                             <Button type='primary' rightIcon={<InfoIcon width='14px' height='14px' />}
@@ -177,7 +176,7 @@ function Product() {
                                                 >
                                                     <ModalInfoProduct product={product} changeStatus={changeStatus} />
                                                 </Modal>
-                                                <Modal className="w-1/2 sm:w-full sm:!h-[90vh] h-auto"
+                                                <Modal className="w-full !h-[90vh]"
                                                     trigger={
                                                         <div className="w-auto h-auto">
                                                             <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />}
@@ -205,13 +204,13 @@ function Product() {
                                         <tr>
                                             <th scope='col'>#</th>
                                             <th scope='col'>Tên</th>
-                                            <th scope='col'>Ảnh</th>
-                                            <th scope='col'>Danh mục</th>
+                                            <th scope='col' className='md:hidden'>Ảnh</th>
+                                            <th scope='col' className='md:hidden'>Danh mục</th>
                                             <th scope='col'>Giá</th>
                                             <th scope='col'>Giá khuyến mãi</th>
-                                            <th scope='col'>Nổi bật</th>
+                                            <th scope='col' className='md:hidden'>Nổi bật</th>
                                             <th scope='col'>Số lượng</th>
-                                            <th scope='col'>Trạng thái</th>
+                                            <th scope='col' className='md:hidden'>Trạng thái</th>
                                             <th scope='col'>Hành động</th>
 
                                         </tr>
@@ -223,20 +222,20 @@ function Product() {
                                                     <tr key={index}>
                                                         <th>{index + 1}</th>
                                                         <th className='w-48 whitespace-pre-wrap'>{product.name}</th>
-                                                        <td>
+                                                        <td className='md:hidden'>
                                                             <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
                                                                 className='w-12 h-12 rounded-full m-auto object-cover'
                                                             />
                                                         </td>
-                                                        <td>{product.category}</td>
+                                                        <td className='md:hidden'>{product.category}</td>
                                                         <td className={product.sale_price && 'line-through'}>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
                                                         <td>{product.sale_price && product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
-                                                        <td>{product.outstand ? 'Có' : 'Không'}</td>
+                                                        <td className='md:hidden'>{product.outstand ? 'Có' : 'Không'}</td>
                                                         <td>{product.quantity}</td>
-                                                        <td>{Object.keys(product.status).map(key => product.status[key] && changeStatus[key])}</td>
+                                                        <td className='md:hidden'>{Object.keys(product.status).map(key => product.status[key] && changeStatus[key])}</td>
                                                         <td>
                                                             <div className='flex justify-center gap-x-1'>
-                                                                <Modal className="w-2/3 h-auto"
+                                                                <Modal className="md:w-full md:!h-[90vh] w-2/3 h-auto"
                                                                     trigger={
                                                                         <div className="w-auto h-auto">
                                                                             <Button type='primary' rightIcon={<InfoIcon width='14px' height='14px' />}
@@ -247,7 +246,7 @@ function Product() {
                                                                 >
                                                                     <ModalInfoProduct product={product} changeStatus={changeStatus} />
                                                                 </Modal>
-                                                                <Modal className="w-1/2 h-auto"
+                                                                <Modal className="md:w-full md:!h-[90vh] w-2/3 h-auto"
                                                                     trigger={
                                                                         <div className="w-auto h-auto">
                                                                             <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />}

@@ -88,13 +88,13 @@ function ModalUpdateProduct({ categorys, product }) {
         <div className='w-full h-auto sm:!h-full sm:!overflow-auto px-8 pb-8 pt-4 sm:pb-20'>
             <h2 className="font-extrabold text-4xl text-center text-black">Chỉnh sửa sản phẩm</h2>
             <Form Form id='form-add-product' className='mt-5 flex flex-col gap-y-2' enctype="multipart/form-data" >
-                <div className='w-full flex sm:flex-col justify-between gap-2'>
-                    <FormGroup className='sm:w-full w-1/2' >
+                <div className='w-full flex sm:flex-col md:flex-col justify-between gap-2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2' >
                         <Input id='name' name='name' type='text' placeholder='Nhập tên sản phẩm' label='Tên sản phẩm'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.name} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='sm:w-full w-1/2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Select className='w-full h-12 p-2 outline-none border-2 border-solid border-gray-400' name='category' label='Danh mục sản phẩm'>
                             <Option value={product.category} name={product.category} />
                             {
@@ -103,7 +103,7 @@ function ModalUpdateProduct({ categorys, product }) {
                         </Select>
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='sm:w-full w-1/2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='quantity' name='quantity' type='number' placeholder='Nhập số lượng' label='Số lượng'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.quantity} />
                         <span className="msg-error text-red-600"></span>
@@ -114,30 +114,30 @@ function ModalUpdateProduct({ categorys, product }) {
                         className='w-full h-40 px-4 border-2 border-solid border-gray-400' defaultValue={product.des} />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
-                <div className='w-full flex sm:flex-col justify-between gap-2'>
-                    <FormGroup className='sm:w-full w-1/2'>
+                <div className='w-full flex sm:flex-col md:flex-col justify-between gap-2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='origin' name='origin' type='text' placeholder='Nhập xuất xứ' label='Xuất xứ'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.origin} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='sm:w-full w-1/2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='price' name='price' type='text' placeholder='Nhập giá' label='Giá'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.price} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='sm:w-full w-1/2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='sale_price' name='sale_price' type='text' placeholder='Nhập giá khuyến mãi' label='Giá khuyến mãi'
                             className='w-full h-12 px-4 border-2 border-solid border-gray-400' defaultValue={product.sale_price} />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
-                <div className='w-full flex sm:flex-col justify-between gap-2'>
-                    <FormGroup className='sm:w-full w-1/2'>
+                <div className='w-full flex sm:flex-col md:flex-col justify-between gap-2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='photo' type='file' label='Ảnh'
                             className='w-full p-2 border-2 border-solid border-gray-400' />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
-                    <FormGroup className='sm:w-full w-1/2'>
+                    <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='photo_detail' multiple type='file' label='Ảnh chi tiết'
                             className='w-full p-2 border-2 border-solid border-gray-400' />
                         <span className="msg-error text-red-600"></span>

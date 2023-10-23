@@ -34,16 +34,16 @@ function InfoPersonal() {
                     ) : (<></>)
                 }
 
-                <div className="w-full flex mt-4 space-x-2">
-                    <Modal className="sm:w-full sm:!h-[90vh] w-2/3 h-auto "
+                <div className="w-full flex md:flex-col mt-4 gap-2">
+                    <Modal className="sm:w-full sm:!h-[90vh] md:w-full md:!h-[90vh] w-2/3 h-auto "
                         trigger={
-                            <Button className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay dổi ảnh' rightIcon={<ImageIcon />} />
+                            <Button className='md:w-full w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay dổi ảnh' rightIcon={<ImageIcon />} />
                         } >
                         <FormUpdateAvatar admin={admin} />
                     </Modal>
-                    <Modal className='sm:!w-full sm:!h-[90vh] w-2/3 h-auto'
+                    <Modal className='sm:!w-full sm:!h-[90vh] md:w-full md:!h-[90vh] w-2/3 h-auto'
                         trigger={
-                            <Button className='w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay đổi thông tin' rightIcon={<InfoIcon />} />
+                            <Button className='md:w-full w-1/2 bg-[var(--primary-color)] text-white py-4' type='primary' title='Thay đổi thông tin' rightIcon={<InfoIcon />} />
                         }
                     >
                         <FormUpdateInfo admin={admin} />

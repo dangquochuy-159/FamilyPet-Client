@@ -29,7 +29,7 @@ function InfoAll() {
                 {
                     adminLogin.add_admin && (
                         <Modal
-                            className="sm:w-full sm:!h-[90vh] w-2/3 h-auto"
+                            className="sm:w-full sm:!h-[90vh] md:w-full md:!h-[90vh] w-2/3 h-auto"
                             trigger={
                                 <div className="w-auto h-auto" >
                                     <Button
@@ -47,7 +47,7 @@ function InfoAll() {
             <div className="w-full h-auto flex flex-wrap sm:!justify-start justify-center items-center gap-8 sm:px-8 py-8 sm:overflow-auto bg-white" >
                 {
                     admins.map((admin) => (
-                        <div key={admin.slug} className="sm:!w-full w-1/5 h-auto p-4 flex sm:!flex-row flex-col items-center gap-y-4 gap-x-8 bg-gray-300 rounded">
+                        <div key={admin.slug} className="sm:!w-full md:w-1/4 w-1/5 h-auto p-4 flex sm:!flex-row flex-col items-center gap-y-4 gap-x-8 bg-gray-300 rounded">
                             <div className="sm:w-2/12">
                                 <Image
                                     src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${admin.avatar}`}
@@ -60,13 +60,12 @@ function InfoAll() {
                                 <p className="sm:hidden">{admin.phone}</p>
                                 <p className="sm:hidden">{admin.gender}</p>
                                 <Modal
-                                    className="sm:w-full w-1/3 h-auto"
+                                    className="sm:w-full md:w-full w-1/3 h-auto"
                                     trigger={
                                         <div className="w-auto h-auto">
                                             <Button
                                                 className='bg-blue-700 text-white'
                                                 type='primary'
-                                                // title='Xem Thêm'
                                                 rightIcon={<InfoIcon />}
                                             />
                                         </div>

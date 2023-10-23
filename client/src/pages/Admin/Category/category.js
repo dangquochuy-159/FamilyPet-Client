@@ -128,17 +128,17 @@ function Category() {
             {
                 !connectServer ? <ConnectError /> :
                     <div className="w-full h-full bg-white p-4 flex flex-col gap-y-5">
-                        <div className="w-full h-1/6 sm:h-auto">
+                        <div className="w-full h-1/6 sm:h-auto md:!h-auto">
                             <Form id='form-add-cate'
-                                className='w-full h-full flex sm:flex-col items-center justify-center sm:gap-y-0 gap-x-10 p-4 border-2 border-solid border-gray-200'>
-                                <FormGroup className="flex sm:flex-col sm:w-full items-center gap-x-5">
+                                className='w-full h-full flex sm:flex-col md:flex-col items-center justify-center sm:gap-y-0 gap-x-10 p-4 border-2 border-solid border-gray-200'>
+                                <FormGroup className="flex sm:flex-col sm:w-full md:flex-col md:w-full items-center gap-x-5">
                                     <Input id='name' name='name' type='text' placeholder='Nhập tên danh mục'
-                                        className="sm:w-full h-14 border-2 border-solid p-2 border-gray-300"
+                                        className="sm:w-full md:w-full h-14 border-2 border-solid p-2 border-gray-300"
                                     />
                                     <span className="msg-error text-red-600"></span>
                                 </FormGroup>
-                                <FormGroup className="flex sm:flex-col sm:w-full items-center gap-x-5">
-                                    <Input id='photo' type='file' className="sm:w-full" />
+                                <FormGroup className="flex sm:flex-col sm:w-full md:flex-col md:w-full items-center gap-x-5">
+                                    <Input id='photo' type='file' className="sm:w-full md:w-full" />
                                 </FormGroup>
                                 <Button id='add-cate' title='Thêm' type='primary' className='bg-blue-600 text-white' />
                                 <div className="flex gap-5">
@@ -151,7 +151,7 @@ function Category() {
                             {
                                 categorys.map((category, index) =>
                                     <div key={index}
-                                        className="sm:w-full sm:flex sm:!justify-between w-1/6 h-auto p-4 rounded bg-[var(--primary-color)] shadow-lg">
+                                        className="sm:w-full sm:flex sm:!justify-between w-1/6 md:w-1/4 h-auto p-4 rounded bg-[var(--primary-color)] shadow-lg">
                                         <Image src={`${process.env.REACT_APP_API_URL}/api/categorys/${category._id}/${category.photo}`}
                                             alt={category.photo}
                                             className='sm:!w-12 sm:!h-12 w-28 h-28 sm:m-0 m-auto rounded-full object-cover'
