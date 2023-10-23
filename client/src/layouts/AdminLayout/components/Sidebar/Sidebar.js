@@ -1,9 +1,8 @@
 import config from "~/config";
 import './Sidebar.scss'
-import { images } from '~/assets'
 import { NavItem, NavMenu } from '~/components/NavMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCat, faChartLine, faCircleInfo, faGift, faPaste, faPenNib, faRectangleList, faRightFromBracket, faUser, } from '@fortawesome/free-solid-svg-icons';
+import { faCat, faChartLine, faCircleInfo, faGift, faPaste, faPenNib, faRectangleList, faRightFromBracket, faUser, faUserGear, } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from "react-router-dom";
 
 
@@ -17,10 +16,15 @@ function Sidebar() {
     }
     return (
         <div className="wrapper--sidebar sm:!w-full md:w-1/12 w-2/12 sm:!h-auto h-screen fixed lg:top-0 sm:!bottom-0 left-0 sm:z-50">
-            <div className='sm:hidden md:hidden w-full logo--admin border-b-2 border-solid border-black'>
+            <div className='w-full h-auto logo--admin border-b-2 border-solid border-black'>
                 <NavLink to='/admin'>
-                    <img src={images.logo_admin} alt='logo admin' />
+                    <h2 className="text-black text-center text-2xl font-bold py-8">
+                        <span className="sm:hidden md:hidden mr-4">  QUẢN TRỊ VIÊN</span>
+                        <FontAwesomeIcon icon={faUserGear} />
+                    </h2>
+                    {/* <img src={images.logo_admin} alt='logo-admin' className="w-1/2 h-auto m-auto" /> */}
                 </NavLink>
+
             </div>
             <NavMenu className='sm:h-[64px] flex sm:!flex-row sm:justify-around sm:items-center  flex-col sm:bg-[var(--primary-color)]'>
                 <NavItem to={admin.dashboard} title='Thống kê' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faChartLine} />} />
@@ -33,7 +37,7 @@ function Sidebar() {
                 <NavItem to={admin.info} title='Thông tin quản trị viên' className='sm:!px-2 sm:!py-0 py-4 px-6' icon={<FontAwesomeIcon icon={faCircleInfo} />} />
                 <NavItem to='./' title='Đăng xuất' className='sm:!block sm:!px-2 sm:!py-0 py-4 px-6 hidden' icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                 <button
-                    className='sm:hidden btn--logout w-full border-t-2 border-solid border-black text-left absolute bottom-0 left-0 py-4 px-6 '
+                    className='sm:hidden btn--logout w-full text-white text-left absolute bottom-0 left-0 py-4 px-6 bg-red-600'
                     onClick={handleLogout}
                 >
                     <span className="w-4 h-4">

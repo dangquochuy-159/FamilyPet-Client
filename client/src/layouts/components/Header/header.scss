@@ -1,0 +1,28 @@
+.wrapper--header_main {
+    .nav--link {
+        position: relative;
+    }
+    .nav--link.active {
+        color: #000;
+        font-weight: bold;
+    }
+    .nav--link:not(.active):hover::before {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        background-color: #fff;
+        animation: RightToLeft linear infinite alternate 0.8s;
+    }
+}
+
+@keyframes RightToLeft {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}

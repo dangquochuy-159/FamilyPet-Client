@@ -13,10 +13,10 @@ function NavItem({ to, icon, title, className, onClick }) {
     return (
         <NavLink
             to={to}
-            className={`${className} nav--link`}
+            className={`${className} nav--link_admin`}
             onClick={onClick || handleNavLinkClick}
         >
-            <span className='w-4 h-4'> {icon}</span>
+            {icon && <span className='w-4 h-4'> {icon}</span>}
             <span className="sm:hidden md:hidden nav--title ml-4 font-bold">{title}</span>
         </NavLink>
     );
@@ -25,7 +25,7 @@ function NavItem({ to, icon, title, className, onClick }) {
 NavItem.propTypes = {
     to: PropTypes.string.isRequired,
     className: PropTypes.string.isRequired,
-    icon: PropTypes.node.isRequired,
+    icon: PropTypes.node,
     title: PropTypes.string.isRequired,
 }
 
