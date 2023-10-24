@@ -19,7 +19,7 @@ const getListProduct = (req, res, next) => {
 // GET /api/products/search?name=&quantity=
 const searchProduct = (req, res, next) => {
     Product
-        .find({ name: { $regex: req.query.name } })
+        .find({ name: { $regex: new RegExp(req.query.name, 'i') } })
         .limit(Number(req.query.quantity))
         .then((products) => {
             res.json({

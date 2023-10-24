@@ -6,8 +6,13 @@ const routes_public = {
     product: '/product',
     priceLList: '/price-list',
     contact: '/contact',
+    cart: '/cart',
+    search: '/search',
+    policy: '/policy',
+    account: '/account',
     register: '/register',
     login: '/login',
+    notFound: '/*'
 }
 
 const routes_private = {

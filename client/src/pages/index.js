@@ -4,7 +4,11 @@ import Introduce from './Customer/Introduce'
 import Contact from './Customer/Contact'
 import PriceList from './Customer/PriceList'
 import Product from './Customer/Product'
+import Cart from './Customer/Cart'
 import Register from './Customer/Register'
+import Search from './Customer/Search'
+import Policy from './Customer/Policy'
+import Account from './Customer/Account'
 import LoginCustomer from './Customer/Login'
 
 // Admin
@@ -18,6 +22,9 @@ import ProductAdmin from './Admin/Product'
 import Info from './Admin/Info'
 import LoginAdmin from './Admin/Login'
 
+// Global
+import NotFound from './Other/NotFound'
+
 
 const pages = {
     Home,
@@ -26,6 +33,10 @@ const pages = {
     PriceList,
     Register,
     Product,
+    Cart,
+    Search,
+    Policy,
+    Account,
     LoginCustomer,
 
     Dashboard,
@@ -37,6 +48,8 @@ const pages = {
     ProductAdmin,
     Info,
     LoginAdmin,
+
+    NotFound,
 
 }
 export default pages

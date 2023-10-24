@@ -6,8 +6,8 @@ function Button(
         title,
         to,
         href,
-        type,
-        className,
+        type = 'none',
+        className = '',
         leftIcon,
         rightIcon,
         onClick,
@@ -38,6 +38,7 @@ function Button(
     }
 
     const classes = {
+        none: '',
         primary: ' font-bold py-2 px-4 rounded',
         outline: `font-bold py-2 px-4 border rounded`,
         text: 'underline',
@@ -45,10 +46,11 @@ function Button(
         disabled: ' font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed',
     }
     return (
-        <Comp className={`${classes[type]} ${className} flex items-center space-x-2 justify-center`} {...passProps} onClick={props.onClick}>
+        <Comp className={`${classes[type]} ${className} flex items-center space-x-2 justify-center`} {...props} onClick={props.onClick}>
             {leftIcon}
             {title ? <span>{title}</span> : <></>}
             {rightIcon}
+
         </Comp>
     );
 }

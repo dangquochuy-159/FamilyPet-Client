@@ -13,7 +13,7 @@ function MainLayout({ children }) {
     return (
         <CustomerContext.Provider value={[value]}>
             <Header />
-            <div className="">
+            <div className="mt-[128px]">
                 {children}
             </div>
             <Footer />

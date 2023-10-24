@@ -3,7 +3,7 @@
         position: relative;
     }
     .nav--link.active {
-        color: #000;
+        color: blue;
         font-weight: bold;
     }
     .nav--link:not(.active):hover::before {
@@ -15,6 +15,29 @@
         height: 2px;
         background-color: #fff;
         animation: RightToLeft linear infinite alternate 0.8s;
+    }
+}
+
+//search
+.clear,
+.loading {
+    font-size: 20px;
+    position: absolute;
+    right: 54px;
+    height: 100%;
+    color: rgba(22, 24, 35, 0.34);
+    // cursor: pointer;
+}
+.loading {
+    animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 
