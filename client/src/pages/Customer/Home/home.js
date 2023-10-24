@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import ButtonToTop from "~/components/ButtonToTop";
 import CustomerContext from "~/context/CustomerContext";
+import Banner from "./components/banner";
+
+import './style_home.scss'
 
 function Home() {
     const contextCustomer = useContext(CustomerContext)
@@ -9,12 +12,13 @@ function Home() {
     const handleClick = () => {
     }
     return (
-        <div style={{ height: '1000px' }} className="">
+        <div id='page-home' style={{ height: '1000px' }} className="page">
             <ButtonToTop />
-            <section className="container bg-gray-200">
+            <Banner />
+            {/* <section className="container bg-gray-200">
                 <h2>Section 1</h2>
-            </section>
-            <button onClick={handleClick}>lcick</button>
+                <button onClick={handleClick}>Click</button>
+            </section> */}
         </div>
     );
 }

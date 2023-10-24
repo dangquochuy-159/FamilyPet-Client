@@ -1,0 +1,35 @@
+// banner
+#sec-banner {
+    .carousel {
+        position: relative;
+    }
+    .flickity-page-dots {
+        display: flex;
+        gap: 16px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        .dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: black;
+            cursor: pointer;
+        }
+    }
+    .flickity-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+    .flickity-button.previous {
+        left: 0;
+    }
+    .flickity-button.next {
+        right: 0;
+    }
+}

@@ -16,7 +16,7 @@ function Header() {
     //     navigate('/cart')
     // }
     return (
-        <div className="wrapper--header_main w-full h-[128px] sm:bg-red-600 md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0">
+        <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-red-600 md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-50">
             <section className="container w-full h-full flex justify-between gap-x-10">
                 <NavLink to='/' className='w-auto h-auto'>
                     <div className="w-auto h-full flex justify-center items-center">
