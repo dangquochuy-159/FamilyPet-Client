@@ -161,21 +161,29 @@ const updateProduct = (req, res, next) => {
 
     Product.findByIdAndUpdate(req.params.id, updateProduct)
         .then((product) => {
-
-
-            let photo = product.photo
-            let photo_detail = product.photo_detail
             let namePhoto
             let pathPhoto
-            photo_detail.push(photo)
-            for (let pt of photo_detail) {
-                namePhoto = pt
+            if (updateProduct.photo) {
+                let photo = product.photo
+                namePhoto = photo
                 pathPhoto = appRoot + pathProduct + namePhoto
                 fs.unlink(pathPhoto, (err) => {
                     if (err) {
                         return
                     }
                 })
+            }
+            if (updateProduct.photo_detail) {
+                let photo_detail = product.photo_detail
+                for (let pt of photo_detail) {
+                    namePhoto = pt
+                    pathPhoto = appRoot + pathProduct + namePhoto
+                    fs.unlink(pathPhoto, (err) => {
+                        if (err) {
+                            return
+                        }
+                    })
+                }
             }
             res.status(200).json({
                 message: 'success'
