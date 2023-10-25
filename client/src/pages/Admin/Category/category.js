@@ -28,8 +28,7 @@ function Category() {
             .then(data => {
                 setConnectServer(true)
                 setCategorys(data.data)
-            })
-            .catch(err => setConnectServer(false))
+            }).catch(err => setConnectServer(false))
     }, [])
 
     // Validator Form
@@ -151,12 +150,12 @@ function Category() {
                             {
                                 categorys.map((category, index) =>
                                     <div key={index}
-                                        className="sm:w-full sm:flex sm:!justify-between w-1/6 md:w-1/4 h-auto p-4 rounded bg-[var(--primary-color)] shadow-lg">
+                                        className="sm:w-full sm:flex sm:!justify-between w-1/6 md:w-1/4 h-auto p-4 rounded bg-white shadow-lg">
                                         <Image src={`${process.env.REACT_APP_API_URL}/api/categorys/${category._id}/${category.photo}`}
                                             alt={category.photo}
                                             className='sm:!w-12 sm:!h-12 w-28 h-28 sm:m-0 m-auto rounded-full object-cover'
                                         />
-                                        <p className="text-center text-lg text-white font-medium py-2">{category.name}</p>
+                                        <p className="text-center text-lg text-black font-medium py-2">{category.name}</p>
                                         <div className="flex justify-center gap-x-2">
                                             <Button className='text-white bg-green-600' type='primary'
                                                 data-name={category.name} data-id={category._id}

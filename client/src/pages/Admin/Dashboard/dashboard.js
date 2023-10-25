@@ -27,16 +27,16 @@ function Dashboard() {
         fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json()).then(data => {
             setProducts(data.data)
             processDataProduct(data.data)
-        })
+        }).catch(err => setConnectServer(false))
 
         fetch(`${process.env.REACT_APP_API_URL}/api/orders`).then(res => res.json()).then(data => {
             setOrders(data.data)
             processDataOrder(data.data)
-        })
+        }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => { setCategorys(data.data) })
+        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => { setCategorys(data.data) }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/evaluates`).then(res => res.json()).then(data => { setEvaluates(data.data) })
+        fetch(`${process.env.REACT_APP_API_URL}/api/evaluates`).then(res => res.json()).then(data => { setEvaluates(data.data) }).catch(err => setConnectServer(false))
     }, [])
 
     const processDataProduct = (data) => {

@@ -3,7 +3,7 @@
         position: relative;
     }
     .nav--link.active {
-        color: blue;
+        color: red;
         font-weight: bold;
     }
     .nav--link:not(.active):hover::before {

@@ -33,12 +33,15 @@ function SearchProduct() {
             return setSearchResult([])
         }
         setLoading(true)
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${debounced}&quantity=5`)
-            .then(res => res.json())
-            .then(data => {
-                setSearchResult(data.data)
-                setLoading(false)
-            })
+        setTimeout(() => {
+            fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${debounced}&quantity=5`)
+                .then(res => res.json())
+                .then(data => {
+                    setSearchResult(data.data)
+                    setLoading(false)
+                })
+        }, 500)
+
     }, [debounced])
 
     const handleClear = () => {
