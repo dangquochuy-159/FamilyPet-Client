@@ -8,6 +8,7 @@ html {
 }
 
 body {
+    font-family: 'Alfa Slab One', serif;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Poppins', sans-serif;
     font-family: 'Quicksand', sans-serif;
@@ -80,4 +81,24 @@ a {
         border-right: 1px solid #000;
         border-bottom: 1px solid #000;
     }
+}
+
+// title
+.title {
+    font-family: 'Alfa Slab One', serif !important;
+    padding: 0 20px;
+    text-align: center;
+    font-weight: 400;
+    text-align: center;
+    padding: 16px 0;
+}
+
+.limit-text {
+    // line-height: 2rem;
+    // height: 4rem;
+    // max-height: 4rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
