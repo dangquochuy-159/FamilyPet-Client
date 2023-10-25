@@ -1,0 +1,8 @@
+.percent-reduce::before {
+    content: '';
+    border-width: 0 24px 16px;
+    border-color: transparent #dc2626 transparent #dc2626;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
