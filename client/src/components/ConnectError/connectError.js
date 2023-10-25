@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
+import './connectError.scss'
 
 function ConnectError() {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setMessage('Đang kết nối tới server...');
+            setMessage('! Mất kết nối tới server ...');
         }, 2000);
 
         return () => clearTimeout(timer);
     }, []);
     return (
-        <div className="w-full h-full bg-white pb-4 px-4 ">
-            <p className="text-2xl text-center mt-10">{message}</p>
+        <div className="wrapper-error w-full h-full flex items-center justify-center bg-transparent text-red-600 ">
+            <h1 className="text-2xl text-white font-normal">{message}</h1>
         </div >
     );
 }
