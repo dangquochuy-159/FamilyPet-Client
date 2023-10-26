@@ -131,6 +131,35 @@ function ModalUpdateProduct({ categorys, product }) {
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
+                <FormGroup className='w-full flex sm:flex-col gap-2'>
+                    {product.outstand ? (
+                        <>
+                            <Input
+                                checked
+                                name='outstand' type='radio' value='true' title='Có' label='Sản phẩm nổi bật: '
+                                className='w-4 h-4'
+                            />
+                            <Input
+                                name='outstand' type='radio' value='false' title='Không'
+                                className='w-4 h-4'
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Input
+                                name='outstand' type='radio' value='true' title='Có' label='Sản phẩm nổi bật: '
+                                className='w-4 h-4'
+                            />
+                            <Input
+                                checked
+                                name='outstand' type='radio' value='false' title='Không'
+                                className='w-4 h-4'
+                            />
+                        </>
+                    )}
+
+                    <span className="msg-error text-red-600"></span>
+                </FormGroup>
                 <div className='w-full flex sm:flex-col md:flex-col justify-between gap-2'>
                     <FormGroup className='sm:w-full md:w-full w-1/2'>
                         <Input id='photo' type='file' label='Ảnh'

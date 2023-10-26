@@ -90,7 +90,7 @@ function SearchProduct() {
             )}
             onClickOutside={handleHideResult}
         >
-            <div className="w-[500px] sm:!w-full  md:w-[300px] flex rounded-sm bg-white relative">
+            <div className="w-[500px] sm:!w-full md:w-[300px] flex rounded-sm bg-white relative">
                 <input
                     ref={inputRef}
                     type='text'

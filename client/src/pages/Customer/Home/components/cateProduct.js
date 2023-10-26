@@ -5,14 +5,14 @@ import ConnectServer from "~/components/ConnectError";
 
 function CategoryProduct() {
     const [connectServer, setConnectServer] = useState(false)
-    const [categorys, setCategorys] = useState()
+    const [categorys, setCategorys] = useState([])
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => {
             setCategorys(data.data)
             setConnectServer(true)
         }).catch(err => setConnectServer(false))
-    })
+    }, [])
 
 
     return (

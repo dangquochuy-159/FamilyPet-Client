@@ -6,16 +6,16 @@ import { CartIcon, SearchIcon, FireIcon } from "../Icons";
 import './cardProduct.scss'
 import Image from '../Image';
 
-function CardProduct({ product }) {
+function CardProduct({ className = '', product }) {
     const price = 600000
     const salePrice = 400000
     return (
-        <div className="rounded-xl shadow-xl shadow-white relative ">
+        <div className={`rounded-xl shadow-xl shadow-white relative ${className}`}>
             <div className="overflow-hidden rounded-t-xl">
                 <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='anh_san_pham'
                     className="transition-all rounded-t-xl hover:scale-125" />
             </div>
-            <div className="flex flex-col items-center gap-5 p-4 rounded-b-xl bg-white">
+            <div className="flex flex-col items-center gap-1 p-4 rounded-b-xl bg-white">
                 <Link to='/'
                     className="limit-text sm:!h-[2.5rem] sm:!max-h-[2.5rem] h-[3.5rem] max-h-[3.5rem] sm:!text-sm text-xl text-black text-center font-medium hover:text-[var(--primary-color)]">
                     {product.name}
@@ -38,7 +38,7 @@ function CardProduct({ product }) {
             {
                 product.sale_price &&
                 <div className="w-12 h-12 flex justify-center items-start pt-2 absolute top-0 right-2 bg-red-600">
-                    <p className="percent-reduce text-lg text-white" >-{100 - (product.sale_price / product.price).toFixed(2) * 100}%</p>
+                    <p className="percent-reduce text-lg text-white" >-{(100 - ((product.sale_price / product.price) * 100)).toFixed(0)}%</p>
                 </div>
             }
         </div>

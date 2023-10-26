@@ -4,7 +4,8 @@ import CustomerContext from "~/context/CustomerContext";
 
 import './style_home.scss'
 import { images } from "~/assets";
-import { CategoryProduct, OutStand } from "./components";
+import { AllProduct, CategoryProduct, OutstandProduct, PromoteProduct } from "./components";
+
 
 
 function Home() {
@@ -14,14 +15,16 @@ function Home() {
     const handleClick = () => {
     }
     return (
-        <div id='page-home' className="page h-[3000px]">
+        <div id='page-home' className="page ">
             <ButtonToTop />
-            <section id='sec-home_banner' className='w-full h-auto md:h-auto overflow-hidden shadow-md shadow-black'>
+            <section id='sec-home_banner' className='grid_layout h-auto md:h-auto overflow-hidden shadow-md shadow-black'>
                 <img src={images.banner1} alt='banner' className='object-contain' />
             </section>
 
             <CategoryProduct />
-            <OutStand />
+            <OutstandProduct />
+            <PromoteProduct />
+            <AllProduct />
             {/* <section className="container bg-gray-200">
                 <h2>Section 1</h2>
                 <button onClick={handleClick}>Click</button>

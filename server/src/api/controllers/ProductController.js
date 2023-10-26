@@ -48,7 +48,6 @@ const filterProduct = (req, res, next) => {
         isNaN(values[i]) ? query[filters[i]] = values[i] :
             query[filters[i]] = { $lt: Number(values[i]) }
     }
-
     Promise.all([
         Product.find(query).skip(skip).limit(limit),
         Product.find({})

@@ -17,14 +17,13 @@ function Header() {
     // }
     return (
         <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-violet-600 md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-50">
-            <section className="grid_layout wide w-full h-full sm:!h-auto flex sm:!flex-col justify-between gap-x-10 !px-4">
-                <NavLink to='/' className='w-auto h-auto'>
+            <section className="grid_layout wide w-full h-full sm:!h-full flex sm:!flex-col justify-between gap-x-10 !px-4">
+                <NavLink to='/' className='w-auto h-auto sm:hidden'>
                     <div className="w-auto h-full flex justify-center items-center">
                         <Image src={images.logo} alt='logo' className='h-full w-full sm:!w-1/5 object-contain' />
                     </div>
                 </NavLink>
-                <div className="w-full flex flex-col items-center gap-x-10">
-
+                <div className="w-full sm:!h-full flex flex-col items-center gap-x-10">
                     <div className="w-full h-full flex items-center justify-between gap-6">
                         <SearchProduct />
                         <div className="sm:!hidden w-auto h-auto relative">

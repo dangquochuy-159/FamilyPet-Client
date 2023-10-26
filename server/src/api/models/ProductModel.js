@@ -3,7 +3,7 @@ const slug = require('mongoose-slug-updater');
 const Schema = mongoose.Schema;
 
 const ProductSchema = Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     category: { type: String, required: true },
     des: { type: String, required: true },
     photo: { type: String, required: true },
