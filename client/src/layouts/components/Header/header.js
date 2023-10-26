@@ -16,25 +16,25 @@ function Header() {
     //     navigate('/cart')
     // }
     return (
-        <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-red-600 md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-50">
-            <section className="container w-full h-full flex justify-between gap-x-10 px-4">
+        <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-violet-600 md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-50">
+            <section className="grid_layout wide w-full h-full sm:!h-auto flex sm:!flex-col justify-between gap-x-10 !px-4">
                 <NavLink to='/' className='w-auto h-auto'>
                     <div className="w-auto h-full flex justify-center items-center">
-                        <Image src={images.logo} alt='logo' className='h-full w-full ' />
+                        <Image src={images.logo} alt='logo' className='h-full w-full sm:!w-1/5 object-contain' />
                     </div>
                 </NavLink>
                 <div className="w-full flex flex-col items-center gap-x-10">
 
                     <div className="w-full h-full flex items-center justify-between gap-6">
                         <SearchProduct />
-                        <div className="w-auto h-auto relative">
+                        <div className="sm:!hidden w-auto h-auto relative">
                             <Button leftIcon={<CartIcon width="32px" height='32px' className='text-white hover:text-blue-600 ' />}
                                 to='/cart' className="hover:!text-blue-600"
                             />
                             <p className="w-5 h-5 flex justify-center items-center absolute -top-2 -right-2 rounded-full text-white font-bold bg-red-600">0</p>
                         </div>
-                        <div className="w-1/2 flex items-center justify-end gap-5">
-                            <div className=" flex justify-center items-center gap-2">
+                        <div className="sm:!hidden w-1/2 flex items-center justify-end gap-5">
+                            <div className="flex justify-center items-center gap-2">
                                 <Button href='tel:19008080' title='19008080' leftIcon={<PhoneIcon width="32px" height='32px' className='text-white' />}
                                     className="hover:text-blue-600 text-white font-bold"
                                 />
@@ -50,7 +50,7 @@ function Header() {
                         </div>
                     </div>
 
-                    <nav className='w-full flex items-center justify-start pb-4 md:gap-x-10 gap-x-20'>
+                    <nav className='sm:!hidden w-full flex items-center justify-start pb-4 md:gap-x-10 gap-x-20'>
                         <NavLink to={router.default} className="nav--link text-lg text-white" >Trang chủ</NavLink>
                         <NavLink to={router.introduce} className="nav--link text-lg text-white" >Giới thiệu</NavLink>
                         <NavLink to={router.product} className="nav--link text-lg text-white" >Sản phẩm</NavLink>
