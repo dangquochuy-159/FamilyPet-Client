@@ -35,13 +35,13 @@ function PromoteProduct() {
                     productPromotes.length > 0 &&
                     <>
                         {/* desktop */}
-                        <div className="sm:!hidden md:!hidden grid grid-cols-5 gap-10 py-10">
+                        <div className="sm:!hidden md:!hidden grid grid-cols-5 gap-2 py-10">
                             {
                                 productPromotes.map((product, index) => index + 1 <= 5 && <CardProduct key={index} product={product} />)
                             }
                         </div>
                         {/* tablet */}
-                        <div className="hidden md:!grid grid-cols-3 gap-10 py-10">
+                        <div className="hidden md:!grid grid-cols-3 gap-2 py-10">
                             {
                                 productPromotes.map((product, index) => index + 1 <= 3 && <CardProduct key={index} product={product} />)
                             }

@@ -24,33 +24,62 @@ function AllProduct() {
             setConnectServer(true)
         }).catch(err => setConnectServer(false))
     }, [])
-    const handleClick = () => {
-        console.log(products)
-        console.log(categorys)
-        console.log(groupProducts)
-
-        // categorys.map(category => {
-        //     console.log('>>>>', category.name)
-        //     products[category.name].map(item => console.log(item.name))
-        // })
-
-    }
     const flickityOptions = {
-        initialIndex: 3,
+        initialIndex: 0,
         pageDots: false,
         prevNextButtons: true,
-        wrapAround: true, // cuộn vô hạn
+        wrapAround: false, // cuộn vô hạn
         autoPlay: false,
         pauseAutoPlayOnHover: true,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    prevNextButtons: false,
-                }
-            }
-        ]
     }
+
+
+    const renderProductDektop = (array) => {
+        const slideItem = [];
+        for (let i = 0; i < array.length; i += 5) {
+            const itemsInDiv = array.slice(i, i + 5);
+            const div = (
+                <div key={i} className="grid grid-cols-5 gap-2 mr-2">
+                    {itemsInDiv.map((product, index) => (
+                        <CardProduct key={index} product={product} className="" />
+                    ))}
+                </div>
+            );
+            slideItem.push(div);
+        }
+        return slideItem;
+    }
+    const renderProductTablet = (array) => {
+        const slideItem = [];
+        for (let i = 0; i < array.length; i += 3) {
+            const itemsInDiv = array.slice(i, i + 3);
+            const div = (
+                <div key={i} className="grid grid-cols-3 gap-2 mr-2">
+                    {itemsInDiv.map((product, index) => (
+                        <CardProduct key={index} product={product} className="" />
+                    ))}
+                </div>
+            );
+            slideItem.push(div);
+        }
+        return slideItem;
+    }
+    const renderProductMobile = (array) => {
+        const slideItem = [];
+        for (let i = 0; i < array.length; i += 2) {
+            const itemsInDiv = array.slice(i, i + 2);
+            const div = (
+                <div key={i} className="grid grid-cols-2 gap-2 mr-2">
+                    {itemsInDiv.map((product, index) => (
+                        <CardProduct key={index} product={product} className="" />
+                    ))}
+                </div>
+            );
+            slideItem.push(div);
+        }
+        return slideItem;
+    }
+
     return (
         <>
             <section id='sec-home_all_product' className="grid_layout wide mt-16">
@@ -59,7 +88,7 @@ function AllProduct() {
                         <CheckBadgeIcon width="36px" height="36px" />
                         <CheckBadgeIcon width="36px" height="36px" />
                     </span>
-                    Tất cả sản  phẩm dang bán
+                    Tất cả sản  phẩm
                     <span className="flex">
                         <CheckBadgeIcon width="36px" height="36px" />
                         <CheckBadgeIcon width="36px" height="36px" />
@@ -71,28 +100,55 @@ function AllProduct() {
                         <>
                             {
                                 categorys.map((category, index) => (
-                                    <div key={index} className="slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 px-24 ">
-                                        <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
-                                        <Flickity
-                                            className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
-                                            elementType={'div'} // default 'div'
-                                            options={flickityOptions} // takes flickity options {}
-                                            disableImagesLoaded={false} // default false
-                                            reloadOnUpdate // default false
-                                            static // default false
+                                    <>
+                                        <div key={index} className="sm:!hidden md:!hidden slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
+                                            <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
+                                            <Flickity
+                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
+                                                elementType={'div'} // default 'div'
+                                                options={flickityOptions} // takes flickity options {}
+                                                disableImagesLoaded={false} // default false
+                                                reloadOnUpdate // default false
+                                                static // default false
 
-                                        >
-                                            {
-                                                groupProducts[category.name].map((product, index) =>
-                                                    <CardProduct key={index} product={product} className="sm:!w-4/5 md:!w-1/3 w-1/5 h-auto  mr-10" />)
-                                            }
-                                        </Flickity>
-                                    </div>
+                                            >
+                                                {renderProductDektop(groupProducts[category.name])}
+                                            </Flickity>
+                                        </div>
+                                        <div key={index} className="hidden md:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
+                                            <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
+                                            <Flickity
+                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
+                                                elementType={'div'} // default 'div'
+                                                options={flickityOptions} // takes flickity options {}
+                                                disableImagesLoaded={false} // default false
+                                                reloadOnUpdate // default false
+                                                static // default false
+
+                                            >
+                                                {renderProductTablet(groupProducts[category.name])}
+                                            </Flickity>
+                                        </div>
+                                        <div key={index} className="hidden sm:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
+                                            <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
+                                            <Flickity
+                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
+                                                elementType={'div'} // default 'div'
+                                                options={flickityOptions} // takes flickity options {}
+                                                disableImagesLoaded={false} // default false
+                                                reloadOnUpdate // default false
+                                                static // default false
+
+                                            >
+                                                {renderProductMobile(groupProducts[category.name])}
+                                            </Flickity>
+                                        </div>
+                                    </>
                                 ))
                             }
                         </>
                 }
-            </section>
+            </section >
         </>
     );
 }

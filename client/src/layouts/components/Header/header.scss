@@ -49,3 +49,13 @@
         width: 100%;
     }
 }
+
+// menu mobile
+#menu-mobile_content {
+    transform: translateX(-100%);
+    transition: all 0.5s;
+}
+
+#menu-mobile_content.active {
+    transform: translateX(0) !important;
+}

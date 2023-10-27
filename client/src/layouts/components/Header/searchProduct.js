@@ -77,7 +77,7 @@ function SearchProduct() {
             interactive={true}
             placement='bottom'
             render={attrs => (
-                <div className='search-result w-[400px] sm:!w-[343px] md:w-[250px]' tabIndex="-1" {...attrs}>
+                <div className='search-result w-[400px] sm:!w-[295px] md:!w-[236px]' tabIndex="-1" {...attrs}>
                     <Wrapper className='flex flex-col gap-4 p-4'>
                         {
                             searchResult.length > 0 && searchResult.map((result, index) => (
@@ -90,7 +90,7 @@ function SearchProduct() {
             )}
             onClickOutside={handleHideResult}
         >
-            <div className="w-[500px] sm:!w-full md:w-[300px] flex rounded-sm bg-white relative">
+            <div className="w-[500px] sm:!w-[295px] md:w-[236px] flex rounded-sm bg-white relative">
                 <input
                     ref={inputRef}
                     type='text'
