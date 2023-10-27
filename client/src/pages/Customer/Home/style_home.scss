@@ -30,13 +30,25 @@
             background-color: var(--primary-color);
         }
         .flickity-button.previous {
+            svg {
+                fill: #fff;
+            }
             left: 0;
         }
         .flickity-button.next {
+            svg {
+                fill: #fff;
+            }
             right: 0;
         }
     }
     .slide-product:hover .flickity-button {
         opacity: 1;
+    }
+}
+
+@media (max-width: 1023px) {
+    .flickity-button {
+        display: none;
     }
 }

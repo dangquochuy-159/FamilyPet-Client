@@ -17,7 +17,7 @@ function CategoryProduct() {
 
     return (
         <section id='sec-home_category' className="grid_layout wide sm:!mt-4 mt-16">
-            <h2 className="title sm:!text-2xl md:!text-3xl text-4xl text-[var(--primary-color)] bg-transparent">Danh mục sản phẩm</h2>
+            <h2 className="title sm:!text-xl md:!text-3xl text-4xl text-[var(--primary-color)] bg-transparent">Danh mục sản phẩm</h2>
             {
                 !connectServer ? <ConnectServer /> :
                     <div className="grid sm:!grid-cols-2 md:!grid-cols-3 grid-cols-5 gap-5 sm:!py-4 py-16">

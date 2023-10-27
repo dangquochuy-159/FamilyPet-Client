@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CardProduct from "~/components/CardProduct";
 import ConnectError from "~/components/ConnectError";
 import Flickity from 'react-flickity-component'
+import { CheckBadgeIcon } from "~/components/Icons";
 
 function AllProduct() {
     const [connectServer, setConnectServer] = useState(false)
@@ -41,8 +42,6 @@ function AllProduct() {
         wrapAround: true, // cuộn vô hạn
         autoPlay: false,
         pauseAutoPlayOnHover: true,
-        // freeScroll: true, // lướt tùy chỉnh 
-        // freeScrollFriction: 0.00,
         responsive: [
             {
                 breakpoint: 768,
@@ -55,17 +54,27 @@ function AllProduct() {
     return (
         <>
             <section id='sec-home_all_product' className="grid_layout wide mt-16">
-                <h2 className="w-full title sm:!text-2xl md:!text-3xl text-4xl text-white bg-[var(--primary-color)]">Sản phẩm đang bán 2</h2>
+                <h2 className="w-full title style-title sm:!text-xl md:!text-3xl text-4xl text-white bg-blue-500">
+                    <span className="flex">
+                        <CheckBadgeIcon width="36px" height="36px" />
+                        <CheckBadgeIcon width="36px" height="36px" />
+                    </span>
+                    Tất cả sản  phẩm dang bán
+                    <span className="flex">
+                        <CheckBadgeIcon width="36px" height="36px" />
+                        <CheckBadgeIcon width="36px" height="36px" />
+                    </span>
+                </h2>
                 {
                     !connectServer ? <ConnectError /> :
                         products.length > 0 &&
                         <>
                             {
                                 categorys.map((category, index) => (
-                                    <div key={index} className="slide-product w-full h-full overflow-hidden mt-16 px-24 ">
-                                        <h2 className="w-full title sm:!text-2xl md:!text-3xl text-4xl text-[var(--primary-color)] ">{category.name}</h2>
+                                    <div key={index} className="slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 px-24 ">
+                                        <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
                                         <Flickity
-                                            className={'carousel w-full h-full focus-visible:outline-none '} // default ''
+                                            className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
                                             elementType={'div'} // default 'div'
                                             options={flickityOptions} // takes flickity options {}
                                             disableImagesLoaded={false} // default false
@@ -75,7 +84,7 @@ function AllProduct() {
                                         >
                                             {
                                                 groupProducts[category.name].map((product, index) =>
-                                                    <CardProduct key={index} product={product} className="sm:!w-1/2 md:!w-1/3 w-1/5 h-auto  mr-10" />)
+                                                    <CardProduct key={index} product={product} className="sm:!w-4/5 md:!w-1/3 w-1/5 h-auto  mr-10" />)
                                             }
                                         </Flickity>
                                     </div>

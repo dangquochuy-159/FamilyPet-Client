@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CardProduct from "~/components/CardProduct";
 import ConnectError from "~/components/ConnectError";
+import { GiftIcon } from "~/components/Icons";
 
 function PromoteProduct() {
 
@@ -18,7 +19,17 @@ function PromoteProduct() {
     }, [])
     return (
         <section id='sec-home_promote' className="grid_layout wide mt-16">
-            <h2 className="w-full title sm:!text-2xl md:!text-3xl text-4xl text-white bg-[var(--primary-color)]">Sản phẩm khuyến mãi</h2>
+            <h2 className="w-full title style-title sm:!text-xl md:!text-3xl text-4xl text-white bg-yellow-400">
+                <span className="flex">
+                    <GiftIcon width="36px" height="36px" />
+                    <GiftIcon width="36px" height="36px" />
+                </span>
+                Sản phẩm khuyến mãi
+                <span className="flex">
+                    <GiftIcon width="36px" height="36px" />
+                    <GiftIcon width="36px" height="36px" />
+                </span>
+            </h2>
             {
                 !connectServer ? <ConnectError /> :
                     productPromotes.length > 0 &&

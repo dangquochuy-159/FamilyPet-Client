@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CardProduct from "~/components/CardProduct";
 import ConnectError from "~/components/ConnectError";
+import { FlashIcon } from "~/components/Icons";
 
 function OutstandProduct() {
     const [connectServer, setConnectServer] = useState(false)
@@ -16,7 +17,17 @@ function OutstandProduct() {
 
     return (
         <section id="sec-home_outstand" className='grid_layout wide'>
-            <h2 className="w-full title sm:!text-2xl md:!text-3xl text-4xl text-white bg-[var(--primary-color)]">Sản phẩm nổi bật</h2>
+            <h2 className="w-full  title style-title sm:!text-xl md:!text-3xl text-4xl text-white bg-red-600">
+                <span className="flex">
+                    <FlashIcon width="36px" height="36px" />
+                    <FlashIcon width="36px" height="36px" />
+                </span>
+                Sản phẩm nổi bật
+                <span className="flex">
+                    <FlashIcon width="36px" height="36px" />
+                    <FlashIcon width="36px" height="36px" />
+                </span>
+            </h2>
             {
                 !connectServer ? <ConnectError /> :
                     productsOutstand.length > 0 &&

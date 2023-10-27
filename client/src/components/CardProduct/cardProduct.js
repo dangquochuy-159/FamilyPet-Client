@@ -37,8 +37,8 @@ function CardProduct({ className = '', product }) {
             }
             {
                 product.sale_price &&
-                <div className="w-12 h-12 flex justify-center items-start pt-2 absolute top-0 right-2 bg-red-600">
-                    <p className="percent-reduce text-lg text-white" >-{(100 - ((product.sale_price / product.price) * 100)).toFixed(0)}%</p>
+                <div className="w-12 h-12 flex justify-center items-start pt-2 absolute top-0 right-2 bg-yellow-400">
+                    <p className="percent-reduce text-lg text-red-500 font-bold" >-{(100 - ((product.sale_price / product.price) * 100)).toFixed(0)}%</p>
                 </div>
             }
         </div>
