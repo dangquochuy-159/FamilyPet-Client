@@ -15,7 +15,7 @@ const publicRoutes = [
     { path: config.routes_public.search, page: pages.Search, layout: MainLayout, required_login: false },
     { path: config.routes_public.policy, page: pages.Policy, layout: MainLayout, required_login: false },
     { path: config.routes_public.account, page: pages.Account, layout: MainLayout, required_login: false },
-    { path: config.routes_public.register, page: pages.Register, layout: null, required_login: false },
+    { path: config.routes_public.register, page: pages.Register, layout: MainLayout, required_login: false },
     { path: config.routes_public.notFound, page: pages.NotFound, layout: null, required_login: false },
 ]
 

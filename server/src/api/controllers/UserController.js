@@ -32,22 +32,22 @@ const getOneUser = (req, res, next) => {
 }
 
 // GET /api/users/search?email= or ?phone_login=
-const getSearchAccountUser = (req, res, next) => {
+const getSearchAccountUser = async (req, res, next) => {
     let q = Object.keys(req.query).join()
     switch (q) {
         case 'email':
-            User.findOne({ email: req.query.email })
-                .then(user => {
-                    user ? res.json(true) : res.json(false)
-                })
-                .catch(next)
+            const exitsEmail = await User.findOne({ email: req.query.email })
+            res.status(200).json({
+                exits: !!exitsEmail
+            });
             break
         case 'phone_login':
-            User.findOne({ phone_login: req.query.phone_login })
-                .then(user => {
-                    user ? res.json(true) : res.json(false)
-                })
-                .catch(next)
+            const exitsPhone = await User.findOne({ phone_login: req.query.phone_login })
+            res.status(200).json({
+                exits: !!exitsPhone
+            });
+
+
             break
         default:
             break

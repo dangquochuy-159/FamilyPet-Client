@@ -7,28 +7,16 @@ import Validator from '~/utils/Validate/validator';
 
 function FormUpdateInfo({ admin }) {
     const [provinces, setProvinces] = useState([])
-    const [valueProvince, setValueProvince] = useState()
     const [districts, setDistricts] = useState([])
-    const [valueDistrict, setValueDistrict] = useState()
     const [wards, setWards] = useState([])
     const ipAddressRef = useRef()
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_ADDRESS}?depth=3`)
+        fetch(`https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1`)
             .then(res => res.json())
-            .then(data => setProvinces(data))
+            .then(data => setProvinces(data.data.data))
+            .catch(error => console.log('Lỗi >>>', error))
     }, [])
-    useEffect(() => {
-        if (valueProvince !== undefined) {
-            setDistricts(valueProvince.districts)
-        }
-    }, [valueProvince])
-
-    useEffect(() => {
-        if (valueDistrict !== undefined) {
-            setWards(valueDistrict.wards)
-        }
-    }, [valueDistrict])
 
     useEffect(() => {
         Validator({
@@ -63,23 +51,22 @@ function FormUpdateInfo({ admin }) {
         switch (name) {
             case "province":
                 provinces.map((pro) => {
-                    if (value === pro.name) {
-                        return ValueItem = pro
-                    }
-                    return ValueItem
+                    return value === pro.name_with_type &&
+                        fetch(`https://vn-public-apis.fpo.vn/districts/getByProvince?provinceCode=${pro.code}&limit=-1`)
+                            .then(res => res.json())
+                            .then(data => setDistricts(data.data.data))
+                            .catch(error => console.log('Lỗi >>>', error))
                 })
-                setValueProvince(ValueItem)
                 ipAddressRef.current.value = ''
                 break
             case "district":
                 districts.map((dis) => {
-                    if (value === dis.name) {
-                        return ValueItem = dis
-                    }
-                    return ValueItem
+                    return value === dis.name_with_type &&
+                        fetch(`https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=${dis.code}&limit=-1`)
+                            .then(res => res.json())
+                            .then(data => setWards(data.data.data))
+                            .catch(error => console.log('Lỗi >>>', error))
                 })
-                setValueDistrict(ValueItem)
-                ipAddressRef.current.value = ''
                 break
             case "ward":
                 ipAddressRef.current.value = ''
@@ -121,19 +108,19 @@ function FormUpdateInfo({ admin }) {
                     <Select className='w-1/4 p-2 outline-none border-2' name='province' onChange={handleInputChange}>
                         <Option value='' name='Tỉnh/ Thành Phố' />
                         {
-                            provinces.map(pro => <Option key={pro.code} value={pro.name} name={pro.name} />)
+                            provinces.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
                         }
                     </Select>
                     <Select className='w-1/4 p-2 outline-none border-2' name='district' onChange={handleInputChange}>
                         <Option value='' name='Quận/ Huyện' />
                         {
-                            districts.map(pro => <Option key={pro.code} value={pro.name} name={pro.name} />)
+                            districts.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
                         }
                     </Select>
                     <Select className='w-1/4 p-2 outline-none border-2' name='ward' onChange={handleInputChange}>
                         <Option value='' name='Phường/ Xã' />
                         {
-                            wards.map(pro => <Option key={pro.code} value={pro.name} name={pro.name} />)
+                            wards.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
                         }
                     </Select>
                 </FormGroup>
