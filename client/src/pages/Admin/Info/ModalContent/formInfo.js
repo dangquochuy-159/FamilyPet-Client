@@ -57,7 +57,7 @@ function FormInfo({ admin }) {
     );
 }
 
-FormInfo.prototype = {
+FormInfo.propTypes = {
     admin: PropTypes.object.isRequired,
 }
 

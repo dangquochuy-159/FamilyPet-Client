@@ -28,7 +28,7 @@ function Header({ title, avatar, name, id }) {
     );
 }
 
-Header.prototypes = {
+Header.propTypes = {
     title: PropTypes.string.isRequired,
 }
 

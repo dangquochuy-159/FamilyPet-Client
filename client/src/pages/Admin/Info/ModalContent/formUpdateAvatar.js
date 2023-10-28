@@ -99,7 +99,7 @@ function FormUpdateAvatar({ admin }) {
     );
 }
 
-FormUpdateAvatar.prototype = {
+FormUpdateAvatar.propTypes = {
     admin: PropTypes.object,
 }
 

@@ -29,7 +29,7 @@ function Modal({ children, trigger, className }) {
     );
 }
 
-Modal.prototype = {
+Modal.propTypes = {
     children: PropTypes.node.isRequired,
     trigger: PropTypes.node.isRequired,
     className: PropTypes.string,

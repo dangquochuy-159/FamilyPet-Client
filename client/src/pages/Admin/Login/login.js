@@ -51,9 +51,10 @@ function Login() {
         ipPassRef.current.type = ipPassRef.current.type === 'password' ? 'text' : 'password';
     }
     return (
-        <div className="wrapper--login w-full h-screen relative">
-            <div className="w-3/4 h-1/2 sm:h-auto p-5 max-w-md bg-white absolute bottom-32 sm:left-1/2 sm:-translate-x-1/2 left-24 rounded shadow-lg">
-                <h2 className="text-4xl text-center">Đăng nhập</h2>
+        <div className="wrapper--login_admin w-full h-screen relative bg-[#f5f5f5]">
+            <div className="w-3/4 h-auto sm:h-auto p-5 max-w-md bg-white absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 rounded shadow-xl shadow-black">
+                <h2 className="text-4xl text-center font-bold">Đăng nhập</h2>
+                <p className="text-xl text-center">(Quản trị viên)</p>
                 <form action="" method="POST" id="form-login" noValidate className="form mt-10 space-y-8">
                     <div className="form-group">
                         <input

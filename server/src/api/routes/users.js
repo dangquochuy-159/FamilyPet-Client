@@ -11,6 +11,7 @@ const {
     getSearchAccountUser,
     getAvatarUser,
     addUser,
+    checkLogin,
     removeUser,
     removeAvatarUser,
     removeSomeProductCart,
@@ -26,6 +27,7 @@ userRouter
     .get('/:id/:name_avt', getAvatarUser)
 
     .post('/', storageUploadSinglePhoto('avatar', 'user'), addUser)
+    .post('/login', checkLogin)
 
     .delete('/:id', removeUser)
     .delete('/:id/avatar', removeAvatarUser)

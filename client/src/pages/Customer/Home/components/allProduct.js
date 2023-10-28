@@ -39,9 +39,9 @@ function AllProduct() {
         for (let i = 0; i < array.length; i += 5) {
             const itemsInDiv = array.slice(i, i + 5);
             const div = (
-                <div key={i} className="grid grid-cols-5 gap-2 mr-2">
+                <div className="grid grid-cols-5 gap-2 mr-2">
                     {itemsInDiv.map((product, index) => (
-                        <CardProduct key={index} product={product} className="" />
+                        <CardProduct key={product.slug} product={product} className="" />
                     ))}
                 </div>
             );
@@ -54,9 +54,9 @@ function AllProduct() {
         for (let i = 0; i < array.length; i += 3) {
             const itemsInDiv = array.slice(i, i + 3);
             const div = (
-                <div key={i} className="grid grid-cols-3 gap-2 mr-2">
+                <div className="grid grid-cols-3 gap-2 mr-2">
                     {itemsInDiv.map((product, index) => (
-                        <CardProduct key={index} product={product} className="" />
+                        <CardProduct key={product.slug} product={product} className="" />
                     ))}
                 </div>
             );
@@ -69,9 +69,9 @@ function AllProduct() {
         for (let i = 0; i < array.length; i += 2) {
             const itemsInDiv = array.slice(i, i + 2);
             const div = (
-                <div key={i} className="grid grid-cols-2 gap-2 mr-2">
+                <div className="grid grid-cols-2 gap-2 mr-2">
                     {itemsInDiv.map((product, index) => (
-                        <CardProduct key={index} product={product} className="" />
+                        <CardProduct key={product.slug} product={product} className="" />
                     ))}
                 </div>
             );
@@ -101,10 +101,10 @@ function AllProduct() {
                             {
                                 categorys.map((category, index) => (
                                     <>
-                                        <div key={index} className="sm:!hidden md:!hidden slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
+                                        <div className="sm:!hidden md:!hidden slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
                                             <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
                                             <Flickity
-                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
+                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16 pb-16'} // default ''
                                                 elementType={'div'} // default 'div'
                                                 options={flickityOptions} // takes flickity options {}
                                                 disableImagesLoaded={false} // default false
@@ -115,10 +115,10 @@ function AllProduct() {
                                                 {renderProductDektop(groupProducts[category.name])}
                                             </Flickity>
                                         </div>
-                                        <div key={index} className="hidden md:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
+                                        <div className="hidden md:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
                                             <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
                                             <Flickity
-                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
+                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16 pb-16'} // default ''
                                                 elementType={'div'} // default 'div'
                                                 options={flickityOptions} // takes flickity options {}
                                                 disableImagesLoaded={false} // default false
@@ -129,10 +129,10 @@ function AllProduct() {
                                                 {renderProductTablet(groupProducts[category.name])}
                                             </Flickity>
                                         </div>
-                                        <div key={index} className="hidden sm:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
+                                        <div className="hidden sm:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
                                             <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
                                             <Flickity
-                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16'} // default ''
+                                                className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16 pb-16'} // default ''
                                                 elementType={'div'} // default 'div'
                                                 options={flickityOptions} // takes flickity options {}
                                                 disableImagesLoaded={false} // default false

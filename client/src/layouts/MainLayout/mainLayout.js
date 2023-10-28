@@ -4,15 +4,23 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 
 function MainLayout({ children }) {
-    const value = 'huy'
-    const [user, setUser] = useState({})
+    const dataUser = window.sessionStorage.getItem('userLogin') && JSON.parse(window.sessionStorage.getItem('userLogin')).data.user
+    const [userLogin, setUserLogin] = useState(dataUser)
+    const [connectServer, setConnectServer] = useState(false)
     useEffect(() => {
-        // fetch(`${process.env.REACT_APP_API_URL}/api/users`).then(res => res.json()).then(data =>)
-    })
+        dataUser &&
+            fetch(`${process.env.REACT_APP_API_URL}/api/users/${dataUser._id}`)
+                .then(res => res.json())
+                .then(data => {
+                    setUserLogin(data.data)
+                    setConnectServer(true)
+                })
+                .catch(err => setConnectServer(false));
+    }, [])
 
     return (
-        <CustomerContext.Provider value={[value]}>
-            <Header />
+        <CustomerContext.Provider value={[userLogin]}>
+            <Header avatar={connectServer && userLogin.avatar} id={connectServer && userLogin._id} carts={connectServer && userLogin.carts.length} />
             <div className="mt-[var(--header-height)] bg-[#f5f5f5]">
                 {children}
             </div>

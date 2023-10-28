@@ -160,7 +160,7 @@ function FormUpdateInfo({ admin }) {
     );
 }
 
-FormUpdateInfo.prototype = {
+FormUpdateInfo.propTypes = {
     admin: PropTypes.object,
 }
 

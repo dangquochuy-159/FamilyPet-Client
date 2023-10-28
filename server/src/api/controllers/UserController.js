@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const fs = require('fs')
 const appRoot = require('app-root-path');
 const HashPassword = require('../utils/hashPassWord')
+const ComparePassword = require('../utils/comparePassword')
 
 const User = require('../models/UserModel');
 const pathUser = '/src/api/public/uploads/users/'
@@ -59,6 +60,40 @@ const getAvatarUser = (req, res, next) => {
     res.sendFile(avatarPath);
 }
 
+// POST /api/users/login
+const checkLogin = (req, res, next) => {
+    let query = {}
+    let keys = Object.keys(req.body)
+    let checkEmail = keys.includes('email')
+    checkEmail ? query['email'] = req.body.email : query['phone_login'] = req.body.phone_login
+    // res.json(query)
+    User.findOne(query)
+        .then(async (user) => {
+            if (user) {
+                let comparePass = await ComparePassword(req.body.password, user.password)
+                if (comparePass) {
+                    res.status(200).json({
+                        login: true,
+                        message: 'Đăng nhập thành công',
+                        user: user,
+                        token: '112'
+                    })
+                } else {
+                    res.status(200).json({
+                        password: false,
+                        message: 'Mật khẩu không chính xác',
+                    })
+                }
+            } else {
+                res.status(200).json({
+                    email: false,
+                    message: 'Tài khoản chưa được đăng kí'
+                })
+            }
+        })
+        .catch(next)
+}
+
 // POST /api/users
 const addUser = async (req, res, next) => {
     let fileName, phone_login, email
@@ -79,7 +114,7 @@ const addUser = async (req, res, next) => {
         phone,
         gender,
         date_birth,
-        avatar: fileName,
+        avatar: fileName ? fileName : null,
     })
         .save()
         .then(() => {
@@ -252,6 +287,7 @@ module.exports = {
     getSearchAccountUser,
     getAvatarUser,
     addUser,
+    checkLogin,
     removeUser,
     removeAvatarUser,
     removeSomeProductCart,

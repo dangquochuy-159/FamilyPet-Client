@@ -59,3 +59,14 @@
 #menu-mobile_content.active {
     transform: translateX(0) !important;
 }
+
+// tippy account
+.tippy-account::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    transform: translateY(-90%);
+    right: 25px;
+    border-width: 10px;
+    border-color: transparent transparent white transparent;
+}

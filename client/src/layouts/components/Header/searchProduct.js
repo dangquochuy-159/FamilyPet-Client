@@ -77,7 +77,7 @@ function SearchProduct() {
             interactive={true}
             placement='bottom'
             render={attrs => (
-                <div className='search-result w-[400px] sm:!w-[295px] md:!w-[236px]' tabIndex="-1" {...attrs}>
+                <div className='w-[400px] sm:!w-[295px] md:!w-[236px]' tabIndex="-1" {...attrs}>
                     <Wrapper className='flex flex-col gap-4 p-4'>
                         {
                             searchResult.length > 0 && searchResult.map((result, index) => (
