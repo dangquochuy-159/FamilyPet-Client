@@ -17,15 +17,6 @@ function SearchProduct() {
 
     const inputRef = useRef()
 
-    const navigate = useNavigate()
-    // const handleSearchProduct = (e) => {
-    //     let name = inputRef.current.value
-    //     fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${name}`)
-    //         .then(res => res.json())
-    //         .then(data => console.log(data))
-    //     inputRef.current.value = ''
-    // }
-
     const debounced = useDebounce(searchValue, 1000)
 
     useEffect(() => {
@@ -62,7 +53,6 @@ function SearchProduct() {
     }
 
     const handleSearchProduct = () => {
-        console.log(searchResult)
         if (inputRef.current.value === '') {
             alert('BẠN CHƯA NHẬP TỪ KHÓA TÌM KIẾM')
         } else {

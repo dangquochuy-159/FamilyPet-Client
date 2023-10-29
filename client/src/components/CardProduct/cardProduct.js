@@ -5,10 +5,26 @@ import { CartIcon, SearchIcon, FireIcon } from "../Icons";
 
 import './cardProduct.scss'
 import Image from '../Image';
+import CustomerContext from '~/context/CustomerContext';
+import { useContext } from 'react';
+import axios from 'axios';
 
 function CardProduct({ className = '', product }) {
-    const price = 600000
-    const salePrice = 400000
+    const [userLogin] = useContext(CustomerContext)
+
+    const handleAddCart = () => {
+        console.log(userLogin._id)
+        console.log(product._id)
+        console.log(1)
+        product.sale_price ? console.log(product.sale_price) : console.log(product.price)
+        let price = product.sale_price ? product.sale_price : product.price
+        axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${product._id}?quantity=1&price=${price}`)
+            .then(() => {
+                alert('Thêm vào giỏ hàng thành công')
+                window.location.reload()
+            })
+
+    }
     return (
         <div className={`rounded-xl shadow-xl shadow-white relative ${className}`}>
             <div className="overflow-hidden rounded-t-xl">
@@ -25,7 +41,7 @@ function CardProduct({ className = '', product }) {
                     <span className={`text-red-600 font-bold ${product.sale_price && 'line-through text-black font-normal text-sm'}`}>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                 </p>
                 <div className="sm:!hidden w-full flex justify-center gap-2">
-                    <Button type='primary' leftIcon={<CartIcon />} className="w-1/3 text-white bg-red-500 hover:bg-red-400" />
+                    <Button type='primary' leftIcon={<CartIcon />} className="w-1/3 text-white bg-red-500 hover:bg-red-400" onClick={handleAddCart} />
                     <Button to='/login' type='primary' leftIcon={<SearchIcon />} className="w-1/3 text-white bg-blue-500 hover:bg-blue-400" />
                 </div>
             </div>

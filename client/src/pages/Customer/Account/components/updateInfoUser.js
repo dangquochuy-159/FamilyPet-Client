@@ -28,7 +28,6 @@ function UpdateInfoUser({ user }) {
             formError: '.msg-error',
             rules: [],
             onRegister: function (data) {
-                console.log(data)
                 const fetchApi = async () => {
                     const formDataToSend = new FormData();
                     if (data) {

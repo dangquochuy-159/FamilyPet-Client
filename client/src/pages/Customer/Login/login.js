@@ -34,11 +34,9 @@ function Login() {
             ],
 
             onRegister: function (data) {
-                console.log('data>>>>', data)
                 const eleErrorLogin = document.querySelector('.error--login')
                 axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, data)
                     .then((res) => {
-                        console.log("res>>>", res.data)
                         let logged = res.data.login
                         if (logged) {
                             alert(res.data.message)

@@ -46,7 +46,6 @@ function Register() {
                 Validator.isRequired("#date_birth", check.isEmpty),
             ],
             onRegister: function (data) {
-                console.log(data)
                 const fetchApi = async () => {
                     const query = emailLogin ? `email=${data.email}` : `phone_login=${data.phone_login}`
                     try {
@@ -68,7 +67,6 @@ function Register() {
                                 formDataToSend.append('avatar', avatar);
                             }
                             try {
-                                console.log('send data')
                                 axios.post(`${process.env.REACT_APP_API_URL}/api/users`, formDataToSend)
                                     .then(response => {
                                         alert('Đăng ký tài khoản thành công')

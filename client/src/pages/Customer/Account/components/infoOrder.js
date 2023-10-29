@@ -26,7 +26,6 @@ function InfoOrder() {
 
     const handleConfirmOrder = (e) => {
         let id = e.target.getAttribute('data-id')
-        console.log(id)
         axios.put(`${process.env.REACT_APP_API_URL}/api/orders/${id}`)
             .then(() => {
                 alert('Xác nhận đơn hàng thành công')
