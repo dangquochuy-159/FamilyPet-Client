@@ -193,16 +193,13 @@ const removeSomeProductCart = (req, res, next) => {
 const updateOneUser = async (req, res, next) => {
     const updateUser = {}
 
-    req.file ? updateUser.avatar = req.file.filename : updateUser
-
     for (let key in req.body) {
         if (req.body[key] !== '') {
             updateUser[key] = req.body[key];
         }
     }
 
-    req.body.password ? updateUser.password = await HashPassword(req.body.password) : updateUser
-    req.body.address ? updateAdmin.address = req.body.address + ' - ' + req.body.ward + ' - ' + req.body.district + ' - ' + req.body.province : updateUser
+    req.body.address ? updateUser.address = req.body.address + ' - ' + req.body.ward + ' - ' + req.body.district + ' - ' + req.body.province : updateUser
     User.findByIdAndUpdate(req.params.id, updateUser)
         .then((user) => {
             if (updateUser.avatar)

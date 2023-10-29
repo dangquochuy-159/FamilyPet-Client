@@ -107,19 +107,19 @@ function Header({ avatar, id, carts }) {
                                     placement='bottom-end'
                                     interactive={true}
                                     render={attrs => (
-                                        <div className='md:!hidden tippy-account w-[200px] h-auto bg-white pt-4 space-y-4 rounded-sm' tabIndex="-1" {...attrs}>
+                                        <div className='md:!hidden tippy-account w-[200px] h-auto bg-white pt-4 space-y-4 rounded-sm shadow-xl shadow-white' tabIndex="-1" {...attrs}>
                                             {
                                                 id ?
                                                     <>
-                                                        <NavLink to='/register' className="flex gap-2 font-bold p-2 hover:bg-gray-400 hover:text-white"> <AccountIcon /> Tài khoản</NavLink>
+                                                        <NavLink to='/account' className="flex gap-2 font-bold p-2 hover:bg-gray-400 hover:text-white"> <AccountIcon /> Tài khoản</NavLink>
                                                         <button onClick={handleLogout} className="w-full flex gap-2 font-bold p-2 hover:bg-gray-400 hover:text-white"> <LogoutIcon /> Đăng xuất </button>
                                                     </>
                                                     :
                                                     <>
                                                         <NavLink to='/login' className="flex gap-2 font-bold p-2 hover:bg-gray-400 hover:text-white"> <LoginIcon /> Đăng nhập </NavLink>
-                                                        <NavLink to='/register' className="flex gap-2 font-bold p-2 hover:bg-gray-400 hover:text-white"> <IntroduceIcon /> Đăng ký </NavLink>
                                                     </>
                                             }
+                                            <NavLink to='/register' className="flex gap-2 font-bold p-2 hover:bg-gray-400 hover:text-white"> <IntroduceIcon /> Đăng ký </NavLink>
                                         </div>
                                     )}
                                 >

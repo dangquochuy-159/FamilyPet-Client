@@ -148,14 +148,11 @@ const removeAvatarAdmin = (req, res, next) => {
 const updateOneAdmin = async (req, res, next) => {
     const updateAdmin = {}
 
-    req.file ? updateAdmin.avatar = req.file.filename : updateAdmin
-
     for (let key in req.body) {
         if (req.body[key] !== '') {
             updateAdmin[key] = req.body[key];
         }
     }
-    req.body.password ? updateAdmin.password = await HashPassword(req.body.password) : updateAdmin
     req.body.address ? updateAdmin.address = req.body.address + ' - ' + req.body.ward + ' - ' + req.body.district + ' - ' + req.body.province : updateAdmin
     Admin.findByIdAndUpdate(req.params.id, updateAdmin)
         .then((admin) => {

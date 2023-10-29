@@ -25,7 +25,7 @@ function Footer() {
                                     <span className="w-11/12">Hotline:19008080</span>
                                 </p>
                             </div>
-                            <div className="sm:!w-3/5 md:!w-full w-1/2 flex gap-4">
+                            <div className="sm:!w-2/5 md:!w-full w-1/2 flex gap-4">
                                 <a href="" className="w-1/5"><img src={images.facebook} alt="facebook" className="w-full brightness-0 invert" /></a>
                                 <a href="" className="w-1/5"><img src={images.twitter} alt="twitter" className="w-full brightness-0 invert" /></a>
                                 <a href="" className="w-1/5"><img src={images.instagram} alt="instagram" className="w-full brightness-0 invert" /></a>

@@ -24,7 +24,7 @@ const getFilterOrder = (req, res, next) => {
 
     const query = {};
     for (let i = 0; i < filters.length; i++) {
-        isNaN(values[i]) ? query[`${filters[i]}.${values[i]}`] = true :
+        isNaN(values[i]) ? query[filters[i]] = values[i] :
             query[filters[i]] = { $lt: Number(values[i]) }
     }
 

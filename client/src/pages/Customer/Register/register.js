@@ -146,76 +146,76 @@ function Register() {
         }
     }
     return (
-        <div id='page-register' className="grid_layout wide pb-16">
+        <div id='page-register' className="grid_layout wide !p-8 bg-white">
             <h2 className="text-center text-4xl font-bold uppercase py-6 ">Đăng kí tài khoản</h2>
             {!connectServer ? <ConnectServer /> :
                 <Form id="form-register-user" enctype="multipart/form-data" className="form p-4 grid sm:!grid-cols-1 grid-cols-2 gap-y-4 gap-x-8">
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Họ và tên </label>
                         <Input
-                            label='Họ và tên'
                             id='full_name' name='full_name' type='text' placeholder='Nhập họ và tên'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
-                        <label className='font-semibold italic'>Phương thức đăng nhập</label>
-                        <Select className='w-full h-12 p-2 outline-none border-2' name='method_login' onChange={handleInputChange}>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Phương thức đăng nhập</label>
+                        <Select className='w-full h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='method_login' onChange={handleInputChange}>
                             <Option value='email' name='Email' />
                             <Option value='phone_login' name='Số điện thoại' />
                         </Select>
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Email </label>
                         <Input
                             disabled={!emailLogin}
-                            label='Email'
                             id={emailLogin ? 'email' : ''} name='email' type='text' placeholder='Nhập Email'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Số điện thoại đăng nhập </label>
                         <Input
                             disabled={emailLogin}
-                            label='Số điện thoại đăng nhập'
                             id={emailLogin ? '' : 'phone_login'} name='phone_login' type='text' placeholder='Nhập số điện thoại đăng nhập'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col space-y-1'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Mật khẩu</label>
                         <Input
-                            label='Mật khẩu'
                             id='password' name='password' type='password' placeholder='Nhập mật khẩu'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col space-y-1'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Nhập lại mật khẩu </label>
                         <Input
-                            label='Xác nhận mật khẩu'
                             id='confirm_password' type='password' placeholder='Nhập lại mật khẩu'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
-                        <label className='font-semibold italic'>Địa chỉ </label>
-                        <div className="w-full flex gap-2">
-                            <Select className='w-1/3 h-12 p-2 outline-none border-2' name='province' onChange={handleInputChange}>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Địa chỉ </label>
+                        <div className="w-full flex sm:!flex-col md:!flex-col gap-2">
+                            <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='province' onChange={handleInputChange}>
                                 <Option name='Tỉnh/ Thành Phố' />
                                 {
                                     provinces.length > 0 && provinces.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
                                 }
                             </Select>
-                            <Select className='w-1/3 h-12 p-2 outline-none border-2' name='district' onChange={handleInputChange}>
+                            <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='district' onChange={handleInputChange}>
                                 <Option name='Quận/ Huyện' />
                                 {
                                     districts.length > 0 && districts.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
                                 }
                             </Select>
-                            <Select className='w-1/3 h-12 p-2 outline-none border-2' name='ward' onChange={handleInputChange}>
+                            <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='ward' onChange={handleInputChange}>
                                 <Option name='Phường/ Xã' />
                                 {
                                     wards.length > 0 && wards.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
@@ -224,41 +224,42 @@ function Register() {
                         </div>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Số nhà, tên đường</label>
                         <Input
-                            label='Số nhà, tên đường'
                             id='address' name='address' type='text' placeholder='Nhập số nhà, tên đường'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Số điện thoại đặt hàng</label>
                         <Input
-                            label='Số điện thoại đặt hàng'
                             id='phone' name='phone' type='text' placeholder='Nhập số điện thoại đặt hàng'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
-                        <label className='font-semibold italic'>Gới tính </label>
-                        <Select className='w-full h-12 p-2 outline-none border-2' name='gender'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Gới tính </label>
+                        <Select className='w-full h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='gender'>
                             <Option value='Nam' name='Nam' />
                             <Option value='Nữ' name='Nứ' />
                         </Select>
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Ngày sinh </label>
                         <Input
-                            label='Ngày sinh'
                             id='date_birth' name='date_birth' type='date'
-                            className='w-full h-12 px-4 border-2 border-solid border-gray-300'
+                            className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                         />
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                     <FormGroup className='w-full flex flex-col gap-2'>
+                        <label className='font-semibold italic text-[var(--primary-color)]'>Ảnh đại diện</label>
                         <Input
-                            id='avatar' type='file' label='Ảnh đại diện: '
-                            className='w-full p-2 border-2 border-solid border-gray-300'
+                            id='avatar' type='file'
+                            className='w-full py-2 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
                             onChange={handleInputChange}
                         />
                     </FormGroup>
