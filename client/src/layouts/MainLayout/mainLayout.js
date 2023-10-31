@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 function MainLayout({ children }) {
     const dataUser = window.sessionStorage.getItem('userLogin') && JSON.parse(window.sessionStorage.getItem('userLogin')).data.user
     const [userLogin, setUserLogin] = useState(dataUser)
+
     const [connectServer, setConnectServer] = useState(false)
     useEffect(() => {
         dataUser &&

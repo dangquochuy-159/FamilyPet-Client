@@ -33,7 +33,6 @@ const UserSchema = Schema(
             member: { type: Boolean, default: true },
         },
         slug: { type: String, slug: "full_name", unique: true },
-
     },
     {
         timestamps: true,

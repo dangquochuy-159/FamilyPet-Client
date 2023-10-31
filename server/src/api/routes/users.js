@@ -17,7 +17,8 @@ const {
     removeSomeProductCart,
     updateOneUser,
     updateAvatarUser,
-    updateCart
+    updateCart,
+    updatePoint,
 } = require('../controllers/UserController')
 
 userRouter
@@ -31,10 +32,11 @@ userRouter
 
     .delete('/:id', removeUser)
     .delete('/:id/avatar', removeAvatarUser)
-    .delete('/:id/cart/:id_product', removeSomeProductCart)
+    .delete('/:id/cart', removeSomeProductCart)
 
+    .put('/:id/change', updatePoint)
     .put('/:id', storageUploadSinglePhoto('avatar', 'user'), updateOneUser)
-    .put('/:id/:name_avt', updateAvatarUser)
     .put('/:id/cart/:id_product', updateCart)
+    .put('/:id/:name_avt', updateAvatarUser)
 
 module.exports = userRouter

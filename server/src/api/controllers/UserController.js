@@ -168,10 +168,9 @@ const removeAvatarUser = (req, res, next) => {
         .catch(next)
 }
 
-// DELETE /api/users/:id/cart/:id_product
+// DELETE /api/users/:id/cart
 const removeSomeProductCart = (req, res, next) => {
-    let cartsReq = req.body.id_product_list
-
+    let cartsReq = req.body
     User.findById(req.params.id)
         .then(user => {
             let cartsUser = user.carts
@@ -278,6 +277,19 @@ const updateCart = (req, res, next) => {
         .catch(next)
 }
 
+// PUT /api/users/:id/change?point=&type=
+const updatePoint = (req, res, next) => {
+    let value
+    value = req.query.type == 'up' ? req.query.point : - (req.query.point)
+    User.updateOne({ _id: req.params.id }, { $inc: { total_point: value } })
+        .then(() => {
+            res.status(200).json({
+                message: 'success',
+            });
+        })
+        .catch(next)
+}
+
 module.exports = {
     getListUsers,
     getOneUser,
@@ -290,5 +302,6 @@ module.exports = {
     removeSomeProductCart,
     updateOneUser,
     updateAvatarUser,
-    updateCart
+    updateCart,
+    updatePoint
 }

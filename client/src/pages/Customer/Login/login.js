@@ -76,8 +76,8 @@ function Login() {
                 <h2 className="text-4xl text-center font-bold">Đăng nhập</h2>
                 <div className="flex flex-col justify-center items-center gap-2 mt-2">
                     {
-                        loginEmail ? <button className="text-center font-medium  hover:text-blue-600" onClick={handleChangeMethodLogin}> Đăng nhập với số điện thoại </button> :
-                            <button className="text-center font-medium  hover:text-blue-600" onClick={handleChangeMethodLogin}> Đăng nhập với với email </button>
+                        loginEmail ? <button className="text-center font-medium  hover:text-blue-600" onClick={handleChangeMethodLogin}> Đăng nhập với email </button> :
+                            <button className="text-center font-medium  hover:text-blue-600" onClick={handleChangeMethodLogin}> Đăng nhập với số điện thoại </button>
                     }
                     <Button leftIcon={<ChangeIcon />} onClick={handleChangeMethodLogin} />
                 </div>

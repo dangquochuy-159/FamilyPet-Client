@@ -10,7 +10,7 @@ const PromoteSchema = Schema(
         des: { type: String, required: true },
         reduce: { type: Number, required: true },
         point: { type: Number, required: true },
-        time_end: { type: Number, required: true }
+        type: { type: String, required: true }
     },
     {
         timestamps: true,

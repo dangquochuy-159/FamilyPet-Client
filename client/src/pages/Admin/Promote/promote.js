@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/Button';
 import ConnectError from '~/components/ConnectError';
-import Form, { FormGroup, Input } from '~/components/Form';
+import Form, { FormGroup, Input, Option, Select } from '~/components/Form';
 import { CheckIcon, DeleteIcon, FilterIcon, UpdateIcon } from '~/components/Icons';
 import check from '~/utils/Validate/ruleCheck';
 import Validator from '~/utils/Validate/validator';
@@ -26,7 +26,7 @@ function Promote() {
     const desEle = document.getElementById('des')
     const pointEle = document.getElementById('point')
     const reduceEle = document.getElementById('reduce')
-    const timeEndEle = document.getElementById('time_end')
+    const typeEle = document.getElementById('type')
     const btnAdd = document.querySelector('.btn-add')
     const btnUpdate = document.querySelector('.btn-update')
     const btnNoUpdate = document.querySelector('.btn-cancel')
@@ -54,7 +54,7 @@ function Promote() {
                 Validator.isRequired("#code", check.isEmpty),
                 Validator.isRequired("#reduce", check.isEmpty),
                 Validator.isRequired("#point", check.isEmpty),
-                Validator.isRequired("#time_end", check.isEmpty),
+                Validator.isRequired("#type", check.isEmpty),
             ],
             onRegister: function (data) {
                 const errorCodeEle = codeELe.parentElement.querySelector('.msg-error')
@@ -139,7 +139,7 @@ function Promote() {
                 desEle.value = promote.des
                 pointEle.value = promote.point
                 reduceEle.value = promote.reduce
-                timeEndEle.value = promote.time_end
+                typeEle.value = promote.type
             }
         })
 
@@ -160,7 +160,7 @@ function Promote() {
         desEle.value = ''
         pointEle.value = ''
         reduceEle.value = ''
-        timeEndEle.value = ''
+        typeEle.value = ''
     }
 
     // function deletePromote
@@ -262,7 +262,7 @@ function Promote() {
                                             <th scope='col' className='md:hidden'>Mô tả</th>
                                             <th scope='col'>Giảm (%)</th>
                                             <th scope='col'>Điểm đổi</th>
-                                            <th scope='col'>Thời hạn</th>
+                                            <th scope='col'>Loại</th>
                                             <th scope='col'>Hành động</th>
 
 
@@ -277,9 +277,9 @@ function Promote() {
                                                         <td className='whitespace-pre-wrap'>{promote.name}</td>
                                                         <td className='whitespace-pre-wrap'>{promote.code}</td>
                                                         <td className='whitespace-pre-wrap md:hidden'>{promote.des}</td>
-                                                        <td className='whitespace-pre-wrap'>{promote.reduce}</td>
-                                                        <td className='whitespace-pre-wrap'>{promote.point}</td>
-                                                        <td className='whitespace-pre-wrap'>{promote.time_end}</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.reduce}%</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.point} điểm</td>
+                                                        <td className='whitespace-pre-wrap'>{promote.type}</td>
                                                         <td className='whitespace-pre-wrap'>
                                                             <div className='flex justify-center gap-2'>
                                                                 <Button type='primary' rightIcon={<UpdateIcon width='14px' height='14px' />} data-id={promote._id}
@@ -326,8 +326,8 @@ function Promote() {
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
                                         <FormGroup className=' sm:w-full w-1/3'>
-                                            <Input id='time_end' name='time_end' type='number' placeholder='Nhập thời gian khuyễn mãi (ngày)' label='Thời gian khuyến mãi (ngày)'
-                                                className='w-full h-12 px-4 border-2 border-solid border-gray-400' />
+                                            <Input id='type' name='type' type='text' placeholder='Nhập loại khuyến mãi (Đơn hàng hoặc Vận chuyển)' label='Mô tả'
+                                                className='w-full h-12 p-4 border-2 border-solid border-gray-400' />
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
                                     </div>

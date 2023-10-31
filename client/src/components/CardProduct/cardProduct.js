@@ -13,16 +13,16 @@ function CardProduct({ className = '', product }) {
     const [userLogin] = useContext(CustomerContext)
 
     const handleAddCart = () => {
-        console.log(userLogin._id)
-        console.log(product._id)
-        console.log(1)
-        product.sale_price ? console.log(product.sale_price) : console.log(product.price)
-        let price = product.sale_price ? product.sale_price : product.price
-        axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${product._id}?quantity=1&price=${price}`)
-            .then(() => {
-                alert('Thêm vào giỏ hàng thành công')
-                window.location.reload()
-            })
+        if (userLogin) {
+            let price = product.sale_price ? product.sale_price : product.price
+            axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${product._id}?quantity=1&price=${price}`)
+                .then(() => {
+                    alert('Thêm vào giỏ hàng thành công')
+                    window.location.reload()
+                })
+        } else {
+            alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng')
+        }
 
     }
     return (

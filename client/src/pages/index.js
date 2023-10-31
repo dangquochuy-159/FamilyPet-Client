@@ -5,6 +5,7 @@ import Contact from './Customer/Contact'
 import PriceList from './Customer/PriceList'
 import Product from './Customer/Product'
 import Cart from './Customer/Cart'
+import PaymentInfo from './Customer/PaymentInfo'
 import Register from './Customer/Register'
 import Search from './Customer/Search'
 import Policy from './Customer/Policy'
@@ -34,6 +35,7 @@ const pages = {
     Register,
     Product,
     Cart,
+    PaymentInfo,
     Search,
     Policy,
     Account,

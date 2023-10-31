@@ -64,7 +64,7 @@ const addPromote = (req, res, next) => {
         des: req.body.des,
         reduce: Number(req.body.reduce),
         point: Number(req.body.point),
-        time_end: Number(req.body.time_end),
+        type: req.body.type,
     })
         .save()
         .then(() => {

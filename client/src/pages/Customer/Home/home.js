@@ -18,7 +18,7 @@ function Home() {
         <div id='page-home' className="page pb-16">
             <ButtonToTop />
             <section id='sec-home_banner' className='grid_layout h-auto md:h-auto overflow-hidden shadow-md shadow-black'>
-                <img src={images.banner1} alt='banner' className='object-contain' />
+                <img src={images.banner1} alt='banner' className='w-full object-contain' />
             </section>
 
             <CategoryProduct />
