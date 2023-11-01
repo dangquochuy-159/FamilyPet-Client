@@ -13,8 +13,7 @@ const OrderSchema = Schema(
         detail: { type: Array }, // object: quantity, name_product, unit_price, into_money
         payments: {
             cod: { type: Boolean, default: true },
-            atm: { type: Boolean, default: false },
-            e_wallet: { type: Boolean, default: false }
+            shop: { type: Boolean, default: false },
         },
         status: {
             confirmed: { type: Boolean, default: false },

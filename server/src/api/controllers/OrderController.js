@@ -65,14 +65,14 @@ const addOrder = (req, res, next) => {
     let order = new Order({
         id_customer: req.body.id_customer,
         name: req.body.name,
+        account: req.body.account,
         phone: req.body.phone,
         address: req.body.address,
         total_pay: Number(req.body.total_pay),
         detail: req.body.detail,
         payments: {
             cod: req.body.payments === "cod",
-            atm: req.body.payments === "atm",
-            e_wallet: req.body.payments === "e_wallet",
+            shop: req.body.payments === "shop",
         },
     })
         .save()
@@ -81,7 +81,7 @@ const addOrder = (req, res, next) => {
                 $inc: {
                     total_pay: order.total_pay,
                     total_order: 1,
-                    total_point: order.total_pay / 1000
+                    total_point: order.total_pay / 10000
                 },
                 $push: {
                     list_orders: {
