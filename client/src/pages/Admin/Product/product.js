@@ -8,6 +8,7 @@ import ModalInfoProduct from './modalIfoProduct';
 import ModalAddProduct from './modalAddProduct';
 import ModalUpdateProduct from './modalUpdateProduct';
 import Modal from '~/components/Modal/modal';
+import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 
 function Product() {
     const [connectServer, setConnectServer] = useState(false)
@@ -109,7 +110,7 @@ function Product() {
                                         <option value="">Giá</option>
                                         {
                                             prices.map((price, index) =>
-                                                <option key={index} value={price}>{price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</option>)
+                                                <option key={index} value={price}>{changeNumberToPrice(price)}</option>)
                                         }
                                     </select>
                                 </div>
@@ -160,8 +161,8 @@ function Product() {
                                                     className='w-12 h-12 rounded-full object-cover'
                                                 />
                                                 <p className='font-bold'>{product.name}</p>
-                                                <p className={product.sale_price && 'line-through'}>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
-                                                <p>{product.sale_price && product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                                                <p className={product.sale_price && 'line-through'}>{changeNumberToPrice(product.price)}</p>
+                                                <p>{product.sale_price && changeNumberToPrice(product.sale_price)}</p>
 
                                             </div>
                                             <div className='flex justify-end gap-x-1'>
@@ -228,8 +229,8 @@ function Product() {
                                                             />
                                                         </td>
                                                         <td className='md:hidden'>{product.category}</td>
-                                                        <td className={product.sale_price && 'line-through'}>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
-                                                        <td>{product.sale_price && product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                                        <td className={product.sale_price && 'line-through'}>{changeNumberToPrice(product.price)}</td>
+                                                        <td>{product.sale_price && changeNumberToPrice(product.sale_price)}</td>
                                                         <td className='md:hidden'>{product.outstand ? 'Có' : 'Không'}</td>
                                                         <td>{product.quantity}</td>
                                                         <td className='md:hidden'>{Object.keys(product.status).map(key => product.status[key] && changeStatus[key])}</td>

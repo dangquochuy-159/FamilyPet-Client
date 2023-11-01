@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import CustomerContext from "~/context/CustomerContext";
+import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 
 function InfoOrder() {
     const [userLogin] = useContext(CustomerContext)
@@ -50,7 +51,7 @@ function InfoOrder() {
                                 <p>Họ và tên: {order.name}</p>
                                 <p>Số điện thoại: {order.phone}</p>
                                 <p>Địa chỉ: {order.address}</p>
-                                <p>Tổng thanh toán: {order.total_pay.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                                <p>Tổng thanh toán: {changeNumberToPrice(order.total_pay)}</p>
                                 <p>Hình thức thanh toán: {Object.keys(order.payments).map(key => order.payments[key] === true && key)}</p>
                             </div>
                             <div className="sm:!col-span-3 md:!col-span-3 col-span-2">
@@ -64,9 +65,9 @@ function InfoOrder() {
                                         order.detail.map(detail => (
                                             <>
                                                 <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{detail['name_product']}</p>
-                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{detail['unit_price'].toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{changeNumberToPrice(detail['unit_price'])}</p>
                                                 <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{detail['quantity']}</p>
-                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{detail['into_money'].toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{changeNumberToPrice(detail['into_money'])}</p>
                                             </>
                                         ))
                                     }

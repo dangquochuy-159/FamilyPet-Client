@@ -7,6 +7,7 @@ import Modal from "~/components/Modal/modal";
 import CustomerContext from "~/context/CustomerContext";
 import UpdateAvatarUser from "./updateAvatarUser";
 import UpdateInfoUser from "./updateInfoUser";
+import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 
 function InfoAccount() {
 
@@ -40,7 +41,7 @@ function InfoAccount() {
                     <div className=" grid sm:!grid-cols-1 md:!grid-cols-2 grid-cols-4 gap-2">
                         <p>Bậc xếp hạng: {Object.keys(userLogin.rank).map(key => userLogin.rank[key] && changeRank[key])}</p>
                         <p>Tổng hóa đơn: {userLogin.total_order}</p>
-                        <p className="col-span-1">Tổng thanh toán: {userLogin.total_pay.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                        <p className="col-span-1">Tổng thanh toán: {changeNumberToPrice(userLogin.total_pay)}</p>
                         <p className="col-span-1">Điểm tích lũy: {userLogin.total_point} điểm</p>
                     </div>
                     <div className="grid sm:!grid-cols-2 md:!grid-cols-2 grid-cols-12 gap-2">

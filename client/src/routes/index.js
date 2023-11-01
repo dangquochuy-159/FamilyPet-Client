@@ -13,6 +13,7 @@ const publicRoutes = [
     { path: config.routes_public.product, page: pages.Product, layout: MainLayout, required_login: false },
     { path: config.routes_public.cart, page: pages.Cart, layout: MainLayout, required_login: false },
     { path: config.routes_public.infoPayment, page: pages.PaymentInfo, layout: MainLayout, required_login: false },
+    { path: config.routes_public.payment, page: pages.Payment, layout: MainLayout, required_login: false },
     { path: config.routes_public.search, page: pages.Search, layout: MainLayout, required_login: false },
     { path: config.routes_public.policy, page: pages.Policy, layout: MainLayout, required_login: false },
     { path: config.routes_public.account, page: pages.Account, layout: MainLayout, required_login: false },

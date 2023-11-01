@@ -8,6 +8,7 @@ import Image from '../Image';
 import CustomerContext from '~/context/CustomerContext';
 import { useContext } from 'react';
 import axios from 'axios';
+import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 
 function CardProduct({ className = '', product }) {
     const [userLogin] = useContext(CustomerContext)
@@ -37,8 +38,8 @@ function CardProduct({ className = '', product }) {
                     {product.name}
                 </Link>
                 <p className="flex min-h-[64px] flex-col items-center justify-start gap-x-4 text-xl">
-                    <span className="text-red-600 font-bold">{product.sale_price && product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-                    <span className={`text-red-600 font-bold ${product.sale_price && 'line-through text-black font-normal text-sm'}`}>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                    <span className="text-red-600 font-bold">{product.sale_price && changeNumberToPrice(product.sale_price)}</span>
+                    <span className={`text-red-600 font-bold ${product.sale_price && 'line-through text-black font-normal text-sm'}`}>{changeNumberToPrice(product.price)}</span>
                 </p>
                 <div className="sm:!hidden w-full flex justify-center gap-2">
                     <Button type='primary' leftIcon={<CartIcon />} className="w-1/3 text-white bg-red-500 hover:bg-red-400" onClick={handleAddCart} />

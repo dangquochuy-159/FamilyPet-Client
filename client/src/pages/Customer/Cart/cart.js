@@ -1,11 +1,12 @@
 import axios from "axios";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
-import { Link, useActionData, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "~/components/Button";
 import ButtonToTop from "~/components/ButtonToTop";
 import { CloseIcon, DeleteIcon, MinusIcon, PayIcon, PlusIcon } from "~/components/Icons";
 import Image from "~/components/Image";
 import CustomerContext from "~/context/CustomerContext";
+import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 
 function Cart() {
     const [products, setProducts] = useState([])
@@ -74,7 +75,6 @@ function Cart() {
     }
     const handleDeleteCartItem = () => {
         if (window.confirm("Bạn chắc chắn muốn xóa sản phẩm trong giỏ hàng")) {
-
             axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProductCheck })
                 .then((res) => {
                     alert("xóa thành công")
@@ -105,15 +105,11 @@ function Cart() {
             }
         })
 
-        const dataPayment = {
-            name: '',
-            phone: '',
-            address: '',
+        const productPayment = {
             total_pay: totalPay,
             details: details,
-            payments: '',
         }
-        window.sessionStorage.setItem("paymentInfo", JSON.stringify(dataPayment))
+        window.sessionStorage.setItem("productPayment", JSON.stringify(productPayment))
         navigate('./payment-info')
     }
     return (
@@ -152,7 +148,7 @@ function Cart() {
                                                         </Fragment>
                                                     )
                                                 }
-                                                <p className="text-xl font-bold text-red-600">{cart.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                                                <p className="text-xl font-bold text-red-600">{changeNumberToPrice(cart.price)}</p>
                                             </div>
                                             <div className="sm:!col-span-2 md:!col-span-2 col-span-1 flex justify-around items-center ">
                                                 {

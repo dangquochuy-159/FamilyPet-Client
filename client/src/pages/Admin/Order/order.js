@@ -20,6 +20,11 @@ function Order() {
         confirmed: 'Đã nhận hàng',
     }
 
+    const changePayments = {
+        cod: 'Thanh toán tại nhà',
+        shop: 'Thanh toán tại cửa hàng'
+    }
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/orders`)
             .then(res => res.json())
@@ -68,9 +73,8 @@ function Order() {
                                 <div className='sm:!w-full flex gap-2'>
                                     <select className='sm:w-1/2 md:!h-1/2 filter p-2 border border-solid border-black' name='payments' >
                                         <option value="">Hình thức thanh toán</option>
-                                        <option value="cod">COD</option>
-                                        <option value="atm">ATM</option>
-                                        <option value="e_wallet">E-wallet</option>
+                                        <option value="cod">Thanh toán tại nhà</option>
+                                        <option value="shop">Thanh toán tại cửa hàng</option>
                                     </select>
                                     <select className='sm:w-1/2 md:!h-1/2 filter p-2 border border-solid border-black' name='status' >
                                         <option value="">Trạng thái</option>
@@ -126,7 +130,7 @@ function Order() {
                                                         <td className='whitespace-pre-wrap sm:hidden'>{order.total_pay}</td>
                                                         <td className='whitespace-pre-wrap sm:hidden md:hidden'>
                                                             {
-                                                                Object.keys(order.payments).map(key => order.payments[key] === true && key)
+                                                                Object.keys(order.payments).map(key => order.payments[key] === true && changePayments[key])
                                                             }
                                                         </td>
                                                         <td className='whitespace-pre-wrap sm:hidden md:hidden'>
@@ -154,7 +158,7 @@ function Order() {
                                                                     </div>
                                                                 }
                                                             >
-                                                                <ModalInfoOrder data={order} changeStatus={changeStatus} />
+                                                                <ModalInfoOrder data={order} changePayments={changePayments} changeStatus={changeStatus} />
                                                             </Modal>
                                                         </td>
                                                         <td className='whitespace-pre-wrap sm:hidden md:hidden'>

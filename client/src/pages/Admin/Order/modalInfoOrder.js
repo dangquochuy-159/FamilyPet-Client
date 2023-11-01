@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function ModalInfoOrder({ data, changeStatus }) {
+function ModalInfoOrder({ data, changeStatus, changePayments }) {
 
     const changeDate = (date) => {
         const originalDate = new Date(date);
@@ -36,7 +36,7 @@ function ModalInfoOrder({ data, changeStatus }) {
             </p>
             <p className="p-2 rounded-md bg-white">
                 <span className="font-bold">Hình thức thanh toán: </span>
-                <span>{Object.keys(data.payments).map(key => data.payments[key] === true && key)}</span>
+                <span>{Object.keys(data.payments).map(key => data.payments[key] === true && changePayments[key])}</span>
             </p>
             <p className="p-2 rounded-md bg-white">
                 <span className="font-bold">Trạng thái đơn hàng: </span>
@@ -84,6 +84,7 @@ function ModalInfoOrder({ data, changeStatus }) {
 ModalInfoOrder.propTypes = {
     data: PropTypes.object.isRequired,
     changeStatus: PropTypes.object.isRequired,
+    changePayments: PropTypes.object.isRequired,
 }
 
 export default ModalInfoOrder;

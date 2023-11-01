@@ -2,6 +2,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types'
 import Image from "~/components/Image";
+import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 
 function ModalInfoProduct({ product, changeStatus }) {
     return (
@@ -48,11 +49,11 @@ function ModalInfoProduct({ product, changeStatus }) {
                         <div className=" space-y-2">
                             <p className="p-2 rounded-md bg-white">
                                 <span className="font-bold">Giá: </span>
-                                <span>{product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                                <span>{changeNumberToPrice(product.price)}</span>
                             </p>
                             <p className="p-2 rounded-md bg-white">
                                 <span className="font-bold">Giá khuyến mãi: </span>
-                                <span>{product.sale_price && product.sale_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                                <span>{product.sale_price && changeNumberToPrice(product.sale_price)}</span>
                             </p>
                             <p className="p-2 rounded-md bg-white">
                                 <span className="font-bold">Lượt đánh giá: </span>

@@ -7,6 +7,7 @@ const routes_public = {
     priceLList: '/price-list',
     contact: '/contact',
     cart: '/cart',
+    payment: '/cart/payment',
     infoPayment: '/cart/payment-info',
     search: '/search',
     policy: '/policy',

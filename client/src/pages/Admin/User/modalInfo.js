@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import Image from '~/components/Image';
+import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 
 function ModalInfo({ user }) {
     const changeRank = {
@@ -51,10 +52,7 @@ function ModalInfo({ user }) {
                     </p>
                     <p className='sm:text-center'>
                         <span className='font-bold sm:text-sm'>Tổng thanh toán:  </span>
-                        <span className='text-[var(--primary-color)] font-bold sm:text-sm'>{user.total_pay.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        })}</span>
+                        <span className='text-[var(--primary-color)] font-bold sm:text-sm'>{changeNumberToPrice(user.total_pay)}</span>
                     </p>
                     <p className='sm:text-center'>
                         <span className='font-bold sm:text-sm'>Điểm tích lũy:  </span>
