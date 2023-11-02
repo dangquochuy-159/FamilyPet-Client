@@ -225,15 +225,15 @@ function PaymentInfo() {
                                     <Fragment key={product._id}>
                                         <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='photo' className="sm:!col-span-2 sm:!w-20 sm:!h-20 md:!w-20 md:!h-20 m-auto w-40 h-40" />
                                         <div className="sm:!col-span-4 col-span-3 flex flex-col gap-4 p-4">
-                                            <p className="sm:!text-sm text-xl font-bold ">{product.name}</p>
+                                            <p className="sm:!text-sm text-xl font-bold ">{detail.name_product}</p>
                                             <p className="sm:!text-sm text-base h-[1.5rem] line-clamp-1">{product.des}</p>
-                                            <p className="sm:!text-sm text-lg text-red-600 font-bold ">{changeNumberToPrice(detail.price)}</p>
+                                            <p className="sm:!text-sm text-lg text-red-600 font-bold ">{changeNumberToPrice(detail.unit_price)}</p>
                                         </div>
                                     </Fragment>
                                 ))
                             }
                             <p className="sm:!col-span-6 sm:!text-sm text-lg text-black font-bold flex sm:!justify-end items-center justify-center">x{detail.quantity}</p>
-                            <p className="sm:!col-span-6 sm:!text-sm text-lg text-red-600 font-bold flex sm:!justify-end items-center justify-center">{changeNumberToPrice(detail.total)}</p>
+                            <p className="sm:!col-span-6 sm:!text-sm text-lg text-red-600 font-bold flex sm:!justify-end items-center justify-center">{changeNumberToPrice(detail.into_money)}</p>
                         </div>
                     )
                 }

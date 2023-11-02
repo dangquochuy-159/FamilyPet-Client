@@ -43,7 +43,7 @@ function CardProduct({ className = '', product }) {
                 </p>
                 <div className="sm:!hidden w-full flex justify-center gap-2">
                     <Button type='primary' leftIcon={<CartIcon />} className="w-1/3 text-white bg-red-500 hover:bg-red-400" onClick={handleAddCart} />
-                    <Button to='/login' type='primary' leftIcon={<SearchIcon />} className="w-1/3 text-white bg-blue-500 hover:bg-blue-400" />
+                    <Button to={`/product?slug=${product.slug}`} type='primary' leftIcon={<SearchIcon />} className="w-1/3 text-white bg-blue-500 hover:bg-blue-400" />
                 </div>
             </div>
             {

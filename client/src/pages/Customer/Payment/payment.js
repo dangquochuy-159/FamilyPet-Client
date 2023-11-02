@@ -7,6 +7,9 @@ import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 const Payment = (props) => {
     const [userLogin] = useContext(CustomerContext)
     const infoPayment = JSON.parse(window.sessionStorage.getItem("infoPayment"))
+
+    const navigate = useNavigate()
+
     const transportFee = 29000
     let reduceOrder = 0
     let reduceShip = 0
@@ -20,9 +23,6 @@ const Payment = (props) => {
         totalPay = infoPayment.total_pay - reduceShip + transportFee
     }
 
-    const navigate = useNavigate()
-    const handleClick = () => {
-    }
     const handleCancelPayment = () => {
         window.sessionStorage.removeItem("productPayment")
         window.sessionStorage.removeItem("infoPayment")
@@ -32,7 +32,7 @@ const Payment = (props) => {
         window.sessionStorage.removeItem("infoPayment")
         navigate('/cart/payment-info')
     }
-    const handlePay = () => {
+    const handlePayment = () => {
         const data = {
             id_customer: userLogin._id,
             name: infoPayment.name,
@@ -62,16 +62,14 @@ const Payment = (props) => {
     }
 
     return (
-
         <section className='grid_layout wide h-auto flex flex-col gap-8 my-16' >
-            <button onClick={handleClick} >CLick</button>
             <div className="w-full p-4 flex justify-between shadow-xl shadow-white rounded-sm gap-2 bg-white sticky top-[128px]">
                 <div className="flex justify-end">
                     <button onClick={handleCancelPayment} className="p-2 sm:!text-sm text-white font-bold rounded-sm bg-red-500">Hủy thanh toán</button>
                 </div>
                 <div className="flex justify-end gap-4  ">
                     <button onClick={handleBackPage} className="sm:!w-1/2 p-2 sm:!text-sm text-white font-bold rounded-sm bg-yellow-600">Quay lại trang trước</button>
-                    <button onClick={handlePay} className="sm:!w-1/2 p-2 sm:!text-sm text-white font-bold rounded-sm bg-green-600">Thanh toán</button>
+                    <button onClick={handlePayment} className="sm:!w-1/2 p-2 sm:!text-sm text-white font-bold rounded-sm bg-green-600">Thanh toán</button>
                 </div>
 
             </div>
@@ -90,8 +88,8 @@ const Payment = (props) => {
                             <div className='grid grid-cols-4'>
                                 <p>{product.name}</p>
                                 <p>x {detail.quantity}</p>
-                                <p>{changeNumberToPrice(detail.price)}</p>
-                                <p>{changeNumberToPrice(detail.total)}</p>
+                                <p>{changeNumberToPrice(detail.unit_price)}</p>
+                                <p>{changeNumberToPrice(detail.into_money)}</p>
                             </div>
                         ))
                     ))

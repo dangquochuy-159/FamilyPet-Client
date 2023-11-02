@@ -97,9 +97,10 @@ function Cart() {
                     cart.id_product === ip.getAttribute("data-id-product") &&
                         details.push({
                             id_product: cart.id_product,
+                            name_product: ip.getAttribute("data-name-product"),
                             quantity: quantity,
-                            price: cart.price,
-                            total: cart.price * quantity,
+                            unit_price: cart.price,
+                            into_money: cart.price * quantity,
                         })
                 })
             }
@@ -163,7 +164,7 @@ function Cart() {
                                                                     className="btn-down disabled:text-gray-300" />
                                                             </div >
                                                             <input type='checkbox' className="ip-check w-6 h-6" onChange={handleChangeInputCheck}
-                                                                data-id-product={product._id}
+                                                                data-id-product={product._id} data-name-product={product.name}
                                                             />
                                                         </Fragment>
                                                     )}
