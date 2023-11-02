@@ -1,16 +1,20 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import Image from "~/components/Image";
+import Modal from "~/components/Modal/modal";
 import CustomerContext from "~/context/CustomerContext";
 import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
+import ModalEvaluate from "./modalEvaluate";
 
 function InfoOrder() {
     const [userLogin] = useContext(CustomerContext)
     const [orders, setOrder] = useState([])
+    const [products, setProducts] = useState([])
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/orders/filter?filter=id_customer&value=${userLogin._id}`).then(res => res.json())
-            .then(data => {
-                setOrder(data.data)
-            })
+            .then(data => setOrder(data.data))
+        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json())
+            .then(data => setProducts(data.data))
     }, [])
 
     const changeDate = (date) => {
@@ -34,8 +38,12 @@ function InfoOrder() {
             })
     }
 
+    const handleEvaluate = () => {
+
+    }
+
     return (
-        <section id='sec-account_order' className="w-full h-auto mt-16 bg-white shadow-xl shadow-white p-8">
+        <section id='sec-account_order' className="w-full h-auto mt-16 bg-white shadow-xl shadow-white sm:!px-0 p-8">
             <h2 className="text-3xl text-center font-bold pb-4">Đơn hàng đã mua</h2>
             {
                 !orders.length > 0 ? <p className="text-center">Chưa có đơn hàng được mua</p> :
@@ -45,33 +53,47 @@ function InfoOrder() {
                                 <p className="text-xl font-bold italic">Mã đơn hàng: {order._id}</p>
                                 <p className="text-xl font-bold italic">Ngày mua hàng: {changeDate(order.createdAt)}</p>
                             </div>
-                            <div className="sm:!col-span-3 md:!col-span-3 flex flex-col gap-4 text-lg font-medium">
+                            <div className="sm:!col-span-3 md:!col-span-3 col-span-3 flex flex-col gap-4 text-lg font-medium">
                                 <p className="font-bold text-xl">Thông tin khách hàng</p>
                                 <p>Tài khoản: {order.account}</p>
                                 <p>Họ và tên: {order.name}</p>
                                 <p>Số điện thoại: {order.phone}</p>
                                 <p>Địa chỉ: {order.address}</p>
                                 <p>Tổng thanh toán: {changeNumberToPrice(order.total_pay)}</p>
-                                <p>Hình thức thanh toán: {Object.keys(order.payments).map(key => order.payments[key] === true && key)}</p>
+                                <p>Hình thức thanh toán: {order.payments['cod'] === true ? 'Thanh toán tại nhà - COD' : 'Thanh toán tại cửa hàng'}</p>
                             </div>
-                            <div className="sm:!col-span-3 md:!col-span-3 col-span-2">
+                            <div className="sm:!col-span-3 md:!col-span-3 col-span-3">
                                 <p className="font-bold text-xl">Sản phẩm</p>
-                                <div className="grid grid-cols-4 gap-2">
-                                    <p className='text-lg font-medium'>Tên</p>
-                                    <p className='text-lg font-medium'>Đơn giá</p>
-                                    <p className='text-lg font-medium'>Số lượng</p>
-                                    <p className='text-lg font-medium'>Thành tiền</p>
+                                <div className="grid grid-cols-6 gap-2 my-2 p-4 bg-white">
+
                                     {
                                         order.detail.map(detail => (
                                             <>
-                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{detail['name_product']}</p>
-                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{changeNumberToPrice(detail['unit_price'])}</p>
-                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{detail['quantity']}</p>
-                                                <p className='mb-2 border-b border-solid border-black text-lg font-normal'>{changeNumberToPrice(detail['into_money'])}</p>
+                                                {
+                                                    products.map(product => product._id === detail.id_product &&
+                                                        <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} className='sm:!col-span-6 md:!col-span-6 w-14 h-14 m-auto' />)
+                                                }
+                                                <p className='sm:!col-span-6 md:!col-span-6 flex justify-center items-center text-lg font-normal'>{detail.name_product}</p>
+                                                <p className='sm:!col-span-2 md:!col-span-2 flex justify-center items-center text-lg text-red-600 font-normal'>{changeNumberToPrice(detail['unit_price'])}</p>
+                                                <p className='sm:!col-span-2 md:!col-span-2 flex justify-center items-center text-lg font-normal'>x {detail.quantity}</p>
+                                                <p className='sm:!col-span-2 md:!col-span-2 flex justify-center items-center text-lg text-red-600 font-normal'>{changeNumberToPrice(detail['into_money'])}</p>
+
+                                                <Modal
+                                                    className="sm:w-full sm:!h-[90vh] md:w-full md:!h-[90vh] w-2/3 h-auto"
+                                                    trigger={
+                                                        <div className="sm:!col-span-6 sm:!p-2 md:!col-span-6 md:!p-2 flex justify-center">
+                                                            <button onClick={handleEvaluate}
+                                                                className='w-full sm:!w-1/2 md:!w-1/2 p-2 text-lg text-white font-normal rounded-sm bg-green-500'>Đánh giá</button>
+                                                        </div>
+                                                    }
+                                                >
+                                                    <ModalEvaluate name_product={detail.name_product} id_product={detail.id_product} user_id={userLogin._id} user_name={userLogin.full_name} />
+                                                </Modal>
                                             </>
                                         ))
                                     }
                                 </div>
+
                             </div>
                             <div className="col-span-3 flex justify-end">
                                 <button data-id={order._id} onClick={handleConfirmOrder}
@@ -84,7 +106,7 @@ function InfoOrder() {
                     ))
             }
 
-        </section>
+        </section >
     );
 }
 

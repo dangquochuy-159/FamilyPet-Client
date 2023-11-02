@@ -23,7 +23,7 @@ function CategoryProduct() {
                     <div className="grid sm:!grid-cols-2 md:!grid-cols-3 grid-cols-5 gap-5 sm:!py-4 py-16">
                         {
                             categorys.map((cate, index) => (
-                                <Link key={index} to='/login'>
+                                <Link key={index} to={`/product?category=${cate.name}`}>
                                     <div className="w-full h-full flex flex-col justify-center items-center">
                                         <div className="w-1/2 h-full rounded-full shadow-xl shadow-white overflow-hidden">
                                             <img src={`${process.env.REACT_APP_API_URL}/api/categorys/${cate._id}/${cate.photo}`} alt='banner'

@@ -22,7 +22,7 @@ function MainLayout({ children }) {
     return (
         <CustomerContext.Provider value={[userLogin]}>
             <div className="flex flex-col min-h-screen">
-                <Header avatar={connectServer && userLogin.avatar} id={connectServer && userLogin._id} carts={connectServer && userLogin.carts.length} />
+                <Header avatar={connectServer && userLogin.avatar} id={connectServer && userLogin._id} cartsLength={connectServer && userLogin.carts.length} />
                 <div className="flex-1 mt-[var(--header-height)] bg-[#f5f5f5]">
                     {children}
                 </div>

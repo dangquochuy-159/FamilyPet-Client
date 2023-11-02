@@ -9,7 +9,7 @@ import { AccountIcon, CartIcon, CloseIcon, HomeIcon, IntroduceIcon, ListIcon, Lo
 import SearchProduct from "./searchProduct";
 import './header.scss'
 
-function Header({ avatar, id, carts }) {
+function Header({ avatar, id, cartsLength }) {
     const router = config.routes_public
     const navigate = useNavigate()
 
@@ -46,7 +46,7 @@ function Header({ avatar, id, carts }) {
                         <div className='flex items-center gap-2'>
                             <NavLink to={router.cart} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <CartIcon /> Giỏ hàng</NavLink>
                             {
-                                id && <p className="w-5 h-5 flex justify-center items-center rounded-full text-white font-bold bg-red-600">{carts}</p>
+                                id && <p className="w-5 h-5 flex justify-center items-center rounded-full text-white font-bold bg-red-600">{cartsLength}</p>
                             }
                         </div>
                         <NavLink to={router.account} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <AccountIcon /> Tài khoản</NavLink>
@@ -86,7 +86,7 @@ function Header({ avatar, id, carts }) {
                             />
                             {
                                 id && <p className="w-5 h-5 flex justify-center items-center absolute -top-2 -right-2 rounded-full text-white font-bold bg-red-600">
-                                    {carts}
+                                    {cartsLength}
                                 </p>
                             }
                         </div>

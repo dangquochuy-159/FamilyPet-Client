@@ -41,6 +41,8 @@ const getFilterEvaluate = (req, res, next) => {
 // POST /api/evaluates
 const addEvaluate = (req, res, next) => {
     const evaluate = new Evaluate({
+        name_user: req.body.name_user,
+        name_product: req.body.name_product,
         id_customer: req.body.id_customer,
         id_product: req.body.id_product,
         content: req.body.content,
@@ -60,6 +62,7 @@ const addEvaluate = (req, res, next) => {
                     });
                 })
         })
+
 }
 
 // DELETE /api/evaluates/:id
