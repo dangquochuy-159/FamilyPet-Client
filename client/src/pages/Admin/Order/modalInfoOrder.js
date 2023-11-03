@@ -1,16 +1,9 @@
 import PropTypes from 'prop-types'
+import { changeDate } from '~/utils/SupportFunction/supportFunction';
 
 function ModalInfoOrder({ data, changeStatus, changePayments }) {
 
-    const changeDate = (date) => {
-        const originalDate = new Date(date);
-        const day = String(originalDate.getDate()).padStart(2, '0');
-        const month = String(originalDate.getMonth() + 1).padStart(2, '0');
-        const year = originalDate.getFullYear();
-        const hours = String(originalDate.getHours()).padStart(2, '0');
-        const minutes = String(originalDate.getMinutes()).padStart(2, '0');
-        return `${hours}:${minutes} - ${day}/${month}/${year}`;
-    }
+
     return (
         <div className="px-4 h-full pb-20 overflow-auto">
             <h2 className="font-extrabold text-xl text-center text-black">Thông tin đơn hàng</h2>

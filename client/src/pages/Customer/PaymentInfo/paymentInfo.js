@@ -41,7 +41,8 @@ function PaymentInfo() {
 
     const handleBackPage = () => {
         window.sessionStorage.removeItem("productPayment")
-        navigate('/cart')
+        // navigate('/cart')
+        window.history.back();
     }
 
     const handleNextPage = () => {

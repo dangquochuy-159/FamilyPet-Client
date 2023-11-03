@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import Image from "~/components/Image";
 import Modal from "~/components/Modal/modal";
 import CustomerContext from "~/context/CustomerContext";
-import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
+import { changeDate, changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 import ModalEvaluate from "./modalEvaluate";
 
 function InfoOrder() {
@@ -17,13 +17,7 @@ function InfoOrder() {
             .then(data => setProducts(data.data))
     }, [])
 
-    const changeDate = (date) => {
-        const originalDate = new Date(date);
-        const day = String(originalDate.getDate()).padStart(2, '0');
-        const month = String(originalDate.getMonth() + 1).padStart(2, '0');
-        const year = originalDate.getFullYear();
-        return `${day}/${month}/${year}`;
-    }
+
     const changeStatus = {
         wait_confirm: 'Xác nhận đã nhận hàng',
         confirmed: 'Đã nhận hàng',

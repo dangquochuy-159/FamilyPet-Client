@@ -30,7 +30,8 @@ const Payment = (props) => {
     }
     const handleBackPage = () => {
         window.sessionStorage.removeItem("infoPayment")
-        navigate('/cart/payment-info')
+        window.history.back();
+        // navigate('/cart/payment-info')
     }
     const handlePayment = () => {
         const data = {
@@ -55,7 +56,7 @@ const Payment = (props) => {
                         axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProduct }).then(() => {
                             window.sessionStorage.removeItem("productPayment")
                             window.sessionStorage.removeItem("infoPayment")
-                            window.location.href = '/cart'
+                            window.location.href = '/'
                         })
                     })
             })

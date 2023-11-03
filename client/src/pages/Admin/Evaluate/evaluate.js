@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '~/components/Button';
 import ConnectError from '~/components/ConnectError';
 import { CheckIcon, FilterIcon } from '~/components/Icons';
+import { changeDate } from '~/utils/SupportFunction/supportFunction';
 
 
 function Evaluate() {
@@ -58,15 +59,7 @@ function Evaluate() {
                 setFilterEvaluates(data.data)
             })
     }
-    const changeDate = (date) => {
-        const originalDate = new Date(date);
-        const day = String(originalDate.getDate()).padStart(2, '0');
-        const month = String(originalDate.getMonth() + 1).padStart(2, '0');
-        const year = originalDate.getFullYear();
-        const hours = String(originalDate.getHours()).padStart(2, '0');
-        const minutes = String(originalDate.getMinutes()).padStart(2, '0');
-        return `${hours}:${minutes} - ${day}/${month}/${year}`;
-    }
+
 
     return (
         <>
