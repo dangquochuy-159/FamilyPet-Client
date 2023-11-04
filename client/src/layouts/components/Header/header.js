@@ -28,21 +28,22 @@ function Header({ avatar, id, cartsLength }) {
         window.location.href = '/login';
     }
     return (
-        <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-violet-600
-         md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-40">
+        <div className="wrapper--header_main w-full h-[var(--header-height)] 
+          bg-[var(--primary-color)] fixed top-0 left-0 z-40">
 
             {/* begin menu mobile */}
-            <div className="hidden sm:!block">
-                <div id='menu-mobile_modal' className="hidden w-full h-[100vh] fixed top-0 left-0 backdrop-opacity-10 backdrop-invert bg-black/70 z-40"></div>
-                <div id='menu-mobile_content' className="w-[80%] h-full p-10 fixed top-0 left-0 z-50 flex flex-col justify-between bg-white">
+            <div className="hidden sm:!block md:!block">
+                <div onClick={handleHideMenu} id='menu-mobile_modal' className="hidden w-full h-[100vh] fixed top-0 left-0 backdrop-opacity-10 backdrop-invert bg-black/70 z-40"></div>
+                <div id='menu-mobile_content' className="w-[80%] md:!w-2/3 h-full p-10 fixed top-0 left-0 z-50 flex flex-col justify-between bg-white">
                     <Button leftIcon={<CloseIcon />} className="p-2 absolute top-2 right-2 bg-red-400 hover:bg-red-500 text-white" onClick={handleHideMenu} />
+                    <SearchProduct />
                     <nav className='flex flex-col items-start justify-start pb-4 md:gap-x-10 gap-8'>
-                        <Image src={images.logo} alt='logo' className='h-auto w-1/2 object-contain' />
                         <NavLink to={router.default} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <HomeIcon /> Trang chủ</NavLink>
                         <NavLink to={router.introduce} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <IntroduceIcon /> Giới thiệu</NavLink>
                         <NavLink to={router.product} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <ProductIcon />Sản phẩm</NavLink>
                         <NavLink to={router.priceLList} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <ListIcon /> Bảng giá</NavLink>
                         <NavLink to={router.contact} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <PhoneIcon /> Liên hệ</NavLink>
+                        <NavLink to={router.policy} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <QuestionIcon /> Chính sách</NavLink>
 
                         <div className='flex items-center gap-2'>
                             <NavLink to={router.cart} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <CartIcon /> Giỏ hàng</NavLink>
@@ -51,7 +52,7 @@ function Header({ avatar, id, cartsLength }) {
                             }
                         </div>
                         <NavLink to={router.account} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <AccountIcon /> Tài khoản</NavLink>
-                        <NavLink to={router.policy} onClick={handleHideMenu} className="nav--link text-lg text-black flex gap-6" > <QuestionIcon /> Trợ giúp</NavLink>
+                        <NavLink to={router.register} className="nav--link text-lg text-black flex gap-6"> <IntroduceIcon /> Đăng ký </NavLink>
                     </nav>
                     <div className='w-full flex justify-between'>
                         {
@@ -67,21 +68,24 @@ function Header({ avatar, id, cartsLength }) {
                                     className='w-10 h-10 object-cover border border-solid border-black rounded-full bg-white p-2 hover:cursor-pointer' />
                         }
                     </div>
+
                 </div>
             </div>
             {/* end menu mobile */}
 
-            <section className="grid_layout wide w-full h-full sm:!h-full flex sm:!flex-col justify-between gap-x-10 !px-4">
-                <NavLink to='/' className='w-auto h-auto sm:hidden'>
+            <section className="grid_layout wide w-full h-full sm:!h-full flex justify-between gap-x-10 !px-4">
+                <Button leftIcon={<MenuIcon />} className="hidden md:!block sm:!block hover:brightness-0 hover:invert" onClick={handleShowMenu} />
+                <NavLink to='/' className='w-auto h-auto '>
                     <div className="w-auto h-full flex justify-center items-center">
-                        <Image src={images.logo} alt='logo' className='h-full w-full sm:!w-1/5 object-contain' />
+                        <Image src={images.logo} alt='logo' className='h-full w-full object-contain' />
                     </div>
                 </NavLink>
                 <div className="w-full sm:!h-full flex flex-col items-center gap-x-10">
-                    <div className="w-full h-full flex items-center justify-between gap-6">
-                        <Button leftIcon={<MenuIcon />} className="hidden sm:!block hover:brightness-0 hover:invert" onClick={handleShowMenu} />
-                        <SearchProduct />
-                        <div className="sm:!hidden w-auto h-auto relative">
+                    <div className="w-full h-full flex items-center sm:!justify-end md:!justify-end justify-between gap-6">
+                        <div className='w-auto h-auto md:!hidden sm:hidden'>
+                            <SearchProduct />
+                        </div>
+                        <div className="sm:!hidden md:!hidden w-auto h-auto relative">
                             <Button leftIcon={<CartIcon width="32px" height='32px' className='text-white hover:text-blue-600 ' />}
                                 to='/cart' className="hover:!text-blue-600"
                             />
@@ -91,13 +95,11 @@ function Header({ avatar, id, cartsLength }) {
                                 </p>
                             }
                         </div>
-                        <div className="sm:!hidden w-1/2 flex items-center justify-end gap-5">
+                        <div className=" w-1/2 flex items-center justify-end gap-5">
                             <div className="flex justify-center items-center gap-2">
                                 <Button href='tel:19008080' title='19008080' leftIcon={<PhoneIcon width="32px" height='32px' className='text-white' />}
-                                    className="md:!hidden hover:text-blue-600 text-white font-bold"
+                                    className=" hover:text-blue-600 text-white font-bold"
                                 />
-
-                                <div><Button to='/policy' leftIcon={<QuestionIcon width="32px" height='32px' className='text-white hover:text-blue-600' />} /></div>
 
                                 <TippyHeadless
                                     appendTo={() => document.body}
@@ -124,7 +126,7 @@ function Header({ avatar, id, cartsLength }) {
                                         </div>
                                     )}
                                 >
-                                    <div className='w-10 h-10'>
+                                    <div className='sm:!hidden md:!hidden w-10 h-10'>
                                         <Link to='/account' className='w-full h-full'>
                                             {
                                                 avatar ?
@@ -136,21 +138,17 @@ function Header({ avatar, id, cartsLength }) {
                                         </Link>
                                     </div>
                                 </TippyHeadless>
-                                {
-                                    id ?
-                                        <Button onClick={handleLogout} className="hidden md:!block text-white font-bold gap-2 bold uppercasee" title=' Đăng xuất' /> :
-                                        <NavLink to='/login' className="hidden md:!block text-white font-bold gap-2 bold uppercase">Đăng nhập</NavLink>
-                                }
                             </div>
                         </div>
                     </div>
 
-                    <nav className='sm:!hidden w-full flex items-center justify-start pb-4 md:gap-x-10 gap-x-20'>
+                    <nav className='sm:!hidden md:!hidden w-full flex items-center justify-start flex-wrap gap-y-2 pb-4 md:gap-x-10 gap-x-20'>
                         <NavLink to={router.default} className="nav--link text-lg text-white" >Trang chủ</NavLink>
                         <NavLink to={router.introduce} className="nav--link text-lg text-white" >Giới thiệu</NavLink>
                         <NavLink to={router.product} className="nav--link text-lg text-white" >Sản phẩm</NavLink>
                         <NavLink to={router.priceLList} className="nav--link text-lg text-white" >Bảng giá</NavLink>
                         <NavLink to={router.contact} className="nav--link text-lg text-white" >Liên hệ</NavLink>
+                        <NavLink to={router.policy} className="nav--link text-lg text-white" >Chính sách</NavLink>
                     </nav>
                 </div>
             </section >
@@ -159,9 +157,9 @@ function Header({ avatar, id, cartsLength }) {
 }
 
 Header.propTypes = {
-    avatar: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    carts: PropTypes.number.isRequired,
+    avatar: PropTypes.node.isRequired,
+    id: PropTypes.node.isRequired,
+    cartsLength: PropTypes.node.isRequired,
 }
 
 export default Header;

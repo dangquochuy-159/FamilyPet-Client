@@ -5,6 +5,8 @@ import { images } from "~/assets";
 import { MapIcon, MapPinIcon, PhoneIcon } from "~/components/Icons";
 
 function Footer() {
+
+
     return (
         <div className="wrapper-footer bg-[var(--primary-color)] text-white pt-16 pb-8">
             <div className="grid_layout wide">
@@ -63,19 +65,18 @@ function Footer() {
                         </div>
                         <div className="sm:!text-xs sm:!col-span-1 flex flex-col sm:items-center sm:!gap-2 md:!gap-4 gap-6">
                             <h4 className="sm:!text-xl text-2xl font-bold">Chính sách</h4>
-                            <Link to='' className="hover:text-black" >Chính sách đổi trả</Link>
-                            <Link to='' className="hover:text-black" >Chính sách bảo mật</Link>
-                            <Link to='' className="hover:text-black" >Chính sách giao hàng</Link>
-                            <Link to='' className="hover:text-black" >Quy chế hoạt động</Link>
-                            <Link to='' className="hover:text-black" >Quy trình đặt hàng và thanh toán</Link>
+                            <Link to='/policy' className="hover:text-black" >Chính sách đổi trả</Link>
+                            <Link to='/policy' className="hover:text-black" >Chính sách bảo mật</Link>
+                            <Link to='/policy' className="hover:text-black" >Chính sách giao hàng</Link>
+                            <Link to='/policy' className="hover:text-black" >Quy trình đặt hàng và thanh toán</Link>
                         </div>
                         <div className="sm:!text-xs sm:!col-span-1 flex flex-col sm:items-center sm:!gap-2 md:!gap-4 gap-6 ">
                             <h4 className="sm:!text-xl text-2xl font-bold">Về chúng tôi</h4>
-                            <Link to="" className="hover:text-black">Trang chủ</Link>
-                            <Link to="" className="hover:text-black">Giới thiệu</Link>
-                            <Link to="" className="hover:text-black">Sản phẩm</Link>
-                            <Link to="" className="hover:text-black">Bảng giá</Link>
-                            <Link to="" className="hover:text-black">Liên hệ</Link>
+                            <Link to="/" className="hover:text-black">Trang chủ</Link>
+                            <Link to="/introduce" className="hover:text-black">Giới thiệu</Link>
+                            <Link to="/product" className="hover:text-black">Sản phẩm</Link>
+                            <Link to="/price-list" className="hover:text-black">Bảng giá</Link>
+                            <Link to="/contact" className="hover:text-black">Liên hệ</Link>
                         </div>
                     </div>
                 </div>

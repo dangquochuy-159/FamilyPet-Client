@@ -65,22 +65,21 @@ function SearchProduct() {
             appendTo={() => document.body}
             visible={showResults && searchResult.length > 0}
             interactive={true}
-            placement='bottom'
+            placement='bottom-start'
             render={attrs => (
-                <div className='w-[400px] sm:!w-[295px] md:!w-[236px]' tabIndex="-1" {...attrs}>
+                <div className='w-[400px] sm:!w-[200px] md:!w-[236px]' tabIndex="-1" {...attrs}>
                     <Wrapper className='flex flex-col gap-4 p-4'>
                         {
                             searchResult.length > 0 && searchResult.map((result, index) => (
                                 <a href={`/product?slug=${result.slug}`} key={index} className="">{result.name}</a>
                             ))
                         }
-
                     </Wrapper>
                 </div>
             )}
             onClickOutside={handleHideResult}
         >
-            <div className="w-[500px] sm:!w-[295px] md:w-[236px] flex rounded-sm bg-white relative">
+            <div className="w-[500px] sm:!w-[90%] md:w-[90%] sm:!shadow-md sm:!shadow-black md:!shadow-md md:!shadow-black flex rounded-sm bg-white relative">
                 <input
                     ref={inputRef}
                     type='text'
