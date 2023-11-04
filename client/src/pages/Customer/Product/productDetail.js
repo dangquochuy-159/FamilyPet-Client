@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import axios from 'axios';
 import PropTypes from 'prop-types'
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -115,18 +116,18 @@ function ProductDetail({ productDetail }) {
                                     {
                                         product.photo_detail.map(photo =>
                                             <div key={photo} onClick={handleChangePhoto} className='w-auto h-auto p-2 border border-solid border-[#ebe4e4] bg-white hover:cursor-pointer hover:border-[var(--primary-color)]'>
-                                                <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photo}`} alt='photo-detail'
+                                                <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photo}`} alt='photo-detail'
                                                     data-photo={photo} className='w-24 h-24 object-cover' />
                                             </div>
                                         )
                                     }
                                     <div onClick={handleChangePhoto} className='w-auto h-auto p-2 border border-solid border-[#ebe4e4] bg-white hover:cursor-pointer hover:border-[var(--primary-color)]'>
-                                        < Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='photo-product'
+                                        <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='photo-product'
                                             data-photo={product.photo} className='w-24 h-24 object-cover' />
                                     </div>
                                 </div>
                                 <div className='sm:!col-span-6 md:!col-span-6 col-span-3 w-full flex items-center bg-white sm:!order-1 md:!order-1'>
-                                    < Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photoMain}`} alt='photo-product' />
+                                    <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photoMain}`} alt='photo-product' />
                                 </div>
                             </div>
                             <div className='sm:!col-span-12 col-span-6 w-full h-full flex flex-col px-4 md:!gap-2 gap-4'>

@@ -1,42 +1,45 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ConnectServer from "~/components/ConnectError";
-import ProductCate from "./productCate";
 import ProductDetail from "./productDetail";
 import './product.scss'
-import CustomerContext from "~/context/CustomerContext";
+import ProductMutil from "./productMutil";
 
 function Product() {
     const [connectServer, setConnectServer] = useState(false)
-    const [userLogin] = useContext(CustomerContext)
-    const [product, setProduct] = useState()
+    const [products, setProducts] = useState()
+    const [keyParams, setKeyParams] = useState('')
 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const slug = queryParams.get("slug");
     const category = queryParams.get("category");
+    const outstand = queryParams.get("outstand");
+    const promote = queryParams.get("promote");
     let query = ''
-    slug && (query = `filter=slug&value=${slug}`)
-    category && (query = `filter=category&value=${category}`)
+    slug && (query = `/filter?filter=slug&value=${slug}`)
+    category && (query = `/filter?filter=category&value=${category}`)
+    outstand && (query = `/filter?filter=outstand&value=${outstand}`)
+
+
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?${query}`)
+        for (const key of queryParams.keys()) {
+            setKeyParams(key)
+        }
+        fetch(`${process.env.REACT_APP_API_URL}/api/products${query}`)
             .then(res => res.json())
             .then(data => {
-                setProduct(data.data)
+                let productPromote = []
+                data.data.map(product => product.sale_price && productPromote.push(product))
+                promote ? setProducts(productPromote) : setProducts(data.data)
                 setConnectServer(true)
             })
-    })
-    const handleClick = () => {
-        console.log(slug)
-        console.log(category)
-        console.log(query)
-    }
+    }, [])
     return !connectServer ? (<ConnectServer />) : (
         <>
-            {/* <button onClick={handleClick}>click</button> */}
             {
-                product.length === 1 ? <ProductDetail productDetail={product} /> : <ProductCate productCate={product} />
+                products.length === 1 ? <ProductDetail productDetail={products} /> : <ProductMutil keyParams={keyParams} valueParams={category} products={products} />
             }
         </>
     );

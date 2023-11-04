@@ -36,7 +36,7 @@ function CardProduct({ className = '', product }) {
             </a>
             <div className="flex flex-col items-center gap-1 p-4 rounded-b-xl bg-white">
                 <a href={`/product?slug=${product.slug}`}
-                    className="limit-text sm:!h-[2.5rem] sm:!max-h-[2.5rem] h-[3.5rem] max-h-[3.5rem] sm:!text-sm text-xl text-black text-center font-medium hover:text-[var(--primary-color)]">
+                    className="limit-text sm:!h-[2.5rem] sm:!max-h-[2.5rem] h-[3.5rem] max-h-[3.5rem] sm:!text-sm text-lg text-black text-center hover:text-[var(--primary-color)]">
                     {product.name}
                 </a>
                 <p className="flex min-h-[64px] flex-col items-center justify-start gap-x-4 text-xl">

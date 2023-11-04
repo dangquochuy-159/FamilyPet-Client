@@ -7,9 +7,7 @@ function Search() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const name = queryParams.get("name");
-    const handleClick = () => {
-        console.log(name)
-    }
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${name}`)
             .then(res => res.json())
@@ -21,7 +19,6 @@ function Search() {
     return (
         <>
             <h2>Search page</h2>
-            <button onClick={handleClick}>click</button>
             {
                 searchResult && searchResult.map(result =>
                     <h2>{result.name}</h2>

@@ -26,6 +26,7 @@ const images = {
     site_footer6: require('./images/site_footer6.png'),
     payments_cod: require('./images/cod.jpg'),
     payments_shop: require('./images/shop.jpg'),
+    banner_product_page: require('./images/banner_cate_product-page.jpg')
 }
 
 export { audios, images }

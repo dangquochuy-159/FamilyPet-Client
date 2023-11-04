@@ -15,6 +15,7 @@ const {
     addProduct,
     removeProduct,
     updateProduct,
+    updateQuantityProduct,
 } = require('../controllers/ProductController')
 
 productRouter
@@ -28,6 +29,7 @@ productRouter
 
     .delete('/:id', removeProduct)
 
+    .put('/quantity', updateQuantityProduct)
     .put('/:id', storageUploadMultiplePhoto('product', 'photo', 'photo_detail'), updateProduct)
 
 module.exports = productRouter;

@@ -14,6 +14,9 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <div id='block-loading' className='hidden w-full h-full bg-black bg-opacity-20 fixed top-0 left-0 z-50'>
+          <div class="lds-dual-ring absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
         <Routes >
           {/* Routes Customer */}
           {

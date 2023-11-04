@@ -145,8 +145,6 @@ const updateProduct = (req, res, next) => {
             updateProduct[key] = req.body[key];
         }
     }
-    let arrColor = req.body.color ? req.body.color.split('-') : []
-    updateProduct.color = arrColor
     req.files.photo ? updateProduct.photo = req.files.photo.map(file => file.filename).join() : updateProduct
     req.files.photo_detail ? updateProduct.photo_detail = req.files.photo_detail.map(file => file.filename) : updateProduct
 
@@ -190,6 +188,24 @@ const updateProduct = (req, res, next) => {
         })
         .catch(next)
 }
+
+// PUT api/products/quantity
+const updateQuantityProduct = (req, res, next) => {
+    let updateArr = req.body
+
+
+    updateArr.forEach((item) => {
+        Product.updateOne(
+            { _id: item.id },
+            { $inc: { quantity: -Number(item.quantity) } }
+        ).then(() => { })
+    })
+    res.json({
+        message: updateArr,
+    })
+
+}
+
 module.exports = {
     getListProduct,
     searchProduct,
@@ -199,4 +215,5 @@ module.exports = {
     addProduct,
     removeProduct,
     updateProduct,
+    updateQuantityProduct,
 }

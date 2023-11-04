@@ -54,7 +54,7 @@ function PromoteProduct() {
                         </div>
                     </>
             }
-            <p className="text-lg text-[var(--primary-color)] w-full text-right hover:text-blue-600"><Link to='/login' >Xem tất cả {`>>`}</Link></p>
+            <p className="text-lg text-[var(--primary-color)] w-full text-right hover:text-blue-600"><Link to='/product?promote=true' >Xem tất cả {`>>`}</Link></p>
 
         </section>
     );

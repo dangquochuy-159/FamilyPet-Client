@@ -39,7 +39,6 @@ function ModalEvaluate({ id_product, name_product, user_name, user_id }) {
             star: star,
             content: contentRef.current.value
         }
-        // console.log(data)
         axios.post(`${process.env.REACT_APP_API_URL}/api/evaluates`, data)
             .then(res => {
                 alert('Gửi đánh giá thành công')

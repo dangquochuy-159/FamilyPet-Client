@@ -46,7 +46,12 @@ const Payment = (props) => {
         }
 
         const listProduct = (infoPayment.details.map(detail => detail.id_product))
-        console.log(listProduct)
+        const listUpdateQuantity = infoPayment.details.map(detail => {
+            return { id: detail.id_product, quantity: detail.quantity }
+
+        })
+        axios.put(`${process.env.REACT_APP_API_URL}/api/products/quantity`, listUpdateQuantity)
+            .then(res => { })
 
         axios.post(`${process.env.REACT_APP_API_URL}/api/orders`, data)
             .then(res => {

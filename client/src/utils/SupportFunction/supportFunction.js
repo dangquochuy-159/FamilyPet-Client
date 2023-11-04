@@ -11,3 +11,14 @@ export const changeDate = (date) => {
     const minutes = String(originalDate.getMinutes()).padStart(2, '0');
     return `${day}/${month}/${year} - ${hours}:${minutes}`;
 }
+
+export const handleLoadingPage = async () => {
+    return new Promise((resolve) => {
+        const loadingEle = document.getElementById('block-loading');
+        loadingEle.classList.remove('hidden')
+        setTimeout(() => {
+            loadingEle.classList.add('hidden')
+            resolve(true);
+        }, 500);
+    });
+}

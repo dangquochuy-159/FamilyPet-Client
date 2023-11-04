@@ -28,7 +28,8 @@ function Header({ avatar, id, cartsLength }) {
         window.location.href = '/login';
     }
     return (
-        <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-violet-600 md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-50">
+        <div className="wrapper--header_main w-full h-[var(--header-height)] sm:bg-violet-600
+         md:bg-green-500 bg-[var(--primary-color)] fixed top-0 left-0 z-40">
 
             {/* begin menu mobile */}
             <div className="hidden sm:!block">
