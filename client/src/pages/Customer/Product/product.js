@@ -38,6 +38,7 @@ function Product() {
     }, [])
     return !connectServer ? (<ConnectServer />) : (
         <>
+            {/* <button onClick={() => console.log(keyParams)}>Click</button> */}
             {
                 products.length === 1 ? <ProductDetail productDetail={products} /> : <ProductMutil keyParams={keyParams} valueParams={category} products={products} />
             }
