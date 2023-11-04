@@ -70,26 +70,31 @@ function ProductDetail({ productDetail }) {
     }
 
     const handlePayment = () => {
-        const details = []
+        if (userLogin) {
+            const details = []
 
-        let quantity = document.querySelector('.input-quantity').value
-        quantity = Number(quantity) === 0 ? 1 : quantity
-        let price = productDetail[0].sale_price ? productDetail[0].sale_price : productDetail[0].price
-        details.push({
-            id_product: productDetail[0]._id,
-            name_product: productDetail[0].name,
-            quantity: quantity,
-            unit_price: price,
-            into_money: price * quantity,
-        })
-        let totalPay = price * quantity
+            let quantity = document.querySelector('.input-quantity').value
+            quantity = Number(quantity) === 0 ? 1 : quantity
+            let price = productDetail[0].sale_price ? productDetail[0].sale_price : productDetail[0].price
+            details.push({
+                id_product: productDetail[0]._id,
+                name_product: productDetail[0].name,
+                quantity: quantity,
+                unit_price: price,
+                into_money: price * quantity,
+            })
+            let totalPay = price * quantity
 
-        const productPayment = {
-            total_pay: totalPay,
-            details: details,
+            const productPayment = {
+                total_pay: totalPay,
+                details: details,
+            }
+            window.sessionStorage.setItem("productPayment", JSON.stringify(productPayment))
+            navigate('/cart/payment-info')
+        } else {
+            if (window.confirm('Vui lòng đăng nhập để mua sản phẩm, chuyển đến trang đăng nhập'))
+                window.location.href = '/login'
         }
-        window.sessionStorage.setItem("productPayment", JSON.stringify(productPayment))
-        navigate('/cart/payment-info')
     }
 
     const handleDownQuantity = () => {

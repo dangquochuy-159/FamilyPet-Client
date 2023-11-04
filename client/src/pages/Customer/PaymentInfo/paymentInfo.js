@@ -189,7 +189,7 @@ function PaymentInfo() {
                 <p>Điểm của bạn: {userLogin.total_point} điểm</p>
                 <div id='block-promote' className="hidden space-y-10 h-96 overflow-auto p-4 bg-[#f5f5f5]">
                     {
-                        promotes.map(promote => (
+                        !promotes.length > 0 ? <p className="text-center">Không có mã khuyến mãi!</p> : promotes.map(promote => (
                             <div key={promote.code}
                                 className={`${promote.point > userLogin.total_point ? 'hidden' : 'grid'} 
                                              grid-cols-5 rounded-sm border border-solid
