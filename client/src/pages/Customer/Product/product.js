@@ -24,6 +24,7 @@ function Product() {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         for (const key of queryParams.keys()) {
             setKeyParams(key)
         }

@@ -9,11 +9,12 @@ function UpdateInfoUser({ user }) {
     const [wards, setWards] = useState([])
     const [avatar, setAvatar] = useState(null)
     const [addressArr, setAddressArr] = useState([])
+
     useEffect(() => {
-        fetch(`https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1`)
+        fetch(`${process.env.REACT_APP_API_ADDRESS}/province`)
             .then(res => res.json())
             .then(data => {
-                setProvinces(data.data.data)
+                setProvinces(data.results)
             })
             .catch(error => {
                 console.log('Lỗi >>>', error)
@@ -21,6 +22,7 @@ function UpdateInfoUser({ user }) {
 
         setAddressArr(user.address.split(' - '))
     }, [])
+
     useEffect(() => {
         Validator({
             form: '#form-update-user',
@@ -59,19 +61,19 @@ function UpdateInfoUser({ user }) {
                 switch (name) {
                     case "province":
                         provinces.map((pro) => {
-                            return value === pro.name_with_type &&
-                                fetch(`https://vn-public-apis.fpo.vn/districts/getByProvince?provinceCode=${pro.code}&limit=-1`)
+                            return value === pro.province_name &&
+                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/district/${pro.province_id}`)
                                     .then(res => res.json())
-                                    .then(data => setDistricts(data.data.data))
+                                    .then(data => setDistricts(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))
                         })
                         break
                     case "district":
                         districts.map((dis) => {
-                            return value === dis.name_with_type &&
-                                fetch(`https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=${dis.code}&limit=-1`)
+                            return value === dis.district_name &&
+                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/ward/${dis.district_id}`)
                                     .then(res => res.json())
-                                    .then(data => setWards(data.data.data))
+                                    .then(data => setWards(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))
                         })
                         break
@@ -114,21 +116,21 @@ function UpdateInfoUser({ user }) {
                             <Option name={addressArr[3]} value={addressArr[3]} />
                             {/* <Option name='Tỉnh/ Thành Phố' /> */}
                             {
-                                provinces.length > 0 && provinces.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
+                                provinces.length > 0 && provinces.map(pro => <Option key={pro.province_id} value={pro.province_name} name={pro.province_name} />)
                             }
                         </Select>
                         <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='district' onChange={handleInputChange}>
                             <Option name={addressArr[2]} value={addressArr[2]} />
                             {/* <Option name='Quận/ Huyện' /> */}
                             {
-                                districts.length > 0 && districts.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
+                                districts.length > 0 && districts.map(dis => <Option key={dis.district_id} value={dis.district_name} name={dis.district_name} />)
                             }
                         </Select>
                         <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='ward' onChange={handleInputChange}>
                             <Option name={addressArr[1]} value={addressArr[1]} />
                             {/* <Option name='Phường/ Xã' /> */}
                             {
-                                wards.length > 0 && wards.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
+                                wards.length > 0 && wards.map(ward => <Option key={ward.ward_id} value={ward.ward_name} name={ward.ward_name} />)
                             }
                         </Select>
                     </div>

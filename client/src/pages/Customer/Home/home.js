@@ -1,19 +1,16 @@
-import { useContext } from "react";
 import ButtonToTop from "~/components/ButtonToTop";
-import CustomerContext from "~/context/CustomerContext";
-
 import './style_home.scss'
 import { images } from "~/assets";
 import { AllProduct, CategoryProduct, OutstandProduct, PromoteProduct, Service } from "./components";
+import { useEffect } from "react";
 
 
 
 function Home() {
-    const contextCustomer = useContext(CustomerContext)
-    const [value] = contextCustomer
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
-    const handleClick = () => {
-    }
     return (
         <div id='page-home' className="page pb-16">
             <ButtonToTop />

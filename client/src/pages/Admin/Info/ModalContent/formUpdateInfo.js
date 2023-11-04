@@ -12,9 +12,9 @@ function FormUpdateInfo({ admin }) {
     const ipAddressRef = useRef()
 
     useEffect(() => {
-        fetch(`https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1`)
+        fetch(`${process.env.REACT_APP_API_ADDRESS}/province`)
             .then(res => res.json())
-            .then(data => setProvinces(data.data.data))
+            .then(data => setProvinces(data.results))
             .catch(error => console.log('Lỗi >>>', error))
     }, [])
 
@@ -51,20 +51,20 @@ function FormUpdateInfo({ admin }) {
         switch (name) {
             case "province":
                 provinces.map((pro) => {
-                    return value === pro.name_with_type &&
-                        fetch(`https://vn-public-apis.fpo.vn/districts/getByProvince?provinceCode=${pro.code}&limit=-1`)
+                    return value === pro.province_name &&
+                        fetch(`${process.env.REACT_APP_API_ADDRESS}/province/district/${pro.province_id}`)
                             .then(res => res.json())
-                            .then(data => setDistricts(data.data.data))
+                            .then(data => setDistricts(data.results))
                             .catch(error => console.log('Lỗi >>>', error))
                 })
                 ipAddressRef.current.value = ''
                 break
             case "district":
                 districts.map((dis) => {
-                    return value === dis.name_with_type &&
-                        fetch(`https://vn-public-apis.fpo.vn/wards/getByDistrict?districtCode=${dis.code}&limit=-1`)
+                    return value === dis.district_name &&
+                        fetch(`${process.env.REACT_APP_API_ADDRESS}/province/ward/${dis.district_id}`)
                             .then(res => res.json())
-                            .then(data => setWards(data.data.data))
+                            .then(data => setWards(data.results))
                             .catch(error => console.log('Lỗi >>>', error))
                 })
                 break
@@ -108,19 +108,19 @@ function FormUpdateInfo({ admin }) {
                     <Select className='w-1/4 p-2 outline-none border-2' name='province' onChange={handleInputChange}>
                         <Option value='' name='Tỉnh/ Thành Phố' />
                         {
-                            provinces.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
+                            provinces.map(pro => <Option key={pro.province_id} value={pro.province_name} name={pro.province_name} />)
                         }
                     </Select>
                     <Select className='w-1/4 p-2 outline-none border-2' name='district' onChange={handleInputChange}>
                         <Option value='' name='Quận/ Huyện' />
                         {
-                            districts.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
+                            districts.map(dis => <Option key={dis.district_id} value={dis.district_name} name={dis.district_name} />)
                         }
                     </Select>
                     <Select className='w-1/4 p-2 outline-none border-2' name='ward' onChange={handleInputChange}>
                         <Option value='' name='Phường/ Xã' />
                         {
-                            wards.map(pro => <Option key={pro.code} value={pro.name_with_type} name={pro.name_with_type} />)
+                            wards.map(ward => <Option key={ward.ward_id} value={ward.ward_name} name={ward.ward_name} />)
                         }
                     </Select>
                 </FormGroup>

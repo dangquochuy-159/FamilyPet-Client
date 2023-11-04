@@ -16,7 +16,7 @@ function OutstandProduct() {
     }, [])
 
     return (
-        <section id="sec-home_outstand" className='grid_layout wide'>
+        <section id="sec-home_outstand" className='grid_layout wide mt-16'>
             <h2 className="w-full  title style-title sm:!text-xl md:!text-3xl text-4xl text-white bg-red-600">
                 <span className="flex">
                     <FlashIcon width="36px" height="36px" />

@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { CheckIcon } from "~/components/Icons";
 import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 
 function PriceList() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
     return (
         <section id='sec-price_list-page' className="grid_layout wide my-8">
             <h2 className="text-2xl text-center font-bold uppercase">Bảng giá</h2>
