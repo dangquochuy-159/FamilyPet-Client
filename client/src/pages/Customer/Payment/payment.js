@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ButtonToTop from '~/components/ButtonToTop';
 import CustomerContext from '~/context/CustomerContext';
-import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
+import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 
 const Payment = (props) => {
     const [userLogin] = useContext(CustomerContext)
@@ -23,16 +24,18 @@ const Payment = (props) => {
         totalPay = infoPayment.total_pay - reduceShip + transportFee
     }
 
-    const handleCancelPayment = () => {
+    const handleCancelPayment = async () => {
         window.sessionStorage.removeItem("productPayment")
         window.sessionStorage.removeItem("infoPayment")
-        navigate('/cart')
+        await handleLoadingPage()
+        navigate('/')
     }
-    const handleBackPage = () => {
-        window.sessionStorage.removeItem("infoPayment")
+
+    const handleBackPage = async () => {
+        await handleLoadingPage()
         window.history.back();
-        // navigate('/cart/payment-info')
     }
+
     const handlePayment = () => {
         const data = {
             id_customer: userLogin._id,
@@ -58,10 +61,11 @@ const Payment = (props) => {
                 alert('Thanh toán đơn hàng thành công')
                 axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/change?point=${infoPayment.promote_point}&type=down`)
                     .then((res) => {
-                        axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProduct }).then(() => {
+                        axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProduct }).then(async () => {
                             window.sessionStorage.removeItem("productPayment")
                             window.sessionStorage.removeItem("infoPayment")
-                            window.location.href = '/'
+                            await handleLoadingPage()
+                            navigate('/')
                         })
                     })
             })
@@ -69,6 +73,7 @@ const Payment = (props) => {
 
     return (
         <section className='grid_layout wide h-auto flex flex-col gap-8 my-16' >
+            <ButtonToTop />
             <div className="w-full p-4 flex justify-between shadow-xl shadow-white rounded-sm gap-2 bg-white sticky top-[128px]">
                 <div className="flex justify-end">
                     <button onClick={handleCancelPayment} className="p-2 sm:!text-sm text-white font-bold rounded-sm bg-red-500">Hủy thanh toán</button>

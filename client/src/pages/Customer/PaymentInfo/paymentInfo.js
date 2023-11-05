@@ -4,12 +4,13 @@ import { images } from "~/assets";
 import ButtonToTop from "~/components/ButtonToTop";
 import Image from "~/components/Image";
 import CustomerContext from "~/context/CustomerContext";
-import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
+import { changeNumberToPrice, handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 
 function PaymentInfo() {
     const productPayment = JSON.parse(window.sessionStorage.getItem("productPayment"))
-    const navigate = useNavigate()
+    const infoPayment = JSON.parse(window.sessionStorage.getItem("infoPayment")) && JSON.parse(window.sessionStorage.getItem("infoPayment"))
     const [userLogin] = useContext(CustomerContext)
+    const navigate = useNavigate()
 
     const [products, setProducts] = useState([])
     const [promotes, setPromotes] = useState([])
@@ -17,7 +18,7 @@ function PaymentInfo() {
     const [promoteType, setPromoteType] = useState('')
     const [promoteReduce, setPromoteReduce] = useState(0)
     const [promotePoint, setPromotePoint] = useState(0)
-    const [checkCod, setCheckCod] = useState(true)
+    const [checkCod, setCheckCod] = useState(infoPayment ? infoPayment.payments === 'cod' : true)
     const [methodPayments, setMethodPayments] = useState('cod')
 
     const ipProCode = document.getElementById('promote-code')
@@ -34,21 +35,15 @@ function PaymentInfo() {
         })
     }, [])
 
-    const handleCancelPayment = () => {
+    const handleCancelPayment = async () => {
+        infoPayment && window.sessionStorage.removeItem("infoPayment")
         window.sessionStorage.removeItem("productPayment")
-        navigate('/cart')
+        await handleLoadingPage()
+        navigate('/')
     }
 
-    const handleBackPage = () => {
-        window.sessionStorage.removeItem("productPayment")
-        // navigate('/cart')
-        window.history.back();
-    }
-
-    const handleNextPage = () => {
+    const handleNextPage = async () => {
         if (ipName.value === '' || ipPhone.value === '' || ipAdd.value === '') {
-            // ipName === '' && (ipName.parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đầy đủ thông tin')
-
             ipName.parentElement.querySelector('.msg-error').innerHTML = ipName.value === '' ? 'Vui lòng nhập đầy đủ thông tin' : ''
             ipPhone.parentElement.querySelector('.msg-error').innerHTML = ipPhone.value === '' ? 'Vui lòng nhập đầy đủ thông tin' : ''
             ipAdd.parentElement.querySelector('.msg-error').innerHTML = ipAdd.value === '' ? 'Vui lòng nhập đầy đủ thông tin' : ''
@@ -68,6 +63,7 @@ function PaymentInfo() {
                 promote_point: promotePoint,
             }
             window.sessionStorage.setItem("infoPayment", JSON.stringify(infoPayment))
+            await handleLoadingPage()
             navigate('/cart/payment')
         }
 
@@ -90,9 +86,11 @@ function PaymentInfo() {
             ipAdd.value = ''
         }
     }
+
     const handleChangeInputInfo = (e) => {
         e.target.value !== '' && (e.target.parentElement.querySelector('.msg-error').innerHTML = '')
     }
+
     const handleShowPromoteCode = (e) => {
         const blockPromote = document.getElementById('block-promote')
         if (blockPromote.classList.contains('hidden')) {
@@ -103,15 +101,18 @@ function PaymentInfo() {
             e.target.innerHTML = 'Xem mã khuyến mãi'
         }
     }
+
     const handleCancelPromoteCode = () => {
         ipProCode.value = ''
         disabledButtonExchange(false)
         setDisabledBtn(true)
     }
+
     const disabledButtonExchange = (boolean) => {
         const listBtnExchange = document.querySelectorAll('.btn-exchange_point')
         Array.from(listBtnExchange).map(btnExchange => btnExchange.disabled = boolean)
     }
+
     const handleExchangePoint = (e) => {
         let promote = JSON.parse(e.target.getAttribute('data-promote'))
         ipProCode.value = promote.code
@@ -132,7 +133,6 @@ function PaymentInfo() {
                     <button onClick={handleCancelPayment} className="p-2 sm:!text-sm text-white font-bold rounded-sm bg-red-500">Hủy thanh toán</button>
                 </div>
                 <div className="flex justify-end gap-4  ">
-                    <button onClick={handleBackPage} className="sm:!w-1/2 p-2 sm:!text-sm text-white font-bold rounded-sm bg-yellow-600">Quay lại trang trước</button>
                     <button onClick={handleNextPage} className="sm:!w-1/2 p-2 sm:!text-sm text-white font-bold rounded-sm bg-green-600">Tiếp theo</button>
                 </div>
             </div>
@@ -157,15 +157,15 @@ function PaymentInfo() {
             <div className="w-full grid grid-cols-2 gap-4 p-4 shadow-xl shadow-white rounded-sm bg-white">
                 <h2 className="col-span-2 text-2xl font-bold">Nhập thông tin khách hàng</h2>
                 <div className="col-span-1 w-full flex flex-col gap-2">
-                    <input onChange={handleChangeInputInfo} type="text" className="input-name border outline-none rounded-full h-12 p-4 border-solid border-[var(--primary-color)] bg-white" placeholder="Nhập tên" />
+                    <input onChange={handleChangeInputInfo} type="text" defaultValue={infoPayment && infoPayment.name} className="input-name border outline-none rounded-full h-12 p-4 border-solid border-[var(--primary-color)] bg-white" placeholder="Nhập tên" />
                     <span className="msg-error ml-4 text-red-500 font-bold"></span>
                 </div>
                 <div className="col-span-1 w-full flex flex-col gap-2">
-                    <input onChange={handleChangeInputInfo} type="text" className="input-phone border outline-none rounded-full h-12 p-4 border-solid border-[var(--primary-color)] bg-white" placeholder="Nhập số điện thoại" />
+                    <input onChange={handleChangeInputInfo} type="number" defaultValue={infoPayment && infoPayment.phone} className="input-phone border outline-none rounded-full h-12 p-4 border-solid border-[var(--primary-color)] bg-white" placeholder="Nhập số điện thoại" />
                     <span className="msg-error ml-4 text-red-500 font-bold"></span>
                 </div>
                 <div className="col-span-2 w-full flex flex-col gap-2">
-                    <input onChange={handleChangeInputInfo} type="text" className="input-add col-span-2 border outline-none rounded-full h-12 p-4 border-solid border-[var(--primary-color)] bg-white" placeholder="Nhập địa chỉ" />
+                    <input onChange={handleChangeInputInfo} type="text" defaultValue={infoPayment && infoPayment.address} className="input-add col-span-2 border outline-none rounded-full h-12 p-4 border-solid border-[var(--primary-color)] bg-white" placeholder="Nhập địa chỉ" />
                     <span className="msg-error ml-4 text-red-500 font-bold"></span>
                 </div>
                 <div className="col-span-2 flex items-center gap-2">

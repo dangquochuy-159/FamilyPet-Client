@@ -1,0 +1,15 @@
+#contact_show {
+    .contact_show-icon {
+        animation: Rotate 0.3s linear infinite alternate;
+    }
+}
+
+@keyframes Rotate {
+    0% {
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}

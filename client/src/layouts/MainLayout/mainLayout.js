@@ -2,6 +2,7 @@ import CustomerContext from "~/context/CustomerContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
+import ContactShow from "~/components/ContactShow";
 
 function MainLayout({ children }) {
     const dataUser = window.sessionStorage.getItem('userLogin') && JSON.parse(window.sessionStorage.getItem('userLogin')).data.user
@@ -22,6 +23,7 @@ function MainLayout({ children }) {
     return (
         <CustomerContext.Provider value={[userLogin]}>
             <div className="flex flex-col min-h-screen">
+                <ContactShow />
                 <Header avatar={connectServer && userLogin.avatar} id={connectServer && userLogin._id} cartsLength={connectServer && userLogin.carts.length} />
                 <div className="flex-1 mt-[var(--header-height)] bg-[#f5f5f5]">
                     {children}

@@ -8,26 +8,26 @@ function Footer() {
 
 
     return (
-        <div className="wrapper-footer bg-[var(--primary-color)] text-white pt-16 pb-8">
+        <div className="wrapper-footer bg-[var(--primary-color)] text-white pt-16 pb-8 sm:!px-2">
             <div className="grid_layout wide">
                 <div className="grid grid-cols-5 gap-10">
                     <div className="sm:!col-span-5 md:!col-span-5 col-span-2 grid sm:!grid-cols-1 md:!grid-cols-2 grid-cols-1 gap-4">
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-4">
-                                <p className="flex gap-2 sm:!text-xs text-xl">
+                                <p className="flex gap-2 sm:!text-base text-xl">
                                     <span className="w-1/12"> <MapPinIcon /></span>
                                     <span className="w-11/12">PetShop</span>
                                 </p>
-                                <p className="flex gap-2 sm:!text-xs text-xl">
+                                <p className="flex gap-2 sm:!text-base text-xl">
                                     <span className="w-1/12"><MapIcon /></span>
                                     <span className="w-11/12">Địa chỉ: 128-140 Đ. Điện Biên Phủ, Đa Kao, Quận 1, Thành phố Hồ Chí Minh, Việt Nam</span>
                                 </p>
-                                <p className="flex gap-2 sm:!text-xs text-xl">
+                                <p className="flex gap-2 sm:!text-base text-xl">
                                     <span className="w-1/12"><PhoneIcon /></span>
                                     <span className="w-11/12">Hotline:19008080</span>
                                 </p>
                             </div>
-                            <div className="sm:!w-2/5 md:!w-full w-1/2 flex gap-4">
+                            <div className="sm:!w-3/5 md:!w-full w-1/2 flex gap-4">
                                 <a href="" className="w-1/5"><img src={images.facebook} alt="facebook" className="w-full brightness-0 invert" /></a>
                                 <a href="" className="w-1/5"><img src={images.twitter} alt="twitter" className="w-full brightness-0 invert" /></a>
                                 <a href="" className="w-1/5"><img src={images.instagram} alt="instagram" className="w-full brightness-0 invert" /></a>
@@ -53,9 +53,9 @@ function Footer() {
                         </div>
                     </div>
 
-                    <div className="sm:!mx-auto sm:!col-span-5 md:!col-span-5 col-span-3 grid sm:!grid-cols-1 grid-cols-3 sm:!gap-2 gap-6">
-                        <div className="sm:!text-xs sm:!col-span-1 flex flex-col sm:items-center sm:!gap-2 md:!gap-4 gap-6">
-                            <h4 className="sm:!text-xl text-2xl font-bold">Tổng đài hỗ trợ </h4>
+                    <div className=" sm:!col-span-5 md:!col-span-5 col-span-3 grid sm:!grid-cols-1 grid-cols-3 sm:!gap-2 gap-6">
+                        <div className="sm:!text-base sm:!col-span-1 flex flex-col sm:items-start sm:!gap-2 md:!gap-4 gap-6">
+                            <h4 className="sm:!text-xl text-2xl sm:!text-black font-bold">Tổng đài hỗ trợ </h4>
                             <p>Hotline hỗ trợ 24/7</p>
                             <p>Tư vấn khách hàng:</p>
                             <p className="underline">19008080</p>
@@ -63,15 +63,15 @@ function Footer() {
                             <p className="underline">19006969</p>
                             <p>petshop@gmail.com</p>
                         </div>
-                        <div className="sm:!text-xs sm:!col-span-1 flex flex-col sm:items-center sm:!gap-2 md:!gap-4 gap-6">
-                            <h4 className="sm:!text-xl text-2xl font-bold">Chính sách</h4>
+                        <div className="sm:!text-base sm:!col-span-1 flex flex-col sm:items-start sm:!gap-2 md:!gap-4 gap-6">
+                            <h4 className="sm:!text-xl sm:!text-black text-2xl font-bold">Chính sách</h4>
                             <Link to='/policy' className="hover:text-black" >Chính sách đổi trả</Link>
                             <Link to='/policy' className="hover:text-black" >Chính sách bảo mật</Link>
                             <Link to='/policy' className="hover:text-black" >Chính sách giao hàng</Link>
                             <Link to='/policy' className="hover:text-black" >Quy trình đặt hàng và thanh toán</Link>
                         </div>
-                        <div className="sm:!text-xs sm:!col-span-1 flex flex-col sm:items-center sm:!gap-2 md:!gap-4 gap-6 ">
-                            <h4 className="sm:!text-xl text-2xl font-bold">Về chúng tôi</h4>
+                        <div className="sm:!text-base sm:!col-span-1 flex flex-col sm:items-start sm:!gap-2 md:!gap-4 gap-6 ">
+                            <h4 className="sm:!text-xl sm:!text-black text-2xl font-bold">Về chúng tôi</h4>
                             <Link to="/" className="hover:text-black">Trang chủ</Link>
                             <Link to="/introduce" className="hover:text-black">Giới thiệu</Link>
                             <Link to="/product" className="hover:text-black">Sản phẩm</Link>

@@ -98,7 +98,7 @@ function Login() {
                                     ref={ipUserNameRef}
                                     id="username"
                                     className="input input-username w-full border-2 border-solid border-gray-400 rounded h-12 px-4 focus:outline-none form-control"
-                                    type="text"
+                                    type="number"
                                     name="phone_login"
                                     placeholder="Nhập số điện thoại"
                                     onFocus={() => document.querySelector('.error--login').innerHTML = ''}

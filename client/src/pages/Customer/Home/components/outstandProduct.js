@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CardProduct from "~/components/CardProduct";
 import ConnectError from "~/components/ConnectError";
 import { FlashIcon } from "~/components/Icons";
+import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 
 function OutstandProduct() {
     const [connectServer, setConnectServer] = useState(false)
     const [productsOutstand, setProductsOutstand] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?filter=outstand&value=true`).then(res => res.json()).then(data => {
             setProductsOutstand(data.data)
             setConnectServer(true)
         }).catch(err => setConnectServer(false))
     }, [])
+
+    const handleToProductPage = async () => {
+        await handleLoadingPage()
+        navigate('/product?outstand=true')
+    }
 
     return (
         <section id="sec-home_outstand" className='grid_layout wide mt-16'>
@@ -52,7 +58,7 @@ function OutstandProduct() {
                         </div>
                     </>
             }
-            <p className="text-lg text-[var(--primary-color)] w-full text-right hover:text-blue-600"><Link to='/product?outstand=true' >Xem tất cả {`>>`}</Link></p>
+            <button onClick={handleToProductPage} className="text-lg text-[var(--primary-color)] w-full text-right hover:text-blue-600">Xem tất cả {`>>`}</button>
 
         </section >
     );

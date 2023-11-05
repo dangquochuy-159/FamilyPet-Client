@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ButtonToTop from "~/components/ButtonToTop";
 
 function Policy() {
     useEffect(() => {
@@ -6,7 +7,9 @@ function Policy() {
     }, [])
     return (
         <section id='sec-policy_page' className="grid_layout wide my-16 flex flex-col gap-8 sm:!my-0 sm:!p-2">
+            <ButtonToTop />
             <h2 className="text-4xl text-[var(--primary-color)] font-bold">Chính sách khi mua hàng tại Petshop</h2>
+            {/* Mục 1 */}
             <div className="space-y-2">
                 <p className="text-2xl font-bold">1. Chính sách đổi trả</p>
                 <p className="text-lg">Nhằm giúp bạn thấy thoải mái và an tâm hơn khi mua sắm tại Petshop, khách hàng và thành viên Petshop hoàn toàn có thể đổi hoặc trả sản phẩm sau khi mua hàng.</p>
@@ -29,6 +32,8 @@ function Policy() {
                 <p className="text-lg">Đơn hàng được xác nhận là lỗi sai sót (hàng hóa, số lượng, giao hàng…) từ phía Petshop, chúng tôi sẽ đổi sản phẩm cho bạn trong vòng 24-48h kể từ khi nhận được thông báo, áp dụng cho tất cả đơn hàng nội thành và các tỉnh thành khác. Chúng tôi khuyến khích bạn nên kiểm tra sản phẩm trước khi thanh toán.</p>
 
             </div>
+
+            {/* Mục 2 */}
             <div className="space-y-2">
                 <p className="text-2xl font-bold">2. Chính sách bảo mật</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Phạm vi thu nhập và mục đích thu nhập</p>
@@ -49,6 +54,8 @@ function Policy() {
                 <p className="text-lg">Trong trường hợp máy chủ lưu trữ thông tin bị hacker tấn công dẫn đến mất mát dữ liệu cá nhân. Chúng tôi sẽ có trách nhiệm thông báo vụ việc cho cơ quan chức năng điều tra xử lý kịp thời và thông báo cho khách hàng được biết.</p>
                 <p className="text-lg">Bảo mật tuyệt đối mọi thông tin giao dịch trực tuyến của khách hàng bao gồm thông tin hóa đơn kế toán chứng từ số hóa trên Petshop.</p>
             </div>
+
+            {/* Mục 3 */}
             <div>
                 <p className="text-2xl font-bold">3. Chính sách giao hàng</p>
                 <ul className="space-y-2 py-2">
@@ -84,8 +91,10 @@ function Policy() {
                     </li>
                 </ul>
             </div>
+
+            {/* Mục 4 */}
             <div className="space-y-2">
-                <p className="text-2xl font-bold">5 .Quy trình đặt hàng và thanh toán</p>
+                <p className="text-2xl font-bold">4. Quy trình đặt hàng và thanh toán</p>
                 <p className="text-lg">Khách hàng có thể chọn thêm sản phẩm vào giỏ hàng sau đó tiến hành thanh toán sản phẩm từ giỏ hàng hoặc có thể mua hàng trực tiếp thông qua nút mua hàng trên trang chi tiết sản phẩm</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Các bước đặt hàng và thanh toán:</p>
                 <p className="text-lg"><strong>Bước 1</strong>: Chọn mua hàng từ giỏ hàng hoặc mua hàng trực tiếp từ trang chi tiết sản phẩm</p>

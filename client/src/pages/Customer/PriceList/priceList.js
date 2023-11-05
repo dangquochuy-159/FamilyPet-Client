@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ButtonToTop from "~/components/ButtonToTop";
 import { CheckIcon } from "~/components/Icons";
 import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 
@@ -8,6 +9,7 @@ function PriceList() {
     }, [])
     return (
         <section id='sec-price_list-page' className="grid_layout wide my-8">
+            <ButtonToTop />
             <h2 className="text-2xl text-center font-bold uppercase">Bảng giá</h2>
             <div className="mt-8 px-8 py-8 bg-white rounded-xl border border-solid border-[var(--primary-color)]">
                 <p className="text-lg text-center mb-8 font-bold">Chăm sóc thú cưng</p>

@@ -3,15 +3,25 @@ import config from "~/config";
 import Image from "~/components/Image";
 import TippyHeadless from '@tippyjs/react/headless';
 import { images } from "~/assets";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "~/components/Button";
 import { AccountIcon, CartIcon, CloseIcon, HomeIcon, IntroduceIcon, ListIcon, LoginIcon, LogoutIcon, MenuIcon, PhoneIcon, ProductIcon, QuestionIcon } from "~/components/Icons";
 import SearchProduct from "./searchProduct";
 import './header.scss'
+import { handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
+import { useEffect, useState } from 'react';
 
 function Header({ avatar, id, cartsLength }) {
     const router = config.routes_public
     const navigate = useNavigate()
+    const [categorys, setCategorys] = useState([])
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json())
+            .then(data => {
+                setCategorys(data.data)
+            })
+    })
 
     const handleShowMenu = () => {
         document.getElementById('menu-mobile_modal').classList.remove('hidden')
@@ -26,6 +36,11 @@ function Header({ avatar, id, cartsLength }) {
     const handleLogout = () => {
         window.sessionStorage.removeItem('userLogin')
         window.location.href = '/login';
+    }
+
+    const handleChangePage = async (e) => {
+        await handleLoadingPage()
+        navigate(e.target.getAttribute('data-url'))
     }
     return (
         <div className="wrapper--header_main w-full h-[var(--header-height)] 
@@ -86,8 +101,8 @@ function Header({ avatar, id, cartsLength }) {
                             <SearchProduct />
                         </div>
                         <div className="sm:!hidden md:!hidden w-auto h-auto relative">
-                            <Button leftIcon={<CartIcon width="32px" height='32px' className='text-white hover:text-blue-600 ' />}
-                                to='/cart' className="hover:!text-blue-600"
+                            <Button leftIcon={<CartIcon width="32px" height='32px' className='text-white hover:text-blue-600 pointer-events-none' />}
+                                data-url='/cart' onClick={handleChangePage} className="hover:!text-blue-600"
                             />
                             {
                                 id && <p className="w-5 h-5 flex justify-center items-center absolute -top-2 -right-2 rounded-full text-white font-bold bg-red-600">
@@ -97,8 +112,8 @@ function Header({ avatar, id, cartsLength }) {
                         </div>
                         <div className=" w-1/2 flex items-center justify-end gap-5">
                             <div className="flex justify-center items-center gap-2">
-                                <Button href='tel:19008080' title='19008080' leftIcon={<PhoneIcon width="32px" height='32px' className='text-white' />}
-                                    className=" hover:text-blue-600 text-white font-bold"
+                                <Button href='tel:19008080' title='19008080' leftIcon={<PhoneIcon width="32px" height='32px' className='text-[var(--primary-color)]' />}
+                                    className=" hover:text-blue-600 text-[var(--primary-color)] font-bold bg-white p-2 rounded-lg"
                                 />
 
                                 <TippyHeadless
@@ -127,15 +142,15 @@ function Header({ avatar, id, cartsLength }) {
                                     )}
                                 >
                                     <div className='sm:!hidden md:!hidden w-10 h-10'>
-                                        <Link to='/account' className='w-full h-full'>
+                                        <button onClick={handleChangePage} data-url='/account' className='w-full h-full'>
                                             {
                                                 avatar ?
                                                     <Image src={`${process.env.REACT_APP_API_URL}/api/users/${id}/${avatar}`} alt='avatar'
-                                                        className='w-full h-full object-cover rounded-full bg-white hover:cursor-pointer' /> :
+                                                        className='w-full h-full object-cover rounded-full bg-white hover:cursor-pointer pointer-events-none' /> :
                                                     <Image src={images.user} alt='ảnh'
-                                                        className='w-full h-full object-cover rounded-full bg-white p-2 hover:cursor-pointer' />
+                                                        className='w-full h-full object-cover rounded-full bg-white p-2 hover:cursor-pointer pointer-events-none' />
                                             }
-                                        </Link>
+                                        </button>
                                     </div>
                                 </TippyHeadless>
                             </div>
@@ -145,12 +160,41 @@ function Header({ avatar, id, cartsLength }) {
                     <nav className='sm:!hidden md:!hidden w-full flex items-center justify-start flex-wrap gap-y-2 pb-4 md:gap-x-10 gap-x-20'>
                         <NavLink to={router.default} className="nav--link text-lg text-white" >Trang chủ</NavLink>
                         <NavLink to={router.introduce} className="nav--link text-lg text-white" >Giới thiệu</NavLink>
-                        <NavLink to={router.product} className="nav--link text-lg text-white" >Sản phẩm</NavLink>
+
+                        <TippyHeadless
+                            appendTo={() => document.body}
+                            // visible={true}
+                            trigger="mouseenter"
+                            offset={[0, 2]}
+                            delay={[50, 50]}
+                            placement='auto'
+                            interactive={true}
+                            render={attrs => (
+                                <div className='w-[400px] h-auto bg-white space-y-4 rounded-sm shadow-xl shadow-white' tabIndex="-1" {...attrs}>
+                                    <div className='grid grid-cols-2 gap-4'>
+                                        <a href='/product' className='col-span-2 border-b border-solid border-[#ccc] p-4 hover:text-[var(--primary-color)] hover:cursor-pointer'>Tất cả sản phẩm</a>
+                                        <p className='col-span-2 px-4 font-bold'>Danh mục sản phẩm</p>
+
+                                        {
+                                            categorys.length > 0 && categorys.map(category => (
+
+                                                <a href={`/product?category=${category.name}`} className='px-4 hover:text-[var(--primary-color)] hover:cursor-pointer'>{category.name}</a>
+                                            ))
+                                        }
+                                        <a href='/product?outstand=true' className='col-span-2 border-y border-solid border-[#ccc] p-4 hover:text-[var(--primary-color)] hover:cursor-pointer'>Sản phẩm khuyến mãi</a>
+                                        <a href='/product?promote=true' className='col-span-2 border-b border-solid border-[#ccc] px-4 pb-4 hover:text-[var(--primary-color)] hover:cursor-pointer'>Sản phẩm nổi bật</a>
+                                    </div>
+                                </div>
+                            )}
+                        >
+                            <NavLink to={router.product} className="nav--link text-lg text-white" >Sản phẩm</NavLink>
+                        </TippyHeadless>
+
                         <NavLink to={router.priceLList} className="nav--link text-lg text-white" >Bảng giá</NavLink>
                         <NavLink to={router.contact} className="nav--link text-lg text-white" >Liên hệ</NavLink>
                         <NavLink to={router.policy} className="nav--link text-lg text-white" >Chính sách</NavLink>
                     </nav>
-                </div>
+                </div >
             </section >
         </div >
     );

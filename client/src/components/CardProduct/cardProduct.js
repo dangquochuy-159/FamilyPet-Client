@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types'
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import { Button } from "~/components/Button";
 import { CartIcon, SearchIcon, FireIcon } from "../Icons";
-
-import './cardProduct.scss'
 import Image from '../Image';
 import CustomerContext from '~/context/CustomerContext';
 import { useContext } from 'react';
-import axios from 'axios';
-import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
+import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
+import './cardProduct.scss'
 
 function CardProduct({ className = '', product }) {
     const [userLogin] = useContext(CustomerContext)
+    const navigate = useNavigate()
 
     const handleAddCart = () => {
         if (userLogin) {
@@ -25,6 +25,11 @@ function CardProduct({ className = '', product }) {
             alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng')
         }
 
+    }
+
+    const handleChangePage = async (e) => {
+        await handleLoadingPage()
+        navigate(`/product?slug=${e.target.getAttribute('data-slug')}`)
     }
     return (
         <div className={`rounded-xl shadow-xl shadow-white relative ${className}`}>
@@ -45,7 +50,7 @@ function CardProduct({ className = '', product }) {
                 </p>
                 <div className="sm:!hidden w-full flex justify-center gap-2">
                     <Button type='primary' leftIcon={<CartIcon />} className="w-1/3 text-white bg-red-500 hover:bg-red-400" onClick={handleAddCart} />
-                    <Button href={`/product?slug=${product.slug}`} type='primary' leftIcon={<SearchIcon />} className="w-1/3 text-white bg-blue-500 hover:bg-blue-400" />
+                    <Button onClick={handleChangePage} data-slug={product.slug} type='primary' leftIcon={<SearchIcon />} className="w-1/3 text-white bg-blue-500 hover:bg-blue-400" />
                 </div>
             </div>
             {

@@ -6,24 +6,26 @@ import ButtonToTop from "~/components/ButtonToTop";
 import { CloseIcon, DeleteIcon, MinusIcon, PayIcon, PlusIcon } from "~/components/Icons";
 import Image from "~/components/Image";
 import CustomerContext from "~/context/CustomerContext";
-import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
+import { changeNumberToPrice, handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 
 function Cart() {
+    const [userLogin] = useContext(CustomerContext)
+
     const [products, setProducts] = useState([])
     const [listProductCheck, setListProductCheck] = useState([])
     const [totalPay, setTotalPay] = useState(0)
     const [disabledBtn, setDisabledBtn] = useState(true)
-    const [userLogin] = useContext(CustomerContext)
+
     const ip_quantityRef = useRef()
+    const navigate = useNavigate()
 
     const ipCheck = document.querySelectorAll('.ip-check')
-    const navigate = useNavigate()
 
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json())
             .then(data => setProducts(data.data))
-    })
+    }, [])
 
     const caculateTotalPay = () => {
         let totalPay = 0
@@ -73,6 +75,7 @@ function Cart() {
         caculateTotalPay()
         setListProductCheck(list_idProduct)
     }
+
     const handleDeleteCartItem = () => {
         if (window.confirm("Bạn chắc chắn muốn xóa sản phẩm trong giỏ hàng")) {
             axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProductCheck })
@@ -82,13 +85,15 @@ function Cart() {
                 })
         }
     }
+
     const handleUnCheck = () => {
         Array.from(ipCheck).map((ip) => {
             return ip.checked = false
         })
         setDisabledBtn(true)
     }
-    const handlePayment = () => {
+
+    const handlePayment = async () => {
         const details = []
         Array.from(ipCheck).forEach(ip => {
             if (ip.checked === true) {
@@ -111,8 +116,10 @@ function Cart() {
             details: details,
         }
         window.sessionStorage.setItem("productPayment", JSON.stringify(productPayment))
+        await handleLoadingPage()
         navigate('./payment-info')
     }
+
     return (
         <section id='sec-home_cart' className="grid_layout wide h-auto !my-16 sm:!my-2 ">
             <ButtonToTop />

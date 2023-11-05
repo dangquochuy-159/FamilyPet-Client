@@ -60,7 +60,7 @@ function ModalEvaluate({ id_product, name_product, user_name, user_id }) {
             </div>
             <div>
                 <p className="text-xl font-medium">Nhận xét:</p>
-                <textarea ref={contentRef} className="h-40 w-full p-4 border border-solid border-gray-300 outline-none" />
+                <textarea ref={contentRef} className="h-40 w-full p-4 border border-solid border-gray-300 outline-none resize-none" />
             </div>
             <div className="flex justify-end">
                 <button onClick={handleSendEvaluate} className="w-40 p-4 text-white bg-red-500">Gửi</button>

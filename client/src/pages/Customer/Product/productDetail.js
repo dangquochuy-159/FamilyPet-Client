@@ -7,18 +7,21 @@ import CardProduct from '~/components/CardProduct';
 import { BoxExchangeIcon, CartIcon, MinusIcon, PayIcon, PlusIcon, StarIcon, TruckIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import CustomerContext from '~/context/CustomerContext';
-import { changeDate, changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
+import { changeDate, changeNumberToPrice, changeStatus, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 
 function ProductDetail({ productDetail }) {
     const [userLogin] = useContext(CustomerContext)
+
     let initQuantity = productDetail[0].quantity === 0 ? 0 : 1
-    const [photoMain, setPhotoMain] = useState(productDetail[0].photo)
     const [numericValue, setNumericValue] = useState(initQuantity);
+    const [photoMain, setPhotoMain] = useState(productDetail[0].photo)
     const [evaluates, setEvaluates] = useState([])
     const [users, setUsers] = useState([])
     const [relatedProducts, setRelatedProducts] = useState([])
+
     const ipQuantityRef = useRef()
     const navigate = useNavigate()
+
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/evaluates`).then(res => res.json())
@@ -29,13 +32,6 @@ function ProductDetail({ productDetail }) {
             .then(data => setRelatedProducts(data.data))
 
     }, [])
-
-
-    const changeStatus = {
-        in_stock: 'Còn hàng',
-        low_stock: 'Sắp hết hàng',
-        out_stock: 'Hết hàng'
-    }
 
     const handleChangePhoto = (e) => {
         let photo = e.target.getAttribute('data-photo')
@@ -69,7 +65,7 @@ function ProductDetail({ productDetail }) {
 
     }
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
         if (userLogin) {
             const details = []
 
@@ -90,6 +86,7 @@ function ProductDetail({ productDetail }) {
                 details: details,
             }
             window.sessionStorage.setItem("productPayment", JSON.stringify(productPayment))
+            await handleLoadingPage()
             navigate('/cart/payment-info')
         } else {
             if (window.confirm('Vui lòng đăng nhập để mua sản phẩm, chuyển đến trang đăng nhập'))

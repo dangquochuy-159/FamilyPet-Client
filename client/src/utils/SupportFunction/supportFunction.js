@@ -22,3 +22,9 @@ export const handleLoadingPage = async () => {
         }, 500);
     });
 }
+
+export const changeStatus = {
+    in_stock: 'Còn hàng',
+    low_stock: 'Sắp hết hàng',
+    out_stock: 'Hết hàng'
+}

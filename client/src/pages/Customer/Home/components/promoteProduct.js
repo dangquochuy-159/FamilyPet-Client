@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CardProduct from "~/components/CardProduct";
 import ConnectError from "~/components/ConnectError";
 import { GiftIcon } from "~/components/Icons";
+import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 
 function PromoteProduct() {
 
     const [connectServer, setConnectServer] = useState(false)
     const [productPromotes, setProductPromotes] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json()).then(data => {
             let products = []
@@ -17,6 +18,11 @@ function PromoteProduct() {
             setConnectServer(true)
         }).catch(err => setConnectServer(false))
     }, [])
+
+    const handleToProductPage = async () => {
+        await handleLoadingPage()
+        navigate('/product?promote=true')
+    }
     return (
         <section id='sec-home_promote' className="grid_layout wide mt-16">
             <h2 className="w-full title style-title sm:!text-xl md:!text-3xl text-4xl text-white bg-yellow-400">
@@ -54,7 +60,7 @@ function PromoteProduct() {
                         </div>
                     </>
             }
-            <p className="text-lg text-[var(--primary-color)] w-full text-right hover:text-blue-600"><Link to='/product?promote=true' >Xem tất cả {`>>`}</Link></p>
+            <button onClick={handleToProductPage} className="text-lg text-[var(--primary-color)] w-full text-right hover:text-blue-600" >Xem tất cả {`>>`}</button>
 
         </section>
     );

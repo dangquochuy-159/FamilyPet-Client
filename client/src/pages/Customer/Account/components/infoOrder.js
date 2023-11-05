@@ -56,12 +56,12 @@ function InfoOrder() {
                                 <p>Tổng thanh toán: {changeNumberToPrice(order.total_pay)}</p>
                                 <p>Hình thức thanh toán: {order.payments['cod'] === true ? 'Thanh toán tại nhà - COD' : 'Thanh toán tại cửa hàng'}</p>
                             </div>
-                            <div className="sm:!col-span-3 md:!col-span-3 col-span-3">
+                            <div className="sm:!col-span-3 md:!col-span-3 col-span-3 space-y-2">
                                 <p className="font-bold text-xl">Sản phẩm</p>
-                                <div className="grid grid-cols-6 gap-2 my-2 p-4 bg-white">
 
-                                    {
-                                        order.detail.map(detail => (
+                                {
+                                    order.detail.map(detail => (
+                                        <div className="grid grid-cols-6 gap-2 my-2 p-4 bg-white">
                                             <>
                                                 {
                                                     products.map(product => product._id === detail.id_product &&
@@ -84,9 +84,9 @@ function InfoOrder() {
                                                     <ModalEvaluate name_product={detail.name_product} id_product={detail.id_product} user_id={userLogin._id} user_name={userLogin.full_name} />
                                                 </Modal>
                                             </>
-                                        ))
-                                    }
-                                </div>
+                                        </div>
+                                    ))
+                                }
 
                             </div>
                             <div className="col-span-3 flex justify-end">

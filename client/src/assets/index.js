@@ -39,6 +39,9 @@ const images = {
     introduce_4: require('./images/introduce_4.jpg'),
     introduce_5: require('./images/introduce_5.jpg'),
     introduce_6: require('./images/introduce_6.jpg'),
+
+    mess_contact_show: require('./images/mess-200.png'),
+    zalo_contact_show: require('./images/zalo-200.png'),
 }
 
 export { audios, images }
