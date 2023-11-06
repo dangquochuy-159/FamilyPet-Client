@@ -71,8 +71,8 @@ function Login() {
             ipPass.parentElement.classList.remove('invalid')
     }
     return (
-        <div className="wrapper--login w-full h-screen relative bg-[#f5f5f5]">
-            <div className="w-3/4 h-auto sm:h-auto p-5 max-w-md bg-white absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 rounded shadow-xl shadow-black">
+        <div className="wrapper--login w-full h-screen relative">
+            <div className="w-3/4 h-auto sm:h-auto p-5 max-w-md backdrop-opacity-10 backdrop-invert bg-white/50 absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 rounded shadow-xl shadow-black">
                 <h2 className="text-4xl text-center font-bold">Đăng nhập</h2>
                 <div className="flex flex-col justify-center items-center gap-2 mt-2">
                     {
@@ -104,7 +104,7 @@ function Login() {
                                     onFocus={() => document.querySelector('.error--login').innerHTML = ''}
                                 />
                         }
-                        <span className="msg-error text-red-600"></span>
+                        <span className="msg-error text-red-600 font-bold"></span>
                     </div>
                     <div className="form-group ">
                         <div className="input input-pass flex items-center border-2 border-solid border-gray-400 rounded">
@@ -120,19 +120,20 @@ function Login() {
                             <button type='button' onClick={handleShowPassword}>
                                 {
                                     eyePass ? (
-                                        <EyeIcon />
-                                    ) : (
                                         <NotEyeIcon />
+                                    ) : (
+                                        <EyeIcon />
                                     )
                                 }
                             </button>
                         </div>
-                        <span className="msg-error text-red-600"></span>
+                        <span className="msg-error text-red-600 font-bold"></span>
                     </div>
                     <div className="flex sm:flex-col items-center justify-between">
                         <button className="bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase">
                             Xác nhận
                         </button>
+
                         <p className="error--login inline-block align-baseline font-bold text-sm text-red-500"></p>
                     </div>
                 </form>

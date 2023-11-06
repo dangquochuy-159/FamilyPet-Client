@@ -218,7 +218,7 @@ function Product() {
                                     </thead>
                                     <tbody className="font-normal text-[#000]">
                                         {
-                                            filterProducts.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
+                                            filterProducts.length === 0 ? <tr><td colSpan='10'>Không tìm thấy kết quả</td></tr> :
                                                 filterProducts.map((product, index) => (
                                                     <tr key={index}>
                                                         <th>{index + 1}</th>

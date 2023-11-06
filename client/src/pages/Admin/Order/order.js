@@ -112,7 +112,7 @@ function Order() {
                                     <tbody className="font-normal text-[#000]">
 
                                         {
-                                            filterOrder.length === 0 ? <tr><td colSpan='9'>Không tìm thấy kết quả</td></tr> :
+                                            filterOrder.length === 0 ? <tr><td colSpan='10'>Không tìm thấy kết quả</td></tr> :
                                                 filterOrder.map((order, index) =>
                                                     <tr key={index}>
                                                         <td className='whitespace-pre-wrap'>{index + 1}</td>

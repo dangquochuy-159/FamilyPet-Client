@@ -197,7 +197,7 @@ function ProductDetail({ productDetail }) {
                     <div className='mt-4 h-[400px] overflow-auto flex flex-col gap-4'>
                         {
                             evaluates.length > 0 &&
-                            evaluates.map(evaluate =>
+                            evaluates.map(evaluate => evaluate.id_product === productDetail[0]._id &&
                                 <div key={evaluate._id} className='flex flex-col gap-2 rounded-sm bg-[#f5f5f5] p-4'>
                                     <div className='flex items-center gap-4'>
                                         {

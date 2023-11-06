@@ -44,28 +44,30 @@ function User() {
                                 </thead>
                                 <tbody className="font-normal text-[#000]">
                                     {
-                                        users.map((user, index) => (
-                                            <tr key={index}>
-                                                <th className="sm:hidden">{user.full_name}</th>
-                                                <th>{user.method_login.email ? user.email : user.phone_login}</th>
-                                                <td className="sm:hidden">{user.gender}</td>
-                                                <td className="sm:hidden">{user.address}</td>
-                                                <td className="sm:hidden">{user.phone}</td>
-                                                <td>
-                                                    <Modal className="sm:w-full w-1/2 sm:!h-[70vh] h-auto"
-                                                        trigger={
-                                                            <div className="w-auto h-auto">
-                                                                <Button type='primary' rightIcon={<InfoIcon width='30px' height='30px' />}
-                                                                    className='bg-blue-500 text-white m-auto'
-                                                                />
-                                                            </div>
-                                                        }
-                                                    >
-                                                        <ModalInfo user={user} />
-                                                    </Modal>
-                                                </td>
-                                            </tr>
-                                        ))
+                                        !users.length > 0 ?
+                                            <tr> <td colSpan='6' className="text-center text-lg py-4">Chưa có khách nào đăng kí tài khoản</td></tr> :
+                                            users.map((user, index) => (
+                                                <tr key={index}>
+                                                    <th className="sm:hidden">{user.full_name}</th>
+                                                    <th>{user.method_login.email ? user.email : user.phone_login}</th>
+                                                    <td className="sm:hidden">{user.gender}</td>
+                                                    <td className="sm:hidden">{user.address}</td>
+                                                    <td className="sm:hidden">{user.phone}</td>
+                                                    <td>
+                                                        <Modal className="sm:w-full w-1/2 sm:!h-[70vh] h-auto"
+                                                            trigger={
+                                                                <div className="w-auto h-auto">
+                                                                    <Button type='primary' rightIcon={<InfoIcon width='30px' height='30px' />}
+                                                                        className='bg-blue-500 text-white m-auto'
+                                                                    />
+                                                                </div>
+                                                            }
+                                                        >
+                                                            <ModalInfo user={user} />
+                                                        </Modal>
+                                                    </td>
+                                                </tr>
+                                            ))
                                     }
                                 </tbody>
                             </table>

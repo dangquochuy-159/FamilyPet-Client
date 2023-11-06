@@ -33,12 +33,10 @@ function CardProduct({ className = '', product }) {
     }
     return (
         <div className={`rounded-xl shadow-xl shadow-white relative ${className}`}>
-            <a href={`/product?slug=${product.slug}`}>
-                <div className="overflow-hidden rounded-t-xl">
-                    <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='anh_san_pham'
-                        className="transition-all rounded-t-xl hover:scale-125" />
-                </div>
-            </a>
+            <div className="overflow-hidden rounded-t-xl">
+                <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='anh_san_pham'
+                    className="transition-all rounded-t-xl hover:scale-125" data-slug={product.slug} onClick={handleChangePage} />
+            </div>
             <div className="flex flex-col items-center gap-1 p-4 rounded-b-xl bg-white">
                 <a href={`/product?slug=${product.slug}`}
                     className="limit-text sm:!h-[2.5rem] sm:!max-h-[2.5rem] h-[3.5rem] max-h-[3.5rem] sm:!text-sm text-lg text-black text-center hover:text-[var(--primary-color)]">
