@@ -18,7 +18,6 @@ function ModalAddProduct({ categorys }) {
                 Validator.isRequired("#des", check.isEmpty),
                 Validator.isRequired("#origin", check.isEmpty),
                 Validator.isRequired("#price", check.isEmpty),
-                Validator.isRequired("#sale_price", check.isEmpty),
                 Validator.isRequired("#photo", check.isEmpty),
                 Validator.isRequired("#photo_detail", check.isEmpty),
             ],

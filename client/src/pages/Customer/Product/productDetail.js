@@ -180,13 +180,13 @@ function ProductDetail({ productDetail }) {
                 <div className='h-auto flex flex-col justify-center items-center gap-6 w-full rounded-sm bg-white p-4'>
                     <h2 className='text-4xl text-center font-bold '>Đánh giá</h2>
                     <div className='flex gap-2'>
-                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${Math.floor(productDetail[0].star / productDetail[0].total_eval) >= 1 && ' fill-yellow-400'}`} /></p>
-                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${Math.floor(productDetail[0].star / productDetail[0].total_eval) >= 2 && ' fill-yellow-400'}`} /></p>
-                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${Math.floor(productDetail[0].star / productDetail[0].total_eval) >= 3 && ' fill-yellow-400'}`} /></p>
-                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${Math.floor(productDetail[0].star / productDetail[0].total_eval) >= 4 && ' fill-yellow-400'}`} /></p>
-                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${Math.floor(productDetail[0].star / productDetail[0].total_eval) >= 5 && ' fill-yellow-400'}`} /></p>
+                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${(productDetail[0].star === 0 ? 5 : Math.floor(productDetail[0].star / productDetail[0].total_eval)) >= 1 && ' fill-yellow-400'}`} /></p>
+                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${(productDetail[0].star === 0 ? 5 : Math.floor(productDetail[0].star / productDetail[0].total_eval)) >= 2 && ' fill-yellow-400'}`} /></p>
+                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${(productDetail[0].star === 0 ? 5 : Math.floor(productDetail[0].star / productDetail[0].total_eval)) >= 3 && ' fill-yellow-400'}`} /></p>
+                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${(productDetail[0].star === 0 ? 5 : Math.floor(productDetail[0].star / productDetail[0].total_eval)) >= 4 && ' fill-yellow-400'}`} /></p>
+                        <p className='text-yellow-400' ><StarIcon width='40px' height='40px' className={`${(productDetail[0].star === 0 ? 5 : Math.floor(productDetail[0].star / productDetail[0].total_eval)) >= 5 && ' fill-yellow-400'}`} /></p>
                     </div>
-                    <p className='text-2xl'>{Math.floor(productDetail[0].star / productDetail[0].total_eval).toFixed(1)} / 5</p>
+                    <p className='text-2xl'>{productDetail[0].star === 0 ? 5 : Math.floor(productDetail[0].star / productDetail[0].total_eval).toFixed(1)} / 5</p>
                     <p>
                         <span>Tổng lượt đánh giá: </span>
                         <span>{productDetail[0].total_eval}</span>

@@ -14,7 +14,7 @@ function ModalInfoProduct({ product, changeStatus }) {
                         <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`}
                             alt='ảnh vô cực'
                             className='w-full h-auto rounded object-cover m-auto' />
-                        <p className="text-center text-2xl font-bold">{(product.star / product.total_eval).toFixed(1)}/5 <FontAwesomeIcon className='text-yellow-400' icon={faStar} /></p>
+                        <p className="text-center text-2xl font-bold">{product.star === 0 ? 5 : (product.star / product.total_eval).toFixed(1)}/5 <FontAwesomeIcon className='text-yellow-400' icon={faStar} /></p>
                     </div>
                     <div className="w-5/6 sm:w-full flex sm:flex-col justify-between gap-x-2 -mt-2">
                         <div className="  space-y-2">
@@ -53,7 +53,7 @@ function ModalInfoProduct({ product, changeStatus }) {
                             </p>
                             <p className="p-2 rounded-md bg-white">
                                 <span className="font-bold">Giá khuyến mãi: </span>
-                                <span>{product.sale_price && changeNumberToPrice(product.sale_price)}</span>
+                                <span>{product.sale_price === 0 ? 'Không' : changeNumberToPrice(product.sale_price)}</span>
                             </p>
                             <p className="p-2 rounded-md bg-white">
                                 <span className="font-bold">Lượt đánh giá: </span>

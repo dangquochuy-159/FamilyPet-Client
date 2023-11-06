@@ -32,6 +32,13 @@ const images = {
     payments_shop: require('./images/shop.jpg'),
 
     banner_product_page: require('./images/banner_cate_product-page.jpg'),
+    banner_product_page02: require('./images/banner_cate_product-page02.jpg'),
+    banner_product_page03: require('./images/banner_cate_product-page03.jpg'),
+
+    banner_price_list01: require('./images/banner_price_list01.jpg'),
+    banner_price_list02: require('./images/banner_price_list02.jpg'),
+    banner_price_list03: require('./images/banner_price_list03.jpg'),
+    banner_price_list04: require('./images/banner_price_list04.jpg'),
 
     introduce_1: require('./images/introduce_1.jpg'),
     introduce_2: require('./images/introduce_2.jpg'),

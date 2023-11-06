@@ -27,9 +27,9 @@ function ProductMutil({ products, keyParams, valueParams }) {
         <>
             <ButtonToTop />
             <div id='sec-product_mutil' className='grid_layout wide grid grid-cols-4 gap-4 my-16 sm:!px-2'>
-                <div className='sm:!col-span-4 md:!col-span-4 '>
+                <div className='sm:!col-span-4 md:!col-span-4 space-y-2'>
                     <h2 className='py-2 text-lg font-bold'>Danh mục sản phẩm</h2>
-                    <ul className='flex md:!flex-row flex-wrap flex-col gap-y-2 gap-x-4 mb-8'>
+                    <ul className='flex sm:!flex-row md:!flex-row flex-wrap flex-col gap-y-2 gap-x-6 mb-8'>
                         {
                             categorys.length > 0 && categorys.map(category =>
                                 <li key={category._id} className='border-b border-solid border-[#ccc] py-2 '>
@@ -49,6 +49,8 @@ function ProductMutil({ products, keyParams, valueParams }) {
                     </div>
                     <button onClick={handleFilterPrice} className='text-white p-2 my-4 float-right w-1/3 rounded-md bg-[var(--primary-color)]'>Lọc</button>
                     <img className='md:!hidden sm:!hidden' src={images.banner_product_page} alt='' />
+                    <img className='md:!hidden sm:!hidden' src={images.banner_product_page02} alt='' />
+                    <img className='md:!hidden sm:!hidden' src={images.banner_product_page03} alt='' />
                 </div>
 
                 <div className='sm:!col-span-4 md:!col-span-4 col-span-3'>

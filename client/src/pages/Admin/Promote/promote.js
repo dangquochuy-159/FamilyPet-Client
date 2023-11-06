@@ -259,10 +259,10 @@ function Promote() {
                                             <th scope='col'>#</th>
                                             <th scope='col'>Tên</th>
                                             <th scope='col'>Mã khuyến mãi</th>
-                                            <th scope='col' className='md:hidden'>Mô tả</th>
+                                            <th scope='col' className='md:hidden'>Loại khuyến mãi</th>
                                             <th scope='col'>Giảm (%)</th>
                                             <th scope='col'>Điểm đổi</th>
-                                            <th scope='col'>Loại</th>
+                                            <th scope='col'>Loại khuyến mãi</th>
                                             <th scope='col'>Hành động</th>
 
 
@@ -326,7 +326,7 @@ function Promote() {
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>
                                         <FormGroup className=' sm:w-full w-1/3'>
-                                            <Input id='type' name='type' type='text' placeholder='Nhập loại khuyến mãi (Đơn hàng hoặc Vận chuyển)' label='Mô tả'
+                                            <Input id='type' name='type' type='text' placeholder='Nhập loại khuyến mãi (Đơn hàng hoặc Vận chuyển)' label='Loại khuyến mãi'
                                                 className='w-full h-12 p-4 border-2 border-solid border-gray-400' />
                                             <span className="msg-error text-red-600"></span>
                                         </FormGroup>

@@ -13,6 +13,7 @@ function AllProduct() {
     const [categorys, setCategorys] = useState([])
 
     useEffect(() => {
+
         fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => {
             setCategorys(data.data)
             setConnectServer(true)
@@ -39,7 +40,7 @@ function AllProduct() {
         for (let i = 0; i < array.length; i += 5) {
             const itemsInDiv = array.slice(i, i + 5);
             const div = (
-                <div className="grid grid-cols-5 gap-2 mr-2">
+                <div className="w-full grid grid-cols-5 gap-2 mr-2">
                     {itemsInDiv.map((product, index) => (
                         <CardProduct key={product.slug} product={product} className="" />
                     ))}
@@ -54,7 +55,7 @@ function AllProduct() {
         for (let i = 0; i < array.length; i += 3) {
             const itemsInDiv = array.slice(i, i + 3);
             const div = (
-                <div className="grid grid-cols-3 gap-2 mr-2">
+                <div className="w-full grid grid-cols-3 gap-2 mr-2">
                     {itemsInDiv.map((product, index) => (
                         <CardProduct key={product.slug} product={product} className="" />
                     ))}
@@ -69,7 +70,7 @@ function AllProduct() {
         for (let i = 0; i < array.length; i += 2) {
             const itemsInDiv = array.slice(i, i + 2);
             const div = (
-                <div className="grid grid-cols-2 gap-2 mr-2">
+                <div className="w-full grid grid-cols-2 gap-2 mr-2">
                     {itemsInDiv.map((product, index) => (
                         <CardProduct key={product.slug} product={product} className="" />
                     ))}

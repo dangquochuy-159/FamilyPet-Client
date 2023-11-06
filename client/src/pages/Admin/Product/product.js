@@ -230,7 +230,7 @@ function Product() {
                                                         </td>
                                                         <td className='md:hidden'>{product.category}</td>
                                                         <td className={product.sale_price && 'line-through'}>{changeNumberToPrice(product.price)}</td>
-                                                        <td>{product.sale_price && changeNumberToPrice(product.sale_price)}</td>
+                                                        <td>{product.sale_price === 0 ? '-' : changeNumberToPrice(product.sale_price)}</td>
                                                         <td className='md:hidden'>{product.outstand ? 'Có' : 'Không'}</td>
                                                         <td>{product.quantity}</td>
                                                         <td className='md:hidden'>{Object.keys(product.status).map(key => product.status[key] && changeStatus[key])}</td>
