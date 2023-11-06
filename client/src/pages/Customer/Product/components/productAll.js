@@ -8,7 +8,7 @@ function ProductAll({ products, priceFilter }) {
     useEffect(() => {
         let dataProduct = []
         products.map(product => {
-            (product.sale_price < priceFilter || product.price < priceFilter) &&
+            (product.sale_price !== 0 ? product.sale_price < priceFilter : product.price < priceFilter) &&
                 dataProduct.push(product)
         })
         setProductsFilter(dataProduct)
