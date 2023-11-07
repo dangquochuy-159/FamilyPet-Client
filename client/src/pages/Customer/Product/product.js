@@ -21,8 +21,6 @@ function Product() {
     category && (query = `/filter?filter=category&value=${category}`)
     outstand && (query = `/filter?filter=outstand&value=${outstand}`)
 
-
-
     useEffect(() => {
         window.scrollTo(0, 0);
         for (const key of queryParams.keys()) {

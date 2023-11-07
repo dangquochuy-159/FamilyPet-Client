@@ -96,7 +96,7 @@ function UpdateInfoUser({ user }) {
                     <Input
                         defaultValue={user.full_name}
                         id='full_name' name='full_name' type='text' placeholder='Nhập họ và tên'
-                        className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
+                        className='w-full h-12 px-4 rounded-md border-2 border-solid border-[var(--primary-color)]'
                     />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
@@ -105,28 +105,28 @@ function UpdateInfoUser({ user }) {
                     <Input
                         defaultValue={user.phone}
                         id='phone' name='phone' type='text' placeholder='Nhập số điện thoại đặt hàng'
-                        className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
+                        className='w-full h-12 px-4 rounded-md border-2 border-solid border-[var(--primary-color)]'
                     />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
                 <FormGroup className='w-full flex flex-col gap-2'>
                     <label className='font-semibold italic text-[var(--primary-color)]'>Địa chỉ </label>
                     <div className="w-full flex sm:!flex-col md:!flex-col gap-2">
-                        <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='province' onChange={handleInputChange}>
+                        <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-md border-2 border-solid border-[var(--primary-color)]' name='province' onChange={handleInputChange}>
                             <Option name={addressArr[3]} value={addressArr[3]} />
                             {/* <Option name='Tỉnh/ Thành Phố' /> */}
                             {
                                 provinces.length > 0 && provinces.map(pro => <Option key={pro.province_id} value={pro.province_name} name={pro.province_name} />)
                             }
                         </Select>
-                        <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='district' onChange={handleInputChange}>
+                        <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-md border-2 border-solid border-[var(--primary-color)]' name='district' onChange={handleInputChange}>
                             <Option name={addressArr[2]} value={addressArr[2]} />
                             {/* <Option name='Quận/ Huyện' /> */}
                             {
                                 districts.length > 0 && districts.map(dis => <Option key={dis.district_id} value={dis.district_name} name={dis.district_name} />)
                             }
                         </Select>
-                        <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='ward' onChange={handleInputChange}>
+                        <Select className='sm:!w-full md:!w-full w-1/3 h-12 p-2 outline-none rounded-md border-2 border-solid border-[var(--primary-color)]' name='ward' onChange={handleInputChange}>
                             <Option name={addressArr[1]} value={addressArr[1]} />
                             {/* <Option name='Phường/ Xã' /> */}
                             {
@@ -140,14 +140,14 @@ function UpdateInfoUser({ user }) {
                     <Input
                         defaultValue={addressArr[0]}
                         id='address' name='address' type='text' placeholder='Nhập số nhà, tên đường'
-                        className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
+                        className='w-full h-12 px-4 rounded-md border-2 border-solid border-[var(--primary-color)]'
                     />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
 
                 <FormGroup className='w-full flex flex-col gap-2'>
                     <label className='font-semibold italic text-[var(--primary-color)]'>Gới tính </label>
-                    <Select className='w-full h-12 p-2 outline-none rounded-full border-2 border-solid border-[var(--primary-color)]' name='gender'>
+                    <Select className='w-full h-12 p-2 outline-none rounded-md border-2 border-solid border-[var(--primary-color)]' name='gender'>
                         <Option value={user.gender} name={user.gender} />
                         {user.gender.toLowerCase() === 'nam' ? <Option value='Nữ' name='Nữ' /> : <Option value='Nam' name='Nam' />}
                     </Select>
@@ -158,14 +158,14 @@ function UpdateInfoUser({ user }) {
                     <Input
                         defaultValue={user.date_birth}
                         id='date_birth' name='date_birth' type='date'
-                        className='w-full h-12 px-4 rounded-full border-2 border-solid border-[var(--primary-color)]'
+                        className='w-full h-12 px-4 rounded-md border-2 border-solid border-[var(--primary-color)]'
                     />
                     <span className="msg-error text-red-600"></span>
                 </FormGroup>
                 <div className='flex-col'>
                     <p className="notify-error mb-2 text-red-600"></p>
                     <button className='bg-orange-500 text-sm active:bg-gray-700 cursor-pointer font-regular text-white px-4 py-2 rounded uppercase'
-                    >Đăng ký</button>
+                    >Cập nhật</button>
                 </div>
             </Form>
         </div>
