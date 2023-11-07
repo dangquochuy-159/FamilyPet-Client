@@ -29,7 +29,7 @@ function CardProduct({ className = '', product }) {
 
     const handleChangePage = async (e) => {
         await handleLoadingPage()
-        navigate(`/product?slug=${e.target.getAttribute('data-slug')}`)
+        window.location.href = `/product?slug=${e.target.getAttribute('data-slug')}`
     }
     return (
         <div className={`h-[420px] w-full rounded-xl shadow-xl shadow-white relative ${className}`}>
@@ -38,10 +38,10 @@ function CardProduct({ className = '', product }) {
                     className="w-full h-full object-cover transition-all rounded-t-xl hover:scale-125" data-slug={product.slug} onClick={handleChangePage} />
             </div>
             <div className="h-1/2 flex flex-col items-center gap-1 p-4 rounded-b-xl bg-white">
-                <a href={`/product?slug=${product.slug}`}
+                <p onClick={handleChangePage}
                     className="limit-text sm:!h-[2.5rem] sm:!max-h-[2.5rem] h-[3.5rem] max-h-[3.5rem] sm:!text-sm text-lg text-black text-center hover:text-[var(--primary-color)]">
                     {product.name}
-                </a>
+                </p>
                 <p className="flex min-h-[64px] flex-col items-center justify-start gap-x-4 text-xl">
                     <span className="text-red-600 font-bold">{product.sale_price !== 0 && changeNumberToPrice(product.sale_price)}</span>
                     <span className={`text-red-600 font-bold ${product.sale_price !== 0 && 'line-through text-black font-normal text-sm'}`}>{changeNumberToPrice(product.price)}</span>
@@ -63,7 +63,7 @@ function CardProduct({ className = '', product }) {
                     <p className="percent-reduce text-lg text-red-500 font-bold" >-{(100 - ((product.sale_price / product.price) * 100)).toFixed(0)}%</p>
                 </div>
             }
-        </div>
+        </div >
 
     );
 }
