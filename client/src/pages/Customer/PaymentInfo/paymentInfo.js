@@ -133,7 +133,7 @@ function PaymentInfo() {
                     <button onClick={handleCancelPayment} className="p-2 sm:!text-sm text-white font-bold rounded-sm bg-red-500">Hủy thanh toán</button>
                 </div>
                 <div className="flex justify-end gap-4  ">
-                    <button onClick={handleNextPage} className="sm:!w-1/2 p-2 sm:!text-sm text-white font-bold rounded-sm bg-green-600">Tiếp theo</button>
+                    <button onClick={handleNextPage} className="sm:!w-full p-2 sm:!text-sm text-white font-bold rounded-sm bg-green-600">Tiếp theo</button>
                 </div>
             </div>
 

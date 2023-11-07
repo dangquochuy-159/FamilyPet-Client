@@ -107,17 +107,17 @@ function ProductDetail({ productDetail }) {
     }
 
     return (
-        <section id='sec-product-detail' className='grid_layout wide w-full h-auto !my-16'>
+        <section id='sec-product-detail' className='grid_layout wide w-full h-auto !my-16 sm:!my-0'>
             {/* product detail */}
             <div>
                 {
                     productDetail.map((product, index) =>
-                        <div key={product._id} className='grid grid-cols-12 w-full h-auto gap-2 !my-16 bg-[#f5f5f5]'>
+                        <div key={product._id} className='grid grid-cols-12 w-full h-auto gap-2 mb-16 bg-[#f5f5f5]'>
                             <div className='sm:!col-span-12 col-span-6 w-full h-auto grid grid-cols-4'>
                                 <div className='sm:!col-span-6 md:!col-span-6 flex sm:!flex-row md:!flex-row flex-col items-center justify-center gap-4  sm:!order-2 md:!order-2'>
                                     {
                                         product.photo_detail.map(photo =>
-                                            <div key={photo} onClick={handleChangePhoto} className='w-auto h-auto p-2 border border-solid border-[#ebe4e4] bg-white hover:cursor-pointer hover:border-[var(--primary-color)]'>
+                                            <div key={photo} onClick={handleChangePhoto} className=' w-auto h-auto p-2 border border-solid border-[#ebe4e4] bg-white hover:cursor-pointer hover:border-[var(--primary-color)]'>
                                                 <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photo}`} alt='photo-detail'
                                                     data-photo={photo} className='w-24 h-24 object-cover' />
                                             </div>
@@ -128,8 +128,8 @@ function ProductDetail({ productDetail }) {
                                             data-photo={product.photo} className='w-24 h-24 object-cover' />
                                     </div>
                                 </div>
-                                <div className='sm:!col-span-6 md:!col-span-6 col-span-3 w-full flex items-center bg-white sm:!order-1 md:!order-1'>
-                                    <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photoMain}`} alt='photo-product' />
+                                <div className='sm:!col-span-6 md:!col-span-6 col-span-3 w-full sm:!h-[320px] md:!h-[428px] flex items-center bg-white sm:!order-1 md:!order-1'>
+                                    <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photoMain}`} alt='photo-product' className=' m-auto w-full h-full object-cover' />
                                 </div>
                             </div>
                             <div className='sm:!col-span-12 col-span-6 w-full h-full flex flex-col px-4 md:!gap-2 gap-4'>
