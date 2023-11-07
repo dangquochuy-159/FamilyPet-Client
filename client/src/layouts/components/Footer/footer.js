@@ -16,7 +16,7 @@ function Footer() {
                             <div className="flex flex-col gap-4">
                                 <p className="flex gap-2 sm:!text-base text-xl">
                                     <span className="w-1/12"> <MapPinIcon /></span>
-                                    <span className="w-11/12">Shoppet</span>
+                                    <span className="w-11/12">FamilyPet</span>
                                 </p>
                                 <p className="flex gap-2 sm:!text-base text-xl">
                                     <span className="w-1/12"><MapIcon /></span>
@@ -61,7 +61,7 @@ function Footer() {
                             <p className="underline">19008080</p>
                             <p>Khiếu nại, góp ý liên hệ:</p>
                             <p className="underline">19006969</p>
-                            <p>shoppet@gmail.com</p>
+                            <p>FamilyPet@gmail.com</p>
                         </div>
                         <div className="sm:!text-base sm:!col-span-1 flex flex-col sm:items-start sm:!gap-2 md:!gap-4 gap-6">
                             <h4 className="sm:!text-xl sm:!text-black text-2xl font-bold">Chính sách</h4>
@@ -81,7 +81,7 @@ function Footer() {
                     </div>
                 </div>
                 <div>
-                    <p className="text-center pt-8">&copy; Bản quyền thuộc về Shoppet</p>
+                    <p className="text-center pt-8">&copy; Bản quyền thuộc về FamilyPet</p>
                 </div>
             </div>
         </div >

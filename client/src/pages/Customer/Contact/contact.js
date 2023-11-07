@@ -41,7 +41,7 @@ function Contact() {
                     </div>
                     <p className="text-xl font-bold">Thư góp ý</p>
                     <p className="text-center">
-                        shoppet@gmail.com
+                        FamilyPet@gmail.com
                     </p>
                 </div>
             </div>

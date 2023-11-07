@@ -8,15 +8,15 @@ function Policy() {
     return (
         <section id='sec-policy_page' className="grid_layout wide my-16 flex flex-col gap-8 sm:!my-0 sm:!p-2">
             <ButtonToTop />
-            <h2 className="text-4xl text-[var(--primary-color)] font-bold">Chính sách khi mua hàng tại Shoppet</h2>
+            <h2 className="text-4xl text-[var(--primary-color)] font-bold">Chính sách khi mua hàng tại FamilyPet</h2>
             {/* Mục 1 */}
             <div className="space-y-2">
                 <p className="text-2xl font-bold">1. Chính sách đổi trả</p>
-                <p className="text-lg">Nhằm giúp bạn thấy thoải mái và an tâm hơn khi mua sắm tại Shoppet, khách hàng và thành viên Shoppet hoàn toàn có thể đổi hoặc trả sản phẩm sau khi mua hàng.</p>
+                <p className="text-lg">Nhằm giúp bạn thấy thoải mái và an tâm hơn khi mua sắm tại FamilyPet, khách hàng và thành viên FamilyPet hoàn toàn có thể đổi hoặc trả sản phẩm sau khi mua hàng.</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Khách hàng được kiểm tra sản phẩm trước khi nhận hàng</p>
-                <p className="text-lg">Shoppet khuyến khích khách hàng nên kiểm tra sản phẩm trước khi thanh toán, hoặc sau khi nhận được hàng nhằm giúp khách hàng an tâm và thoải mái hơn khi lựa chọn mua sắm tại Shoppet.</p>
+                <p className="text-lg">FamilyPet khuyến khích khách hàng nên kiểm tra sản phẩm trước khi thanh toán, hoặc sau khi nhận được hàng nhằm giúp khách hàng an tâm và thoải mái hơn khi lựa chọn mua sắm tại FamilyPet.</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Sản phẩm được đổi trả</p>
-                <p className="text-lg">Hàng hóa đổi/trả cần kèm theo hóa đơn mua hàng gốc từ Shoppet và còn hạn sử dụng kèm theo:</p>
+                <p className="text-lg">Hàng hóa đổi/trả cần kèm theo hóa đơn mua hàng gốc từ FamilyPet và còn hạn sử dụng kèm theo:</p>
                 <p className="text-lg">Còn nguyên tem, nhãn, bao bì, seal.</p>
                 <p className="text-lg">Bao bì SP không nhàu nát, xé rách, lủng lỗ</p>
                 <p className="text-lg">Chưa qua sử dụng (mới 100%).</p>
@@ -25,11 +25,11 @@ function Policy() {
                 <p className="text-lg">Thời gian đổi/trả áp dụng: trong vòng 5 ngày kể từ khi bạn nhận được sản phẩm.</p>
 
                 <p className="text-xl italic text-[var(--primary-color)] underline">Phương thức đổi/trả và thời gian giải quyết</p>
-                <p className="text-lg">Khi nhận được yêu cầu đổi/trả sản phẩm, Shoppet sẽ cố gắng giải quyết trong vòng 24h từ lúc nhận được yêu cầu</p>
+                <p className="text-lg">Khi nhận được yêu cầu đổi/trả sản phẩm, FamilyPet sẽ cố gắng giải quyết trong vòng 24h từ lúc nhận được yêu cầu</p>
                 <p className="text-lg">Bạn không tốn phí đổi/trả sản phẩm</p>
                 <p className="text-lg">Bạn có thể đổi/trả sản phẩm tại cửa hàng hoặc yêu cầu dịch vụ chuyển phát, bạn thanh toán phí vận chuyển phát sinh.</p>
                 <p className="text-lg">Khi bạn yêu cầu đổi/trả sản phẩm sau thời gian đổi/trả tại, chúng tôi có thể từ chối giải quyết.</p>
-                <p className="text-lg">Đơn hàng được xác nhận là lỗi sai sót (hàng hóa, số lượng, giao hàng…) từ phía Shoppet, chúng tôi sẽ đổi sản phẩm cho bạn trong vòng 24-48h kể từ khi nhận được thông báo, áp dụng cho tất cả đơn hàng nội thành và các tỉnh thành khác. Chúng tôi khuyến khích bạn nên kiểm tra sản phẩm trước khi thanh toán.</p>
+                <p className="text-lg">Đơn hàng được xác nhận là lỗi sai sót (hàng hóa, số lượng, giao hàng…) từ phía FamilyPet, chúng tôi sẽ đổi sản phẩm cho bạn trong vòng 24-48h kể từ khi nhận được thông báo, áp dụng cho tất cả đơn hàng nội thành và các tỉnh thành khác. Chúng tôi khuyến khích bạn nên kiểm tra sản phẩm trước khi thanh toán.</p>
 
             </div>
 
@@ -37,22 +37,22 @@ function Policy() {
             <div className="space-y-2">
                 <p className="text-2xl font-bold">2. Chính sách bảo mật</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Phạm vi thu nhập và mục đích thu nhập</p>
-                <p className="text-lg">Việc thu nhập thông tin trên website của Shoppet bao gồm: email, số điện thoại, địa chỉ và họ tên khách hàng</p>
+                <p className="text-lg">Việc thu nhập thông tin trên website của FamilyPet bao gồm: email, số điện thoại, địa chỉ và họ tên khách hàng</p>
                 <p className="text-lg">Dữ liệu sẽ được thu nhập khi khách hàng đăng kí tài khoản hoặc mua hàng trên website </p>
-                <p className="text-lg">Đây là các thông tin mà Shoppet cần khách hàng cung cấp khi sử dụng dịch vụ nhằm để Shoppet liên hệ khi khách hàng mưa sắm tại website</p>
+                <p className="text-lg">Đây là các thông tin mà FamilyPet cần khách hàng cung cấp khi sử dụng dịch vụ nhằm để FamilyPet liên hệ khi khách hàng mưa sắm tại website</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Phạm vi sử dụng thông tin</p>
-                <p className="text-lg">Shoppet sẽ sử dụng thông tin khách hàng cugn cấp để:</p>
+                <p className="text-lg">FamilyPet sẽ sử dụng thông tin khách hàng cugn cấp để:</p>
                 <p className="text-lg">Cung cấp các dịch vụ đến khách hàng</p>
                 <p className="text-lg">Gửi các thông báo về các hoạt động trao đổi thông tin giữa khách hàng và website</p>
                 <p className="text-lg">Liên lạc và giải quyết với khách hàng trong một số trường hợp đặt biệt</p>
-                <p className="text-lg">Khồn sử dụng thông tin khách hàng ngoài mục đích xác nhận và liên hệ có liên quan đến giao dịch tại Shoppet</p>
+                <p className="text-lg">Khồn sử dụng thông tin khách hàng ngoài mục đích xác nhận và liên hệ có liên quan đến giao dịch tại FamilyPet</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Thời gian lưu trữ thông tin</p>
-                <p className="text-lg">Dữ liệu cá nhân của khách hàng sẽ được lưu trữ cho đến khi có yêu cầu hủy bỏ hoặc khách hàng yêu cầu hủy bỏ. Còn lại trong mọi trường hợp thông tin cá nhân khách hàng sẽ được bảo mật trên máy chủ của Shoppet</p>
+                <p className="text-lg">Dữ liệu cá nhân của khách hàng sẽ được lưu trữ cho đến khi có yêu cầu hủy bỏ hoặc khách hàng yêu cầu hủy bỏ. Còn lại trong mọi trường hợp thông tin cá nhân khách hàng sẽ được bảo mật trên máy chủ của FamilyPet</p>
                 <p className="text-xl italic text-[var(--primary-color)] underline">Cam kết bảo mật thông tin khách hàng</p>
-                <p className="text-lg">Thông tin cá nhân của khách hàng trên Shoppet được cam kết bảo mật tuyệt đối theo chính sách bảo vệ thông tin cá nhân của Shoppet Việc thu thập và sử dụng thông tin của mỗi khách hàng chỉ được thực hiện khi có sự đồng ý của khách hàng đó trừ những trường hợp pháp luật có quy định khác.</p>
+                <p className="text-lg">Thông tin cá nhân của khách hàng trên FamilyPet được cam kết bảo mật tuyệt đối theo chính sách bảo vệ thông tin cá nhân của FamilyPet Việc thu thập và sử dụng thông tin của mỗi khách hàng chỉ được thực hiện khi có sự đồng ý của khách hàng đó trừ những trường hợp pháp luật có quy định khác.</p>
                 <p className="text-lg">Không sử dụng, không chuyển giao, cung cấp hay tiết lộ cho bên thứ 3 nào về thông tin cá nhân của khách hàng khi không có sự cho phép đồng ý từ khách hàng.</p>
                 <p className="text-lg">Trong trường hợp máy chủ lưu trữ thông tin bị hacker tấn công dẫn đến mất mát dữ liệu cá nhân. Chúng tôi sẽ có trách nhiệm thông báo vụ việc cho cơ quan chức năng điều tra xử lý kịp thời và thông báo cho khách hàng được biết.</p>
-                <p className="text-lg">Bảo mật tuyệt đối mọi thông tin giao dịch trực tuyến của khách hàng bao gồm thông tin hóa đơn kế toán chứng từ số hóa trên Shoppet.</p>
+                <p className="text-lg">Bảo mật tuyệt đối mọi thông tin giao dịch trực tuyến của khách hàng bao gồm thông tin hóa đơn kế toán chứng từ số hóa trên FamilyPet.</p>
             </div>
 
             {/* Mục 3 */}
@@ -65,7 +65,7 @@ function Policy() {
                     </li>
                     <li className="space-y-2">
                         <p className="text-xl italic text-[var(--primary-color)] underline">Thời gian nhận hàng</p>
-                        <p className="text-lg">Shoppet giao hàng hoả tốc trong ngày với các khách hàng trong TP Hồ Chí Minh và bán kính đến cửa hàng của Shoppet dưới 15 km. Khoảng cách lớn hơn nhân viên của chúng tôi sẽ tư vấn cách thức giao hàng thuận tiện nhất cho khách hàng.</p>
+                        <p className="text-lg">FamilyPet giao hàng hoả tốc trong ngày với các khách hàng trong TP Hồ Chí Minh và bán kính đến cửa hàng của FamilyPet dưới 15 km. Khoảng cách lớn hơn nhân viên của chúng tôi sẽ tư vấn cách thức giao hàng thuận tiện nhất cho khách hàng.</p>
                         <div className="grid grid-cols-2 gap-2">
                             <p className="text-lg font-bold">Khoảng cách từ khách hàng đến cửa hàng</p>
                             <p className="text-lg font-bold">Thành phố Hồ Chí Minh</p>
