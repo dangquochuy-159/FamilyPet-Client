@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 
 function ModalDetailProduct({ data }) {
 
@@ -24,9 +25,9 @@ function ModalDetailProduct({ data }) {
                                 <tr key={index}>
                                     <td className='border border-solid border-black p-4'>{index}</td>
                                     <td className='border border-solid border-black p-4'>{detail['name_product']}</td>
-                                    <td className='border border-solid border-black p-4'>{detail['unit_price']}</td>
+                                    <td className='border border-solid border-black p-4'>{changeNumberToPrice(detail['unit_price'])}</td>
                                     <td className='border border-solid border-black p-4'>{detail['quantity']}</td>
-                                    <td className='border border-solid border-black p-4'>{detail['into_money']}</td>
+                                    <td className='border border-solid border-black p-4'>{changeNumberToPrice(detail['into_money'])}</td>
 
                                 </tr>
                             ))
