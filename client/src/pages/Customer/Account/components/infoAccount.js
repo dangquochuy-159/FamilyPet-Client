@@ -8,6 +8,7 @@ import CustomerContext from "~/context/CustomerContext";
 import UpdateAvatarUser from "./updateAvatarUser";
 import UpdateInfoUser from "./updateInfoUser";
 import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
+import { images } from "~/assets";
 
 function InfoAccount() {
 
@@ -25,8 +26,8 @@ function InfoAccount() {
         <section id='sec-account_info' className="w-full h-auto bg-white shadow-xl shadow-white relative">
             <div div className="w-full h-auto grid sm:!grid-cols-1 md:!grid-cols-1 grid-cols-4">
                 <div className="col-span-1 w-full h-full p-4 flex justify-center items-center">
-                    <Image src={`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/${userLogin.avatar}`} alt='avatar'
-                        className='w-[200px] h-[200px] rounded-full object-cover'
+                    <Image src={userLogin.avatar[0] || images.no_image}
+                        className='w-[200px] h-[200px] rounded-full border border-solid border-[#ccc] object-cover'
                     />
                 </div>
                 <div className="col-span-3 p-8 grid grid-cols-1 gap-4">

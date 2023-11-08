@@ -1,10 +1,10 @@
-import Image from "~/components/Image";
 import { useContext, useEffect, useState } from "react";
 import AdminContext from '~/context/AdminContext';
 import { Button } from "~/components/Button";
 import { InfoIcon, PlusIcon } from "~/components/Icons";
 import { FormAddAdmin, FormInfo } from "./ModalContent";
 import Modal from "~/components/Modal/modal";
+import { images } from "~/assets";
 
 function InfoAll() {
     const context = useContext(AdminContext)
@@ -49,8 +49,8 @@ function InfoAll() {
                     admins.map((admin) => (
                         <div key={admin.slug} className="sm:!w-full md:w-1/4 w-1/5 h-auto p-4 flex sm:!flex-row flex-col items-center gap-y-4 gap-x-8 bg-gray-300 rounded">
                             <div className="sm:w-2/12">
-                                <Image
-                                    src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${admin.avatar}`}
+                                <img
+                                    src={admin.avatar[0] || images.no_image}
                                     className='sm:!w-12 sm:!h-12 w-24 h-24 object-cover rounded-full'
                                     alt="avatar"
                                 />

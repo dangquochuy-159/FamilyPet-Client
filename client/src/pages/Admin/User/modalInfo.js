@@ -14,7 +14,7 @@ function ModalInfo({ user }) {
         <div className='w-full h-full overflow-auto px-8 pb-8 pt-4'>
             <div className='flex sm:flex-col items-center gap-20'>
                 <Image className='w-28 h-28 object-cover rounded-full'
-                    src={`${process.env.REACT_APP_API_URL}/api/users/${user._id}/${user.avatar}`} />
+                    src={user.avatar[0]} />
                 <h2 className="font-extrabold sm:!text-xl text-4xl text-center text-black">Thông tin khách hàng</h2>
             </div>
             <div className='flex sm:flex-col text-lg mt-10 gap-x-20'>

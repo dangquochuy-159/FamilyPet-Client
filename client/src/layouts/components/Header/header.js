@@ -77,7 +77,7 @@ function Header({ avatar, id, cartsLength }) {
                         }
                         {
                             avatar ?
-                                <Image src={`${process.env.REACT_APP_API_URL}/api/users/${id}/${avatar}`} alt='avatar'
+                                <Image src={avatar[0]} alt='avatar'
                                     className='w-10 h-10 object-cover border border-solid border-black rounded-full bg-white hover:cursor-pointer' /> :
                                 <Image src={images.user} alt='ảnh'
                                     className='w-10 h-10 object-cover border border-solid border-black rounded-full bg-white p-2 hover:cursor-pointer' />
@@ -145,7 +145,7 @@ function Header({ avatar, id, cartsLength }) {
                                         <button onClick={handleChangePage} data-url='/account' className='w-full h-full'>
                                             {
                                                 avatar ?
-                                                    <Image src={`${process.env.REACT_APP_API_URL}/api/users/${id}/${avatar}`} alt='avatar'
+                                                    <Image src={avatar[0]} alt='avatar'
                                                         className='w-full h-full object-cover rounded-full bg-white hover:cursor-pointer pointer-events-none' /> :
                                                     <Image src={images.user} alt='ảnh'
                                                         className='w-full h-full object-cover rounded-full bg-white p-2 hover:cursor-pointer pointer-events-none' />

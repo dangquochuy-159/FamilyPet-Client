@@ -228,7 +228,7 @@ function FormAddAdmin() {
                         <span className="msg-error text-red-600"></span>
                     </FormGroup>
                 </div>
-                <FormGroup className='w-full flex flex sm:flex-col gap-2'>
+                <FormGroup className='w-full flex sm:flex-col gap-2'>
                     <Input
                         name='gender' type='radio' value='Nam' title='Nam' label='Giới tính: '
                         className='w-4 h-4'

@@ -14,7 +14,7 @@ function ProductDetail({ productDetail }) {
 
     let initQuantity = productDetail[0].quantity === 0 ? 0 : 1
     const [numericValue, setNumericValue] = useState(initQuantity);
-    const [photoMain, setPhotoMain] = useState(productDetail[0].photo)
+    const [photoMain, setPhotoMain] = useState(productDetail[0].photo[0])
     const [evaluates, setEvaluates] = useState([])
     const [users, setUsers] = useState([])
     const [relatedProducts, setRelatedProducts] = useState([])
@@ -118,18 +118,18 @@ function ProductDetail({ productDetail }) {
                                     {
                                         product.photo_detail.map(photo =>
                                             <div key={photo} onClick={handleChangePhoto} className=' w-auto h-auto p-2 border border-solid border-[#ebe4e4] bg-white hover:cursor-pointer hover:border-[var(--primary-color)]'>
-                                                <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photo}`} alt='photo-detail'
-                                                    data-photo={photo} className='w-24 h-24 object-cover' />
+                                                <img src={photo[0]} alt='photo-detail'
+                                                    data-photo={photo[0]} className='w-24 h-24 object-cover' />
                                             </div>
                                         )
                                     }
                                     <div onClick={handleChangePhoto} className='w-auto h-auto p-2 border border-solid border-[#ebe4e4] bg-white hover:cursor-pointer hover:border-[var(--primary-color)]'>
-                                        <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='photo-product'
-                                            data-photo={product.photo} className='w-24 h-24 object-cover' />
+                                        <img src={product.photo[0]} alt='photo-product'
+                                            data-photo={product.photo[0]} className='w-24 h-24 object-cover' />
                                     </div>
                                 </div>
                                 <div className='sm:!col-span-6 md:!col-span-6 col-span-3 w-full sm:!h-[320px] md:!h-[428px] flex items-center bg-white sm:!order-1 md:!order-1'>
-                                    <img src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${photoMain}`} alt='photo-product' className=' m-auto w-full h-full object-cover' />
+                                    <img src={photoMain} alt='photo-product' className=' m-auto w-full h-full object-cover' />
                                 </div>
                             </div>
                             <div className='sm:!col-span-12 col-span-6 w-full h-full flex flex-col px-4 md:!gap-2 gap-4'>
@@ -202,7 +202,7 @@ function ProductDetail({ productDetail }) {
                                     <div className='flex items-center gap-4'>
                                         {
                                             users.map(user => user._id === evaluate.id_customer &&
-                                                <Image key={user._id} src={`${process.env.REACT_APP_API_URL}/api/users/${user._id}/${user.avatar}`} alt='avt'
+                                                <Image key={user._id} src={user.avatar[0]} alt='avt'
                                                     className='w-12 h-12 rounded-full object-cover' />
                                             )
                                         }

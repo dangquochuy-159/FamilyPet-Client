@@ -65,7 +65,7 @@ const Payment = (props) => {
                             window.sessionStorage.removeItem("productPayment")
                             window.sessionStorage.removeItem("infoPayment")
                             await handleLoadingPage()
-                            navigate('/')
+                            window.location.href = '/'
                         })
                     })
             })

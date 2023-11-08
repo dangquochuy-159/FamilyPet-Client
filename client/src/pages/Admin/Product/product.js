@@ -157,7 +157,7 @@ function Product() {
                                     filterProducts.map((product, index) => (
                                         <div key={index} className={`w-full p-2 flex flex-col gap-y-2 rounded-sm`}>
                                             <div className='flex justify-start items-center gap-x-3'>
-                                                <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
+                                                <Image src={product.photo[0]} alt={product.photo}
                                                     className='w-12 h-12 rounded-full object-cover'
                                                 />
                                                 <p className='font-bold'>{product.name}</p>
@@ -224,7 +224,7 @@ function Product() {
                                                         <th>{index + 1}</th>
                                                         <th className='w-48 whitespace-pre-wrap'>{product.name}</th>
                                                         <td className='md:hidden'>
-                                                            <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt={product.photo}
+                                                            <Image src={product.photo[0]} alt={product.photo}
                                                                 className='w-12 h-12 rounded-full m-auto object-cover'
                                                             />
                                                         </td>

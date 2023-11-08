@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStop } from "@fortawesome/free-solid-svg-icons";
 import { ImageIcon, InfoIcon } from "~/components/Icons";
 import { Button } from "~/components/Button";
-import Image from "~/components/Image";
 import { FormUpdateAvatar, FormUpdateInfo } from "./ModalContent";
 import Modal from "~/components/Modal/modal";
+import { images } from "~/assets";
 
 function InfoPersonal() {
     const context = useContext(AdminContext)
@@ -26,10 +26,10 @@ function InfoPersonal() {
             <div className="sm:w-full w-2/5 h-full flex flex-col items-center sm:!p-8 py-8 pl-8">
                 {
                     admin._id ? (
-                        <Image
-                            src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${admin.avatar}`}
-                            className='w-56 h-56 object-cover rounded-full'
-                            alt='avatar'
+                        <img
+                            src={admin.avatar[0] || images.no_image}
+                            className='w-56 h-56 object-cover rounded-full border border-solid border-[#ccc]'
+                            alt="avatar"
                         />
                     ) : (<></>)
                 }

@@ -8,6 +8,7 @@ import CustomerContext from '~/context/CustomerContext';
 import { useContext } from 'react';
 import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 import './cardProduct.scss'
+import { images } from '~/assets';
 
 function CardProduct({ className = '', product }) {
     const [userLogin] = useContext(CustomerContext)
@@ -35,7 +36,7 @@ function CardProduct({ className = '', product }) {
     return (
         <div className={`h-[420px] w-full rounded-xl shadow-xl shadow-white relative ${className}`}>
             <div className="overflow-hidden rounded-t-xl w-full h-1/2">
-                <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} alt='anh_san_pham'
+                <Image src={product.photo[0]} alt='anh_san_pham'
                     className="w-full h-full object-cover transition-all rounded-t-xl hover:scale-125" data-slug={product.slug} onClick={handleChangePage} />
             </div>
             <div className="h-1/2 flex flex-col items-center gap-1 p-4 rounded-b-xl bg-white">

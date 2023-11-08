@@ -11,7 +11,7 @@ function ModalInfoProduct({ product, changeStatus }) {
             <div className="mt-8 space-y-4">
                 <div className="w-full flex sm:flex-col md:flex-col gap-2">
                     <div className="sm:w-full md:w-full w-1/6 flex flex-col gap-y-2">
-                        <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`}
+                        <Image src={product.photo[0]}
                             alt='ảnh vô cực'
                             className='w-full h-auto rounded object-cover m-auto' />
                         <p className="text-center text-2xl font-bold">{product.star === 0 ? 5 : (product.star / product.total_eval).toFixed(1)}/5 <FontAwesomeIcon className='text-yellow-400' icon={faStar} /></p>
@@ -73,7 +73,7 @@ function ModalInfoProduct({ product, changeStatus }) {
                     <div className="w-full flex justify-center sm:flex-wrap gap-2">
                         {
                             product.photo_detail.map(ptDetail =>
-                                <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${ptDetail}`}
+                                <Image src={ptDetail[0]}
                                     alt='ảnh vô cực'
                                     className='sm:w-full w-1/5 h-auto rounded object-cover' />
                             )

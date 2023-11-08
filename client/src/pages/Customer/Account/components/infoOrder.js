@@ -65,7 +65,7 @@ function InfoOrder() {
                                             <>
                                                 {
                                                     products.map(product => product._id === detail.id_product &&
-                                                        <Image src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}/${product.photo}`} className='sm:!col-span-6 md:!col-span-6 w-14 h-14 m-auto' />)
+                                                        <Image src={product.photo[0]} className='sm:!col-span-6 md:!col-span-6 w-14 h-14 m-auto' />)
                                                 }
                                                 <p className='sm:!col-span-6 md:!col-span-6 flex justify-center items-center text-lg font-normal'>{detail.name_product}</p>
                                                 <p className='sm:!col-span-2 md:!col-span-2 flex justify-center items-center text-lg text-red-600 font-normal'>{changeNumberToPrice(detail['unit_price'])}</p>

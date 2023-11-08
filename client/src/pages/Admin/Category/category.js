@@ -8,6 +8,8 @@ import { CloseIcon, DeleteIcon, UpdateIcon } from "~/components/Icons";
 import Validator from "~/utils/Validate/validator";
 import check from "~/utils/Validate/ruleCheck";
 import axios from "axios";
+import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
+import { images } from "~/assets";
 
 
 function Category() {
@@ -59,6 +61,7 @@ function Category() {
                             })
                     }
                 }
+
                 fetchApi()
             }
         })
@@ -139,10 +142,10 @@ function Category() {
                                 <FormGroup className="flex sm:flex-col sm:w-full md:flex-col md:w-full items-center gap-x-5">
                                     <Input id='photo' type='file' className="sm:w-full md:w-full" />
                                 </FormGroup>
-                                <Button id='add-cate' title='Thêm' type='primary' className='bg-blue-600 text-white' />
+                                <Button id='add-cate' title='Thêm' type='primary' className='bg-blue-600 text-white hover:bg-blue-500' />
                                 <div className="flex gap-5">
-                                    <Button id='update-cate' title='Cập nhật' type='primary' className='hidden bg-blue-600 text-white' onClick={handleUpdate} />
-                                    <Button id='no-update-cate' type='primary' className='hidden bg-red-600 text-white' leftIcon={<CloseIcon />} onClick={handleNoUpdate} />
+                                    <Button id='update-cate' title='Cập nhật' type='primary' className='hidden bg-blue-600 text-white hover:bg-blue-500' onClick={handleUpdate} />
+                                    <Button id='no-update-cate' type='primary' className='hidden bg-red-600 text-white hover:bg-red-500' leftIcon={<CloseIcon />} onClick={handleNoUpdate} />
                                 </div>
                             </Form>
                         </div>
@@ -151,16 +154,16 @@ function Category() {
                                 categorys.map((category, index) =>
                                     <div key={index}
                                         className="sm:w-full sm:flex sm:!justify-between w-1/6 md:w-1/4 h-auto p-4 rounded bg-white shadow-lg">
-                                        <Image src={`${process.env.REACT_APP_API_URL}/api/categorys/${category._id}/${category.photo}`}
+                                        <Image src={category.photo[0]}
                                             alt={category.photo}
                                             className='sm:!w-12 sm:!h-12 w-28 h-28 sm:m-0 m-auto rounded-full object-cover'
                                         />
                                         <p className="text-center text-lg text-black font-medium py-2">{category.name}</p>
                                         <div className="flex justify-center gap-x-2">
-                                            <Button className='text-white bg-green-600' type='primary'
+                                            <Button className='text-white bg-green-600 hover:bg-green-500' type='primary'
                                                 data-name={category.name} data-id={category._id}
                                                 leftIcon={<UpdateIcon width='16px' height='16px' />} onClick={handleShowFormUpdate} />
-                                            <Button className='text-white bg-red-600' type='primary' data-cate={category._id}
+                                            <Button className='text-white bg-red-600 hover:bg-red-500' type='primary' data-cate={category._id}
                                                 leftIcon={<DeleteIcon width='16px' height='16px' />} onClick={handleDelete} />
                                         </div>
                                     </div>

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react';
+import { images } from '~/assets';
 import { Button } from '~/components/Button';
 import { DeleteIcon, UploadIcon } from '~/components/Icons';
-import Image from '~/components/Image';
 
 function FormUpdateAvatar({ admin }) {
-    const [nameAvt, setNameAvt] = useState(admin.avatar)
+    const [linkAvt, setLinkAvt] = useState(admin.avatar[0])
+    const [public_id, setPublic_id] = useState(admin.avatar[1])
     const avatarRef = useRef()
     const handleUploadAvatar = async (e) => {
         const { name, files } = e.target;
@@ -24,14 +25,17 @@ function FormUpdateAvatar({ admin }) {
         }
     }
     const handleGetAvatar = (e) => {
-        setNameAvt(e.target.getAttribute('data-img'))
-        let avt = e.target.getAttribute('data-img')
-        avatarRef.current.src = `${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${avt}`
+        setLinkAvt(e.target.getAttribute('data-link'))
+        setPublic_id(e.target.getAttribute('data-publicId'))
+        let avt = e.target.getAttribute('data-link')
+        avatarRef.current.src = avt
 
     }
     const handleChangeAvatar = () => {
-        axios.put(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${nameAvt}`)
-            .then(() => {
+
+        let idAvatar = public_id.split("/").pop()
+        axios.put(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${idAvatar}`)
+            .then((response) => {
                 window.location.reload();
             })
     }
@@ -55,9 +59,9 @@ function FormUpdateAvatar({ admin }) {
                     <label htmlFor="file" className='w-1/3 h-auto hover:cursor-pointer md:order-2'>
                         <Button className='w-full bg-[var(--primary-color)] text-white py-4 pointer-events-none' type='primary' title='Tải ảnh' rightIcon={<UploadIcon />} />
                     </label>
-                    <Image
+                    <img
                         innerRef={avatarRef}
-                        src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${nameAvt}`}
+                        src={linkAvt || images.no_image}
                         className='w-40 h-40 object-cover rounded-full md:order-1'
                         alt='avatar'
                     />
@@ -79,13 +83,14 @@ function FormUpdateAvatar({ admin }) {
                                 <div className='w-full h-56 md:!h-full mt-4 flex sm:!flex-nowrap flex-wrap sm:!justify-start justify-center gap-2 overflow-y-auto '>
                                     {
                                         admin.avatar_old.map((avatar, index) => (
-                                            <Image
+                                            <img
                                                 key={index}
-                                                src={`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${avatar}`}
+                                                src={avatar[0] || images.no_image}
                                                 className='w-56 h-28 object-contain rounded hover:cursor-pointer'
                                                 alt='avatar'
                                                 onClick={handleGetAvatar}
-                                                data-img={avatar}
+                                                data-link={avatar[0]}
+                                                data-publicId={avatar[1]}
                                             />
                                         ))
                                     }

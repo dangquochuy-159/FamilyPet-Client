@@ -142,7 +142,7 @@ function Cart() {
                                             <div className="col-span-1 w-full flex justify-center items-center p-4 ">
                                                 {
                                                     products.map(product => product._id === cart.id_product &&
-                                                        <Image key={product._id} src={`${process.env.REACT_APP_API_URL}/api/products/${product._id}}/${product.photo}`} alt='thuung'
+                                                        <Image key={product._id} src={product.photo[0]} alt='thuung'
                                                             className='w-[150px] h-[150xp] object-cover' />
                                                     )
                                                 }

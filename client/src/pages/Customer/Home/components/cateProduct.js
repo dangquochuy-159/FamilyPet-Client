@@ -32,7 +32,7 @@ function CategoryProduct() {
 
                                 <div className="w-full h-full flex flex-col justify-center items-center">
                                     <div className="w-1/2 h-full rounded-full shadow-xl shadow-white overflow-hidden">
-                                        <img src={`${process.env.REACT_APP_API_URL}/api/categorys/${cate._id}/${cate.photo}`} alt='banner'
+                                        <img src={cate.photo[0]} alt='banner'
                                             className='w-full h-auto shadow-2xl shadow-white hover:cursor-pointer'
                                             onClick={handleChangePage} data-slug={cate.name} />
                                     </div>
