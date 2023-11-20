@@ -65,7 +65,12 @@ function Cart() {
         let isChecked = Array.from(ipCheck).some(ip => {
             return ip.checked === true
         })
-        isChecked === true ? setDisabledBtn(false) : setDisabledBtn(true)
+        // isChecked === true ? setDisabledBtn(false) : setDisabledBtn(true)
+        if (isChecked) {
+            document.getElementById('btn-uncheck').disabled = !document.getElementById('btn-uncheck').disabled
+            document.getElementById('btn-pay').disabled = !document.getElementById('btn-pay').disabled
+            document.getElementById('btn-delete').disabled = !document.getElementById('btn-delete').disabled
+        }
 
         Array.from(ipCheck).forEach(ip => {
             if (ip.checked === true) {
