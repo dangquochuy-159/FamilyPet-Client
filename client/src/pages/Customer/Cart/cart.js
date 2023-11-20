@@ -19,8 +19,6 @@ function Cart() {
     const ip_quantityRef = useRef()
     const navigate = useNavigate()
 
-    const ipCheck = document.querySelectorAll('.ip-check')
-
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json())
@@ -28,6 +26,7 @@ function Cart() {
     }, [])
 
     const caculateTotalPay = () => {
+        const ipCheck = document.querySelectorAll('.ip-check')
         let totalPay = 0
         Array.from(ipCheck).forEach(ip => {
             if (ip.checked === true) {
@@ -61,16 +60,13 @@ function Cart() {
     }
 
     const handleChangeInputCheck = (e) => {
+        const ipCheck = document.querySelectorAll('.ip-check')
         let list_idProduct = []
         let isChecked = Array.from(ipCheck).some(ip => {
             return ip.checked === true
         })
-        // isChecked === true ? setDisabledBtn(false) : setDisabledBtn(true)
-        if (isChecked) {
-            document.getElementById('btn-uncheck').disabled = !document.getElementById('btn-uncheck').disabled
-            document.getElementById('btn-pay').disabled = !document.getElementById('btn-pay').disabled
-            document.getElementById('btn-delete').disabled = !document.getElementById('btn-delete').disabled
-        }
+        isChecked === true ? setDisabledBtn(false) : setDisabledBtn(true)
+
 
         Array.from(ipCheck).forEach(ip => {
             if (ip.checked === true) {
@@ -92,6 +88,7 @@ function Cart() {
     }
 
     const handleUnCheck = () => {
+        const ipCheck = document.querySelectorAll('.ip-check')
         Array.from(ipCheck).map((ip) => {
             return ip.checked = false
         })
@@ -100,6 +97,7 @@ function Cart() {
 
     const handlePayment = async () => {
         const details = []
+        const ipCheck = document.querySelectorAll('.ip-check')
         Array.from(ipCheck).forEach(ip => {
             if (ip.checked === true) {
                 let quantity = ip.parentElement.querySelector('.input-quantity').value
