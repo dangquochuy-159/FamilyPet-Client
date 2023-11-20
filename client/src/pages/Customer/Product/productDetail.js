@@ -53,7 +53,7 @@ function ProductDetail({ productDetail }) {
     const handleAddCart = () => {
         if (userLogin) {
             let price = productDetail[0].sale_price ? productDetail[0].sale_price : productDetail[0].price
-            axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${productDetail[0]._id}?quantity=1&price=${price}`)
+            axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${productDetail[0]._id}?quantity=${ipQuantityRef.current.value}&price=${price}`)
                 .then(() => {
                     alert('Thêm vào giỏ hàng thành công')
                     window.location.reload()
