@@ -54,11 +54,13 @@ function Category() {
                         const formData = new FormData()
                         formData.append('name', data.name)
                         // ipFile.files[0] && formData.append('photo', ipFile.files[0])
-                        if (ipFile.files[0]) {
+                        if (ipFile?.files[0]) {
                             formData.append('photo', ipFile.files[0])
                         }
 
-                        axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData)
+                        axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData,
+                            { headers: { "Content-Type": "multipart/form-data" }, }
+                        )
                             .then(res => {
                                 window.location.reload()
                             })
