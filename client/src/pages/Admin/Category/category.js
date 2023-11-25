@@ -50,7 +50,6 @@ function Category() {
                         const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
                         ele.innerHTML = 'Tên danh mục đã tồn tại'
                     } else {
-
                         const formData = new FormData()
                         formData.append('name', data.name)
                         // ipFile.files[0] && formData.append('photo', ipFile.files[0])
