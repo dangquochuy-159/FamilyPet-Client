@@ -37,7 +37,7 @@ function AllProduct() {
 
     const renderProductDektop = (array) => {
         const slideItem = [];
-        for (let i = 0; i < array.length; i += 5) {
+        for (let i = 0; i < array?.length; i += 5) {
             const itemsInDiv = array.slice(i, i + 5);
             const div = (
                 <div className="w-full grid grid-cols-5 gap-2 mr-2">
@@ -52,7 +52,7 @@ function AllProduct() {
     }
     const renderProductTablet = (array) => {
         const slideItem = [];
-        for (let i = 0; i < array.length; i += 3) {
+        for (let i = 0; i < array?.length; i += 3) {
             const itemsInDiv = array.slice(i, i + 3);
             const div = (
                 <div className="w-full grid grid-cols-3 gap-2 mr-2">
@@ -67,7 +67,7 @@ function AllProduct() {
     }
     const renderProductMobile = (array) => {
         const slideItem = [];
-        for (let i = 0; i < array.length; i += 2) {
+        for (let i = 0; i < array?.length; i += 2) {
             const itemsInDiv = array.slice(i, i + 2);
             const div = (
                 <div className="w-full grid grid-cols-2 gap-2 mr-2">
