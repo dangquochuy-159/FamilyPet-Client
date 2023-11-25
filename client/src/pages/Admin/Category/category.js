@@ -54,7 +54,7 @@ function Category() {
                         const formData = new FormData()
                         formData.append('name', data.name)
                         // ipFile.files[0] && formData.append('photo', ipFile.files[0])
-                        if (ipFile?.files[0]) {
+                        if (ipFile.files[0]) {
                             formData.append('photo', ipFile.files[0])
                         }
 
