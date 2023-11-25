@@ -57,9 +57,7 @@ function Category() {
                             formData.append('photo', ipFile.files[0])
                         }
 
-                        axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData,
-                            { headers: { "Content-Type": "multipart/form-data" }, }
-                        )
+                        axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData,)
                             .then(res => {
                                 window.location.reload()
                             })
