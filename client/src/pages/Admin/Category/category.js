@@ -53,6 +53,7 @@ function Category() {
 
                         const formData = new FormData()
                         formData.append('name', data.name)
+                        console.log(ipFile.files[0])
                         ipFile.files[0] && formData.append('photo', ipFile.files[0])
 
                         axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData)
