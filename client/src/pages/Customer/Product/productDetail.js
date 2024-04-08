@@ -147,7 +147,7 @@ function ProductDetail({ productDetail }) {
                                 </div>
                                 <div className='flex items-end gap-4'>
                                     <span className='text-2xl text-red-600 font-bold '>{product.sale_price ? changeNumberToPrice(product.sale_price) : changeNumberToPrice(product.price)}</span>
-                                    <span className='text-lg text-black line-through '>{product.sale_price && changeNumberToPrice(product.price)}</span>
+                                    <span className='text-lg text-black line-through '>{product.sale_price != 0 ? changeNumberToPrice(product.price) : ''}</span>
                                 </div>
                                 <div className='flex items-center justify-start gap-4 py-4 border-y border-dashed border-[var(--primary-color)]'>
                                     <span className='text-lg font-bold'>Số lượng:</span>

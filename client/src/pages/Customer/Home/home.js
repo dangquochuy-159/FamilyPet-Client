@@ -32,7 +32,7 @@ function Home() {
                     <img src={images.logo_home_05} alt='logo-home' className="w-full h-auto object-contain" />
                 </div>
             </section>
-        </div>
+        </div >
     );
 }
 

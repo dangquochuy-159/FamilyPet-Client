@@ -9,19 +9,10 @@ import { AccountIcon, CartIcon, CloseIcon, HomeIcon, IntroduceIcon, ListIcon, Lo
 import SearchProduct from "./searchProduct";
 import './header.scss'
 import { handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
-import { useEffect, useState } from 'react';
 
-function Header({ avatar, id, cartsLength }) {
+function Header({ avatar, id, cartsLength, categorys }) {
     const router = config.routes_public
     const navigate = useNavigate()
-    const [categorys, setCategorys] = useState([])
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json())
-            .then(data => {
-                setCategorys(data.data)
-            })
-    })
 
     const handleShowMenu = () => {
         document.getElementById('menu-mobile_modal').classList.remove('hidden')
@@ -42,6 +33,7 @@ function Header({ avatar, id, cartsLength }) {
         await handleLoadingPage()
         navigate(e.target.getAttribute('data-url'))
     }
+
     return (
         <div className="wrapper--header_main w-full h-[var(--header-height)] 
           bg-[var(--primary-color)] fixed top-0 left-0 z-40">
@@ -198,6 +190,7 @@ function Header({ avatar, id, cartsLength }) {
             </section >
         </div >
     );
+
 }
 
 Header.propTypes = {

@@ -19,8 +19,8 @@ function Sidebar() {
             <div className='w-full h-auto logo--admin border-b-2 border-solid border-black'>
                 <NavLink to='/admin'>
                     <h2 className="text-black text-center text-2xl font-bold py-8">
-                        <span className="sm:hidden md:hidden mr-4">  QUẢN TRỊ VIÊN</span>
-                        <FontAwesomeIcon icon={faUserGear} />
+                        <span className="sm:hidden md:hidden mr-4"> QUẢN TRỊ VIÊN</span>
+                        <span className="sm:hidden xl:hidden">  <FontAwesomeIcon icon={faUserGear} /></span>
                     </h2>
                     {/* <img src={images.logo_admin} alt='logo-admin' className="w-1/2 h-auto m-auto" /> */}
                 </NavLink>
