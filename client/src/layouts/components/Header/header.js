@@ -6,7 +6,7 @@ import { images } from "~/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "~/components/Button";
 import { AccountIcon, CartIcon, CloseIcon, HomeIcon, IntroduceIcon, ListIcon, LoginIcon, LogoutIcon, MenuIcon, PhoneIcon, ProductIcon, QuestionIcon } from "~/components/Icons";
-import SearchProduct from "./searchProduct";
+import SearchProduct from "./SearchProduct";
 import './header.scss'
 import { handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 

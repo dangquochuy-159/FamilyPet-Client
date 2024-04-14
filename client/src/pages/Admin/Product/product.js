@@ -7,7 +7,7 @@ import axios from 'axios';
 import ModalInfoProduct from './modalIfoProduct';
 import ModalAddProduct from './modalAddProduct';
 import ModalUpdateProduct from './modalUpdateProduct';
-import Modal from '~/components/Modal/modal';
+import Modal from '~/components/Modal/Modal';
 import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
 
 function Product() {

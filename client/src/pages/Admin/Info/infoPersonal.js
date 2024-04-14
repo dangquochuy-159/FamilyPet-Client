@@ -5,7 +5,7 @@ import { faStop } from "@fortawesome/free-solid-svg-icons";
 import { ImageIcon, InfoIcon } from "~/components/Icons";
 import { Button } from "~/components/Button";
 import { FormUpdateAvatar, FormUpdateInfo } from "./ModalContent";
-import Modal from "~/components/Modal/modal";
+import Modal from "~/components/Modal/Modal";
 import { images } from "~/assets";
 
 function InfoPersonal() {

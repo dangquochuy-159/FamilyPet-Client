@@ -3,7 +3,7 @@ import { Button } from "~/components/Button";
 import ConnectServer from "~/components/ConnectError";
 import { ImageIcon, IntroduceIcon } from "~/components/Icons";
 import Image from "~/components/Image";
-import Modal from "~/components/Modal/modal";
+import Modal from "~/components/Modal/Modal";
 import CustomerContext from "~/context/CustomerContext";
 import UpdateAvatarUser from "./updateAvatarUser";
 import UpdateInfoUser from "./updateInfoUser";

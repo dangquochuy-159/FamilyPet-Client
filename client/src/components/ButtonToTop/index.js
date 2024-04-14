@@ -1,1 +1,1 @@
-export { default } from './buttonToTop'
+export { default } from './ButtonToTop'

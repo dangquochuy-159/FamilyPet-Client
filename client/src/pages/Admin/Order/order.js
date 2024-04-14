@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '~/components/Button';
 import ConnectError from '~/components/ConnectError';
 import { CheckIcon, FilterIcon, InfoIcon, ListIcon } from '~/components/Icons';
-import Modal from '~/components/Modal/modal';
+import Modal from '~/components/Modal/Modal';
 import ModalDetailProduct from './modalDetailProduct';
 import ModalInfoOrder from './modalInfoOrder';
 import { changeDate } from '~/utils/SupportFunction/supportFunction';

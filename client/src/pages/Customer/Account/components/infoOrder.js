@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Image from "~/components/Image";
-import Modal from "~/components/Modal/modal";
+import Modal from "~/components/Modal/Modal";
 import CustomerContext from "~/context/CustomerContext";
 import { changeDate, changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 import ModalEvaluate from "./modalEvaluate";

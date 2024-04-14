@@ -1,1 +1,1 @@
-export { default } from './connectError'
+export { default } from './ConnectError'

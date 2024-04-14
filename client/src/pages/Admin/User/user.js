@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ConnectError from "~/components/ConnectError";
 import { Button } from "~/components/Button";
 import { InfoIcon } from "~/components/Icons";
-import Modal from "~/components/Modal/modal";
+import Modal from "~/components/Modal/Modal";
 import ModalInfo from "./modalInfo";
 
 function User() {

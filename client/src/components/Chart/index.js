@@ -1,2 +1,2 @@
-export { default as PieChart } from './pieChart'
-export { default as BarChart } from './barChart'
+export { default as PieChart } from './PieChart'
+export { default as BarChart } from './BarChart'

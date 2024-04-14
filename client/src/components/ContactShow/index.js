@@ -1,1 +1,1 @@
-export { default } from './contactShow' 
+export { default } from './ContactShow' 

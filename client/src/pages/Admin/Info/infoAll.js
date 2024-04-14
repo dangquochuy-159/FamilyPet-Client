@@ -3,7 +3,7 @@ import AdminContext from '~/context/AdminContext';
 import { Button } from "~/components/Button";
 import { InfoIcon, PlusIcon } from "~/components/Icons";
 import { FormAddAdmin, FormInfo } from "./ModalContent";
-import Modal from "~/components/Modal/modal";
+import Modal from "~/components/Modal/Modal";
 import { images } from "~/assets";
 
 function InfoAll() {
