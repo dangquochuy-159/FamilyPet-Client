@@ -28,7 +28,7 @@ function ButtonToTop() {
     }, []);
 
     return (
-        <>
+        <div className="sm:hidden md:!inline-block">
             {showButton && (
                 <TERipple rippleColor="light">
                     <button
@@ -54,7 +54,7 @@ function ButtonToTop() {
                     </button>
                 </TERipple>
             )}
-        </>
+        </div>
     );
 }
 
