@@ -2,7 +2,6 @@ import CustomerContext from "~/context/CustomerContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
-import ContactShow from "~/components/ContactShow";
 import ButtonToTop from "~/components/ButtonToTop";
 
 function MainLayout({ children }) {
@@ -31,7 +30,6 @@ function MainLayout({ children }) {
         <CustomerContext.Provider value={[userLogin]}>
             <div className="flex flex-col min-h-screen">
                 <ButtonToTop />
-                <ContactShow />
                 <Header
                     avatar={connectServer && userLogin.avatar}
                     id={connectServer && userLogin._id}
