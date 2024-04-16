@@ -24,7 +24,7 @@ function CategoryProduct() {
             {/* <h2 className="title sm:!text-xl md:!text-3xl text-4xl text-[var(--primary-color)] bg-transparent">Danh mục sản phẩm</h2> */}
             {
                 !connectServer ? <ConnectServer /> :
-                    <div className="grid sm:!grid-cols-2 md:!grid-cols-3 grid-cols-5 gap-5 sm:!py-4 p-4">
+                    <div className="grid sm:!grid-cols-1 md:!grid-cols-3 grid-cols-5 gap-5 sm:!py-4 p-4">
                         {
                             categorys.map((cate, index) => (
                                 <h3 key={index}
