@@ -2,7 +2,6 @@ import axios from "axios";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "~/components/Button";
-import ButtonToTop from "~/components/ButtonToTop";
 import { CloseIcon, DeleteIcon, MinusIcon, PayIcon, PlusIcon } from "~/components/Icons";
 import Image from "~/components/Image";
 import CustomerContext from "~/context/CustomerContext";
@@ -124,7 +123,6 @@ function Cart() {
 
     return (
         <section id='sec-home_cart' className="grid_layout wide h-auto !my-16 sm:!my-2 ">
-            <ButtonToTop />
             {
                 !userLogin ? <p className="h-auto sm:!pt-16 text-center text-2xl font-bold">Vui lòng đăng nhập để xem thông tin giỏ hàng!
                     <Link to='/login' className="ml-4 text-red-400 font-medium underline hover:text-blue-500">Đăng nhập</Link>

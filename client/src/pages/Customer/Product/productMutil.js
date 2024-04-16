@@ -3,7 +3,6 @@ import { ProductAll, ProductCategory, ProductOutstand, ProductPromote } from './
 import { useEffect, useRef, useState } from 'react';
 import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 import { images } from '~/assets';
-import ButtonToTop from '~/components/ButtonToTop';
 
 function ProductMutil({ products, keyParams, valueParams }) {
     const [priceFilter, setPriceFilter] = useState(5000000)
@@ -25,7 +24,6 @@ function ProductMutil({ products, keyParams, valueParams }) {
 
     return (
         <>
-            <ButtonToTop />
             <div id='sec-product_mutil' className='grid_layout wide grid grid-cols-4 gap-4 my-16 sm:!px-2'>
                 <div className='sm:!col-span-4 md:!col-span-4 space-y-2'>
                     <h2 className='py-2 text-lg font-bold'>Danh mục sản phẩm</h2>

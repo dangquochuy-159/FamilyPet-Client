@@ -1,7 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { images } from "~/assets";
-import ButtonToTop from "~/components/ButtonToTop";
 import Image from "~/components/Image";
 import CustomerContext from "~/context/CustomerContext";
 import { changeNumberToPrice, handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
@@ -125,7 +124,6 @@ function PaymentInfo() {
 
     return (
         <section id='sec-home_payment-info' className="grid_layout wide h-auto flex flex-col gap-8 my-16">
-            <ButtonToTop />
 
             {/* Button Controller */}
             <div className="w-full p-4 flex justify-between shadow-xl shadow-white rounded-sm gap-2 bg-white sticky top-[128px]">

@@ -3,7 +3,6 @@ import { faEnvelope, faLocationDot, faPhone, faUser } from "@fortawesome/free-so
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { Button } from "~/components/Button";
-import ButtonToTop from "~/components/ButtonToTop";
 
 function Contact() {
 
@@ -13,7 +12,6 @@ function Contact() {
 
     return (
         <section id='sec-contact_page' className="grid_layout wide my-16 sm:!px-4">
-            <ButtonToTop />
             <h2 className="text-2xl text-center font-bold uppercase">Liên hệ</h2>
             <div className="grid grid-cols-3 mt-8 gap-y-4">
                 <div className="sm:!col-span-3 w-full flex flex-col items-center gap-4">

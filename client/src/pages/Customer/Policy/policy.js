@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import ButtonToTop from "~/components/ButtonToTop";
 
 function Policy() {
     useEffect(() => {
@@ -7,7 +6,6 @@ function Policy() {
     }, [])
     return (
         <section id='sec-policy_page' className="grid_layout wide my-16 flex flex-col gap-8 sm:!my-0 sm:!p-2">
-            <ButtonToTop />
             <h2 className="text-4xl text-[var(--primary-color)] font-bold">Chính sách khi mua hàng tại FamilyPet</h2>
             {/* Mục 1 */}
             <div className="space-y-2">

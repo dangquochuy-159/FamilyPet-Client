@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useEffect } from "react";
 import { images } from "~/assets";
-import ButtonToTop from "~/components/ButtonToTop";
 
 function Introduce() {
     useEffect(() => {
@@ -9,7 +8,6 @@ function Introduce() {
     }, [])
     return (
         <section id='sec-introduce_page' className="grid_layout wide my-16 sm:!my-4 sm:!px-4 ">
-            <ButtonToTop />
             <div className="flex flex-col gap-4">
                 <h2 className="text-2xl font-bold">Giới thiệu</h2>
                 <p>Thú cưng từ lâu đã trở thành một phần không thể thiếu trong cuộc sống của mỗi người,

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { images } from "~/assets";
-import ButtonToTop from "~/components/ButtonToTop";
 import { CheckIcon } from "~/components/Icons";
 import { changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 
@@ -10,7 +9,6 @@ function PriceList() {
     }, [])
     return (
         <section id='sec-price_list-page' className="grid_layout wide my-8">
-            <ButtonToTop />
             <h2 className="text-2xl text-center font-bold uppercase">Bảng giá</h2>
             <div className='grid grid-cols-2 gap-2 mt-8'>
                 <img src={images.banner_price_list01} alt='' className="h-full" />

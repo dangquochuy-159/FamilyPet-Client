@@ -115,7 +115,7 @@ Validator.isEmail = function (selector, isEmail) {
   return {
     selector: selector,
     test: function (value) {
-      var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      var regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
       return regex.test(value) ? undefined : isEmail;
     },
   };

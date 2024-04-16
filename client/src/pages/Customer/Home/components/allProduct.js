@@ -5,6 +5,7 @@ import CardProduct from "~/components/CardProduct";
 import ConnectError from "~/components/ConnectError";
 import Flickity from 'react-flickity-component'
 import { CheckBadgeIcon } from "~/components/Icons";
+import TitleProduct from "./TitleProduct";
 
 function AllProduct() {
     const [connectServer, setConnectServer] = useState(false)
@@ -84,17 +85,7 @@ function AllProduct() {
     return (
         <>
             <section id='sec-home_all_product' className="grid_layout wide mt-16">
-                <h2 className="w-full title style-title sm:!text-xl md:!text-3xl text-4xl text-white bg-blue-500">
-                    <span className="flex">
-                        <CheckBadgeIcon width="36px" height="36px" />
-                        <CheckBadgeIcon width="36px" height="36px" />
-                    </span>
-                    Tất cả sản  phẩm
-                    <span className="flex">
-                        <CheckBadgeIcon width="36px" height="36px" />
-                        <CheckBadgeIcon width="36px" height="36px" />
-                    </span>
-                </h2>
+                <TitleProduct title='Tất cả sản  phẩm' />
                 {
                     !connectServer ? <ConnectError /> :
                         products.length > 0 &&
@@ -102,8 +93,7 @@ function AllProduct() {
                             {
                                 categorys.map((category, index) => (
                                     <>
-                                        <div className="sm:!hidden md:!hidden slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
-                                            <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
+                                        <div className="sm:!hidden md:!hidden slide-product w-full h-full overflow-hidden sm:!mt-4 ">
                                             <Flickity
                                                 className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16 pb-16'} // default ''
                                                 elementType={'div'} // default 'div'
@@ -117,7 +107,6 @@ function AllProduct() {
                                             </Flickity>
                                         </div>
                                         <div className="hidden md:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
-                                            <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
                                             <Flickity
                                                 className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16 pb-16'} // default ''
                                                 elementType={'div'} // default 'div'
@@ -131,7 +120,6 @@ function AllProduct() {
                                             </Flickity>
                                         </div>
                                         <div className="hidden sm:!block slide-product w-full h-full overflow-hidden sm:!mt-4 mt-16 ">
-                                            <h2 className="w-full title sm:!text-xl md:!text-3xl text-4xl text-black underline">{category.name}</h2>
                                             <Flickity
                                                 className={'carousel w-full h-full focus-visible:outline-none sm:!mt-4 mt-16 pb-16'} // default ''
                                                 elementType={'div'} // default 'div'

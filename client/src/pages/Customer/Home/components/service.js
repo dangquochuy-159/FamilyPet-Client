@@ -1,20 +1,11 @@
 import { images } from "~/assets";
 import { AirPlanIcon, ServiceIcon } from "~/components/Icons";
+import TitleProduct from "./TitleProduct";
 
 function Service() {
     return (
         <section id='sec-home_service' className="grid_layout wide mt-16">
-            <h2 className="w-full title  style-title sm:!text-2xl md:!text-3xl text-4xl text-white bg-green-500">
-                <span className="flex">
-                    <ServiceIcon width="36px" height="36px" />
-                    <ServiceIcon width="36px" height="36px" />
-                </span>
-                Dịch vụ
-                <span className="flex">
-                    <ServiceIcon width="36px" height="36px" />
-                    <ServiceIcon width="36px" height="36px" />
-                </span>
-            </h2>
+            <TitleProduct title=' Dịch vụ' />
             <div className="grid sm:!grid-cols-1 md:!grid-cols-1 grid-cols-3 gap-10 py-10">
                 <div className="flex flex-col gap-5 p-4 sm:!rounded-none rounded-md shadow-md shadow-white bg-white">
                     <h4 className="text-center text-2xl font-bold p-4">Chăm sóc thú cưng</h4>

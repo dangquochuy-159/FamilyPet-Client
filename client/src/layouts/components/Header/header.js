@@ -32,6 +32,8 @@ function Header({ avatar, id, cartsLength, categorys }) {
     const handleChangePage = async (e) => {
         await handleLoadingPage()
         navigate(e.target.getAttribute('data-url'))
+        console.log(e.target.getAttribute('data-url'))
+
     }
 
     return (
@@ -84,7 +86,7 @@ function Header({ avatar, id, cartsLength, categorys }) {
                 <Button leftIcon={<MenuIcon />} className="hidden md:!block sm:!block hover:brightness-0 hover:invert" onClick={handleShowMenu} />
                 <NavLink to='/' className='w-auto h-auto '>
                     <div className="w-auto h-full flex justify-center items-center">
-                        <Image src={images.logo} alt='logo' className='h-full w-full object-contain' />
+                        <Image src={images.logo} alt='logo' className='h-full w-full object-contain p-4' />
                     </div>
                 </NavLink>
                 <div className="w-full sm:!h-full flex flex-col items-center gap-x-10">

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ButtonToTop from '~/components/ButtonToTop';
 import CustomerContext from '~/context/CustomerContext';
 import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 
@@ -73,7 +72,6 @@ const Payment = (props) => {
 
     return (
         <section className='grid_layout wide h-auto flex flex-col gap-8 my-16' >
-            <ButtonToTop />
             <div className="w-full p-4 flex justify-between shadow-xl shadow-white rounded-sm gap-2 bg-white sticky top-[128px]">
                 <div className="flex justify-end">
                     <button onClick={handleCancelPayment} className="p-2 sm:!text-sm text-white font-bold rounded-sm bg-red-500">Hủy thanh toán</button>

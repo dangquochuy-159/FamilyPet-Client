@@ -16,29 +16,23 @@ function CategoryProduct() {
     }, [])
     const handleChangePage = async (e) => {
         await handleLoadingPage()
-        // console.log(e.target)
-        // window.location.replace(`/product?slug=${e.target.getAttribute('data-slug')}`)
         navigate(`/product?category=${e.target.getAttribute('data-slug')}`)
     }
 
     return (
-        <section id='sec-home_category' className="grid_layout wide sm:!mt-4 mt-16">
-            <h2 className="title sm:!text-xl md:!text-3xl text-4xl text-[var(--primary-color)] bg-transparent">Danh mục sản phẩm</h2>
+        <section id='sec-home_category' className="grid_layout sm:!mt-4 mt-16">
+            {/* <h2 className="title sm:!text-xl md:!text-3xl text-4xl text-[var(--primary-color)] bg-transparent">Danh mục sản phẩm</h2> */}
             {
                 !connectServer ? <ConnectServer /> :
-                    <div className="grid sm:!grid-cols-2 md:!grid-cols-3 grid-cols-5 gap-5 sm:!py-4 py-4 bg-white">
+                    <div className="grid sm:!grid-cols-2 md:!grid-cols-3 grid-cols-5 gap-5 sm:!py-4 p-4">
                         {
                             categorys.map((cate, index) => (
-
-                                <div className="w-full h-full flex flex-col justify-center items-center">
-                                    <div className="w-1/2 h-full rounded-full shadow-xl shadow-white overflow-hidden">
-                                        <img src={cate.photo[0]} alt='banner'
-                                            className='w-full h-auto shadow-2xl shadow-white hover:cursor-pointer'
-                                            onClick={handleChangePage} data-slug={cate.name} />
-                                    </div>
-                                    <h3 className="text-sm text-center font-bold pt-5 hover:cursor-pointer" onClick={handleChangePage} data-slug={cate.name}>{cate.name}</h3>
-                                </div>
-
+                                <h3 key={index}
+                                    className="w-full h-full text-xl text-center text-white font-normal py-5  
+                                    bg-[var(--category-color)] rounded-md hover:cursor-pointer hover:bg-[var(--primary-color-hover)]"
+                                    onClick={handleChangePage}
+                                    data-slug={cate.name}>{cate.name}
+                                </h3>
                             ))
                         }
 
