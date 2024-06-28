@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { API_EVALUATE, API_EVALUATE_FILTER, API_PRODUCT, API_USER } from '~/api/api';
 import { Button } from '~/components/Button';
 import ConnectError from '~/components/ConnectError';
 import { CheckIcon, FilterIcon } from '~/components/Icons';
@@ -16,7 +17,7 @@ function Evaluate() {
     const filterEle = document.querySelectorAll('.filter')
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/evaluates`)
+        fetch(API_EVALUATE)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -24,14 +25,14 @@ function Evaluate() {
                 setFilterEvaluates(data.data)
             })
             .catch(err => setConnectServer(false))
-        fetch(`${process.env.REACT_APP_API_URL}/api/users`)
+        fetch(API_USER)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
                 setUsers(data.data)
             })
             .catch(err => setConnectServer(false))
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`)
+        fetch(API_PRODUCT)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -53,7 +54,7 @@ function Evaluate() {
             return query
         })
         const queryString = query.join('&')
-        fetch(`${process.env.REACT_APP_API_URL}/api/evaluates/filter?${queryString}`)
+        fetch(`${API_EVALUATE_FILTER}?${queryString}`)
             .then(res => res.json())
             .then(data => {
                 setFilterEvaluates(data.data)

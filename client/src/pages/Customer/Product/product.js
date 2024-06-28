@@ -4,6 +4,7 @@ import ConnectServer from "~/components/ConnectError";
 import ProductDetail from "./productDetail";
 import './product.scss'
 import ProductMutil from "./productMutil";
+import { API_PRODUCT } from "~/api/api";
 
 function Product() {
     const [connectServer, setConnectServer] = useState(false)
@@ -26,7 +27,7 @@ function Product() {
         for (const key of queryParams.keys()) {
             setKeyParams(key)
         }
-        fetch(`${process.env.REACT_APP_API_URL}/api/products${query}`)
+        fetch(`${API_PRODUCT}${query}`)
             .then(res => res.json())
             .then(data => {
                 let productPromote = []

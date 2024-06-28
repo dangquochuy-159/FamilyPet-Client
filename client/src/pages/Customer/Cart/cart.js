@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_PRODUCT, API_USER } from "~/api/api";
 import { Button } from "~/components/Button";
 import { CloseIcon, DeleteIcon, MinusIcon, PayIcon, PlusIcon } from "~/components/Icons";
 import Image from "~/components/Image";
@@ -19,7 +20,7 @@ function Cart() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json())
+        fetch(`${API_PRODUCT}`).then(res => res.json())
             .then(data => setProducts(data.data))
     }, [])
 
@@ -77,7 +78,7 @@ function Cart() {
 
     const handleDeleteCartItem = () => {
         if (window.confirm("Bạn chắc chắn muốn xóa sản phẩm trong giỏ hàng")) {
-            axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProductCheck })
+            axios.delete(`${API_USER}/${userLogin._id}/cart`, { data: listProductCheck })
                 .then((res) => {
                     alert("xóa thành công")
                     window.location.reload()

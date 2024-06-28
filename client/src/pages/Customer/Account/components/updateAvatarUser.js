@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRef, useState } from "react";
+import { API_USER } from "~/api/api";
 import { images } from "~/assets";
 import { Button } from "~/components/Button";
 import { DeleteIcon, UploadIcon } from "~/components/Icons";
@@ -16,7 +17,7 @@ function UpdateAvatarUser({ user }) {
             const formDataToSend = new FormData();
             formDataToSend.append('avatar', files[0]);
             try {
-                axios.put(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`, formDataToSend)
+                axios.put(`${API_USER}/${user._id}`, formDataToSend)
                     .then(response => {
                         window.location.reload();
                     })
@@ -33,7 +34,7 @@ function UpdateAvatarUser({ user }) {
     }
     const handleChangeAvatar = () => {
         let idAvatar = public_id.split("/").pop()
-        axios.put(`${process.env.REACT_APP_API_URL}/api/users/${user._id}/${idAvatar}`)
+        axios.put(`${API_USER}/${user._id}/${idAvatar}`)
             .then(() => {
                 window.location.reload();
             })
@@ -41,7 +42,7 @@ function UpdateAvatarUser({ user }) {
     const handleDeleteAvatar = () => {
         if (window.confirm('Bạn chắc chắn muốn xóa ảnh')) {
             try {
-                axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${user._id}/avatar`)
+                axios.delete(`${API_USER}/${user._id}/avatar`)
                     .then(response => window.location.reload())
             } catch (error) {
                 console.error('Error sending PUT request:', error);

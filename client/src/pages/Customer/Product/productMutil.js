@@ -3,6 +3,7 @@ import { ProductAll, ProductCategory, ProductOutstand, ProductPromote } from './
 import { useEffect, useRef, useState } from 'react';
 import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 import { images } from '~/assets';
+import { API_CATEGORY } from '~/api/api';
 
 function ProductMutil({ products, keyParams, valueParams }) {
     const [priceFilter, setPriceFilter] = useState(5000000)
@@ -18,7 +19,7 @@ function ProductMutil({ products, keyParams, valueParams }) {
 
     }
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json())
+        fetch(`${API_CATEGORY}`).then(res => res.json())
             .then(data => setCategorys(data.data))
     }, [])
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { API_PRODUCT, API_PRODUCT_SEARCH } from "~/api/api";
 import CardProduct from "~/components/CardProduct";
 
 function Search() {
@@ -10,7 +11,7 @@ function Search() {
     const name = queryParams.get("name");
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${name}`)
+        fetch(`${API_PRODUCT_SEARCH}?name=${name}`)
             .then(res => res.json())
             .then(data => {
                 setSearchResult(data.data)

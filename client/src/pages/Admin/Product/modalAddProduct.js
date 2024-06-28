@@ -1,6 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types'
 import { useEffect } from 'react';
+import { API_PRODUCT, API_PRODUCT_FILTER } from '~/api/api';
 import Form, { FormGroup, Input, Option, Select } from "~/components/Form";
 import check from '~/utils/Validate/ruleCheck';
 import Validator from '~/utils/Validate/validator';
@@ -25,7 +26,7 @@ function ModalAddProduct({ categorys }) {
 
                 const fetchApi = async () => {
                     try {
-                        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?filter=name&value=${data.name}`)
+                        const response = await fetch(`${API_PRODUCT_FILTER}?filter=name&value=${data.name}`)
                         const results = await response.json();
                         if (results.data.length > 0) {
                             const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
@@ -43,7 +44,7 @@ function ModalAddProduct({ categorys }) {
                                 formData.append(key, data[key]);
                             }
                             try {
-                                axios.post(`${process.env.REACT_APP_API_URL}/api/products`, formData)
+                                axios.post(API_PRODUCT, formData)
                                     .then(response => {
                                         alert('Thêm sản phẩm thành công')
                                         window.location.reload();

@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import ButtonToTop from "~/components/ButtonToTop";
+import { API_CATEGORY, API_USER } from "~/api/api";
 
 function MainLayout({ children }) {
     const dataUser = window.sessionStorage.getItem('userLogin') && JSON.parse(window.sessionStorage.getItem('userLogin')).data.user
@@ -12,12 +13,12 @@ function MainLayout({ children }) {
 
     const [connectServer, setConnectServer] = useState(false)
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json())
+        fetch(`${API_CATEGORY}`).then(res => res.json())
             .then(data => {
                 setCategorys(data.data)
             })
         dataUser &&
-            fetch(`${process.env.REACT_APP_API_URL}/api/users/${dataUser._id}`)
+            fetch(`${API_USER}/${dataUser._id}`)
                 .then(res => res.json())
                 .then(data => {
                     setUserLogin(data.data)

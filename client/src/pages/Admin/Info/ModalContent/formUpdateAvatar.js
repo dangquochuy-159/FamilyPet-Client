@@ -1,6 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react';
+import { API_ADMIN } from '~/api/api';
 import { images } from '~/assets';
 import { Button } from '~/components/Button';
 import { DeleteIcon, UploadIcon } from '~/components/Icons';
@@ -15,7 +16,7 @@ function FormUpdateAvatar({ admin }) {
             const formDataToSend = new FormData();
             formDataToSend.append('avatar', files[0]);
             try {
-                axios.put(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}`, formDataToSend)
+                axios.put(`${API_ADMIN}/${admin._id}`, formDataToSend)
                     .then(response => {
                         window.location.reload();
                     })
@@ -34,7 +35,7 @@ function FormUpdateAvatar({ admin }) {
     const handleChangeAvatar = () => {
 
         let idAvatar = public_id.split("/").pop()
-        axios.put(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/${idAvatar}`)
+        axios.put(`${API_ADMIN}/${admin._id}/${idAvatar}`)
             .then((response) => {
                 window.location.reload();
             })
@@ -42,7 +43,7 @@ function FormUpdateAvatar({ admin }) {
     const handleDeleteAvatar = () => {
         if (window.confirm('Bạn chắc chắn muốn xóa ảnh')) {
             try {
-                axios.delete(`${process.env.REACT_APP_API_URL}/api/admins/${admin._id}/avatar`)
+                axios.delete(`${API_ADMIN}/${admin._id}/avatar`)
                     .then(response => window.location.reload())
             } catch (error) {
                 console.error('Error sending PUT request:', error);

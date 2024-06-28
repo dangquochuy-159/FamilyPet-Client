@@ -5,6 +5,7 @@ import { Button } from "~/components/Button";
 import { InfoIcon } from "~/components/Icons";
 import Modal from "~/components/Modal/Modal";
 import ModalInfo from "./modalInfo";
+import { API_USER } from "~/api/api";
 
 function User() {
 
@@ -12,7 +13,7 @@ function User() {
     const [connectServer, setConnectServer] = useState(false)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/users`)
+        fetch(API_USER)
             .then(res => res.json())
             .then(data => {
                 setUsers(data.data)

@@ -1,5 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_PRODUCT, API_PROMOTE } from "~/api/api";
 import { images } from "~/assets";
 import Image from "~/components/Image";
 import CustomerContext from "~/context/CustomerContext";
@@ -26,10 +27,10 @@ function PaymentInfo() {
     const ipAdd = document.querySelector('.input-add')
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json()).then(data => {
+        fetch(`${API_PRODUCT}`).then(res => res.json()).then(data => {
             setProducts(data.data)
         })
-        fetch(`${process.env.REACT_APP_API_URL}/api/promotes`).then(res => res.json()).then(data => {
+        fetch(`${API_PROMOTE}`).then(res => res.json()).then(data => {
             setPromotes(data.data)
         })
     }, [])

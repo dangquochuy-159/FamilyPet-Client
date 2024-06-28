@@ -3,6 +3,7 @@ import ConnectError from "~/components/ConnectError";
 import AdminContext from '~/context/AdminContext';
 import InfoPersonal from "./infoPersonal";
 import InfoAll from "./infoAll";
+import { API_ADMIN } from "~/api/api";
 
 function Info() {
     const context = useContext(AdminContext)
@@ -10,7 +11,7 @@ function Info() {
     const [connectServer, setConnectServer] = useState(false)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/admins/${adminLogin._id}`)
+        fetch(`${API_ADMIN}/${adminLogin._id}`)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)

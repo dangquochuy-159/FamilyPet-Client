@@ -4,6 +4,7 @@ import Form, { FormGroup, Input, Option, Select } from "~/components/Form";
 import check from "~/utils/Validate/ruleCheck";
 import Validator from "~/utils/Validate/validator";
 import ConnectServer from "~/components/ConnectError";
+import { API_ADDRESS_DISTRICT, API_ADDRESS_PROVINCE, API_ADDRESS_WARD, API_USER, API_USER_SEARCH } from "~/api/api";
 
 function Register() {
     const [connectServer, setConnectServer] = useState(false)
@@ -14,7 +15,7 @@ function Register() {
     const [emailLogin, setEmailLogin] = useState(true)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_ADDRESS}/province`)
+        fetch(API_ADDRESS_PROVINCE)
             .then(res => res.json())
             .then(data => {
                 setProvinces(data.results)
@@ -50,7 +51,7 @@ function Register() {
                 const fetchApi = async () => {
                     const query = emailLogin ? `email=${data.email}` : `phone_login=${data.phone_login}`
                     try {
-                        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/search?${query}`)
+                        const response = await fetch(`${API_USER_SEARCH}?${query}`)
                         const results = await response.json();
                         if (results.exits) {
                             const ele = document.getElementById(`${emailLogin ? 'email' : 'phone_login'}`).parentElement.querySelector('.msg-error')
@@ -68,7 +69,7 @@ function Register() {
                                 formDataToSend.append('avatar', avatar);
                             }
                             try {
-                                axios.post(`${process.env.REACT_APP_API_URL}/api/users`, formDataToSend)
+                                axios.post(API_USER, formDataToSend)
                                     .then(response => {
                                         alert('Đăng ký tài khoản thành công')
                                         window.location.href = '/login';
@@ -95,7 +96,7 @@ function Register() {
                     case "province":
                         provinces.map((pro) => {
                             return value === pro.province_name &&
-                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/district/${pro.province_id}`)
+                                fetch(`${API_ADDRESS_DISTRICT}/${pro.province_id}`)
                                     .then(res => res.json())
                                     .then(data => setDistricts(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))
@@ -104,7 +105,7 @@ function Register() {
                     case "district":
                         districts.map((dis) => {
                             return value === dis.district_name &&
-                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/ward/${dis.district_id}`)
+                                fetch(`${API_ADDRESS_WARD}/${dis.district_id}`)
                                     .then(res => res.json())
                                     .then(data => setWards(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))

@@ -5,6 +5,7 @@ import ConnectError from '~/components/ConnectError';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faClipboardList, faPaste, faPenNib, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { BarChart, PieChart } from "~/components/Chart";
+import { API_CATEGORY, API_EVALUATE, API_ORDER, API_PRODUCT, API_USER } from "~/api/api";
 
 function Dashboard() {
     const [connectServer, setConnectServer] = useState(false)
@@ -19,24 +20,24 @@ function Dashboard() {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/users`).then(res => res.json()).then(data => {
+        fetch(API_USER).then(res => res.json()).then(data => {
             setConnectServer(true)
             setUser(data.data)
         }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json()).then(data => {
+        fetch(API_PRODUCT).then(res => res.json()).then(data => {
             setProducts(data.data)
             processDataProduct(data.data)
         }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/orders`).then(res => res.json()).then(data => {
+        fetch(API_ORDER).then(res => res.json()).then(data => {
             setOrders(data.data)
             processDataOrder(data.data)
         }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => { setCategorys(data.data) }).catch(err => setConnectServer(false))
+        fetch(API_CATEGORY).then(res => res.json()).then(data => { setCategorys(data.data) }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/evaluates`).then(res => res.json()).then(data => { setEvaluates(data.data) }).catch(err => setConnectServer(false))
+        fetch(API_EVALUATE).then(res => res.json()).then(data => { setEvaluates(data.data) }).catch(err => setConnectServer(false))
     }, [])
 
     const processDataProduct = (data) => {

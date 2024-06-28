@@ -5,13 +5,14 @@ import ConnectError from "~/components/ConnectError";
 import { FlashIcon } from "~/components/Icons";
 import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 import TitleProduct from "./TitleProduct";
+import { API_PRODUCT, API_PRODUCT_FILTER } from "~/api/api";
 
 function OutstandProduct() {
     const [connectServer, setConnectServer] = useState(false)
     const [productsOutstand, setProductsOutstand] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?filter=outstand&value=true`).then(res => res.json()).then(data => {
+        fetch(`${API_PRODUCT_FILTER}?filter=outstand&value=true`).then(res => res.json()).then(data => {
             setProductsOutstand(data.data)
             setConnectServer(true)
         }).catch(err => setConnectServer(false))

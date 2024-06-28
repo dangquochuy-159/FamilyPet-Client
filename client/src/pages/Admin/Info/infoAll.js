@@ -5,6 +5,7 @@ import { InfoIcon, PlusIcon } from "~/components/Icons";
 import { FormAddAdmin, FormInfo } from "./ModalContent";
 import Modal from "~/components/Modal/Modal";
 import { images } from "~/assets";
+import { API_ADMIN } from "~/api/api";
 
 function InfoAll() {
     const context = useContext(AdminContext)
@@ -13,7 +14,7 @@ function InfoAll() {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/admins`)
+        fetch(API_ADMIN)
             .then(res => res.json())
             .then(data => {
                 setAdmins(data.data)

@@ -5,6 +5,7 @@ import './login.scss'
 import { ChangeIcon, EyeIcon, HomeIcon, NotEyeIcon } from "~/components/Icons";
 import { NavLink } from "react-router-dom";
 import { Button } from "~/components/Button";
+import { API_USER_LOGIN } from "~/api/api";
 
 function Login() {
     const [loginEmail, setLoginEmail] = useState("true")
@@ -35,7 +36,7 @@ function Login() {
 
             onRegister: function (data) {
                 const eleErrorLogin = document.querySelector('.error--login')
-                axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, data)
+                axios.post(API_USER_LOGIN, data)
                     .then((res) => {
                         let logged = res.data.login
                         if (logged) {

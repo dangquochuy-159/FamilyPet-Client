@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types'
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { API_EVALUATE, API_PRODUCT, API_PRODUCT_FILTER, API_USER } from '~/api/api';
 import CardProduct from '~/components/CardProduct';
 import { BoxExchangeIcon, CartIcon, MinusIcon, PayIcon, PlusIcon, StarIcon, TruckIcon } from '~/components/Icons';
 import Image from '~/components/Image';
@@ -24,11 +25,11 @@ function ProductDetail({ productDetail }) {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/evaluates`).then(res => res.json())
+        fetch(API_EVALUATE).then(res => res.json())
             .then(data => setEvaluates(data.data))
-        fetch(`${process.env.REACT_APP_API_URL}/api/users`).then(res => res.json())
+        fetch(API_USER).then(res => res.json())
             .then(data => setUsers(data.data))
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?filter=category&value=${productDetail[0].category}&size=5`).then(res => res.json())
+        fetch(`${API_PRODUCT_FILTER}?filter=category&value=${productDetail[0].category}&size=5`).then(res => res.json())
             .then(data => setRelatedProducts(data.data))
 
     }, [])
@@ -53,7 +54,7 @@ function ProductDetail({ productDetail }) {
     const handleAddCart = () => {
         if (userLogin) {
             let price = productDetail[0].sale_price ? productDetail[0].sale_price : productDetail[0].price
-            axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${productDetail[0]._id}?quantity=${ipQuantityRef.current.value}&price=${price}`)
+            axios.put(`${API_USER}/${userLogin._id}/cart/${productDetail[0]._id}?quantity=${ipQuantityRef.current.value}&price=${price}`)
                 .then(() => {
                     alert('Thêm vào giỏ hàng thành công')
                     window.location.reload()

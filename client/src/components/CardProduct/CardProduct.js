@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 import './cardProduct.scss'
 import { images } from '~/assets';
+import { API_USER } from '~/api/api';
 
 function CardProduct({ className = '', product }) {
     const [userLogin] = useContext(CustomerContext)
@@ -18,7 +19,7 @@ function CardProduct({ className = '', product }) {
     const handleAddCart = () => {
         if (userLogin) {
             let price = product.sale_price ? product.sale_price : product.price
-            axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart/${product._id}?quantity=1&price=${price}`)
+            axios.put(`${API_USER}/${userLogin._id}/cart/${product._id}?quantity=1&price=${price}`)
                 .then(() => {
                     alert('Thêm vào giỏ hàng thành công')
                     window.location.reload()

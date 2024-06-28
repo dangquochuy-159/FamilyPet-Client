@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { API_ADDRESS_DISTRICT, API_ADDRESS_PROVINCE, API_ADDRESS_WARD, API_ADMIN, API_ADMIN_SEARCH } from '~/api/api';
 import Form, { FormGroup, Input, Option, Select } from '~/components/Form';
 import check from '~/utils/Validate/ruleCheck';
 import Validator from '~/utils/Validate/validator';
@@ -12,7 +13,7 @@ function FormAddAdmin() {
     const [avatar, setAvatar] = useState(null)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_ADDRESS}/province`)
+        fetch(API_ADDRESS_PROVINCE)
             .then(res => res.json())
             .then(data => setProvinces(data.results))
             .catch(error => console.log('Lỗi >>>', error))
@@ -44,7 +45,7 @@ function FormAddAdmin() {
 
                 const fetchApi = async () => {
                     try {
-                        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/admins/search/?email=${data.email}`)
+                        const response = await fetch(`${API_ADMIN_SEARCH}/?email=${data.email}`)
                         const results = await response.json();
                         if (results.exits) {
                             const ele = document.getElementById('email').parentElement.querySelector('.msg-error')
@@ -62,7 +63,7 @@ function FormAddAdmin() {
                                 formDataToSend.append('avatar', avatar);
                             }
                             try {
-                                axios.post(`${process.env.REACT_APP_API_URL}/api/admins`, formDataToSend)
+                                axios.post(API_ADMIN, formDataToSend)
                                     .then(response => {
                                         alert('Đăng ký quản trị viên thành công')
                                         window.location.reload();
@@ -96,7 +97,7 @@ function FormAddAdmin() {
                     case "province":
                         provinces.map((pro) => {
                             return value === pro.province_name &&
-                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/district/${pro.province_id}`)
+                                fetch(`${API_ADDRESS_DISTRICT}/${pro.province_id}`)
                                     .then(res => res.json())
                                     .then(data => setDistricts(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))
@@ -105,7 +106,7 @@ function FormAddAdmin() {
                     case "district":
                         districts.map((dis) => {
                             return value === dis.district_name &&
-                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/ward/${dis.district_id}`)
+                                fetch(`${API_ADDRESS_WARD}/${dis.district_id}`)
                                     .then(res => res.json())
                                     .then(data => setWards(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))

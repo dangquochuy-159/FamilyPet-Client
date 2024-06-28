@@ -5,15 +5,16 @@ import Modal from "~/components/Modal/Modal";
 import CustomerContext from "~/context/CustomerContext";
 import { changeDate, changeNumberToPrice } from "~/utils/SupportFunction/supportFunction";
 import ModalEvaluate from "./modalEvaluate";
+import { API_ORDER, API_ORDER_FILTER, API_PRODUCT } from "~/api/api";
 
 function InfoOrder() {
     const [userLogin] = useContext(CustomerContext)
     const [orders, setOrder] = useState([])
     const [products, setProducts] = useState([])
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/orders/filter?filter=id_customer&value=${userLogin._id}`).then(res => res.json())
+        fetch(`${API_ORDER_FILTER}?filter=id_customer&value=${userLogin._id}`).then(res => res.json())
             .then(data => setOrder(data.data))
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json())
+        fetch(`${API_PRODUCT}`).then(res => res.json())
             .then(data => setProducts(data.data))
     }, [])
 
@@ -25,7 +26,7 @@ function InfoOrder() {
 
     const handleConfirmOrder = (e) => {
         let id = e.target.getAttribute('data-id')
-        axios.put(`${process.env.REACT_APP_API_URL}/api/orders/${id}`)
+        axios.put(`${API_ORDER}/${id}`)
             .then(() => {
                 alert('Xác nhận đơn hàng thành công')
                 window.location.reload()

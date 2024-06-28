@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_CATEGORY } from "~/api/api";
 import ConnectServer from "~/components/ConnectError";
 import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 
@@ -9,7 +10,7 @@ function CategoryProduct() {
     const [categorys, setCategorys] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => {
+        fetch(`${API_CATEGORY}`).then(res => res.json()).then(data => {
             setCategorys(data.data)
             setConnectServer(true)
         }).catch(err => setConnectServer(false))

@@ -6,6 +6,7 @@ import Modal from '~/components/Modal/Modal';
 import ModalDetailProduct from './modalDetailProduct';
 import ModalInfoOrder from './modalInfoOrder';
 import { changeDate } from '~/utils/SupportFunction/supportFunction';
+import { API_ORDER, API_ORDER_FILTER } from '~/api/api';
 
 
 function Order() {
@@ -27,7 +28,7 @@ function Order() {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/orders`)
+        fetch(API_ORDER)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -49,7 +50,7 @@ function Order() {
             return query
         })
         const queryString = query.join('&')
-        fetch(`${process.env.REACT_APP_API_URL}/api/orders/filter?${queryString}`)
+        fetch(`${API_ORDER_FILTER}?${queryString}`)
             .then(res => res.json())
             .then(data => {
                 setFilterOrder(data.data)

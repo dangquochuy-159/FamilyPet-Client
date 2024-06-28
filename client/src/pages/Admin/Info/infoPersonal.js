@@ -7,6 +7,7 @@ import { Button } from "~/components/Button";
 import { FormUpdateAvatar, FormUpdateInfo } from "./ModalContent";
 import Modal from "~/components/Modal/Modal";
 import { images } from "~/assets";
+import { API_ADMIN } from "~/api/api";
 
 function InfoPersonal() {
     const context = useContext(AdminContext)
@@ -14,7 +15,7 @@ function InfoPersonal() {
     const [admin, setAdmin] = useState({})
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/admins/${adminLogin._id}`)
+        fetch(`${API_ADMIN}/${adminLogin._id}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.data)

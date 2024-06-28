@@ -6,6 +6,7 @@ import ConnectError from "~/components/ConnectError";
 import Flickity from 'react-flickity-component'
 import { CheckBadgeIcon } from "~/components/Icons";
 import TitleProduct from "./TitleProduct";
+import { API_CATEGORY, API_PRODUCT } from "~/api/api";
 
 function AllProduct() {
     const [connectServer, setConnectServer] = useState(false)
@@ -15,12 +16,12 @@ function AllProduct() {
 
     useEffect(() => {
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`).then(res => res.json()).then(data => {
+        fetch(`${API_CATEGORY}`).then(res => res.json()).then(data => {
             setCategorys(data.data)
             setConnectServer(true)
         }).catch(err => setConnectServer(false))
 
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json()).then(data => {
+        fetch(`${API_PRODUCT}`).then(res => res.json()).then(data => {
             setProducts(data.data)
             setGroupProducts(_.groupBy(data.data, 'category'))
             setConnectServer(true)

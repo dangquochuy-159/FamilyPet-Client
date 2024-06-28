@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Validator from "~/utils/Validate/validator";
 import './login.scss'
 import { EyeIcon, NotEyeIcon } from "~/components/Icons";
+import { API_ADMIN_LOGIN } from "~/api/api";
 
 function Login() {
     const [eyePass, setEyePass] = useState('false')
@@ -29,7 +30,7 @@ function Login() {
             ],
             onRegister: function (data) {
                 const eleErrorLogin = document.querySelector('.error--login')
-                axios.post(`${process.env.REACT_APP_API_URL}/api/admins/login`, data)
+                axios.post(API_ADMIN_LOGIN, data)
                     .then((res) => {
                         let logged = res.data.login
                         if (logged) {

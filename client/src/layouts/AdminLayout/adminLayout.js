@@ -3,6 +3,7 @@ import AdminContext from '~/context/AdminContext';
 import { Header, Sidebar } from './components';
 import { useEffect, useState } from 'react';
 import { images } from '~/assets';
+import { API_ADMIN } from '~/api/api';
 
 function AdminLayout({ children }) {
     const dataAdmin = JSON.parse(window.sessionStorage.getItem('adminLogin')).data.admin
@@ -12,7 +13,7 @@ function AdminLayout({ children }) {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/admins/${dataAdmin._id}`)
+        fetch(`${API_ADMIN}/${dataAdmin._id}`)
             .then(res => res.json())
             .then(data => {
                 setAdminLogin(data.data)

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { API_PROMOTE, API_PROMOTE_FILTER, API_PROMOTE_SEARCH } from '~/api/api';
 import { Button } from '~/components/Button';
 import ConnectError from '~/components/ConnectError';
 import Form, { FormGroup, Input, Option, Select } from '~/components/Form';
@@ -33,7 +34,7 @@ function Promote() {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/promotes`)
+        fetch(`${API_PROMOTE}`)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -60,7 +61,7 @@ function Promote() {
                 const errorCodeEle = codeELe.parentElement.querySelector('.msg-error')
                 const postRequest = () => {
                     try {
-                        axios.post(`${process.env.REACT_APP_API_URL}/api/promotes`, data)
+                        axios.post(`${API_PROMOTE}`, data)
                             .then(res => {
                                 alert('Thêm khuyến mãi thành công')
                                 window.location.reload();
@@ -71,7 +72,7 @@ function Promote() {
                 }
                 const putRequest = () => {
                     try {
-                        axios.put(`${process.env.REACT_APP_API_URL}/api/promotes/${currentId}`, data)
+                        axios.put(`${API_PROMOTE}/${currentId}`, data)
                             .then(res => {
                                 alert('Cập nhật khuyến mãi thành công')
                                 window.location.reload();
@@ -83,7 +84,7 @@ function Promote() {
                 const messageError = () => errorCodeEle.innerHTML = 'Mã khuyến mãi đã tồn tại'
 
                 const addPromote = async () => {
-                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/promotes/search?code=${data.code}`)
+                    const response = await fetch(`${API_PROMOTE_SEARCH}?code=${data.code}`)
                     const results = await response.json();
                     results.data.length > 0 ? messageError() : postRequest()
                 }
@@ -91,7 +92,7 @@ function Promote() {
                     if (oldCode === data.code) {
                         putRequest()
                     } else {
-                        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/promotes/search?code=${data.code}`)
+                        const response = await fetch(`${API_PROMOTE_SEARCH}?code=${data.code}`)
                         const results = await response.json();
                         results.data.length > 0 ? messageError() : putRequest()
                     }
@@ -115,7 +116,7 @@ function Promote() {
             return query
         })
         const queryString = query.join('&')
-        fetch(`${process.env.REACT_APP_API_URL}/api/promotes/filter?${queryString}`)
+        fetch(`${API_PROMOTE_FILTER}?${queryString}`)
             .then(res => res.json())
             .then(data => {
                 setFilterPromotes(data.data)
@@ -167,7 +168,7 @@ function Promote() {
     const handleDeletePromote = (e) => {
         if (window.confirm('Bạn chắn chắn muốn xóa mã khuyến mãi')) {
             let id = e.target.getAttribute('data-id')
-            axios.delete(`${process.env.REACT_APP_API_URL}/api/promotes/${id}`)
+            axios.delete(`${API_PROMOTE}/${id}`)
                 .then(() => {
                     alert('Xóa mã khuyến mãi thành công')
                     window.location.reload()

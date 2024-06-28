@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_ORDER, API_PRODUCT, API_PRODUCT_QUANTITY, API_USER } from '~/api/api';
 import CustomerContext from '~/context/CustomerContext';
 import { changeNumberToPrice, handleLoadingPage } from '~/utils/SupportFunction/supportFunction';
 
@@ -52,15 +53,15 @@ const Payment = (props) => {
             return { id: detail.id_product, quantity: detail.quantity }
 
         })
-        axios.put(`${process.env.REACT_APP_API_URL}/api/products/quantity`, listUpdateQuantity)
+        axios.put(API_PRODUCT_QUANTITY, listUpdateQuantity)
             .then(res => { })
 
-        axios.post(`${process.env.REACT_APP_API_URL}/api/orders`, data)
+        axios.post(API_ORDER, data)
             .then(res => {
                 alert('Thanh toán đơn hàng thành công')
-                axios.put(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/change?point=${infoPayment.promote_point}&type=down`)
+                axios.put(`${API_USER}/${userLogin._id}/change?point=${infoPayment.promote_point}&type=down`)
                     .then((res) => {
-                        axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${userLogin._id}/cart`, { data: listProduct }).then(async () => {
+                        axios.delete(`${API_USER}/${userLogin._id}/cart`, { data: listProduct }).then(async () => {
                             window.sessionStorage.removeItem("productPayment")
                             window.sessionStorage.removeItem("infoPayment")
                             await handleLoadingPage()

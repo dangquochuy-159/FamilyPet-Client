@@ -8,6 +8,7 @@ import { faCircleXmark, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useDebounce } from "~/hooks";
 import Wrapper from "~/components/Wrapper";
 import { Link, useNavigate } from "react-router-dom";
+import { API_PRODUCT_SEARCH } from "~/api/api";
 
 function SearchProduct() {
     const [searchValue, setSeachValue] = useState('')
@@ -25,7 +26,7 @@ function SearchProduct() {
         }
         setLoading(true)
         setTimeout(() => {
-            fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${debounced}&quantity=5`)
+            fetch(`${API_PRODUCT_SEARCH}?name=${debounced}&quantity=5`)
                 .then(res => res.json())
                 .then(data => {
                     setSearchResult(data.data)

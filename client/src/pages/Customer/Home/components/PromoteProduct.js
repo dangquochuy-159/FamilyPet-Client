@@ -5,6 +5,7 @@ import ConnectError from "~/components/ConnectError";
 import { GiftIcon } from "~/components/Icons";
 import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 import TitleProduct from "./TitleProduct";
+import { API_PRODUCT } from "~/api/api";
 
 function PromoteProduct() {
 
@@ -12,7 +13,7 @@ function PromoteProduct() {
     const [productPromotes, setProductPromotes] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`).then(res => res.json()).then(data => {
+        fetch(`${API_PRODUCT}`).then(res => res.json()).then(data => {
             let products = []
             data.data.map(product => product.sale_price && products.push(product))
             setProductPromotes(products)

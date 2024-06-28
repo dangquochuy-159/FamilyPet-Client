@@ -10,6 +10,7 @@ import check from "~/utils/Validate/ruleCheck";
 import axios from "axios";
 import { handleLoadingPage } from "~/utils/SupportFunction/supportFunction";
 import { images } from "~/assets";
+import { API_CATEGORY, API_CATEGORY_SEARCH } from "~/api/api";
 
 
 function Category() {
@@ -25,7 +26,7 @@ function Category() {
 
     // get API
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`)
+        fetch(`${API_CATEGORY}`)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -44,7 +45,7 @@ function Category() {
             ],
             onRegister: function (data) {
                 const fetchApi = async () => {
-                    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/categorys/search?name=${data.name}`)
+                    const response = await fetch(`${API_CATEGORY_SEARCH}?name=${data.name}`)
                     const results = await response.json();
                     if (results.data.length > 0) {
                         const ele = document.getElementById('name').parentElement.querySelector('.msg-error')
@@ -57,7 +58,7 @@ function Category() {
                             formData.append('photo', ipFile.files[0])
                         }
 
-                        axios.post(`${process.env.REACT_APP_API_URL}/api/categorys`, formData,)
+                        axios.post(`${API_CATEGORY}`, formData,)
                             .then(res => {
                                 window.location.reload()
                             })
@@ -72,7 +73,7 @@ function Category() {
     const handleDelete = (e) => {
         if (window.confirm('Bạn chắc chắn muốn xóa danh mục')) {
             let id = e.target.getAttribute('data-cate')
-            axios.delete(`${process.env.REACT_APP_API_URL}/api/categorys/${id}`)
+            axios.delete(`${API_CATEGORY}/${id}`)
                 .then(res => window.location.reload())
         }
     }
@@ -95,7 +96,7 @@ function Category() {
             const formData = new FormData()
             formData.append('name', ipName.value)
             ipFile.files && formData.append('photo', ipFile.files[0])
-            axios.put(`${process.env.REACT_APP_API_URL}/api/categorys/${idCategory}`, formData)
+            axios.put(`${API_CATEGORY}/${idCategory}`, formData)
                 .then(res => window.location.reload())
         }
 
@@ -103,7 +104,7 @@ function Category() {
             update()
         }
         else {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/categorys/search?name=${ipName.value}`)
+            const response = await fetch(`${API_CATEGORY_SEARCH}?name=${ipName.value}`)
             const results = await response.json();
             if (results.data.length > 0) {
                 const ele = document.getElementById('name').parentElement.querySelector('.msg-error')

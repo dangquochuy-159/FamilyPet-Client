@@ -14,7 +14,8 @@ const routes_public = {
     account: '/account',
     register: '/register',
     login: '/login',
-    notFound: '/*'
+    notFound: '/*',
+    contact2: '/contact2',
 }
 
 const routes_private = {

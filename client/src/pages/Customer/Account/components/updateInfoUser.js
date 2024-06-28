@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { API_ADDRESS_DISTRICT, API_ADDRESS_PROVINCE, API_ADDRESS_WARD, API_USER } from "~/api/api";
 import Form, { FormGroup, Input, Option, Select } from "~/components/Form";
 import Validator from "~/utils/Validate/validator";
 
@@ -11,7 +12,7 @@ function UpdateInfoUser({ user }) {
     const [addressArr, setAddressArr] = useState([])
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_ADDRESS}/province`)
+        fetch(API_ADDRESS_PROVINCE)
             .then(res => res.json())
             .then(data => {
                 setProvinces(data.results)
@@ -41,7 +42,7 @@ function UpdateInfoUser({ user }) {
                         formDataToSend.append('avatar', avatar);
                     }
                     try {
-                        axios.put(`${process.env.REACT_APP_API_URL}/api/users/${user._id}`, formDataToSend)
+                        axios.put(`${API_USER}/${user._id}`, formDataToSend)
                             .then(response => {
                                 alert('Cập nhật thông tin tài khoản thành công')
                                 window.location.href = '/account';
@@ -62,7 +63,7 @@ function UpdateInfoUser({ user }) {
                     case "province":
                         provinces.map((pro) => {
                             return value === pro.province_name &&
-                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/district/${pro.province_id}`)
+                                fetch(`${API_ADDRESS_DISTRICT}/${pro.province_id}`)
                                     .then(res => res.json())
                                     .then(data => setDistricts(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))
@@ -71,7 +72,7 @@ function UpdateInfoUser({ user }) {
                     case "district":
                         districts.map((dis) => {
                             return value === dis.district_name &&
-                                fetch(`${process.env.REACT_APP_API_ADDRESS}/province/ward/${dis.district_id}`)
+                                fetch(`${API_ADDRESS_WARD}/${dis.district_id}`)
                                     .then(res => res.json())
                                     .then(data => setWards(data.results))
                                     .catch(error => console.log('Lỗi >>>', error))

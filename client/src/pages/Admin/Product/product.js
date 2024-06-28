@@ -9,6 +9,7 @@ import ModalAddProduct from './modalAddProduct';
 import ModalUpdateProduct from './modalUpdateProduct';
 import Modal from '~/components/Modal/Modal';
 import { changeNumberToPrice } from '~/utils/SupportFunction/supportFunction';
+import { API_CATEGORY, API_PRODUCT, API_PRODUCT_FILTER, API_PRODUCT_SEARCH } from '~/api/api';
 
 function Product() {
     const [connectServer, setConnectServer] = useState(false)
@@ -27,7 +28,7 @@ function Product() {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/products`)
+        fetch(API_PRODUCT)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -35,7 +36,7 @@ function Product() {
                 setFilterProducts(data.data)
             })
             .catch(err => setConnectServer(false))
-        fetch(`${process.env.REACT_APP_API_URL}/api/categorys`)
+        fetch(`${API_CATEGORY}`)
             .then(res => res.json())
             .then(data => {
                 setConnectServer(true)
@@ -53,7 +54,7 @@ function Product() {
             return query
         })
         const queryString = query.join('&')
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/filter?${queryString}`)
+        fetch(`${API_PRODUCT_FILTER}?${queryString}`)
             .then(res => res.json())
             .then(data => {
                 setFilterProducts(data.data)
@@ -66,7 +67,7 @@ function Product() {
             return filter.value = ''
         })
         let name = searchEle.value
-        fetch(`${process.env.REACT_APP_API_URL}/api/products/search?name=${name}`)
+        fetch(`${API_PRODUCT_SEARCH}?name=${name}`)
             .then(res => res.json())
             .then(data => {
                 setFilterProducts(data.data)
@@ -86,7 +87,7 @@ function Product() {
     const handleDeleteProduct = (e) => {
         let id = e.target.getAttribute('data-id')
         if (window.confirm('Bạn chắc chắn muốn xóa sản phẩm')) {
-            axios.delete(`${process.env.REACT_APP_API_URL}/api/products/${id}`)
+            axios.delete(`${API_PRODUCT}/${id}`)
                 .then(() => {
                     alert('Xóa sản phẩm thành công')
                     window.location.reload()
